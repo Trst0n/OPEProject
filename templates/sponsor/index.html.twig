@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sponsor index{% endblock %}
+
+{% block body %}
+    <h1>Sponsor index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Languages</th>
+                <th>Wishes</th>
+                <th>State</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sponsor in sponsors %}
+            <tr>
+                <td>{{ sponsor.id }}</td>
+                <td>{{ sponsor.languages ? sponsor.languages|join(', ') : '' }}</td>
+                <td>{{ sponsor.wishes ? sponsor.wishes|join(', ') : '' }}</td>
+                <td>{{ sponsor.state }}</td>
+                <td>
+                    <a href="{{ path('app_sponsor_show', {'id': sponsor.id}) }}">show</a>
+                    <a href="{{ path('app_sponsor_edit', {'id': sponsor.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sponsor_new') }}">Create new</a>
+{% endblock %}

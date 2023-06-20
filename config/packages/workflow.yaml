@@ -1,0 +1,37 @@
+framework:
+    workflows:
+        sponsoring_process:
+            type: 'state_machine'
+            marking_store:
+                type: 'method'
+                property: 'state'
+            supports:
+                - App\Entity\Sponsorship
+            initial_marking: initialized
+            places:
+                - initialized
+                - semiValidated_match
+                - approved
+                - sponsorship
+                - ended # parrainage fini
+                - rejected # parrainage rejeté -> suppression
+            transitions:
+                to_validate: # L'un des parti accepte la proposition de matching
+                    from: initialized
+                    to: semiValidated_match
+                to_refuse: # L'un des parti refuse la proposition de matching
+                    from: initialized
+                    to: rejected
+                to_approve: # La deuxième personne accepte la proposition de match
+                    from: semiValidated_match
+                    to: approved
+                to_reject: # L'un des parti refuse la proposition de match durant le processus
+                    from: semiValidated_match
+                    to: rejected
+                to_conclude: # Les deux partis ont pris contact
+                    from: approved
+                    to: sponsorship
+                to_end: # L'un des parti souhaite arrêter le parrainnage
+                    from: sponsorship
+                    to: ended
+
