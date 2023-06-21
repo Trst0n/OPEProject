@@ -439,6 +439,6 @@ class __TwigTemplate_ae54e206c1f2867ecdb313a7de6fa014 extends Template
                     </ul>
 
                 </div>
-</nav>", "partials/navbar-vertical.html.twig", "/home/tristan/PhpstormProjects/OpeWebApp/templates/partials/navbar-vertical.html.twig");
+</nav>", "partials/navbar-vertical.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/partials/navbar-vertical.html.twig");
     }
 }

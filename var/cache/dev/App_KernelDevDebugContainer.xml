@@ -2554,31 +2554,51 @@
     </service>
     <service id="workflow.security.expression_language" class="Symfony\Component\Workflow\EventListener\ExpressionLanguage"/>
     <service id=".state_machine.sponsoring_process.transition.0" class="Symfony\Component\Workflow\Transition">
-      <argument>to_validate</argument>
+      <argument>st_validate</argument>
       <argument>initialized</argument>
-      <argument>semiValidated_match</argument>
+      <argument>student_approved</argument>
     </service>
     <service id=".state_machine.sponsoring_process.transition.1" class="Symfony\Component\Workflow\Transition">
-      <argument>to_refuse</argument>
+      <argument>sp_validate</argument>
       <argument>initialized</argument>
-      <argument>rejected</argument>
+      <argument>sponsor_approved</argument>
     </service>
     <service id=".state_machine.sponsoring_process.transition.2" class="Symfony\Component\Workflow\Transition">
-      <argument>to_approve</argument>
-      <argument>semiValidated_match</argument>
-      <argument>approved</argument>
+      <argument>st_refuse</argument>
+      <argument>initialized</argument>
+      <argument>student_rejected</argument>
     </service>
     <service id=".state_machine.sponsoring_process.transition.3" class="Symfony\Component\Workflow\Transition">
-      <argument>to_reject</argument>
-      <argument>semiValidated_match</argument>
-      <argument>rejected</argument>
+      <argument>sp_refuse</argument>
+      <argument>initialized</argument>
+      <argument>sponsor_rejected</argument>
     </service>
     <service id=".state_machine.sponsoring_process.transition.4" class="Symfony\Component\Workflow\Transition">
+      <argument>sp_approve</argument>
+      <argument>student_approved</argument>
+      <argument>approved</argument>
+    </service>
+    <service id=".state_machine.sponsoring_process.transition.5" class="Symfony\Component\Workflow\Transition">
+      <argument>st_approve</argument>
+      <argument>sponsor_approved</argument>
+      <argument>approved</argument>
+    </service>
+    <service id=".state_machine.sponsoring_process.transition.6" class="Symfony\Component\Workflow\Transition">
+      <argument>st_reject</argument>
+      <argument>sponsor_approved</argument>
+      <argument>student_rejected</argument>
+    </service>
+    <service id=".state_machine.sponsoring_process.transition.7" class="Symfony\Component\Workflow\Transition">
+      <argument>sp_reject</argument>
+      <argument>student_approved</argument>
+      <argument>sponsor_rejected</argument>
+    </service>
+    <service id=".state_machine.sponsoring_process.transition.8" class="Symfony\Component\Workflow\Transition">
       <argument>to_conclude</argument>
       <argument>approved</argument>
       <argument>sponsorship</argument>
     </service>
-    <service id=".state_machine.sponsoring_process.transition.5" class="Symfony\Component\Workflow\Transition">
+    <service id=".state_machine.sponsoring_process.transition.9" class="Symfony\Component\Workflow\Transition">
       <argument>to_end</argument>
       <argument>sponsorship</argument>
       <argument>ended</argument>
@@ -2607,11 +2627,13 @@
     <service id="state_machine.sponsoring_process.definition" class="Symfony\Component\Workflow\Definition">
       <argument type="collection">
         <argument>initialized</argument>
-        <argument>semiValidated_match</argument>
+        <argument>sponsor_approved</argument>
+        <argument>student_approved</argument>
+        <argument>student_rejected</argument>
+        <argument>sponsor_rejected</argument>
         <argument>approved</argument>
         <argument>sponsorship</argument>
         <argument>ended</argument>
-        <argument>rejected</argument>
       </argument>
       <argument type="collection">
         <argument type="service" id=".state_machine.sponsoring_process.transition.0"/>
@@ -2620,6 +2642,10 @@
         <argument type="service" id=".state_machine.sponsoring_process.transition.3"/>
         <argument type="service" id=".state_machine.sponsoring_process.transition.4"/>
         <argument type="service" id=".state_machine.sponsoring_process.transition.5"/>
+        <argument type="service" id=".state_machine.sponsoring_process.transition.6"/>
+        <argument type="service" id=".state_machine.sponsoring_process.transition.7"/>
+        <argument type="service" id=".state_machine.sponsoring_process.transition.8"/>
+        <argument type="service" id=".state_machine.sponsoring_process.transition.9"/>
       </argument>
       <argument type="collection">
         <argument>initialized</argument>

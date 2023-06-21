@@ -18,18 +18,20 @@ class Field
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Curriculum::class, inversedBy: 'fields')]
-    private Collection $curriculum;
+
 
     #[ORM\ManyToMany(targetEntity: Proposal::class, mappedBy: 'workfields')]
     private Collection $proposals;
+
+    #[ORM\ManyToMany(targetEntity: Curriculum::class, inversedBy: 'fields')]
+    private Collection $curricula;
 
 
 
     public function __construct()
     {
-        $this->curriculum = new ArrayCollection();
         $this->proposals = new ArrayCollection();
+        $this->curricula = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -45,30 +47,6 @@ class Field
     public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Curriculum>
-     */
-    public function getCurriculum(): Collection
-    {
-        return $this->curriculum;
-    }
-
-    public function addCurriculum(Curriculum $curriculum): static
-    {
-        if (!$this->curriculum->contains($curriculum)) {
-            $this->curriculum->add($curriculum);
-        }
-
-        return $this;
-    }
-
-    public function removeCurriculum(Curriculum $curriculum): static
-    {
-        $this->curriculum->removeElement($curriculum);
 
         return $this;
     }
@@ -96,6 +74,30 @@ class Field
         if ($this->proposals->removeElement($proposal)) {
             $proposal->removeWorkfield($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Curriculum>
+     */
+    public function getCurricula(): Collection
+    {
+        return $this->curricula;
+    }
+
+    public function addCurriculum(Curriculum $curriculum): static
+    {
+        if (!$this->curricula->contains($curriculum)) {
+            $this->curricula->add($curriculum);
+        }
+
+        return $this;
+    }
+
+    public function removeCurriculum(Curriculum $curriculum): static
+    {
+        $this->curricula->removeElement($curriculum);
 
         return $this;
     }

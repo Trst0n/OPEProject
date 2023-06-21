@@ -219,6 +219,6 @@ class __TwigTemplate_bf4caffb6f3b147e9d0b49b18bf727d2 extends Template
 
     <a href=\"{{ path('app_sponsorship_new') }}\">Create new</a>
 {% endblock %}
-", "sponsorship/index.html.twig", "/home/tristan/PhpstormProjects/OpeWebApp/templates/sponsorship/index.html.twig");
+", "sponsorship/index.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/sponsorship/index.html.twig");
     }
 }

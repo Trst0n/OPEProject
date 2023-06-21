@@ -25,11 +25,12 @@ class Curriculum
     #[ORM\ManyToOne(inversedBy: 'curricula')]
     private ?Establishment $establishment = null;
 
-    #[ORM\ManyToMany(targetEntity: Field::class, mappedBy: 'curriculum')]
-    private Collection $fields;
 
     #[ORM\OneToMany(mappedBy: 'curriculum', targetEntity: Request::class)]
     private Collection $requests;
+
+    #[ORM\ManyToMany(targetEntity: Field::class, mappedBy: 'curricula')]
+    private Collection $fields;
 
 
 
@@ -80,32 +81,6 @@ class Curriculum
         return $this;
     }
 
-    /**
-     * @return Collection<int, Field>
-     */
-    public function getFields(): Collection
-    {
-        return $this->fields;
-    }
-
-    public function addField(Field $field): static
-    {
-        if (!$this->fields->contains($field)) {
-            $this->fields->add($field);
-            $field->addCurriculum($this);
-        }
-
-        return $this;
-    }
-
-    public function removeField(Field $field): static
-    {
-        if ($this->fields->removeElement($field)) {
-            $field->removeCurriculum($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Request>
@@ -132,6 +107,33 @@ class Curriculum
             if ($request->getCurriculum() === $this) {
                 $request->setCurriculum(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Field>
+     */
+    public function getFields(): Collection
+    {
+        return $this->fields;
+    }
+
+    public function addField(Field $field): static
+    {
+        if (!$this->fields->contains($field)) {
+            $this->fields->add($field);
+            $field->addCurriculum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeField(Field $field): static
+    {
+        if ($this->fields->removeElement($field)) {
+            $field->removeCurriculum($this);
         }
 
         return $this;

@@ -609,6 +609,6 @@ class __TwigTemplate_bd3c772238237497c87cca9c1c544741 extends Template
                          </div>
                         <p style=\"margin-bottom: 7%\"></p>
 {% endblock %}
-", "dashboard/index.html.twig", "/home/tristan/PhpstormProjects/OpeWebApp/templates/dashboard/index.html.twig");
+", "dashboard/index.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/dashboard/index.html.twig");
     }
 }

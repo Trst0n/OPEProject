@@ -981,6 +981,6 @@ class __TwigTemplate_7efc9de0490a1b805b095453ca638c55 extends Template
         </table>
     {% endif %}
 {% endblock %}
-", "@WebProfiler/Collector/config.html.twig", "/home/tristan/PhpstormProjects/OpeWebApp/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
+", "@WebProfiler/Collector/config.html.twig", "/home/tristan/Desktop/OPE/OPEProject/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
     }
 }

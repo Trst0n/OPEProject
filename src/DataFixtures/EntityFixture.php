@@ -26,61 +26,65 @@ class EntityFixture extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         $city = new City();
-        $city->setZipcode((int) $faker->postcode)->setName($faker->city);
+        $city->setZipcode((int) $faker->postcode())->setName($faker->city());
         $manager->persist($city);
 
         $city2 = new City();
         $city2->setZipcode(45000)->setName("Orleans");
         $manager->persist($city2);
 
-        $cursus2 = new Curriculum();
-        $cursus2->setTitle("L3MIAGE");
-        $manager->persist($cursus2);
 
         $establishment2 = new Establishment();
-        $establishment2->setName("UniversiteOrleans")->addCurriculum($cursus2);
+        $establishment2->setName("UniversiteOrleans");
         $manager->persist($establishment2);
+
+
+        $cursus2 = new Curriculum();
+        $cursus2->setTitle("L3MIAGE")->setEstablishment($establishment2);
+        $manager->persist($cursus2);
+
 
         $field2 = new Field();
         $field2->setName("informatique")->addCurriculum($cursus2);
         $manager->persist($field2);
 
-        $cursus = new Curriculum();
-        $cursus->setTitle($faker->domainName);
-        $manager->persist($cursus);
-
         $establishment = new Establishment();
-        $establishment->setName($faker->name)->addCurriculum($cursus);
+        $establishment->setName($faker->name());
         $manager->persist($establishment);
 
+        $cursus = new Curriculum();
+        $cursus->setTitle($faker->domainName())->setEstablishment($establishment);
+        $manager->persist($cursus);
+
         $field = new Field();
-        $field->setName($faker->domainName)->addCurriculum($cursus);
+        $field->setName($faker->domainName())->addCurriculum($cursus);
         $manager->persist($field);
 
-//        for ($i=0; $i < 5; $i++) {
-//            $person2 = new Sponsor();
-//            $person2->setCivility(Civility::Women)
-//                ->setFirstname($faker->firstName())
-//                ->setLastname($faker->lastName())
-//                ->setPhonenumber($faker->phoneNumber())
-//                ->setEmail($faker->email())
-//                ->setCreatedAt(new \DateTimeImmutable())
-//                ->setUpdatedAt(new \DateTimeImmutable())
-//                ->setBirthdate($faker->dateTime);
-//
-//            $sponsor = new Proposal();
-//            $sponsor
-//                ->setCity($city)
-//                ->setWishes([Wish::Housing, Wish::Administrative ])
-//                ->setWorkfield([$field])
-//                ->setLanguages([Language::Chinese, Language::French]);
-//
-//            $manager->persist($sponsor);
-//
-//            $person2->addLead($sponsor);
-//            $manager->persist($person2);
-//
-//        }
+
+        for ($i=0; $i < 5; $i++) {
+            $person2 = new Sponsor();
+            $person2->setCivility(Civility::Women)
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPhonenumber($faker->phoneNumber())
+                ->setEmail($faker->email())
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setUpdatedAt(new \DateTimeImmutable())
+                ->setBirthdate($faker->dateTime());
+
+            $sponsor = new Proposal();
+            $sponsor
+                ->setCity($city)
+                ->setWishes([Wish::Housing, Wish::Administrative ])
+                ->addWorkfield($field)
+                ->setLanguages([Language::Chinese, Language::French]);
+
+            $manager->persist($sponsor);
+
+            $person2->addLead($sponsor);
+            $manager->persist($person2);
+
+        }
 
         for ($i=0; $i < 5; $i++) {
             $person = new Student();
@@ -91,7 +95,7 @@ class EntityFixture extends Fixture
                 ->setEmail($faker->email())
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setUpdatedAt(new \DateTimeImmutable())
-                ->setBirthdate($faker->dateTime);
+                ->setBirthdate($faker->dateTime());
 
             $student = new Request();
             $student

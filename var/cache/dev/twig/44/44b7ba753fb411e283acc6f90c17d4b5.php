@@ -194,6 +194,6 @@ class __TwigTemplate_54fa696f300cab86d4e2ac2c81862feb extends Template
 
     {{ include('student/_delete_form.html.twig') }}
 {% endblock %}
-", "student/show.html.twig", "/home/tristan/PhpstormProjects/OpeWebApp/templates/student/show.html.twig");
+", "student/show.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/student/show.html.twig");
     }
 }

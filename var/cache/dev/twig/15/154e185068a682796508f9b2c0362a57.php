@@ -79,6 +79,6 @@ class __TwigTemplate_132aabf3b2b33f834267494edaa29eec extends Template
     <input type=\"hidden\" name=\"_token\" value=\"{{ csrf_token('delete' ~ sponsorship.id) }}\">
     <button class=\"btn\">Delete</button>
 </form>
-", "sponsorship/_delete_form.html.twig", "/home/tristan/PhpstormProjects/OpeWebApp/templates/sponsorship/_delete_form.html.twig");
+", "sponsorship/_delete_form.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/sponsorship/_delete_form.html.twig");
     }
 }

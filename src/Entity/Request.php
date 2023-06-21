@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Request extends Lead
 {
     #[ORM\ManyToOne(inversedBy: 'requests')]
-    #[ORM\JoinColumn(nullable: false)]
     private ?Curriculum $curriculum = null;
 
     #[ORM\OneToMany(mappedBy: 'sponsorRequest', targetEntity: Sponsorship::class)]

@@ -42,7 +42,7 @@ class __TwigTemplate_73e1a7f70e58ea24f956c68273329c1d extends Template
         // line 1
         echo "<nav class=\"navbar navbar-expand-lg navbar-light bg-white border-bottom position-fixed w-100  \" style=\"z-index: 2;\">
    <div class=\"container-fluid \">
-     <a class=\"navbar-brand\" href=\"@@webRoot/index.html\"><img src=\"@@webRoot/assets/images/brand/logo/logo-primary.svg\" alt=\"\"></a>
+     <a class=\"navbar-brand\" href=\"@@webRoot/index.html\"><img src=\"/assets/images/brand/logo/logo-primary.svg\" alt=\"\"></a>
      <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
        <span class=\"navbar-toggler-icon\"></span>
      </button>
@@ -51,7 +51,7 @@ class __TwigTemplate_73e1a7f70e58ea24f956c68273329c1d extends Template
      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
        <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">
          <li class=\"nav-item\">
-           <a class=\"nav-link active\" href=\"@@webRoot/index.html\">Home</a>
+           <a class=\"nav-link active\" href=\"/index.html\">Home</a>
          </li>
          <li class=\"nav-item\">
            <a class=\"nav-link\" href=\"@@webRoot/docs/accordions.html\">Components</a>
@@ -93,7 +93,7 @@ class __TwigTemplate_73e1a7f70e58ea24f956c68273329c1d extends Template
     {
         return new Source("<nav class=\"navbar navbar-expand-lg navbar-light bg-white border-bottom position-fixed w-100  \" style=\"z-index: 2;\">
    <div class=\"container-fluid \">
-     <a class=\"navbar-brand\" href=\"@@webRoot/index.html\"><img src=\"@@webRoot/assets/images/brand/logo/logo-primary.svg\" alt=\"\"></a>
+     <a class=\"navbar-brand\" href=\"@@webRoot/index.html\"><img src=\"/assets/images/brand/logo/logo-primary.svg\" alt=\"\"></a>
      <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
        <span class=\"navbar-toggler-icon\"></span>
      </button>
@@ -102,7 +102,7 @@ class __TwigTemplate_73e1a7f70e58ea24f956c68273329c1d extends Template
      <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
        <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">
          <li class=\"nav-item\">
-           <a class=\"nav-link active\" href=\"@@webRoot/index.html\">Home</a>
+           <a class=\"nav-link active\" href=\"/index.html\">Home</a>
          </li>
          <li class=\"nav-item\">
            <a class=\"nav-link\" href=\"@@webRoot/docs/accordions.html\">Components</a>
@@ -121,6 +121,6 @@ class __TwigTemplate_73e1a7f70e58ea24f956c68273329c1d extends Template
 
      </div>
    </div>
- </nav>", "partials/doc-navbar.html", "/home/tristan/PhpstormProjects/OpeWebApp/templates/partials/doc-navbar.html");
+ </nav>", "partials/doc-navbar.html", "/home/tristan/Desktop/OPE/OPEProject/templates/partials/doc-navbar.html");
     }
 }

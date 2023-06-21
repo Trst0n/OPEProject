@@ -361,6 +361,6 @@ class __TwigTemplate_02c66b95e536478641edcff3e98dc9df extends Template
       </li>
     </ul>
   </nav>
-</div>", "partials/header.html.twig", "/home/tristan/PhpstormProjects/OpeWebApp/templates/partials/header.html.twig");
+</div>", "partials/header.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/partials/header.html.twig");
     }
 }

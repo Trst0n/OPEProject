@@ -409,6 +409,6 @@ class __TwigTemplate_eecb06617b383cc5a027c9971d148222 extends Template
 
     </nav>
   </div>
-  </div>", "partials/doc-sidenav.html", "/home/tristan/PhpstormProjects/OpeWebApp/templates/partials/doc-sidenav.html");
+  </div>", "partials/doc-sidenav.html", "/home/tristan/Desktop/OPE/OPEProject/templates/partials/doc-sidenav.html");
     }
 }
