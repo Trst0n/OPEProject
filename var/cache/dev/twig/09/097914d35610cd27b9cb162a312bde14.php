@@ -67,6 +67,6 @@ class __TwigTemplate_57b1ec617f61672885a23dfd2ee46843 extends Template
         return new Source("<div>
     <h2>Bienvenue dans le processus OPE</h2>
     <p>Votre inscription a bien été prise en compte nous vous recontacterons sous peu</p>
-</div>", "mail/registration.html.twig", "/home/tristan/PhpstormProjects/OpeWebApp/templates/mail/registration.html.twig");
+</div>", "mail/registration.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/mail/registration.html.twig");
     }
 }

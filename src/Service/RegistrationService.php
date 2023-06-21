@@ -2,7 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\Lead;
 use App\Entity\Person;
+use App\Entity\Proposal;
+use App\Entity\Request;
 use App\Entity\Sponsor;
 use App\Entity\Student;
 use DateTime;
@@ -19,152 +22,89 @@ class RegistrationService
     {
         if($this->dataValidator->validate($data,$type)) {
 
-            $PersonRepository = $this->entityManager->getRepository(Person::class);
-            $person = $PersonRepository->findOneBy(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email']]);
-
+            $StudentRepository = $this->entityManager->getRepository(Student::class);
             $SponsorRepository = $this->entityManager->getRepository(Sponsor::class);
-            $StudentsRepository = $this->entityManager->getRepository(Student::class);
+            $LeadRepository = $this->entityManager->getRepository(Lead::class);
+
+
+            if($type === "sponsor"){
+                $person = $SponsorRepository->findOneBy(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email']]);
+            }
+            else{
+                $person = $StudentRepository->findOneBy(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email']]);
+            }
+
+            $ProposalRepository = $this->entityManager->getRepository(Proposal::class);
+            $RequestRepository = $this->entityManager->getRepository(Request::class);
 
             /** Si la personne existe deja dans la bd: màj des profils déjà existant */
             if ($person) {
-                #TODO Valider les données avant de changer les statuts
                 switch ($type) {
                     case "sponsor":
-                        $sponsors = $SponsorRepository->findBy(['person' => $person, 'state' => 'valid']);
+                        $proposals = $ProposalRepository->findBy(['person' => $person, 'state' => 'valid']);
 
-                        foreach ($sponsors as $sponsor) {
-                            $sponsor->setState('outdated');
+                        foreach ($proposals as $proposal) {
+                            $proposal->setState('outdated');
                             /** Màj du statut à 'obsolète' pour le ou les differents profil sponsor*/
                         }
                         break;
 
                     case "student":
-                        $student = $StudentsRepository->findOneBy(['person' => $person, 'state' => 'valid']);
-                        $student->setState('outdated');
+                        $request = $RequestRepository->findOneBy(['person' => $person, 'state' => 'valid']);
+                        $request->setState('outdated');
                         /** Màj du status à 'obsolète' */
-
                         break;
                 }
 
             }
-            if (!$person) {
-                $type === "sponsor" ? $birthdate = "01-01-2001" : $birthdate = $data['birthdate']; //Date d'anniversaire bidon pour le parrain car non demandée
-                $person = new Person();
-                $person->setFirstname($data['firstname'])->setLastname($data['lastname'])->setPhonenumber($data['phonenumber'])->setEmail($data['email'])
-                    ->setBirthdate(DateTime::createFromFormat('m-d-Y', $birthdate))->setCivility($this->service->getCiviity($data['civility']))
-                    ->setUpdatedAt(new \DateTimeImmutable())->setCreatedAt(new \DateTimeImmutable());
 
-                $PersonRepository->save($person, true); //flush
-            }
 
-            /** Création des profils étudiant/parrain */
+            /** Création des profils étudiant/parrain (+ person ) */
             switch ($type) {
                 case "sponsor":
 
-                    for ($i = 0; $i < $data['numStudent']; $i++) {
-                        $updatedSponsor = new Sponsor();
-                        $updatedSponsor->setCity($this->service->getCity($data['city']))->setWorkfield($this->service->getFields($data['workfield']))->setWishes($this->service->getWishes($data['wishes']))
-                            ->setLanguages($this->service->getLanguages($data['languages']));
+                    if (!$person) { // si le profil de personne n'existe pas
+                        $person= new Sponsor();
+                        $person->setFirstname($data['firstname'])->setLastname($data['lastname'])->setPhonenumber($data['phonenumber'])->setEmail($data['email'])
+                            ->setBirthdate(DateTime::createFromFormat('m-d-Y', "01-01-2001"))->setCivility($this->service->getCiviity($data['civility']))
+                            ->setUpdatedAt(new \DateTimeImmutable())->setCreatedAt(new \DateTimeImmutable());
 
-                        $person->setUpdatedAt(new \DateTimeImmutable())->addSponsorProposal($updatedSponsor);
-                        $SponsorRepository->save($updatedSponsor, true); // flush de l'entité
+                        $SponsorRepository->save($person, true); //flush
                     }
 
+                    for ($i = 0; $i < $data['numStudent']; $i++) {
+                        $updatedProposal = new Proposal();
+                        $updatedProposal->setCity($this->service->getCity($data['city']))->setWorkfield($this->service->getFields($data['workfield']))->setWishes($this->service->getWishes($data['wishes']))
+                            ->setLanguages($this->service->getLanguages($data['languages']));
+
+                        $person->setUpdatedAt(new \DateTimeImmutable())->addLead($updatedProposal);
+                        $ProposalRepository->save($updatedProposal, true); // flush de l'entité
+                    }
                     return true;
 
                 case "student":
 
-                    $updatedStudent = new Student();
-                    $updatedStudent->setCity($this->service->getCity($data['city']))->setEstablishment($this->service->getEstablishment($data['establishment']))
+                    if (!$person) { // si le profil de personne n'existe pas
+                        $person = new Student();
+                        $person->setFirstname($data['firstname'])->setLastname($data['lastname'])->setPhonenumber($data['phonenumber'])->setEmail($data['email'])
+                            ->setBirthdate(DateTime::createFromFormat('m-d-Y', $data['birthdate']))->setCivility($this->service->getCiviity($data['civility']))
+                            ->setUpdatedAt(new \DateTimeImmutable())->setCreatedAt(new \DateTimeImmutable());
+
+                        $StudentRepository->save($person, true); //flush
+                    }
+
+                    $updatedRequest = new Request();
+                    $updatedRequest->setCity($this->service->getCity($data['city']))
                         ->setCurriculum($this->service->getCurriculum($data['curriculum']))->setWishes($this->service->getWishes($data['wishes']))
                         ->setLanguages($this->service->getLanguages($data['languages']));
 
-                    $person->setUpdatedAt(new \DateTimeImmutable())->addSupportRequest($updatedStudent);
-                    $StudentsRepository->save($updatedStudent, true); // flush de l'entité
+                    $person->setUpdatedAt(new \DateTimeImmutable())->addLead($updatedRequest);
+                    $RequestRepository->save($updatedRequest, true); // flush de l'entité
 
                     return true;
 
             }
         }
         return false;
-//
-//        if($person) { /** Si la personne existe deja dans notre BD */
-//            switch ($type) {
-//                case "sponsor":
-//                    $SponsorRepository = $this->entityManager->getRepository(Sponsor::class);
-//                    $sponsors = $SponsorRepository->findBy(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email'], 'state' => 'valid']);
-//
-//                    foreach($sponsors as $sponsor){
-//                        $sponsor->setState('outdated'); /** Màj du statut à 'obsolète' pour le ou les differents profil sponsor*/
-//                    }
-//
-//                    /** création d'un nouveau profil sponsor */
-//
-//                    for($i=0; $i<$data['numStudent']; $i++){
-//                        $updatedSponsor = new Sponsor();
-//                        $updatedSponsor->setCity($this->service->getCity($data['city']))->setWorkfield($this->service->getFields($data['workfield']))->setWishes($this->service->getWishes($data['wishes']))
-//                            ->setLanguages($this->service->getLanguages($data['languages']));
-//
-//                        $SponsorRepository->save($updatedSponsor, true); // flush de l'entité
-//
-//                        $person->setUpdatedAt(new \DateTimeImmutable())->addSponsorProposal($updatedSponsor);
-//                    }
-//
-//                    return true;
-//
-//                case "student":
-//                    $StudentsRepository = $this->entityManager->getRepository(Student::class);
-//                    $student = $StudentsRepository->findOneBy(['firstname' => $data['firstname'], 'lastname' => $data['lastname'], 'email' => $data['email']]);
-//                    $student->setState('outdated'); /** Màj du status à 'obsolète' */
-//
-//                    /** création d'un nouveau profil étudiant */
-//
-//                    $updatedStudent = new Student();
-//                    $updatedStudent->setCity($this->service->getCity($data['city']))->setEstablishment($this->service->getEstablishment($data['establishment']))
-//                        ->setCurriculum($this->service->getCurriculum($data['curriculum']))->setWishes($this->service->getWishes($data['wishes']))
-//                        ->setLanguages($this->service->getLanguages($data['languages']));
-//
-//                    $StudentsRepository->save($updatedStudent, true); // flush de l'entité
-//
-//                    $person->setUpdatedAt(new \DateTimeImmutable())->addSupportRequest($updatedStudent);
-//
-//                    return true;
-//            }
-//        }
-//        else{
-//            switch ($type){
-//                case "sponsor":
-//                    $SponsorRepository = $this->entityManager->getRepository(Sponsor::class);
-//
-//                    // Création de la personne
-//                    $newperson = new Person();
-//                    $newperson->setFirstname($data['firstname'])->setLastname($data['lastname'])->setPhonenumber($data['phonenumber'])->setEmail($data['email'])
-//                        ->setBirthdate(DateTime::createFromFormat('m-d-Y', "00-00-0000"))->setCivility($this->service->getCiviity($data['civility']))
-//                        ->setUpdatedAt(new \DateTimeImmutable())->setCreatedAt(new \DateTimeImmutable());
-//
-//                    // Création de son profil sponsor
-//                    for($i=0; $i<$data['numStudent']; $i++){
-//                        $updatedSponsor = new Sponsor();
-//                        $updatedSponsor->setCity($this->service->getCity($data['city']))->setWorkfield($this->service->getFields($data['workfield']))->setWishes($this->service->getWishes($data['wishes']))
-//                            ->setLanguages($this->service->getLanguages($data['languages']));
-//
-//                        $SponsorRepository->save($updatedSponsor, true); // flush de l'entité
-//
-//                        $newperson->setUpdatedAt(new \DateTimeImmutable())->addSponsorProposal($updatedSponsor);
-//                    }
-//
-//                    return true;
-//                case "student":
-//                    $student = new Student();
-//                    $student->setFirstname($data[])->setLastname($data[])->setPhonenumber($data[])->setEmail($data[])->setBirthdate(DateTime::createFromFormat('m-d-Y', $data['birthdate']))->setCivility($this->service->getCiviity($data['civility']))->setCity($this->service->getCity($data['city']))
-//                        ->setCurriculum($data[])->setEstablishment($this->service->getEstablishment($data['establishment']))->setLanguages($this->service->getLanguages($data['languages']))->setWishes($this->service->getWishes($data['wishes']))
-//                        ->setUpdatedAt(new \DateTimeImmutable())->setCreatedAt(new \DateTimeImmutable());
-//
-//                    return true;
-//
-//            }
-//        }
-//        return false; /** argument non valide */
-//    }
     }
 }

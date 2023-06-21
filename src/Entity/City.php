@@ -21,16 +21,11 @@ class City
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Sponsor::class)]
-    private Collection $sponsors;
-
-    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Student::class)]
-    private Collection $students;
-
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Lead::class)]
+    private Collection $leads;
     public function __construct()
     {
-        $this->sponsors = new ArrayCollection();
-        $this->students = new ArrayCollection();
+        $this->leads = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,62 +58,33 @@ class City
     }
 
     /**
-     * @return Collection<int, Sponsor>
+     * @return Collection<int, Lead>
      */
-    public function getSponsors(): Collection
+    public function getLeads(): Collection
     {
-        return $this->sponsors;
+        return $this->leads;
     }
 
-    public function addSponsor(Sponsor $sponsor): static
+    public function addLead(Lead $lead): static
     {
-        if (!$this->sponsors->contains($sponsor)) {
-            $this->sponsors->add($sponsor);
-            $sponsor->setCity($this);
+        if (!$this->leads->contains($lead)) {
+            $this->leads->add($lead);
+            $lead->setCity($this);
         }
 
         return $this;
     }
 
-    public function removeSponsor(Sponsor $sponsor): static
+    public function removeLead(Lead $lead): static
     {
-        if ($this->sponsors->removeElement($sponsor)) {
+        if ($this->leads->removeElement($lead)) {
             // set the owning side to null (unless already changed)
-            if ($sponsor->getCity() === $this) {
-                $sponsor->setCity(null);
+            if ($lead->getCity() === $this) {
+                $lead->setCity(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Student>
-     */
-    public function getStudents(): Collection
-    {
-        return $this->students;
-    }
-
-    public function addStudent(Student $student): static
-    {
-        if (!$this->students->contains($student)) {
-            $this->students->add($student);
-            $student->setCity($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStudent(Student $student): static
-    {
-        if ($this->students->removeElement($student)) {
-            // set the owning side to null (unless already changed)
-            if ($student->getCity() === $this) {
-                $student->setCity(null);
-            }
-        }
-
-        return $this;
-    }
 }

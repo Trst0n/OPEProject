@@ -21,13 +21,10 @@ class Establishment
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Curriculum::class)]
     private Collection $curricula;
 
-    #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Student::class)]
-    private Collection $students;
 
     public function __construct()
     {
         $this->curricula = new ArrayCollection();
-        $this->students = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,33 +74,5 @@ class Establishment
         return $this;
     }
 
-    /**
-     * @return Collection<int, Student>
-     */
-    public function getStudents(): Collection
-    {
-        return $this->students;
-    }
 
-    public function addStudent(Student $student): static
-    {
-        if (!$this->students->contains($student)) {
-            $this->students->add($student);
-            $student->setEstablishment($this);
-        }
-
-        return $this;
-    }
-
-    public function removeStudent(Student $student): static
-    {
-        if ($this->students->removeElement($student)) {
-            // set the owning side to null (unless already changed)
-            if ($student->getEstablishment() === $this) {
-                $student->setEstablishment(null);
-            }
-        }
-
-        return $this;
-    }
 }

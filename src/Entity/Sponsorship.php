@@ -13,13 +13,6 @@ class Sponsorship
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\OneToOne(mappedBy: 'sponsorship', cascade: ['persist', 'remove'])]
-    private ?Sponsor $sponsor = null;
-
-    #[ORM\OneToOne(mappedBy: 'sponsorship', cascade: ['persist', 'remove'])]
-    private ?Student $student = null;
-
     #[ORM\Column(type: Types::ARRAY)]
     private array $wishes = [];
 
@@ -29,54 +22,19 @@ class Sponsorship
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sponsorship')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Request $sponsorRequest = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sponsorship')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Proposal $sponsorProposal = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getSponsor(): ?Sponsor
-    {
-        return $this->sponsor;
-    }
-
-    public function setSponsor(?Sponsor $sponsor): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($sponsor === null && $this->sponsor !== null) {
-            $this->sponsor->setSponsorship(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($sponsor !== null && $sponsor->getSponsorship() !== $this) {
-            $sponsor->setSponsorship($this);
-        }
-
-        $this->sponsor = $sponsor;
-
-        return $this;
-    }
-
-    public function getStudent(): ?Student
-    {
-        return $this->student;
-    }
-
-    public function setStudent(?Student $student): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($student === null && $this->student !== null) {
-            $this->student->setSponsorship(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($student !== null && $student->getSponsorship() !== $this) {
-            $student->setSponsorship($this);
-        }
-
-        $this->student = $student;
-
-        return $this;
-    }
 
     public function getWishes(): array
     {
@@ -110,6 +68,30 @@ class Sponsorship
     public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getSponsorRequest(): ?Request
+    {
+        return $this->sponsorRequest;
+    }
+
+    public function setSponsorRequest(?Request $sponsorRequest): static
+    {
+        $this->sponsorRequest = $sponsorRequest;
+
+        return $this;
+    }
+
+    public function getSponsorProposal(): ?Proposal
+    {
+        return $this->sponsorProposal;
+    }
+
+    public function setSponsorProposal(?Proposal $sponsorProposal): static
+    {
+        $this->sponsorProposal = $sponsorProposal;
 
         return $this;
     }

@@ -20,11 +20,9 @@ class Establishment extends \App\Entity\Establishment implements \Doctrine\Persi
         "\0".parent::class."\0".'curricula' => [parent::class, 'curricula', null],
         "\0".parent::class."\0".'id' => [parent::class, 'id', null],
         "\0".parent::class."\0".'name' => [parent::class, 'name', null],
-        "\0".parent::class."\0".'students' => [parent::class, 'students', null],
         'curricula' => [parent::class, 'curricula', null],
         'id' => [parent::class, 'id', null],
         'name' => [parent::class, 'name', null],
-        'students' => [parent::class, 'students', null],
     ];
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Entity\Person;
+use App\Entity\Proposal;
+use App\Entity\Request;
 use App\Entity\Sponsor;
 use App\Entity\Student;
 use DateTime;
@@ -23,19 +25,18 @@ class DataValidator
 
         switch($type){
             case "sponsor":
-
-                // vérification de tout les champs specifique au sponsor
+                // vérification de tout les champs specifique au proposal
                  $valid = $valid && array_key_exists("workfield", $data) && array_key_exists("numStudent", $data) &&  array_key_exists("wishes", $data)
                      &&  array_key_exists("languages", $data) && array_key_exists("city", $data);
 
                  $valid = $valid && ($data['numStudent'] === 1 || $data['numStudent'] === 2);
 
                  if($valid){
-                     $persontest = new Person();
+                     $persontest = new Sponsor();
                      $persontest->setFirstname($data['firstname'])->setLastname($data['lastname'])->setPhonenumber($data['phonenumber'])->setEmail($data['email'])
                          ->setBirthdate(DateTime::createFromFormat('m-d-Y', "01-01-2001"))->setCivility($this->service->getCiviity($data['civility']))
                          ->setUpdatedAt(new \DateTimeImmutable())->setCreatedAt(new \DateTimeImmutable());
-                     $sponsortest = new Sponsor();
+                     $sponsortest = new Proposal();
                      $sponsortest->setCity($this->service->getCity($data['city']))->setWorkfield($this->service->getFields($data['workfield']))->setWishes($this->service->getWishes($data['wishes']))
                          ->setLanguages($this->service->getLanguages($data['languages']));
                  }
@@ -47,16 +48,16 @@ class DataValidator
             case "student":
 
                 // vérification de tout les champs specifique au student
-                $valid = $valid && array_key_exists("birthdate", $data) && array_key_exists("establishment", $data) &&  array_key_exists("wishes", $data)
+                $valid = $valid && array_key_exists("birthdate", $data) &&  array_key_exists("wishes", $data)
                     &&  array_key_exists("languages", $data) && array_key_exists("city", $data) && array_key_exists("curriculum", $data) ;
 
                 if($valid){
-                    $persontest = new Person();
+                    $persontest = new Student();
                     $persontest->setFirstname($data['firstname'])->setLastname($data['lastname'])->setPhonenumber($data['phonenumber'])->setEmail($data['email'])
                         ->setBirthdate(DateTime::createFromFormat('m-d-Y', $data['birthdate']))->setCivility($this->service->getCiviity($data['civility']))
                         ->setUpdatedAt(new \DateTimeImmutable())->setCreatedAt(new \DateTimeImmutable());
-                    $studenttest = new Student();
-                    $studenttest->setCity($this->service->getCity($data['city']))->setEstablishment($this->service->getEstablishment($data['establishment']))
+                    $studenttest = new Request();
+                    $studenttest->setCity($this->service->getCity($data['city']))
                         ->setCurriculum($this->service->getCurriculum($data['curriculum']))->setWishes($this->service->getWishes($data['wishes']))
                         ->setLanguages($this->service->getLanguages($data['languages']));
                 }

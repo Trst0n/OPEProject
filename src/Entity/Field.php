@@ -21,13 +21,15 @@ class Field
     #[ORM\ManyToMany(targetEntity: Curriculum::class, inversedBy: 'fields')]
     private Collection $curriculum;
 
-    #[ORM\ManyToMany(targetEntity: Sponsor::class, mappedBy: 'workfield')]
-    private Collection $sponsors;
+    #[ORM\ManyToMany(targetEntity: Proposal::class, mappedBy: 'workfields')]
+    private Collection $proposals;
+
+
 
     public function __construct()
     {
         $this->curriculum = new ArrayCollection();
-        $this->sponsors = new ArrayCollection();
+        $this->proposals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,29 +74,31 @@ class Field
     }
 
     /**
-     * @return Collection<int, Sponsor>
+     * @return Collection<int, Proposal>
      */
-    public function getSponsors(): Collection
+    public function getProposals(): Collection
     {
-        return $this->sponsors;
+        return $this->proposals;
     }
 
-    public function addSponsor(Sponsor $sponsor): static
+    public function addProposal(Proposal $proposal): static
     {
-        if (!$this->sponsors->contains($sponsor)) {
-            $this->sponsors->add($sponsor);
-            $sponsor->addWorkfield($this);
+        if (!$this->proposals->contains($proposal)) {
+            $this->proposals->add($proposal);
+            $proposal->addWorkfield($this);
         }
 
         return $this;
     }
 
-    public function removeSponsor(Sponsor $sponsor): static
+    public function removeProposal(Proposal $proposal): static
     {
-        if ($this->sponsors->removeElement($sponsor)) {
-            $sponsor->removeWorkfield($this);
+        if ($this->proposals->removeElement($proposal)) {
+            $proposal->removeWorkfield($this);
         }
 
         return $this;
     }
+
+
 }

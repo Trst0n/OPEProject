@@ -9,9 +9,11 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\DiscriminatorColumn(name: 'discr', type: 'string')]
+#[ORM\DiscriminatorMap(['sponsor' => Sponsor::class, 'student' => Student::class])]
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
-class Person
+abstract class Person
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -54,16 +56,14 @@ class Person
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'person', targetEntity: Sponsor::class)]
-    private Collection $sponsorProposal;
+    #[ORM\OneToMany(mappedBy: 'person', targetEntity: Lead::class)]
+    private Collection $leads;
 
-    #[ORM\OneToMany(mappedBy: 'person', targetEntity: Student::class)]
-    private Collection $supportRequest;
+
 
     public function __construct()
     {
-        $this->sponsorProposal = new ArrayCollection();
-        $this->supportRequest = new ArrayCollection();
+        $this->leads = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,62 +168,34 @@ class Person
     }
 
     /**
-     * @return Collection<int, Sponsor>
+     * @return Collection<int, Lead>
      */
-    public function getSponsorProposal(): Collection
+    public function getLeads(): Collection
     {
-        return $this->sponsorProposal;
+        return $this->leads;
     }
 
-    public function addSponsorProposal(Sponsor $sponsorProposal): static
+    public function addLead(Lead $lead): static
     {
-        if (!$this->sponsorProposal->contains($sponsorProposal)) {
-            $this->sponsorProposal->add($sponsorProposal);
-            $sponsorProposal->setPerson($this);
+        if (!$this->leads->contains($lead)) {
+            $this->leads->add($lead);
+            $lead->setPerson($this);
         }
 
         return $this;
     }
 
-    public function removeSponsorProposal(Sponsor $sponsorProposal): static
+    public function removeLead(Lead $lead): static
     {
-        if ($this->sponsorProposal->removeElement($sponsorProposal)) {
+        if ($this->leads->removeElement($lead)) {
             // set the owning side to null (unless already changed)
-            if ($sponsorProposal->getPerson() === $this) {
-                $sponsorProposal->setPerson(null);
+            if ($lead->getPerson() === $this) {
+                $lead->setPerson(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Student>
-     */
-    public function getSupportRequest(): Collection
-    {
-        return $this->supportRequest;
-    }
 
-    public function addSupportRequest(Student $supportRequest): static
-    {
-        if (!$this->supportRequest->contains($supportRequest)) {
-            $this->supportRequest->add($supportRequest);
-            $supportRequest->setPerson($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSupportRequest(Student $supportRequest): static
-    {
-        if ($this->supportRequest->removeElement($supportRequest)) {
-            // set the owning side to null (unless already changed)
-            if ($supportRequest->getPerson() === $this) {
-                $supportRequest->setPerson(null);
-            }
-        }
-
-        return $this;
-    }
 }

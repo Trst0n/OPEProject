@@ -10,28 +10,58 @@ framework:
             initial_marking: initialized
             places:
                 - initialized
-                - semiValidated_match
+                - sponsor_approved  # parrainage approuvé par une personne
+                - student_approved
+                - student_rejected       # parrainage rejeté par student
+                - sponsor_rejected       # parrainage rejeté par sponsor
                 - approved
-                - sponsorship
-                - ended # parrainage fini
-                - rejected # parrainage rejeté -> suppression
+                - sponsorship       # parrainage
+                #                - st_ended          # une des personnes y met fin
+                #                - sp_ended
+                - ended             # parrainage fini par les deux parti
+
             transitions:
-                to_validate: # L'un des parti accepte la proposition de matching
+                st_validate: # L'etudiant accepte la proposition de matching
                     from: initialized
-                    to: semiValidated_match
-                to_refuse: # L'un des parti refuse la proposition de matching
+                    to: student_approved
+                sp_validate: # Le sponsor accepte la proposition de matching
                     from: initialized
-                    to: rejected
-                to_approve: # La deuxième personne accepte la proposition de match
-                    from: semiValidated_match
+                    to: sponsor_approved
+
+
+                st_refuse: # L'un des parti refuse la proposition de matching
+                    from: initialized
+                    to: student_rejected
+                sp_refuse:
+                    from: initialized
+                    to: sponsor_rejected
+
+
+                sp_approve: # La deuxième personne accepte la proposition de match
+                    from: student_approved
                     to: approved
-                to_reject: # L'un des parti refuse la proposition de match durant le processus
-                    from: semiValidated_match
-                    to: rejected
+                st_approve:
+                    from: sponsor_approved
+                    to: approved
+
+                st_reject: # L'un des parti refuse la proposition de match durant le processus
+                    from: sponsor_approved
+                    to: student_rejected
+                sp_reject:
+                    from: student_approved
+                    to: sponsor_rejected
+
                 to_conclude: # Les deux partis ont pris contact
                     from: approved
                     to: sponsorship
+
                 to_end: # L'un des parti souhaite arrêter le parrainnage
                     from: sponsorship
                     to: ended
+#                st_end: # L'un des parti souhaite arrêter le parrainnage
+#                    from: sponsorship
+#                    to: st_ended
+#                sp_end: # L'un des parti souhaite arrêter le parrainnage
+#                    from: sponsorship
+#                    to: sp_ended
 

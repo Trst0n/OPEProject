@@ -28,13 +28,15 @@ class Curriculum
     #[ORM\ManyToMany(targetEntity: Field::class, mappedBy: 'curriculum')]
     private Collection $fields;
 
-    #[ORM\ManyToMany(targetEntity: Student::class, mappedBy: 'curriculum')]
-    private Collection $students;
+    #[ORM\OneToMany(mappedBy: 'curriculum', targetEntity: Request::class)]
+    private Collection $requests;
+
+
 
     public function __construct()
     {
         $this->fields = new ArrayCollection();
-        $this->students = new ArrayCollection();
+        $this->requests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -106,29 +108,34 @@ class Curriculum
     }
 
     /**
-     * @return Collection<int, Student>
+     * @return Collection<int, Request>
      */
-    public function getStudents(): Collection
+    public function getRequests(): Collection
     {
-        return $this->students;
+        return $this->requests;
     }
 
-    public function addStudent(Student $student): static
+    public function addRequest(Request $request): static
     {
-        if (!$this->students->contains($student)) {
-            $this->students->add($student);
-            $student->addCurriculum($this);
+        if (!$this->requests->contains($request)) {
+            $this->requests->add($request);
+            $request->setCurriculum($this);
         }
 
         return $this;
     }
 
-    public function removeStudent(Student $student): static
+    public function removeRequest(Request $request): static
     {
-        if ($this->students->removeElement($student)) {
-            $student->removeCurriculum($this);
+        if ($this->requests->removeElement($request)) {
+            // set the owning side to null (unless already changed)
+            if ($request->getCurriculum() === $this) {
+                $request->setCurriculum(null);
+            }
         }
 
         return $this;
     }
+
+
 }
