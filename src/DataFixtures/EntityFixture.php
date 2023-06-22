@@ -12,6 +12,7 @@ use App\Entity\Person;
 use App\Entity\Proposal;
 use App\Entity\Request;
 use App\Entity\Sponsor;
+use App\Entity\Sponsorship;
 use App\Entity\Student;
 use App\Entity\Wish;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -60,6 +61,55 @@ class EntityFixture extends Fixture
         $field->setName($faker->domainName())->addCurriculum($cursus);
         $manager->persist($field);
 
+        for ($i=0; $i < 3; $i++) {
+            $person = new Student();
+            $person->setCivility(Civility::Women)
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPhonenumber($faker->phoneNumber())
+                ->setEmail($faker->email())
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setUpdatedAt(new \DateTimeImmutable())
+                ->setBirthdate($faker->dateTime());
+
+            $student = new Request();
+            $student
+                ->setCity($city)
+                ->setWishes([Wish::Housing, Wish::Administrative])
+                ->setCurriculum($cursus)
+                ->setLanguages([Language::Chinese, Language::French]);
+            $manager->persist($student);
+
+            $person->addLead($student);
+            $manager->persist($person);
+
+            $person2 = new Sponsor();
+            $person2->setCivility(Civility::Women)
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPhonenumber($faker->phoneNumber())
+                ->setEmail($faker->email())
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setUpdatedAt(new \DateTimeImmutable())
+                ->setBirthdate($faker->dateTime());
+
+            $sponsor = new Proposal();
+            $sponsor
+                ->setCity($city)
+                ->setWishes([Wish::Housing, Wish::Administrative])
+                ->addWorkfield($field)
+                ->setLanguages([Language::Chinese, Language::French]);
+
+            $manager->persist($sponsor);
+
+            $person2->addLead($sponsor);
+            $manager->persist($person2);
+
+
+            $sponsorship = new Sponsorship();
+            $sponsorship->setSponsorRequest($student)->setSponsorProposal($sponsor)->setWishes([Wish::Housing]);
+            $manager->persist($sponsorship);
+        }
 
         for ($i=0; $i < 5; $i++) {
             $person2 = new Sponsor();
@@ -83,7 +133,6 @@ class EntityFixture extends Fixture
 
             $person2->addLead($sponsor);
             $manager->persist($person2);
-
         }
 
         for ($i=0; $i < 5; $i++) {

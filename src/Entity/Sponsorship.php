@@ -9,6 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SponsorshipRepository::class)]
 class Sponsorship
 {
+
+    public function __construct()
+    {
+        $this->created_at= new \DateTimeImmutable();
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

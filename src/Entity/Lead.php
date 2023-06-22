@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\LeadRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'discr', type: 'string')]
@@ -18,6 +20,13 @@ class Lead
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotNull]
+    #[ORM\Column(enumType: Civility::class)]
+    private ?Civility $civility = null;
+
+
+
+    #[Assert\NotNull]
     #[ORM\ManyToOne(inversedBy: 'leads')]
     private ?Person $person = null;
 
@@ -25,13 +34,16 @@ class Lead
     #[ORM\JoinColumn(nullable: false)]
     private ?City $city = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(type: Types::ARRAY)]
     private array $languages = [];
 
+    #[Assert\NotBlank]
     #[ORM\Column(type: Types::ARRAY)]
     private array $wishes = [];
 
     #[ORM\Column(length: 255)]
+
     private ?string $state = 'valid';
 
     public function getId(): ?int
@@ -97,5 +109,21 @@ class Lead
         $this->state = $state;
 
         return $this;
+    }
+
+    /**
+     * @return Civility|null
+     */
+    public function getCivility(): ?Civility
+    {
+        return $this->civility;
+    }
+
+    /**
+     * @param Civility|null $civility
+     */
+    public function setCivility(?Civility $civility): void
+    {
+        $this->civility = $civility;
     }
 }

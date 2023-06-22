@@ -31,7 +31,7 @@
                                         <!-- project number -->
                                         <div>
                                             <h1 class="fw-bold">{{ sponsorship | length }}</h1>
-                                            <p class="mb-0">En cours</p>
+                                            <p class="mb-0"><span class="text-success me-2">{{  nomatchrequests | length }}</span>Demande(s) en attente</p>
                                         </div>
                                     </div>
                                 </div>
@@ -54,8 +54,8 @@
                                         </div>
                                         <!-- project number -->
                                         <div>
-                                            <h1 class="fw-bold">{{ sponsoratdate }}</h1>
-                                            <p class="mb-0"><span class="text-success me-2">{{ sponsors  | length }}</span>Inscrits</p>
+                                            <h1 class="fw-bold">{{ proposalsatdate }}</h1>
+                                            <p class="mb-0"><span class="text-success me-2">{{ nbproposals }}</span>Inscrits</p>
                                         </div>
                                     </div>
                                 </div>
@@ -78,8 +78,8 @@
                                         </div>
                                         <!-- project number -->
                                         <div>
-                                            <h1 class="fw-bold">{{ studentatdate }}</h1>
-                                            <p class="mb-0"><span class="text-success me-2">{{ students | length }}</span>Inscrits</p>
+                                            <h1 class="fw-bold">{{ requestsatdate }}</h1>
+                                            <p class="mb-0"><span class="text-success me-2">12</span>Inscrits</p>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                         <div class="d-flex justify-content-between align-items-center
                             mb-3">
                                             <div>
-                                                <h4 class="mb-0">Demande de Parrainage</h4>
+                                                <h4 class="mb-0">Match en Attente</h4>
                                             </div>
                                             <div class="icon-shape icon-md bg-light-primary text-primary
                             rounded-2">
@@ -103,8 +103,8 @@
                                         </div>
                                         <!-- project number -->
                                         <div>
-                                            <h1 class="fw-bold">{{ nomatchstudents | length }}</h1>
-                                            <p class="mb-0"><span class="text-success me-2">{{ nomatchsponsor }}</span>Parrain(s) disponible(s)</p>
+                                            <h1 class="fw-bold">{{ nomatchrequests | length }}</h1>
+                                            <p class="mb-0"><span class="text-success me-2">{{ nomatchproposal }}</span>Parrain(s) disponible(s)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -116,63 +116,46 @@
                                 <div class="card">
                                     <!-- card header  -->
                                     <div class="card-header bg-white  py-4">
-                                        <h4 class="mb-0">Etudiants sans parrainage</h4>
+                                        <h4 class="mb-0">Match en attente</h4>
                                     </div>
                                     <!-- table  -->
                                     <div class="table-responsive text-center">
                                         <table class="table text-nowrap mb-0">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th>Identité</th>
-                                                    <th>Date inscription</th>
+                                                    <th>Etudiant</th>
+                                                    <th>Parrain</th>
                                                     <th>Ville</th>
                                                     <th>Demande(s)</th>
-                                                    <th>Langues(s) parlée(s)</th>
                                                     <th>Matching</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% for student in nomatchstudents %}
+                                            {% for match in matchencours %}
                                                 <tr>
                                                     <td class="align-middle">
-                                                            <div style="text-align: left; margin-left: 27%">
-                                                                {% if student.person.civility == "Men"  %} MR. {% else %} MME. {% endif %}
-                                                               {{ student.person.lastname }}
-                                                            </div>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <div class="text-center">
-                                                        {{ student.person.updatedAt | date('d-m-Y') }}
+                                                        <div style="text-align: left; margin-left: 27%">
+                                                            {{ match.sponsorRequest.person.firstname }} {{ match.sponsorRequest.person.lastname | upper }}
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="text-center">
-                                                        {{ student.city.name }}
+                                                            {{ match.sponsorProposal.person.firstname }} {{ match.sponsorProposal.person.lastname | upper }}
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <div class="text-center">
+                                                        test
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="text-center">
                                                             {% set cpt = 0 %}
-                                                            {% for wish in student.wishes %}
+                                                            {% for wish in match.wishes %}
                                                                 {% if cpt < 3 %}
                                                                     Wish
                                                                 {% endif %}
                                                                     {% set cpt = cpt +1 %}
-                                                            {% endfor %}
-                                                            {% if cpt >= 3 %}
-                                                                {% set cpt = cpt - 2 %}
-                                                                + {{ cpt }}
-                                                            {% endif %}
-                                                        </div>
-                                                    </td>
-                                                    <td class="align-middle text-dark">
-                                                        <div class="text-center">
-                                                            {% set cpt = 0 %}
-                                                            {% for language in student.languages %}
-                                                                {% if cpt < 3 %}
-                                                                    language
-                                                                {% endif %}
-                                                                {% set cpt = cpt +1 %}
                                                             {% endfor %}
                                                             {% if cpt >= 3 %}
                                                                 {% set cpt = cpt - 2 %}
@@ -192,7 +175,7 @@
                                     </div>
                                     <!-- card footer  -->
                                     <div  class="card-footer bg-white text-center">
-                                        <a href="#" class="link-primary">Voir tous les étudiants </a>
+                                        <a href="#" class="link-primary">Voir tous les matchs </a>
 
                                     </div>
                                 </div>

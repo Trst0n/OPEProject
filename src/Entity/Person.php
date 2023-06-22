@@ -7,12 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'discr', type: 'string')]
 #[ORM\DiscriminatorMap(['sponsor' => Sponsor::class, 'student' => Student::class])]
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
+#[UniqueEntity('email')]
+#[ORM\HasLifecycleCallbacks]
 abstract class Person
 {
     #[ORM\Id]
@@ -38,17 +41,13 @@ abstract class Person
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[Assert\Email]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name: 'email', type: 'string', length: 255, unique: true)]
     private ?string $email = null;
 
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthdate = null;
-
-    #[Assert\NotNull]
-    #[ORM\Column(enumType: Civility::class)]
-    private ?Civility $civility = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
@@ -131,38 +130,29 @@ abstract class Person
         return $this;
     }
 
-    public function getCivility(): ?Civility
-    {
-        return $this->civility;
-    }
-
-    public function setCivility(Civility $civility): static
-    {
-        $this->civility = $civility;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updated_at): static
+    #[ORM\PostUpdate]
+    public function setUpdatedAt(): static
     {
-        $this->updated_at = $updated_at;
+        $this->updated_at = new \DateTimeImmutable();
 
         return $this;
     }
+
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    #[ORM\PrePersist]
+    public function setCreatedAt(): static
     {
-        $this->created_at = $created_at;
+        $this->created_at = new \DateTimeImmutable();
 
         return $this;
     }

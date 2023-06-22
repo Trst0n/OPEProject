@@ -24,7 +24,7 @@ class ApiController extends AbstractController
      * @throws TransportExceptionInterface
      */
     #[Route('/sponsor', name: 'app_api_sponsor', methods: ['POST'])]
-    public function apiSponsor(Request $request): Response
+    public function createSponsor(Request $request): Response
     {
         /** Récuperation des données JSON **/
         $data = json_decode(
@@ -61,7 +61,7 @@ class ApiController extends AbstractController
      * @throws TransportExceptionInterface
      */
     #[Route('/student', name: 'app_api_student', methods: ['POST'])]
-    public function apiEtu(Request $request): JsonResponse
+    public function createStudent(Request $request): JsonResponse
     {
         /** Récuperation des données JSON **/
         $data = json_decode(
