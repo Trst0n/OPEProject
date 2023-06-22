@@ -42,9 +42,8 @@ class Lead
     #[ORM\Column(type: Types::ARRAY)]
     private array $wishes = [];
 
-    #[ORM\Column(length: 255)]
-
-    private ?string $state = 'valid';
+    #[ORM\Column(length: 255, enumType: LeadState::class)]
+    private LeadState $state = LeadState::AVAILABLE;
 
     public function getId(): ?int
     {
@@ -99,12 +98,12 @@ class Lead
         return $this;
     }
 
-    public function getState(): ?string
+    public function getState(): ?LeadState
     {
         return $this->state;
     }
 
-    public function setState(string $state): static
+    public function setState(LeadState $state): static
     {
         $this->state = $state;
 

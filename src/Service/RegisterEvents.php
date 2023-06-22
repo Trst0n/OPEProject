@@ -22,7 +22,8 @@ class RegisterEvents implements EventSubscriberInterface
     public function getSubscribedEvents(): array
     {
         return [
-           // Events::prePersist
+           // Events::prePersist,
+            //
         ];
     }
 

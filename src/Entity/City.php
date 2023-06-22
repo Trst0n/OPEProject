@@ -23,6 +23,12 @@ class City
 
     #[ORM\OneToMany(mappedBy: 'city', targetEntity: Lead::class)]
     private Collection $leads;
+
+    #[ORM\Column]
+    private ?int $Lat = null;
+
+    #[ORM\Column]
+    private ?int $lng = null;
     public function __construct()
     {
         $this->leads = new ArrayCollection();
@@ -83,6 +89,30 @@ class City
                 $lead->setCity(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?int
+    {
+        return $this->Lat;
+    }
+
+    public function setLat(int $Lat): static
+    {
+        $this->Lat = $Lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?int
+    {
+        return $this->lng;
+    }
+
+    public function setLng(int $lng): static
+    {
+        $this->lng = $lng;
 
         return $this;
     }

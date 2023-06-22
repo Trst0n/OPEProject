@@ -5,59 +5,66 @@ framework:
             marking_store:
                 type: 'method'
                 property: 'state'
+
             supports:
                 - App\Entity\Sponsorship
-            initial_marking: initialized
+            initial_marking: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
             places:
-                - initialized
-                - sponsor_approved  # parrainage approuvé par une personne
-                - student_approved
-                - student_rejected       # parrainage rejeté par student
-                - sponsor_rejected       # parrainage rejeté par sponsor
-                - approved
-                - sponsorship       # parrainage
-                #                - st_ended          # une des personnes y met fin
+                - !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
+                - !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED        # parrainage approuvé par une personne
+                - !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED
+                - !php/const App\Entity\SponsorshipState::STATE_STUDENT_REJECTED        # parrainage rejeté par student
+                - !php/const App\Entity\SponsorshipState::STATE_SPONSOR_REJECTED        # parrainage rejeté par sponsor
+                - !php/const App\Entity\SponsorshipState::STATE_APPROVED
+                - !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP             # parrainage
+                #                - st_ended                                             # une des personnes y met fin
                 #                - sp_ended
-                - ended             # parrainage fini par les deux parti
+                - !php/const App\Entity\SponsorshipState::STATE_ENDED                         # parrainage fini par les deux parti
 
             transitions:
-                st_validate: # L'etudiant accepte la proposition de matching
-                    from: initialized
-                    to: student_approved
-                sp_validate: # Le sponsor accepte la proposition de matching
-                    from: initialized
-                    to: sponsor_approved
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_VALIDATE: # L'etudiant accepte la proposition de matching
+                    from: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
+                    to: !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_VALIDATE: # Le sponsor accepte la proposition de matching
+                    from: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
+                    to: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED
 
 
-                st_refuse: # L'un des parti refuse la proposition de matching
-                    from: initialized
-                    to: student_rejected
-                sp_refuse:
-                    from: initialized
-                    to: sponsor_rejected
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_REFUSE: # L'un des parti refuse la proposition de matching
+                    from: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
+                    to: !php/const App\Entity\SponsorshipState::STATE_STUDENT_REJECTED
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_REFUSE:
+                    from: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
+                    to: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_REJECTED
 
 
-                sp_approve: # La deuxième personne accepte la proposition de match
-                    from: student_approved
-                    to: approved
-                st_approve:
-                    from: sponsor_approved
-                    to: approved
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_APPROVE:          # La deuxième personne accepte la proposition de match
+                    from: !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED
+                    to: !php/const App\Entity\SponsorshipState::STATE_APPROVED
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_APPROVE:
+                    from: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED
+                    to: !php/const App\Entity\SponsorshipState::STATE_APPROVED
 
-                st_reject: # L'un des parti refuse la proposition de match durant le processus
-                    from: sponsor_approved
-                    to: student_rejected
-                sp_reject:
-                    from: student_approved
-                    to: sponsor_rejected
 
-                to_conclude: # Les deux partis ont pris contact
-                    from: approved
-                    to: sponsorship
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_REJECT:            # L'un des parti refuse la proposition de match durant le processus
+                    from: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED
+                    to: !php/const App\Entity\SponsorshipState::STATE_STUDENT_REJECTED
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_REJECT:
+                    from: !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED
+                    to: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_REJECTED
 
-                to_end: # L'un des parti souhaite arrêter le parrainnage
-                    from: sponsorship
-                    to: ended
+
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_TO_CONCLUDE:          # Les deux partis ont pris contact
+                    from: !php/const App\Entity\SponsorshipState::STATE_APPROVED
+                    to: !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP
+
+
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_TO_END:               # L'un des parti souhaite arrêter le parrainnage
+                    from: !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP
+                    to: !php/const App\Entity\SponsorshipState::STATE_ENDED
+
+
+
 #                st_end: # L'un des parti souhaite arrêter le parrainnage
 #                    from: sponsorship
 #                    to: st_ended

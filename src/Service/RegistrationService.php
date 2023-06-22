@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Lead;
+use App\Entity\LeadState;
 use App\Entity\Person;
 use App\Entity\Proposal;
 use App\Entity\Request;
@@ -58,7 +59,7 @@ class RegistrationService
 
                 foreach ($person->getLeads() as $lead){
                     if(! in_array($lead->getId(), $newProposals)){
-                        $lead->setState('outdated');
+                        $lead->setState(LeadState::OUTDATED);
                     }
                 }
 
@@ -98,7 +99,7 @@ class RegistrationService
 
                 foreach ($person->getLeads() as $lead){
                     if($lead->getId() != $updatedRequest->getId()){
-                        $lead->setState('outdated');
+                        $lead->setState(LeadState::OUTDATED);
                     }
                 }
                 $this->entityManager->flush();
