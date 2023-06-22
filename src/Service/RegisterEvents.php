@@ -22,24 +22,24 @@ class RegisterEvents implements EventSubscriberInterface
     public function getSubscribedEvents(): array
     {
         return [
-            Events::prePersist
+           // Events::prePersist
         ];
     }
 
-    public function prePersist(PrePersistEventArgs $args):void
-    {
-        $entity = $args->getObject();
-
-        if($entity instanceof Lead){
-            $person = $entity->getPerson();
-
-            foreach ($person->getLeads() as $lead){
-                if($lead != $entity){
-                    $lead->setState("outdated");
-                }
-            }
-        }
-    }
+//    public function prePersist(PrePersistEventArgs $args):void
+//    {
+//        $entity = $args->getObject();
+//
+//        if($entity instanceof Request){
+//            $person = $entity->getPerson();
+//
+//            foreach ($person->getLeads() as $lead){
+//                if($lead->getId() != $entity->getId()){
+//                    $lead->setState("outdated");
+//                }
+//            }
+//        }
+//    }
 
 
 

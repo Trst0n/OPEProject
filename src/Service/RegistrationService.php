@@ -31,7 +31,7 @@ class RegistrationService
                     $person= new Sponsor();
                     $person->setFirstname($data['firstname'])->setLastname($data['lastname'])->setPhonenumber($data['phonenumber'])->setEmail($data['email'])
                         ->setBirthdate(DateTime::createFromFormat('m-d-Y', "01-01-2001"))
-                        ->setUpdatedAt(new \DateTimeImmutable())->setCreatedAt(new \DateTimeImmutable());
+                        ->setUpdatedAt()->setCreatedAt();
 
                     if(!$this->validator->validate($person)) {
                         return false;
@@ -41,6 +41,7 @@ class RegistrationService
                 }
 
                 /** Création des nouveaux profils */
+                $newProposals = [];
                 for ($i = 0; $i < $data['numStudent']; $i++) {
                     $updatedProposal = new Proposal();
                     $updatedProposal->setCity($this->service->getCity($data['city']))->setWorkfield($this->service->getFields($data['workfield']))->setWishes($this->service->getWishes($data['wishes']))
@@ -51,9 +52,14 @@ class RegistrationService
                     if(!$this->validator->validate($updatedProposal)) {
                         return false;
                     }
-
+                    $newProposals[]=$updatedProposal->getId();
                     $this->entityManager->persist($updatedProposal);
+                }
 
+                foreach ($person->getLeads() as $lead){
+                    if(! in_array($lead->getId(), $newProposals)){
+                        $lead->setState('outdated');
+                    }
                 }
 
                 $this->entityManager->flush();
@@ -67,8 +73,8 @@ class RegistrationService
                 if(!$person){
                     $person = new Student();
                     $person->setFirstname($data['firstname'])->setLastname($data['lastname'])->setPhonenumber($data['phonenumber'])->setEmail($data['email'])
-                        ->setBirthdate(DateTime::createFromFormat('m-d-Y', $data['birthdate']))
-                        ->setCreatedAt(new \DateTimeImmutable());
+                        ->setBirthdate(DateTime::createFromFormat('m-d-Y', $data['birthdate']))->setUpdatedAt()
+                        ->setCreatedAt();
 
                     if(!$this->validator->validate($person)) {
                         return false;
@@ -89,6 +95,12 @@ class RegistrationService
                 }
 
                 $this->entityManager->persist($updatedRequest); // flush de l'entité
+
+                foreach ($person->getLeads() as $lead){
+                    if($lead->getId() != $updatedRequest->getId()){
+                        $lead->setState('outdated');
+                    }
+                }
                 $this->entityManager->flush();
                 return true;
 
