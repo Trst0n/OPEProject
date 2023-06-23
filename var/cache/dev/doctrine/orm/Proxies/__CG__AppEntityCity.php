@@ -17,12 +17,16 @@ class City extends \App\Entity\City implements \Doctrine\Persistence\Proxy
     }
 
     private const LAZY_OBJECT_PROPERTY_SCOPES = [
+        "\0".parent::class."\0".'Lat' => [parent::class, 'Lat', null],
         "\0".parent::class."\0".'id' => [parent::class, 'id', null],
         "\0".parent::class."\0".'leads' => [parent::class, 'leads', null],
+        "\0".parent::class."\0".'lng' => [parent::class, 'lng', null],
         "\0".parent::class."\0".'name' => [parent::class, 'name', null],
         "\0".parent::class."\0".'zipcode' => [parent::class, 'zipcode', null],
+        'Lat' => [parent::class, 'Lat', null],
         'id' => [parent::class, 'id', null],
         'leads' => [parent::class, 'leads', null],
+        'lng' => [parent::class, 'lng', null],
         'name' => [parent::class, 'name', null],
         'zipcode' => [parent::class, 'zipcode', null],
     ];

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\LeadState;
 use App\Repository\ProposalRepository;
 use App\Repository\RequestRepository;
 use App\Repository\SponsorRepository;
@@ -15,38 +16,41 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     #[Route('/', name: 'app_dashboard')]
-    public function index(SponsorshipRepository $sponsorshipRepository, StudentRepository $studentRepository, RequestRepository $requestRepository ,ProposalRepository $proposalRepository, LeadService $leadService): Response
+    public function index(SponsorshipRepository $sponsorshipRepository, RequestRepository $requestRepository ,ProposalRepository $proposalRepository): Response
     {
-        //Liste des parrainage
-        $sponsorships = $sponsorshipRepository->findAll();
-
-        //Liste des parrainage(match en cours)
-        $matchEnCours = [];
-
-        //Liste des matchs en attente (=noMatchRequests)
-        $noMatchRequests = count($requestRepository->findBy(['state' => 'valid']));
-
-        #TODO classement par date d'inscription la plus vieille
         #TODO liens index
 
-        foreach ($sponsorships as $sponsorship) {
-            if ($sponsorship->getState() === 'initialized' || $sponsorship->getState() === 'sponsor_approved' || $sponsorship->getState() === 'student_approved') {
-                $matchEnCours[] = $sponsorship;
-            }
+        //Nombre de sponsorship total & nombre de sponsorship en cours
+        $numSponsorship = count($sponsorshipRepository->findAll());
+        $numValidSponsorship = $numSponsorship - count($sponsorshipRepository->findBy(["state" => "ended"]));
+
+        //Nombre de proposal "valid" & nombre de proposal inscrits
+        $numProposals = count($proposalRepository->findAll());
+        $numValidProposals = $numProposals - count($proposalRepository->findBy(["state" => LeadState::OUTDATED]));
+
+        //Nombre de request "valid" & nombre de resquest inscrits
+        $numRequests = count($requestRepository->findAll());
+        $numValidRequests = $numRequests - count($requestRepository->findBy(["state" => LeadState::OUTDATED]));
+
+        //Liste des matchs en attente
+        $onHoldMatches= [];
+        $noMatchRequests = [];
+        foreach ($requestRepository->findAll() as $request) {
+           if($request->getState() !== LeadState::OUTDATED && $request->getState() !== LeadState::SPONSORSHIP  && $request->getState() !== LeadState::MATCH_APPROVED){
+               if($request->getState() === LeadState::AVAILABLE){
+                   $noMatchRequests[] = $request;
+               }
+               $onHoldMatches[] = $request;
+           }
         }
 
-        //Nb des sponsors sans match
-        $noMatchProposals = count($proposalRepository->findBy(['state' => 'valid'])); //valid = compte valid, sans match ni parrainnage
-        $nbproposals = count($proposalRepository->findAll());
+        //Requests sans match apparaitront en premier
+        $onHoldMatches = $noMatchRequests + $onHoldMatches;
 
-        //Nombre de sponsor/student valide
-        $proposalatdate = count($proposalRepository->findBy(['state' => 'valid']));
-        $requestatdate = count($requestRepository->findBy(['state' => 'valid']));
+        return $this->render('dashboard/index.html.twig', [
+            'numSponsorship' => $numSponsorship, 'numValidSponsorship' => $numValidSponsorship, 'numProposals' => $numProposals,
+            'numValidProposals' => $numValidProposals, 'numRequests' => $numRequests, 'numValidRequests' => $numValidRequests, 'onHoldMatches' => $onHoldMatches,
 
-
-            return $this->render('dashboard/index.html.twig', [
-                'controller_name' => 'DashboardController', 'sponsorship' => $sponsorships, 'nomatchrequests' => $noMatchRequests, 'matchencours' => $matchEnCours,
-                'nbproposals' => $nbproposals, 'nomatchproposal' => $noMatchProposals, 'requestsatdate' => $requestatdate, 'proposalsatdate' => $proposalatdate
-            ]);
+        ]);
         }
 }

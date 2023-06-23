@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DashboardController!{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block body %}
                         <div class="row">
@@ -30,8 +30,8 @@
                                         </div>
                                         <!-- project number -->
                                         <div>
-                                            <h1 class="fw-bold">{{ sponsorship | length }}</h1>
-                                            <p class="mb-0"><span class="text-success me-2">{{  nomatchrequests | length }}</span>Demande(s) en attente</p>
+                                            <h1 class="fw-bold">{{ numValidSponsorship }}</h1>
+                                            <p class="mb-0"><span class="text-success me-2">{{ numSponsorship }}</span>Au total</p>
                                         </div>
                                     </div>
                                 </div>
@@ -54,8 +54,8 @@
                                         </div>
                                         <!-- project number -->
                                         <div>
-                                            <h1 class="fw-bold">{{ proposalsatdate }}</h1>
-                                            <p class="mb-0"><span class="text-success me-2">{{ nbproposals }}</span>Inscrits</p>
+                                            <h1 class="fw-bold">{{ numValidProposals }}</h1>
+                                            <p class="mb-0"><span class="text-success me-2">{{ numProposals }}</span>Inscrits</p>
                                         </div>
                                     </div>
                                 </div>
@@ -78,8 +78,8 @@
                                         </div>
                                         <!-- project number -->
                                         <div>
-                                            <h1 class="fw-bold">{{ requestsatdate }}</h1>
-                                            <p class="mb-0"><span class="text-success me-2">12</span>Inscrits</p>
+                                            <h1 class="fw-bold">{{ numValidRequests }}</h1>
+                                            <p class="mb-0"><span class="text-success me-2">{{ numRequests }}</span>Inscrits</p>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                         <div class="d-flex justify-content-between align-items-center
                             mb-3">
                                             <div>
-                                                <h4 class="mb-0">Match en Attente</h4>
+                                                <h4 class="mb-0">Match en attente</h4>
                                             </div>
                                             <div class="icon-shape icon-md bg-light-primary text-primary
                             rounded-2">
@@ -103,8 +103,8 @@
                                         </div>
                                         <!-- project number -->
                                         <div>
-                                            <h1 class="fw-bold">{{ nomatchrequests | length }}</h1>
-                                            <p class="mb-0"><span class="text-success me-2">{{ nomatchproposal }}</span>Parrain(s) disponible(s)</p>
+                                            <h1 class="fw-bold">{{ onHoldMatches | length }}</h1>
+                                            <p class="mb-0"><span class="text-success me-2">zeze</span>Parrain(s) disponible(s)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -123,49 +123,53 @@
                                         <table class="table text-nowrap mb-0">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th>Etudiant</th>
-                                                    <th>Parrain</th>
-                                                    <th>Ville</th>
-                                                    <th>Demande(s)</th>
-                                                    <th>Matching</th>
+                                                    <th>Nom</th>
+                                                    <th>Prenom</th>
+                                                    <th>Date d'inscription</th>
+                                                    <th>Statut</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            {% for match in matchencours %}
+                                            {% for request in onHoldMatches %}
                                                 <tr>
                                                     <td class="align-middle">
-                                                        <div style="text-align: left; margin-left: 27%">
-                                                            {{ match.sponsorRequest.person.firstname }} {{ match.sponsorRequest.person.lastname | upper }}
+                                                        <div class="text-center">
+                                                            {{ request.person.lastname }}
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="text-center">
-                                                            {{ match.sponsorProposal.person.firstname }} {{ match.sponsorProposal.person.lastname | upper }}
+                                                            {{ request.person.firstname | upper }}
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
                                                         <div class="text-center">
-                                                        test
+                                                            {{ request.person.updatedAt | date('Y-m-d')  }}
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
+                                                        {% if request.state.value == "available" %}
+                                                            <div class="text-center" style="color: darkred">
+                                                                VALIDATION ADMIN
+                                                            </div>
+                                                        {% elseif request.state.value == "matched"%}
+                                                            <div class="text-center" style="color: orange">
+                                                                VALIDATION PERSONNES
+                                                            </div>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td class="align-middle">
                                                         <div class="text-center">
-                                                            {% set cpt = 0 %}
-                                                            {% for wish in match.wishes %}
-                                                                {% if cpt < 3 %}
-                                                                    Wish
-                                                                {% endif %}
-                                                                    {% set cpt = cpt +1 %}
-                                                            {% endfor %}
-                                                            {% if cpt >= 3 %}
-                                                                {% set cpt = cpt - 2 %}
-                                                                + {{ cpt }}
+                                                            {% if request.state.value == "matched" %}
+                                                                <a href="#"><i style="font-size: 120%" class="bi bi-arrow-up-square"></i></a>
+                                                            {% else %}
+                                                                <a href="#"><i style="font-size: 120%" class="bi bi-plus-square"></i></a>
                                                             {% endif %}
-                                                        </div>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <div class="text-center">
-                                                            <a href="#"><i style="font-size: 120%" class="bi bi-person-plus"></i></a>
+                                                            &nbsp;
+                                                            &nbsp;
+                                                            <a href="#"><i style="font-size: 120%" class="bi bi-info-circle"></i></a>
+
                                                         </div>
                                                     </td>
                                                 </tr>
