@@ -391,6 +391,9 @@
     <service id="App\DataFixtures\EntityFixture" class="App\DataFixtures\EntityFixture" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
     </service>
+    <service id="App\Event\SponsorshipStatusUpdate" class="App\Event\SponsorshipStatusUpdate" autowire="true" autoconfigure="true">
+      <tag name="doctrine.orm.entity_listener" event="postUpdate" method="postUpdate" lazy="" entity_manager="" entity="App\Entity\Sponsorship" priority=""/>
+    </service>
     <service id="App\Repository\AdministratorRepository" class="App\Repository\AdministratorRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -441,6 +444,9 @@
     </service>
     <service id="App\Security\ApiKeyAuthenticator" class="App\Security\ApiKeyAuthenticator" autowire="true" autoconfigure="true">
       <argument>%env(APP_API_TOKEN)</argument>
+    </service>
+    <service id="App\Service\Algorithm" class="App\Service\Algorithm" autowire="true" autoconfigure="true">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="App\Service\FindEntity" class="App\Service\FindEntity" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
@@ -5195,11 +5201,21 @@
       <tag name="cache.pool"/>
       <argument type="service" id="cache.doctrine.orm.default.query.recorder_inner"/>
     </service>
-    <service id="doctrine.orm.default_entity_listener_resolver" class="Doctrine\Bundle\DoctrineBundle\Mapping\ContainerEntityListenerResolver">
-      <argument type="service" id="service_container"/>
+    <service id="doctrine.orm.default_entity_listener_resolver" class="Doctrine\Bundle\DoctrineBundle\Mapping\ContainerEntityListenerResolver" public="true">
+      <argument type="service" id=".service_locator.kzFiPQi"/>
+      <call method="registerService">
+        <argument>App\Event\SponsorshipStatusUpdate</argument>
+        <argument>App\Event\SponsorshipStatusUpdate</argument>
+      </call>
     </service>
     <service id="doctrine.orm.default_listeners.attach_entity_listeners" class="Doctrine\ORM\Tools\AttachEntityListenersListener">
       <tag name="doctrine.event_listener" event="loadClassMetadata"/>
+      <call method="addEntityListener">
+        <argument>App\Entity\Sponsorship</argument>
+        <argument>App\Event\SponsorshipStatusUpdate</argument>
+        <argument>postUpdate</argument>
+        <argument>postUpdate</argument>
+      </call>
     </service>
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
@@ -6908,6 +6924,8 @@
     <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\EntityFixture" class="App\DataFixtures\EntityFixture" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\EntityFixture" class="App\DataFixtures\EntityFixture" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.App\Event\SponsorshipStatusUpdate.0.App\Event\SponsorshipStatusUpdate" class="App\Event\SponsorshipStatusUpdate" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Event\SponsorshipStatusUpdate" class="App\Event\SponsorshipStatusUpdate" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AdministratorRepository" class="App\Repository\AdministratorRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\AdministratorRepository" class="App\Repository\AdministratorRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CityRepository" class="App\Repository\CityRepository" autowire="true" abstract="true"/>
@@ -7648,6 +7666,12 @@
         <argument key="doctrine.orm.listeners.lock_store_schema_listener" type="service_closure" id="doctrine.orm.listeners.lock_store_schema_listener"/>
         <argument key="doctrine.orm.listeners.pdo_session_handler_schema_listener" type="service_closure" id="doctrine.orm.listeners.pdo_session_handler_schema_listener"/>
         <argument key="doctrine.orm.messenger.doctrine_schema_listener" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_listener"/>
+      </argument>
+    </service>
+    <service id=".service_locator.kzFiPQi" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="App\Event\SponsorshipStatusUpdate" type="service_closure" id="App\Event\SponsorshipStatusUpdate"/>
       </argument>
     </service>
     <service id=".service_locator.YRbhAc1" class="Symfony\Component\DependencyInjection\ServiceLocator">

@@ -36,6 +36,9 @@ class Sponsorship
     #[ORM\JoinColumn(nullable: false)]
     private ?Proposal $sponsorProposal = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $updates_at = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,6 +101,18 @@ class Sponsorship
     public function setSponsorProposal(?Proposal $sponsorProposal): static
     {
         $this->sponsorProposal = $sponsorProposal;
+
+        return $this;
+    }
+
+    public function getUpdatesAt(): ?\DateTimeImmutable
+    {
+        return $this->updates_at;
+    }
+
+    public function setUpdatesAt(\DateTimeImmutable $updates_at): static
+    {
+        $this->updates_at = $updates_at;
 
         return $this;
     }
