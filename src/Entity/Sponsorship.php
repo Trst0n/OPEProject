@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SponsorshipRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Sponsorship
 {
 
@@ -62,6 +63,7 @@ class Sponsorship
         return $this->state;
     }
 
+
     public function setState(string $state): static
     {
         $this->state = $state;
@@ -69,14 +71,16 @@ class Sponsorship
         return $this;
     }
 
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    #[ORM\PrePersist]
+    public function setCreatedAt(): static
     {
-        $this->created_at = $created_at;
+        $this->created_at = new \DateTimeImmutable();
 
         return $this;
     }
@@ -110,9 +114,11 @@ class Sponsorship
         return $this->updates_at;
     }
 
-    public function setUpdatesAt(\DateTimeImmutable $updates_at): static
+    #[ORM\PostUpdate]
+    #[ORM\PrePersist]
+    public function setUpdatesAt(): static
     {
-        $this->updates_at = $updates_at;
+        $this->updates_at = new \DateTimeImmutable();
 
         return $this;
     }

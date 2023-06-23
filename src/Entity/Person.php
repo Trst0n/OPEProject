@@ -136,6 +136,7 @@ abstract class Person
     }
 
     #[ORM\PostUpdate]
+    #[ORM\PrePersist]
     public function setUpdatedAt(): static
     {
         $this->updated_at = new \DateTimeImmutable();
