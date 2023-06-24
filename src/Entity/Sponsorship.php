@@ -24,7 +24,7 @@ class Sponsorship
     private array $wishes = [];
 
     #[ORM\Column(length: 255)]
-    private ?string $state = 'initialized';
+    private SponsorshipState|string|null $state = SponsorshipState::STATE_INITIALIZED;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;

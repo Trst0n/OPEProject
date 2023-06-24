@@ -17,52 +17,45 @@
 
          <!-- Nav item -->
          <li class="nav-item">
-            <div class="navbar-heading">Entité</div>
+            <div class="navbar-heading">Entités</div>
         </li>
 
 
              <!-- Nav item -->
              <li class="nav-item">
-                <a class="nav-link has-arrow @@if (context.page_group !== 'pages') { collapsed }" href="#!" data-bs-toggle="collapse" data-bs-target="#navPages" aria-expanded="false" aria-controls="navPages">
+                <a class="nav-link has-arrow @@if (context.page_group !== 'pages') { collapsed }" href="{{ path('app_dashboard_users') }}" data-bs-toggle="collapse" data-bs-target="#navPages" aria-expanded="false" aria-controls="navPages">
                     <i
                     data-feather="layers"
 
                     class="nav-icon icon-xs me-2">
-                </i> Student
+                </i> Utilisateurs
                 </a>
 
                 <div id="navPages" class="collapse @@if (context.page_group === 'pages') { show }" data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link @@if (context.page === 'profile') { active }" href="{{ path('app_student_index') }}">
-                                List
-                </a>
+                            <a class="nav-link has-arrow  @@if (context.page === 'settings') { active } "  href="{{ path('app_dashboard_users') }}" >Etudiants </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link has-arrow  @@if (context.page === 'settings') { active } "  href="@@webRoot/pages/settings.html" >
-                                Settings
-                                </a>
-
+                            <a class="nav-link has-arrow  @@if (context.page === 'settings') { active } "  href="{{ path('app_dashboard_users')}}" >Parrains </a>
                         </li>
                     </ul>
                 </div>
 
                 </li>
-
-
                         <!-- Nav item -->
                         <li class="nav-item">
                             <a class="nav-link has-arrow @@if (context.page_group !== 'authentication') { collapsed }" href="#!" data-bs-toggle="collapse" data-bs-target="#navAuthentication" aria-expanded="false" aria-controls="navAuthentication">
                                 <i data-feather="lock" class="nav-icon icon-xs me-2">
-                                </i> Authentication
+                                </i> Matchs & Parrainages
                             </a>
                             <div id="navAuthentication" class="collapse @@if (context.page_group === 'authentication') { show }" data-bs-parent="#sideNavbar">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link @@if (context.page === 'signin') { active }" href="@@webRoot/pages/sign-in.html"> Sign In</a>
+                                        <a class="nav-link @@if (context.page === 'signin') { active }" href="{{ path('app_dashboard_sponsorships')}}"> Parrainages</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link @@if (context.page === 'signup') { active } " href="@@webRoot/pages/sign-up.html"> Sign Up</a>
+                                        <a class="nav-link @@if (context.page === 'signup') { active } " href="{{ path('app_dashboard_matches')}}"> Matchs</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link @@if (context.page === 'forgetpassword') { active }" href="@@webRoot/pages/forget-password.html">
