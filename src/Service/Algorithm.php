@@ -13,6 +13,20 @@ class Algorithm
     public function __construct(EntityManagerInterface $entityManager){
         $this->entityManager = $entityManager;
     }
+// the latitude and longitude needs to be a float
+    public function Distance($latitudeFrom,$longitudeFrom, $latitudeTo, $longitudeTo)
+    {
+        $earthRadius = 6371;
+        $latFrom = deg2rad($latitudeFrom);
+        $lonFrom = deg2rad($longitudeFrom);
+        $latTo = deg2rad($latitudeTo);
+        $lonTo = deg2rad($longitudeTo);
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+                cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        return $angle * $earthRadius;
+    }
 
     public function Algo(Student $student){
         $kpis = [
@@ -79,6 +93,8 @@ class Algorithm
                     $possibleHits[$sponsor->getId()]["language"]=$sponsor->getLanguages();
                     $possibleHits[$sponsor->getId()]["domain"]=$sponsor->getDomaine();
                     $possibleHits[$sponsor->getId()]["objective"]=$sponsor->getWishes();
+                    $possibleHits[$sponsor->getId()]["latitude"]=$sponsor->getWishes();
+                    $possibleHits[$sponsor->getId()]["longitude"]=$sponsor->getWishes();
                 }
             }
         }
@@ -89,6 +105,14 @@ class Algorithm
             foreach($kpis as $kpi=>$boost){
                 $intersect = array_intersect($data[$kpi],$studentEntity->getWishes());
                 $score += count($intersect)*$boost[$kpi];
+                //need to add a function in entity leads that return the available lead
+                $distance=$this->Distance($data["latitude"],$data["longitude"],$student->getLatitude(),$student->getLongitude());
+                if($distance==0){
+                    $score+=$boost["location"];
+                }else{
+                    $score+=($boost["location"]/$distance);
+                }
+
             }
             $scores[$sponsorId]=$score/count($kpis);
 
