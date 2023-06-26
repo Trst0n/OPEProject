@@ -93,8 +93,9 @@ class Algorithm
                     $possibleHits[$sponsor->getId()]["language"]=$sponsor->getLanguages();
                     $possibleHits[$sponsor->getId()]["domain"]=$sponsor->getDomaine();
                     $possibleHits[$sponsor->getId()]["objective"]=$sponsor->getWishes();
-                    $possibleHits[$sponsor->getId()]["latitude"]=$sponsor->getWishes();
-                    $possibleHits[$sponsor->getId()]["longitude"]=$sponsor->getWishes();
+                    //need to add a function in entity leads that return the available lead
+                    $possibleHits[$sponsor->getId()]["latitude"]=$sponsor->getLatitude();
+                    $possibleHits[$sponsor->getId()]["longitude"]=$sponsor->getLongitude();
                 }
             }
         }
