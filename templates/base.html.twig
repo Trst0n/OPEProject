@@ -13,6 +13,8 @@
             {{ encore_entry_script_tags('app') }}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
 </head>
 <body class="bg-light">
 <div id="db-wrapper">
@@ -22,9 +24,9 @@
     <div id="page-content">
         {% include "partials/header.html.twig" %}
         <!-- Container fluid -->
-        <div class="container-fluid px-6">
+{#        <div class="container-fluid px-6">#}
             {% block body %}{% endblock %}
-        </div>
+{#        </div>#}
     </div>
 </div>
 </body>

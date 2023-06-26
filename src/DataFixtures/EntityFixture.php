@@ -8,11 +8,13 @@ use App\Entity\Curriculum;
 use App\Entity\Establishment;
 use App\Entity\Field;
 use App\Entity\Language;
+use App\Entity\LeadState;
 use App\Entity\Person;
 use App\Entity\Proposal;
 use App\Entity\Request;
 use App\Entity\Sponsor;
 use App\Entity\Sponsorship;
+use App\Entity\SponsorshipState;
 use App\Entity\Student;
 use App\Entity\Wish;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -27,11 +29,11 @@ class EntityFixture extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         $city = new City();
-        $city->setZipcode((int) $faker->postcode())->setName($faker->city());
+        $city->setZipcode((int) $faker->postcode())->setName($faker->city())->setLat($faker->randomNumber())->setLng($faker->randomNumber());
         $manager->persist($city);
 
         $city2 = new City();
-        $city2->setZipcode(45000)->setName("Orleans");
+        $city2->setZipcode(45000)->setName("Orleans")->setLat($faker->randomNumber())->setLng($faker->randomNumber());
         $manager->persist($city2);
 
 
@@ -63,17 +65,14 @@ class EntityFixture extends Fixture
 
         for ($i=0; $i < 3; $i++) {
             $person = new Student();
-            $person->setCivility(Civility::Women)
-                ->setFirstname($faker->firstName())
+            $person->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setPhonenumber($faker->phoneNumber())
                 ->setEmail($faker->email())
-                ->setCreatedAt(new \DateTimeImmutable())
-                ->setUpdatedAt(new \DateTimeImmutable())
                 ->setBirthdate($faker->dateTime());
 
             $student = new Request();
-            $student
+            $student->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
                 ->setCity($city)
                 ->setWishes([Wish::Housing, Wish::Administrative])
                 ->setCurriculum($cursus)
@@ -84,17 +83,15 @@ class EntityFixture extends Fixture
             $manager->persist($person);
 
             $person2 = new Sponsor();
-            $person2->setCivility(Civility::Women)
-                ->setFirstname($faker->firstName())
+            $person2->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setPhonenumber($faker->phoneNumber())
                 ->setEmail($faker->email())
-                ->setCreatedAt(new \DateTimeImmutable())
-                ->setUpdatedAt(new \DateTimeImmutable())
                 ->setBirthdate($faker->dateTime());
 
             $sponsor = new Proposal();
             $sponsor
+                ->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
                 ->setCity($city)
                 ->setWishes([Wish::Housing, Wish::Administrative])
                 ->addWorkfield($field)
@@ -111,21 +108,38 @@ class EntityFixture extends Fixture
             $manager->persist($sponsorship);
         }
 
-        for ($i=0; $i < 5; $i++) {
-            $person2 = new Sponsor();
-            $person2->setCivility(Civility::Women)
-                ->setFirstname($faker->firstName())
+        for ($i=0; $i < 20; $i++) {
+            $person = new Student();
+            $person->setFirstname($faker->firstName())
                 ->setLastname($faker->lastName())
                 ->setPhonenumber($faker->phoneNumber())
                 ->setEmail($faker->email())
-                ->setCreatedAt(new \DateTimeImmutable())
-                ->setUpdatedAt(new \DateTimeImmutable())
+                ->setBirthdate($faker->dateTime());
+
+            $student = new Request();
+            $student->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
+                ->setCity($city)
+                ->setWishes([Wish::Housing, Wish::Administrative])
+                ->setCurriculum($cursus)
+                ->setLanguages([Language::Chinese, Language::French])
+                ->setState($faker->randomNumber()%2 === 0 ?  LeadState::AVAILABLE : LeadState::MATCHED);
+            $manager->persist($student);
+
+            $person->addLead($student);
+            $manager->persist($person);
+
+            $person2 = new Sponsor();
+            $person2->setFirstname($faker->firstName())
+                ->setLastname($faker->lastName())
+                ->setPhonenumber($faker->phoneNumber())
+                ->setEmail($faker->email())
                 ->setBirthdate($faker->dateTime());
 
             $sponsor = new Proposal();
             $sponsor
+                ->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
                 ->setCity($city)
-                ->setWishes([Wish::Housing, Wish::Administrative ])
+                ->setWishes([Wish::Housing, Wish::Administrative])
                 ->addWorkfield($field)
                 ->setLanguages([Language::Chinese, Language::French]);
 
@@ -133,30 +147,65 @@ class EntityFixture extends Fixture
 
             $person2->addLead($sponsor);
             $manager->persist($person2);
+
+            $sponsorship = new Sponsorship();
+            $sponsorship->setSponsorRequest($student)->setSponsorProposal($sponsor)->setWishes([Wish::Housing]);
+
+        if($faker->randomNumber()%2 === 0){
+           $sponsorship->setState(random_int(1,2)%2 === 0 ? SponsorshipState::STATE_INITIALIZED : SponsorshipState::STATE_STUDENT_APPROVED);
+        }
+        else{
+            $sponsorship->setState(random_int(1,2)%2 === 0 ? SponsorshipState::STATE_SPONSOR_APPROVED : SponsorshipState::STATE_APPROVED);
+        }
+            $manager->persist($sponsorship);
+
+
         }
 
-        for ($i=0; $i < 5; $i++) {
-            $person = new Student();
-            $person->setCivility(Civility::Women)
-                ->setFirstname($faker->firstName())
-                ->setLastname($faker->lastName())
-                ->setPhonenumber($faker->phoneNumber())
-                ->setEmail($faker->email())
-                ->setCreatedAt(new \DateTimeImmutable())
-                ->setUpdatedAt(new \DateTimeImmutable())
-                ->setBirthdate($faker->dateTime());
-
-            $student = new Request();
-            $student
-                ->setCity($city)
-                ->setWishes([Wish::Housing, Wish::Administrative ])
-                ->setCurriculum($cursus)
-                ->setLanguages([Language::Chinese, Language::French]);
-            $manager->persist($student);
-
-            $person->addLead($student);
-            $manager->persist($person);
-        }
+//        for ($i=0; $i < 10; $i++) {
+//            $person2 = new Sponsor();
+//            $person2
+//                ->setFirstname($faker->firstName())
+//                ->setLastname($faker->lastName())
+//                ->setPhonenumber($faker->phoneNumber())
+//                ->setEmail($faker->email())
+//                ->setBirthdate($faker->dateTime());
+//
+//            $sponsor = new Proposal();
+//            $sponsor
+//                ->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
+//                ->setCity($city)
+//                ->setWishes([Wish::Housing, Wish::Administrative ])
+//                ->addWorkfield($field)
+//                ->setLanguages([Language::Chinese, Language::French]);
+//
+//            $manager->persist($sponsor);
+//
+//            $person2->addLead($sponsor);
+//            $manager->persist($person2);
+//        }
+//
+//        for ($i=0; $i < 10; $i++) {
+//            $person = new Student();
+//            $person
+//                ->setFirstname($faker->firstName())
+//                ->setLastname($faker->lastName())
+//                ->setPhonenumber($faker->phoneNumber())
+//                ->setEmail($faker->email())
+//                ->setBirthdate($faker->dateTime());
+//
+//            $student = new Request();
+//            $student
+//                ->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
+//                ->setCity($city)
+//                ->setWishes([Wish::Housing, Wish::Administrative ])
+//                ->setCurriculum($cursus)
+//                ->setLanguages([Language::Chinese, Language::French]);
+//            $manager->persist($student);
+//
+//            $person->addLead($student);
+//            $manager->persist($person);
+//        }
 
 
         $manager->flush();

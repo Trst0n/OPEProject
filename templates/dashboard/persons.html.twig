@@ -17,7 +17,7 @@
                 if((personlist[personl]["firstname"].toLowerCase()).startsWith(val.toLowerCase()) || (personlist[personl]["lastname"].toLowerCase()).startsWith(val.toLowerCase()) ){
                     startwith.push(personlist[personl]);
                 }
-                else if((personlist[personl]["firstname"].toLowerCase()).includes(val.toLowerCase()) || (personlist[personl]["lastname"].toLowerCase()).includes(val.toLowerCase())){
+                else if(((personlist[personl]["firstname"].toLowerCase()).concat(personlist[personl]["lastname"].toLowerCase())).includes(val.toLowerCase())){
                     within.push(personlist[personl]);
                 }
             }
@@ -30,14 +30,11 @@
             if(personByName.length === 0){
                 document.getElementById('noresult').innerHTML = "<div><div class=\"container-fluid text-center\" style=\"margin-top: 10%\"> <h3> Aucun résulat pour la recherche \"" + val +"\" </h3></div></div>";
             }
-
-            console.log(personByName)
             for(var person in personByName){
-                console.log(personByName[person])
                 document.getElementById('persons').innerHTML +=  "<tr> <td class=\"align-middle\"> <div class=\"text-center\">" + personByName[person]["firstname"] + "&nbsp;" + (personByName[person]["lastname"]).toUpperCase() +
                     "</div> </td> <td class=\"align-middle\"> <div class=\"text-center\"> " + personByName[person]["createAt"] + " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\" style=\"color: cornflowerblue\">" +
                     personByName[person]["email"] + " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\">" + personByName[person]["phonenumber"] +
-                    " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\" style=\"color: darkred\">" + personByName[person]["status"] + " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\"> <a href=\"#\"><i style=\"font-size: 120%\" class=\"bi bi-info-circle\"></i></a> </div></td> </tr>";
+                    " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\" style=\"color: mediumpurple\">" + personByName[person]["status"] + " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\"> <a href=\"./user/"+ personByName[person]["id"] +"\"><i style=\"font-size: 120%\" class=\"bi bi-info-circle\"></i></a> </div></td> </tr>";
             }
         }
     </script>
@@ -45,29 +42,34 @@
 {% endblock %}
 
 {% block body %}
+    <div class="bg-primary pt-2 pb-4">
 
     <div class="ms-lg-3 d-none d-md-none d-lg-block" style="margin-top: 5%">
+
         <!-- Form -->
-        <form class="d-flex align-items-center">
+        <form class="d-flex align-items-center" autocomplete="off">
             <input style="width: 70%; margin-left: 15%" type="search" class="form-control" placeholder="Rechercher un utilisateur" oninput="search(this.value)"/>
         </form>
+        <br>
+        <div class="text-center">
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Primary &nbsp;</button>
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Primary &nbsp;</button>
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Primary &nbsp;</button>
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Primary &nbsp;</button>
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Primary &nbsp;</button>
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Primary &nbsp;</button>
+        </div>
+        </div>
     </div>
-{#    <div class="input-group ms-lg-3" style="margin-top: 5%" >#}
-{#        <form autocomplete="off" class="d-flex align-items-center container-fluid">#}
-{#                <div class="form-outline">#}
-{#                    <input id="myInput"  type="search" class="form-control" name="person" placeholder="Rechercher un utilisateur"  " >#}
-{#                </div>#}
-{#            </form>#}
-{#    </div>#}
 
-    <div class="table-responsive text-center" style="margin-top: 3%">
+    <div class="table-responsive text-center" style="margin-top: 3%; font-size: 17px">
         <table class="table text-nowrap mb-0">
-            <thead class="table-light">
+            <thead class="table-light" >
             <tr>
                 <th>Identité</th>
-                <th>Date d'inscription</th>
-                <th>Email</th>
-                <th>N° Téléphone</th>
+                <th><i class="bi bi-calendar"></i> Date d'inscription</th>
+                <th><i class="bi bi-envelope"></i> Email</th>
+                <th><i class="bi bi-telephone"></i> N° Téléphone </th>
                 <th>Statut</th>
                 <th>Actions</th>
             </tr>
@@ -96,9 +98,9 @@
                             </div>
                         </td>
                         <td class="align-middle">
-                            <div class="text-center" style="color: darkred">
+                            <div class="text-center" style="color: mediumpurple">
                                 {% if person is instanceof(student) %}
-                                    Etudiant
+                                    Étudiant
                                 {% else %}
                                     Parrain
                                 {% endif %}
@@ -106,7 +108,7 @@
                         </td>
                         <td class="align-middle">
                             <div class="text-center">
-                                <a href="#"><i style="font-size: 120%" class="bi bi-info-circle"></i></a>
+                                <a href="{{ path('app_dashboard_user', {'id': person.id}) }}"><i style="font-size: 120%" class="bi bi-info-circle"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -115,4 +117,6 @@
         </table>
         <p id="noresult"></p>
     </div>
+    <p style="margin-bottom: 7%"></p>
+
 {% endblock %}

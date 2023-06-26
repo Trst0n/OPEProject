@@ -58,8 +58,6 @@ abstract class Person
     #[ORM\OneToMany(mappedBy: 'person', targetEntity: Lead::class)]
     private Collection $leads;
 
-
-
     public function __construct()
     {
         $this->leads = new ArrayCollection();

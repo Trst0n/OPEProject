@@ -43,10 +43,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
         echo "<div class=\"header @@classList\">
   <!-- navbar -->
   <nav class=\"navbar-classic navbar navbar-expand-lg\">
-    <a id=\"nav-toggle\" href=\"#\"><i
-        data-feather=\"menu\"
-
-        class=\"nav-icon me-2 icon-xs\"></i></a>
+    <a id=\"nav-toggle\" href=\"#\"><i style=\"font-size: 130%\" class=\"bi bi-list\"></i></a>
     <div class=\"ms-lg-3 d-none d-md-none d-lg-block\">
       <!-- Form -->
       <form class=\"d-flex align-items-center\">
@@ -214,10 +211,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
         return new Source("<div class=\"header @@classList\">
   <!-- navbar -->
   <nav class=\"navbar-classic navbar navbar-expand-lg\">
-    <a id=\"nav-toggle\" href=\"#\"><i
-        data-feather=\"menu\"
-
-        class=\"nav-icon me-2 icon-xs\"></i></a>
+    <a id=\"nav-toggle\" href=\"#\"><i style=\"font-size: 130%\" class=\"bi bi-list\"></i></a>
     <div class=\"ms-lg-3 d-none d-md-none d-lg-block\">
       <!-- Form -->
       <form class=\"d-flex align-items-center\">

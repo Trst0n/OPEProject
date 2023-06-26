@@ -62,28 +62,31 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
         // line 12
         $this->displayBlock('javascripts', $context, $blocks);
         // line 16
-        echo "</head>
+        echo "    <link rel=\"stylesheet\" href=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/app.css"), "html", null, true);
+        echo "\">
+
+</head>
 <body class=\"bg-light\">
 <div id=\"db-wrapper\">
     <!-- navbar vertical -->
     ";
-        // line 20
-        $this->loadTemplate("partials/navbar-vertical.html.twig", "base.html.twig", 20)->display($context);
-        // line 21
+        // line 22
+        $this->loadTemplate("partials/navbar-vertical.html.twig", "base.html.twig", 22)->display($context);
+        // line 23
         echo "    <!-- Page content -->
     <div id=\"page-content\">
         ";
-        // line 23
-        $this->loadTemplate("partials/header.html.twig", "base.html.twig", 23)->display($context);
-        // line 24
-        echo "        <!-- Container fluid -->
-        <div class=\"container-fluid px-6\">
-            ";
+        // line 25
+        $this->loadTemplate("partials/header.html.twig", "base.html.twig", 25)->display($context);
         // line 26
+        echo "        <!-- Container fluid -->
+";
+        // line 28
+        echo "            ";
         $this->displayBlock('body', $context, $blocks);
-        // line 27
-        echo "        </div>
-    </div>
+        // line 30
+        echo "    </div>
 </div>
 </body>
 </html>
@@ -169,7 +172,7 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
 
     }
 
-    // line 26
+    // line 28
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -199,7 +202,7 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
 
     public function getDebugInfo()
     {
-        return array (  173 => 26,  161 => 14,  156 => 13,  146 => 12,  134 => 9,  129 => 8,  119 => 7,  100 => 5,  85 => 27,  83 => 26,  79 => 24,  77 => 23,  73 => 21,  71 => 20,  65 => 16,  63 => 12,  60 => 11,  58 => 7,  53 => 5,  47 => 1,);
+        return array (  176 => 28,  164 => 14,  159 => 13,  149 => 12,  137 => 9,  132 => 8,  122 => 7,  103 => 5,  89 => 30,  86 => 28,  83 => 26,  81 => 25,  77 => 23,  75 => 22,  65 => 16,  63 => 12,  60 => 11,  58 => 7,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -219,6 +222,8 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
             {{ encore_entry_script_tags('app') }}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
+    <link rel=\"stylesheet\" href=\"{{ asset('css/app.css') }}\">
+
 </head>
 <body class=\"bg-light\">
 <div id=\"db-wrapper\">
@@ -228,9 +233,9 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
     <div id=\"page-content\">
         {% include \"partials/header.html.twig\" %}
         <!-- Container fluid -->
-        <div class=\"container-fluid px-6\">
+{#        <div class=\"container-fluid px-6\">#}
             {% block body %}{% endblock %}
-        </div>
+{#        </div>#}
     </div>
 </div>
 </body>

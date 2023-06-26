@@ -36,7 +36,7 @@ class Request extends Lead
     /**
      * @return Collection<int, Sponsorship>
      */
-    public function getSponsorship(): Collection
+        public function getSponsorship(): Collection
     {
         return $this->sponsorship;
     }

@@ -3,13 +3,17 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
+
+{#                <div id="page-content">#}
+                    <div class="bg-primary pt-10 pb-21"></div>
+                    <div class="container-fluid mt-n22 px-6">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-12">
                                 <!-- Page header -->
                                 <div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="mb-2 mb-lg-0" style="margin-top: 2%">
-                                            <h2 class="mb-0 "> Parrainages </h2>
+                                            <h1 class="mb-0  text-white" style="font-weight: bolder"> Dashboard </h1>
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +108,7 @@
                                         <!-- project number -->
                                         <div>
                                             <h1 class="fw-bold">{{ onHoldMatches | length }}</h1>
-                                            <p class="mb-0"><span class="text-success me-2">zeze</span>Parrain(s) disponible(s)</p>
+                                            <p class="mb-0"><span class="text-success me-2">{{ numNoMatchSponsor }}</span>Parrain(s) disponible(s)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -127,6 +131,7 @@
                                                     <th>Prenom</th>
                                                     <th>Date d'inscription</th>
                                                     <th>Statut</th>
+                                                    <th>Priorité</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
@@ -148,27 +153,42 @@
                                                             {{ request.person.updatedAt | date('Y-m-d')  }}
                                                         </div>
                                                     </td>
-                                                    <td class="align-middle">
+
                                                         {% if request.state.value == "available" %}
-                                                            <div class="text-center" style="color: darkred">
-                                                                VALIDATION ADMIN
-                                                            </div>
+                                                            <td class="align-middle">
+                                                                <div class="text-center">
+                                                                    VALIDATION ADMIN
+                                                                </div>
+                                                            </td>
+                                                            <td class="align-middle">
+                                                                <div class="text-center">
+                                                                    <span class="badge bg-danger">High</span>
+                                                                </div>
+                                                            </td>
+
                                                         {% elseif request.state.value == "matched"%}
-                                                            <div class="text-center" style="color: orange">
-                                                                VALIDATION PERSONNES
-                                                            </div>
+                                                            <td class="align-middle">
+                                                                <div class="text-center">
+                                                                    VALIDATION PERSONNES
+                                                                </div>
+                                                            </td>
+                                                            <td class="align-middle">
+                                                                <div class="text-center">
+                                                                    <span class="badge bg-warning">Medium</span>
+                                                                </div>
+                                                            </td>
+
                                                         {% endif %}
-                                                    </td>
                                                     <td class="align-middle">
                                                         <div class="text-center">
                                                             {% if request.state.value == "matched" %}
-                                                                <a href="#"><i style="font-size: 120%" class="bi bi-arrow-up-square"></i></a>
+                                                                <a href="#"><i style="font-size: 130%" class="bi bi-arrow-up-square"></i></a>
                                                             {% else %}
-                                                                <a href="#"><i style="font-size: 120%" class="bi bi-plus-square"></i></a>
+                                                                <a href="#"><i style="font-size: 130%" class="bi bi-plus-square"></i></a>
                                                             {% endif %}
                                                             &nbsp;
                                                             &nbsp;
-                                                            <a href="#"><i style="font-size: 120%" class="bi bi-info-circle"></i></a>
+                                                            <a href="{{ path('app_dashboard_user', {'id': request.person.id}) }}"><i style="font-size: 130%" class="bi bi-info-circle"></i></a>
 
                                                         </div>
                                                     </td>
@@ -185,6 +205,8 @@
                                 </div>
 
                             </div>
-                         </div>
+                        </div>
+                    </div>
+
                         <p style="margin-bottom: 7%"></p>
 {% endblock %}

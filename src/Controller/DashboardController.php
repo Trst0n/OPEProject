@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\LeadState;
 use App\Entity\Person;
+use App\Entity\Request;
 use App\Entity\Sponsorship;
 use App\Entity\SponsorshipState;
 use App\Entity\Student;
@@ -45,16 +46,22 @@ class DashboardController extends AbstractController
                if($request->getState() === LeadState::AVAILABLE){
                    $noMatchRequests[] = $request;
                }
-               $onHoldMatches[] = $request;
+               elseif($request->getState() === LeadState::MATCHED){
+                   $onHoldMatches[] = $request;
+               }
            }
         }
 
         //Requests sans match apparaitront en premier
-        $onHoldMatches = $noMatchRequests + $onHoldMatches;
+        $onHoldMatches = array_merge($noMatchRequests , $onHoldMatches);
+
+        //Num Sponsor disponible
+        $numNoMatchSponsor = count($proposalRepository->findBy(['state' => LeadState::AVAILABLE]));
 
         return $this->render('dashboard/index.html.twig', [
             'numSponsorship' => $numSponsorship, 'numValidSponsorship' => $numValidSponsorship, 'numProposals' => $numProposals,
             'numValidProposals' => $numValidProposals, 'numRequests' => $numRequests, 'numValidRequests' => $numValidRequests, 'onHoldMatches' => $onHoldMatches,
+            'numNoMatchSponsor' => $numNoMatchSponsor
 
         ]);
         }
@@ -64,9 +71,10 @@ class DashboardController extends AbstractController
 
         $jsvar = [];
 
+        //Variables pour le code js => donnée tableau de personne
         foreach($personRepository->findAll() as $person) {
             $jsvar[]= ["id" => $person->getId(), "firstname"=>$person->getFirstname(),"lastname"=>$person->getLastname(), "createAt" => $person->getCreatedAt()->format("d-m-Y"), "email" => $person->getEmail()
-            , "phonenumber" => $person->getPhonenumber(), "status" => ($person instanceof Student ? "student" : "sponsor")];
+            , "phonenumber" => $person->getPhonenumber(), "status" => ($person instanceof Student ? "Étudiant" : "Parrain")];
         }
 
 
@@ -84,8 +92,18 @@ class DashboardController extends AbstractController
     #[Route('/user/{id}', name: 'app_dashboard_user',  methods: ['GET'])]
     public function user(Person $person): Response{
 
+        $civility = $person->getLeads()->last()->getCivility();
+        $hasSponsorship = false;
+        foreach ($person->getLeads() as $lead){
+            if(count($lead->getSponsorship()) !== 0){
+                $hasSponsorship = true;
+            }
+        }
+
+
         return $this->render('dashboard/person.html.twig', [
-            'person' => $person
+            'person' => $person, 'status' => ($person instanceof Student ? "Etudiant" : "Parrain"), 'civility' => $civility, 'request' => Request::class,
+            'hasSponsorship' => $hasSponsorship
         ]);
     }
 
@@ -108,8 +126,10 @@ class DashboardController extends AbstractController
     #[Route('/matches', name: 'app_dashboard_matches',  methods: ['GET'])]
     public function matches(SponsorshipRepository $sponsorshipRepository): Response{
 
+        $matches = array_merge($sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_INITIALIZED]),  $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_STUDENT_APPROVED]), $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSOR_APPROVED]), $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_APPROVED]));
+
         return $this->render('dashboard/matches.html.twig', [
-            'matches' => $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSOR_APPROVED, SponsorshipState::STATE_APPROVED, SponsorshipState::STATE_STUDENT_APPROVED, SponsorshipState::STATE_INITIALIZED])
+            'matches' => $matches,
         ]);
     }
 

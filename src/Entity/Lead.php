@@ -24,8 +24,6 @@ class Lead
     #[ORM\Column(enumType: Civility::class)]
     private ?Civility $civility = null;
 
-
-
     #[Assert\NotNull]
     #[ORM\ManyToOne(inversedBy: 'leads')]
     private ?Person $person = null;
@@ -35,11 +33,11 @@ class Lead
     private ?City $city = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::ARRAY, enumType: Language::class)]
     private array $languages = [];
 
     #[Assert\NotBlank]
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::ARRAY, enumType: Wish::class)]
     private array $wishes = [];
 
     #[ORM\Column(length: 255, enumType: LeadState::class)]
@@ -121,8 +119,10 @@ class Lead
     /**
      * @param Civility|null $civility
      */
-    public function setCivility(?Civility $civility): void
+    public function setCivility(?Civility $civility): self
     {
         $this->civility = $civility;
+
+        return $this;
     }
 }
