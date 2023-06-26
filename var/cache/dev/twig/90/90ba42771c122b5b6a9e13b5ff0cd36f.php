@@ -88,11 +88,14 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         // line 6
         echo "
     <script>
+
+        /** TODO Display block/none filter boostrap */
+
         function search(val){
             let personlist = []
             personlist = ";
-        // line 10
-        echo json_encode((isset($context["jsvar"]) || array_key_exists("jsvar", $context) ? $context["jsvar"] : (function () { throw new RuntimeError('Variable "jsvar" does not exist.', 10, $this->source); })()));
+        // line 13
+        echo json_encode((isset($context["jsvar"]) || array_key_exists("jsvar", $context) ? $context["jsvar"] : (function () { throw new RuntimeError('Variable "jsvar" does not exist.', 13, $this->source); })()));
         echo ";
 
 
@@ -134,7 +137,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
 
     }
 
-    // line 44
+    // line 47
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -144,7 +147,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 45
+        // line 48
         echo "    <div class=\"bg-primary pt-2 pb-4\">
 
     <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
@@ -155,8 +158,8 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         </form>
         <br>
         <div class=\"text-center\">
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Parrain &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Etudiant &nbsp;</button>
             <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
             <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
             <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
@@ -164,8 +167,11 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         </div>
         </div>
     </div>
-
-    <div class=\"table-responsive text-center\" style=\"margin-top: 3%; font-size: 17px\">
+    <div class=\"container-fluid mt-2 px-6\">
+        <div class=\"card\" style=\"margin-top: 3%\">
+            <div class=\"card-header bg-white  py-4\">
+            </div>
+    <div class=\"table-responsive text-center\" style=\"font-size: 17px\">
         <table class=\"table text-nowrap mb-0\">
             <thead class=\"table-light\" >
             <tr>
@@ -179,67 +185,67 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
             </thead>
             <tbody id=\"persons\">
                 ";
-        // line 78
+        // line 84
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["persons"]) || array_key_exists("persons", $context) ? $context["persons"] : (function () { throw new RuntimeError('Variable "persons" does not exist.', 78, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["persons"]) || array_key_exists("persons", $context) ? $context["persons"] : (function () { throw new RuntimeError('Variable "persons" does not exist.', 84, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["person"]) {
-            // line 79
+            // line 85
             echo "                    <tr>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 82
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "firstname", [], "any", false, false, false, 82), "html", null, true);
+            // line 88
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "firstname", [], "any", false, false, false, 88), "html", null, true);
             echo " &nbsp; ";
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "lastname", [], "any", false, false, false, 82)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "lastname", [], "any", false, false, false, 88)), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 87
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "createdAt", [], "any", false, false, false, 87), "d-m-Y"), "html", null, true);
+            // line 93
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "createdAt", [], "any", false, false, false, 93), "d-m-Y"), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\" style=\"color: cornflowerblue\">
                                 ";
-            // line 92
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "email", [], "any", false, false, false, 92), "html", null, true);
+            // line 98
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "email", [], "any", false, false, false, 98), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 97
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "phonenumber", [], "any", false, false, false, 97), "html", null, true);
+            // line 103
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "phonenumber", [], "any", false, false, false, 103), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\" style=\"color: mediumpurple\">
                                 ";
-            // line 102
-            if ($this->extensions['App\Twig\AppExtension']->isInstanceof($context["person"], (isset($context["student"]) || array_key_exists("student", $context) ? $context["student"] : (function () { throw new RuntimeError('Variable "student" does not exist.', 102, $this->source); })()))) {
-                // line 103
+            // line 108
+            if ($this->extensions['App\Twig\AppExtension']->isInstanceof($context["person"], (isset($context["student"]) || array_key_exists("student", $context) ? $context["student"] : (function () { throw new RuntimeError('Variable "student" does not exist.', 108, $this->source); })()))) {
+                // line 109
                 echo "                                    Étudiant
                                 ";
             } else {
-                // line 105
+                // line 111
                 echo "                                    Parrain
                                 ";
             }
-            // line 107
+            // line 113
             echo "                            </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 <a href=\"";
-            // line 111
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_user", ["id" => twig_get_attribute($this->env, $this->source, $context["person"], "id", [], "any", false, false, false, 111)]), "html", null, true);
+            // line 117
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_user", ["id" => twig_get_attribute($this->env, $this->source, $context["person"], "id", [], "any", false, false, false, 117)]), "html", null, true);
             echo "\"><i style=\"font-size: 120%\" class=\"bi bi-info-circle\"></i></a>
                             </div>
                         </td>
@@ -249,11 +255,13 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['person'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 116
+        // line 122
         echo "            </tbody>
         </table>
         <p id=\"noresult\"></p>
     </div>
+        </div>
+</div>
     <p style=\"margin-bottom: 7%\"></p>
 
 ";
@@ -277,7 +285,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
 
     public function getDebugInfo()
     {
-        return array (  253 => 116,  242 => 111,  236 => 107,  232 => 105,  228 => 103,  226 => 102,  218 => 97,  210 => 92,  202 => 87,  192 => 82,  187 => 79,  183 => 78,  148 => 45,  138 => 44,  95 => 10,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  259 => 122,  248 => 117,  242 => 113,  238 => 111,  234 => 109,  232 => 108,  224 => 103,  216 => 98,  208 => 93,  198 => 88,  193 => 85,  189 => 84,  151 => 48,  141 => 47,  98 => 13,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -289,6 +297,9 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
 {% block javascripts %}
 
     <script>
+
+        /** TODO Display block/none filter boostrap */
+
         function search(val){
             let personlist = []
             personlist = {{ jsvar | json_encode() | raw}};
@@ -336,8 +347,8 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         </form>
         <br>
         <div class=\"text-center\">
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Parrain &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Etudiant &nbsp;</button>
             <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
             <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
             <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
@@ -345,8 +356,11 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         </div>
         </div>
     </div>
-
-    <div class=\"table-responsive text-center\" style=\"margin-top: 3%; font-size: 17px\">
+    <div class=\"container-fluid mt-2 px-6\">
+        <div class=\"card\" style=\"margin-top: 3%\">
+            <div class=\"card-header bg-white  py-4\">
+            </div>
+    <div class=\"table-responsive text-center\" style=\"font-size: 17px\">
         <table class=\"table text-nowrap mb-0\">
             <thead class=\"table-light\" >
             <tr>
@@ -401,6 +415,8 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         </table>
         <p id=\"noresult\"></p>
     </div>
+        </div>
+</div>
     <p style=\"margin-bottom: 7%\"></p>
 
 {% endblock %}
