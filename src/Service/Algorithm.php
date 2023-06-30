@@ -11,9 +11,8 @@ use phpDocumentor\Reflection\Types\Integer;
 
 class Algorithm
 {
-    private EntityManagerInterface $entityManager;
-    public function __construct(EntityManagerInterface $entityManager){
-        $this->entityManager = $entityManager;
+
+    public function __construct(private EntityManagerInterface $entityManager){
     }
 // the latitude and longitude needs to be a float
 

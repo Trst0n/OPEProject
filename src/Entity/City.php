@@ -25,10 +25,10 @@ class City
     private Collection $leads;
 
     #[ORM\Column]
-    private ?int $lat = null;
-
+    private ?float $lat = null;
     #[ORM\Column]
-    private ?int $lng = null;
+    private ?float $lng = null;
+
     public function __construct()
     {
         $this->leads = new ArrayCollection();
@@ -93,24 +93,24 @@ class City
         return $this;
     }
 
-    public function getLat(): ?int
+    public function getLat(): ?float
     {
         return $this->lat;
     }
 
-    public function setLat(int $Lat): static
+    public function setLat(float $Lat): static
     {
         $this->lat = $Lat;
 
         return $this;
     }
 
-    public function getLng(): ?int
+    public function getLng(): ?float
     {
         return $this->lng;
     }
 
-    public function setLng(int $lng): static
+    public function setLng(float $lng): static
     {
         $this->lng = $lng;
 
