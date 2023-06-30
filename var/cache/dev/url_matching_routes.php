@@ -18,10 +18,10 @@ return [
         '/api/student' => [[['_route' => 'app_api_student', '_controller' => 'App\\Controller\\ApiController::createStudent'], null, ['POST' => 0], null, false, false, null]],
         '/' => [[['_route' => 'app_dashboard', '_controller' => 'App\\Controller\\DashboardController::index'], null, ['GET' => 0], null, false, false, null]],
         '/users' => [[['_route' => 'app_dashboard_users', '_controller' => 'App\\Controller\\DashboardController::users'], null, ['GET' => 0], null, false, false, null]],
-        '/matches' => [[['_route' => 'app_dashboard_matches', '_controller' => 'App\\Controller\\DashboardController::matches'], null, ['GET' => 0], null, false, false, null]],
         '/perma/link' => [[['_route' => 'app_perma_link', '_controller' => 'App\\Controller\\PermaLinkController::index'], null, null, null, false, false, null]],
         '/sponsor' => [[['_route' => 'app_sponsor_index', '_controller' => 'App\\Controller\\SponsorController::index'], null, ['GET' => 0], null, true, false, null]],
         '/sponsorships' => [[['_route' => 'app_sponsorship_sponsorships', '_controller' => 'App\\Controller\\SponsorshipController::sponsorships'], null, ['GET' => 0], null, false, false, null]],
+        '/matches' => [[['_route' => 'app_dashboard_matches', '_controller' => 'App\\Controller\\SponsorshipController::matches'], null, ['GET' => 0], null, false, false, null]],
         '/student' => [[['_route' => 'app_student_index', '_controller' => 'App\\Controller\\StudentController::index'], null, ['GET' => 0], null, true, false, null]],
     ],
     [ // $regexpList
@@ -45,12 +45,12 @@ return [
                     .'|(*:186)'
                     .'|/sponsorship(*:206)'
                 .')'
-                .'|/match/([^/]++)(*:230)'
                 .'|/s(?'
-                    .'|ponsor/([^/]++)(*:258)'
-                    .'|tudent/([^/]++)(*:281)'
+                    .'|ponsor/([^/]++)(*:235)'
+                    .'|tudent/([^/]++)(*:258)'
                 .')'
-                .'|/validate/([^/]++)(*:308)'
+                .'|/validate/([^/]++)(*:285)'
+                .'|/match/([^/]++)(*:308)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -63,11 +63,11 @@ return [
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         186 => [[['_route' => 'app_dashboard_user', '_controller' => 'App\\Controller\\DashboardController::user'], ['id'], ['GET' => 0], null, false, true, null]],
         206 => [[['_route' => 'app_sponsorship_new', '_controller' => 'App\\Controller\\SponsorshipController::sponsorship'], ['id'], ['GET' => 0], null, false, false, null]],
-        230 => [[['_route' => 'app_dashboard_match', '_controller' => 'App\\Controller\\DashboardController::match'], ['id'], ['GET' => 0], null, false, true, null]],
-        258 => [[['_route' => 'app_sponsor_show', '_controller' => 'App\\Controller\\SponsorController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        281 => [[['_route' => 'app_student_show', '_controller' => 'App\\Controller\\StudentController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        235 => [[['_route' => 'app_sponsor_show', '_controller' => 'App\\Controller\\SponsorController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        258 => [[['_route' => 'app_student_show', '_controller' => 'App\\Controller\\StudentController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        285 => [[['_route' => 'app_sponsorship_validate', '_controller' => 'App\\Controller\\SponsorshipController::sponsorshipvalidation'], ['sponsorship'], ['GET' => 0], null, false, true, null]],
         308 => [
-            [['_route' => 'app_sponsorship_validate', '_controller' => 'App\\Controller\\SponsorshipController::sponsorshipvalidation'], ['sponsorship'], ['GET' => 0], null, false, true, null],
+            [['_route' => 'app_dashboard_match', '_controller' => 'App\\Controller\\SponsorshipController::match'], ['id'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

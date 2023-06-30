@@ -49,7 +49,7 @@ class ApiController extends AbstractController
             );
         }
 
-        $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/registration.html.twig');
+        $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/sponsor-registration.html.twig', ['lastname' => $data['lastname'], 'civility' => (strtolower($data['civility']) === "men" ? "Mr." : "Mme.")]);
         $this->mailing->sendEmail('noreply.ope@gmail.com',"Incription d'un nouvel utilisateur", 'mail/registration.html.twig');
 
         return new JsonResponse(
@@ -85,7 +85,7 @@ class ApiController extends AbstractController
             );
         }
 
-        $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/registration.html.twig');
+        $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/student-registration.html.twig', ['firstname' => $data['firstname']]);
         $this->mailing->sendEmail('noreply.ope@gmail.com',"Incription d'un nouvel utilisateur", 'mail/registration.html.twig');
 
         return new JsonResponse(

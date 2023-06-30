@@ -351,6 +351,8 @@
     <service id="App\Command\ReminderCommand" class="App\Command\ReminderCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
+      <argument type="service" id="App\Repository\SponsorshipRepository"/>
+      <argument type="service" id="App\Service\Mailing"/>
       <call method="setName">
         <argument>app:send-reminder</argument>
       </call>
@@ -504,7 +506,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.sbq0S6X"/>
+      <argument type="service" id=".service_locator.auHEWCw"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3277,7 +3279,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.sbq0S6X"/>
+      <argument type="service" id=".service_locator.auHEWCw"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -7372,18 +7374,6 @@
         <argument key="person" type="service_closure" id=".errored..service_locator.A7uOTdJ.App\Entity\Person"/>
       </argument>
     </service>
-    <service id=".service_locator.gvThNC9" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="sponsorshipRepository" type="service_closure" id="App\Repository\SponsorshipRepository"/>
-      </argument>
-    </service>
-    <service id=".service_locator.A1WuIv." class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="sponsorship" type="service_closure" id=".errored..service_locator.A1WuIv..App\Entity\Sponsorship"/>
-      </argument>
-    </service>
     <service id=".service_locator.MPUuYf0" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7394,6 +7384,12 @@
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="sponsor" type="service_closure" id=".errored..service_locator.IMMhoNM.App\Entity\Sponsor"/>
+      </argument>
+    </service>
+    <service id=".service_locator.gvThNC9" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="sponsorshipRepository" type="service_closure" id="App\Repository\SponsorshipRepository"/>
       </argument>
     </service>
     <service id=".service_locator.64IM_Lz" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7412,6 +7408,12 @@
         <argument key="sponsorship" type="service_closure" id=".errored..service_locator.lXwBZ8..App\Entity\Sponsorship"/>
       </argument>
     </service>
+    <service id=".service_locator.A1WuIv." class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="sponsorship" type="service_closure" id=".errored..service_locator.A1WuIv..App\Entity\Sponsorship"/>
+      </argument>
+    </service>
     <service id=".service_locator.wmzwuy." class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7424,16 +7426,16 @@
         <argument key="student" type="service_closure" id=".errored..service_locator.aMfIQn5.App\Entity\Student"/>
       </argument>
     </service>
-    <service id=".service_locator.sbq0S6X" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.auHEWCw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\DashboardController::index" type="service_closure" id=".service_locator.PBTVzPc"/>
-        <argument key="App\Controller\DashboardController::match" type="service_closure" id=".service_locator.A1WuIv."/>
-        <argument key="App\Controller\DashboardController::matches" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController::user" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\DashboardController::users" type="service_closure" id=".service_locator.nndhpqw"/>
         <argument key="App\Controller\SponsorController::index" type="service_closure" id=".service_locator.MPUuYf0"/>
         <argument key="App\Controller\SponsorController::show" type="service_closure" id=".service_locator.IMMhoNM"/>
+        <argument key="App\Controller\SponsorshipController::match" type="service_closure" id=".service_locator.A1WuIv."/>
+        <argument key="App\Controller\SponsorshipController::matches" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\SponsorshipController::sponsorship" type="service_closure" id=".service_locator.64IM_Lz"/>
         <argument key="App\Controller\SponsorshipController::sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\SponsorshipController::sponsorshipvalidation" type="service_closure" id=".service_locator.lXwBZ8."/>
@@ -7444,12 +7446,12 @@
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Controller\DashboardController:index" type="service_closure" id=".service_locator.PBTVzPc"/>
-        <argument key="App\Controller\DashboardController:match" type="service_closure" id=".service_locator.A1WuIv."/>
-        <argument key="App\Controller\DashboardController:matches" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController:user" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\DashboardController:users" type="service_closure" id=".service_locator.nndhpqw"/>
         <argument key="App\Controller\SponsorController:index" type="service_closure" id=".service_locator.MPUuYf0"/>
         <argument key="App\Controller\SponsorController:show" type="service_closure" id=".service_locator.IMMhoNM"/>
+        <argument key="App\Controller\SponsorshipController:match" type="service_closure" id=".service_locator.A1WuIv."/>
+        <argument key="App\Controller\SponsorshipController:matches" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\SponsorshipController:sponsorship" type="service_closure" id=".service_locator.64IM_Lz"/>
         <argument key="App\Controller\SponsorshipController:sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\SponsorshipController:sponsorshipvalidation" type="service_closure" id=".service_locator.lXwBZ8."/>
@@ -8465,9 +8467,6 @@
     <service id=".errored..service_locator.A7uOTdJ.App\Entity\Person" class="App\Entity\Person">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.A7uOTdJ&quot;: it needs an instance of &quot;App\Entity\Person&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
-    <service id=".errored..service_locator.A1WuIv..App\Entity\Sponsorship" class="App\Entity\Sponsorship">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.A1WuIv.&quot;: it needs an instance of &quot;App\Entity\Sponsorship&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
-    </service>
     <service id=".errored..service_locator.IMMhoNM.App\Entity\Sponsor" class="App\Entity\Sponsor">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.IMMhoNM&quot;: it needs an instance of &quot;App\Entity\Sponsor&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
@@ -8476,6 +8475,9 @@
     </service>
     <service id=".errored..service_locator.lXwBZ8..App\Entity\Sponsorship" class="App\Entity\Sponsorship">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.lXwBZ8.&quot;: it needs an instance of &quot;App\Entity\Sponsorship&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.A1WuIv..App\Entity\Sponsorship" class="App\Entity\Sponsorship">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.A1WuIv.&quot;: it needs an instance of &quot;App\Entity\Sponsorship&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.aMfIQn5.App\Entity\Student" class="App\Entity\Student">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.aMfIQn5&quot;: it needs an instance of &quot;App\Entity\Student&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -9495,7 +9497,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.sbq0S6X"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.auHEWCw"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9520,7 +9522,7 @@
     <service id=".service_locator.8jLB1e9" alias=".service_locator.PBTVzPc"/>
     <service id=".service_locator.6nenO84" alias=".service_locator.64IM_Lz"/>
     <service id=".service_locator.xbTBvZ5" alias=".service_locator.lXwBZ8."/>
-    <service id=".service_locator.dgJpjNz" alias=".service_locator.sbq0S6X"/>
+    <service id=".service_locator.4Uadv00" alias=".service_locator.auHEWCw"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.jij13qc" alias=".service_locator.PBToVFE"/>
@@ -9546,12 +9548,12 @@
     <service id=".service_locator.4G4oGUx" alias=".service_locator.PBTVzPc"/>
     <service id=".service_locator.LWNhF2." alias=".service_locator.nndhpqw"/>
     <service id=".service_locator.dNoe8Y7" alias=".service_locator.A7uOTdJ"/>
-    <service id=".service_locator.P9qU_e5" alias=".service_locator.gvThNC9"/>
-    <service id=".service_locator.V8vZvKO" alias=".service_locator.A1WuIv."/>
     <service id=".service_locator..KBaod7" alias=".service_locator.MPUuYf0"/>
     <service id=".service_locator.sHKlZZl" alias=".service_locator.IMMhoNM"/>
+    <service id=".service_locator.P9qU_e5" alias=".service_locator.gvThNC9"/>
     <service id=".service_locator.TewEm46" alias=".service_locator.64IM_Lz"/>
     <service id=".service_locator.BF7wrlb" alias=".service_locator.lXwBZ8."/>
+    <service id=".service_locator.V8vZvKO" alias=".service_locator.A1WuIv."/>
     <service id=".service_locator.ElkER0G" alias=".service_locator.wmzwuy."/>
     <service id=".service_locator.x1xfdir" alias=".service_locator.aMfIQn5"/>
     <service id=".service_locator.Q1z.f9O" alias=".service_locator.O2p6Lk7"/>

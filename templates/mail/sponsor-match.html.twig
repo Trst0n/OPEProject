@@ -1,18 +1,18 @@
 <div>
-    Bonjour {{ civility }} {{ lastname }},
-
+    Bonjour {{ civility }} {{ lastname }},<br>
+    <br>
     Faisant suite à votre inscription sur la plateforme de parrainage Ôpe, nous avons le plaisir de
-    vous transmettre les coordonnées de l’étudiant que nous vous proposons :
-    {{ student.civility.value == "Men" ? "Mr." : "Mme."}} {{ student.person.lastname }} {{ student.person.firstname }}
-    {{ student.person.phonenumber }}
-    {{ student.person.mail }}
-
-    Vous avez une semaine pour contacter l’étudiant et nous en informer.
-    Contact établi : <a href="#"> OUI </a>
-
-    Espérant que vous partagerez de très bons moments grâce à notre plate-forme.
-
+    vous transmettre les coordonnées de l’étudiant que nous vous proposons :<br>
+    {{ student.civility.value == "MEN" ? "Mr." : "Mme."}} {{ student.person.lastname }} {{ student.person.firstname }}<br>
+    {{ student.person.phonenumber }}<br>
+    {{ student.person.email }}<br>
+    <br>
+    Vous avez une semaine pour contacter l’étudiant et nous en informer.<br>
+    Contact établi : <a href="#"> OUI </a><br>
+    <br>
+    Espérant que vous partagerez de très bons moments grâce à notre plate-forme.<br>
+    <br>
     Cordialement,
-
+    <br>
     L'équipe Ôpe
 </div>

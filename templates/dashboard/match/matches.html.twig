@@ -56,14 +56,12 @@
                     </td>
                     <td class="align-middle">
                         <div class="text-center">
-                            {% if match.state == "initialized"  %}
+                            {% if match.state == "match"  %}
                                 Attente réponse
                             {% elseif match.state == "sponsor_approved" %}
                                 Attente réponse (étudiant)
                             {% elseif match.state == "student_approved" %}
                                 Attente réponse (parrain)
-                            {% elseif match.state == "approved" %}
-                                Attente prise de contact
                             {% endif %}
                         </div>
                     </td>

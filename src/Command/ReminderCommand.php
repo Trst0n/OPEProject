@@ -15,16 +15,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'app:send-reminder')]
 class ReminderCommand extends Command
 {
-    public function __construct(string $name = null, private SponsorshipRepository $sponsorshipRepository, private Mailing $mailing)
+    public function __construct( private SponsorshipRepository $sponsorshipRepository, private Mailing $mailing)
     {
-        parent::__construct($name);
+        parent::__construct();
     }
 
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-
         // ENVOI DE MAIL A TOUS LES UTILISATEURS QUI SONT EN PARRAINAGE TOUS LES 2 MOIS;
+
         $sponsors = [];
         $students = [];
 

@@ -158,7 +158,7 @@ class __TwigTemplate_09aff5448d2c3cb6cd9073da074fc881 extends Template
                         <div class=\"text-center\">
                             ";
             // line 59
-            if ((twig_get_attribute($this->env, $this->source, $context["match"], "state", [], "any", false, false, false, 59) == "initialized")) {
+            if ((twig_get_attribute($this->env, $this->source, $context["match"], "state", [], "any", false, false, false, 59) == "match")) {
                 // line 60
                 echo "                                Attente réponse
                             ";
@@ -172,13 +172,8 @@ $context["match"], "state", [], "any", false, false, false, 63) == "student_appr
                 // line 64
                 echo "                                Attente réponse (parrain)
                             ";
-            } elseif ((twig_get_attribute($this->env, $this->source,             // line 65
-$context["match"], "state", [], "any", false, false, false, 65) == "approved")) {
-                // line 66
-                echo "                                Attente prise de contact
-                            ";
             }
-            // line 68
+            // line 66
             echo "                        </div>
                     </td>
                     <td class=\"align-middle\">
@@ -192,7 +187,7 @@ $context["match"], "state", [], "any", false, false, false, 65) == "approved")) 
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['match'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 77
+        // line 75
         echo "            </tbody>
         </table>
         <p id=\"noresult\"></p>
@@ -224,7 +219,7 @@ $context["match"], "state", [], "any", false, false, false, 65) == "approved")) 
 
     public function getDebugInfo()
     {
-        return array (  196 => 77,  182 => 68,  178 => 66,  176 => 65,  173 => 64,  171 => 63,  168 => 62,  166 => 61,  163 => 60,  161 => 59,  153 => 54,  143 => 49,  133 => 44,  128 => 41,  124 => 40,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  191 => 75,  177 => 66,  173 => 64,  171 => 63,  168 => 62,  166 => 61,  163 => 60,  161 => 59,  153 => 54,  143 => 49,  133 => 44,  128 => 41,  124 => 40,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -287,14 +282,12 @@ $context["match"], "state", [], "any", false, false, false, 65) == "approved")) 
                     </td>
                     <td class=\"align-middle\">
                         <div class=\"text-center\">
-                            {% if match.state == \"initialized\"  %}
+                            {% if match.state == \"match\"  %}
                                 Attente réponse
                             {% elseif match.state == \"sponsor_approved\" %}
                                 Attente réponse (étudiant)
                             {% elseif match.state == \"student_approved\" %}
                                 Attente réponse (parrain)
-                            {% elseif match.state == \"approved\" %}
-                                Attente prise de contact
                             {% endif %}
                         </div>
                     </td>

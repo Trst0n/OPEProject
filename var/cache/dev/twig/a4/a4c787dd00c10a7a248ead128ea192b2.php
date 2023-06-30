@@ -203,7 +203,10 @@ class __TwigTemplate_7bb3268b532edd714c18e769d2339e34 extends Template
                                             </div>
                                             <div class=\"icon-shape icon-md bg-light-primary text-primary
                             rounded-2\">
-                                                <i class=\"bi bi bi-inboxes-fill\"></i>
+                                                <a href=\"";
+        // line 105
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_matches");
+        echo "\"><i class=\"bi bi bi-inboxes-fill\"></i></a>
                                             </div>
                                         </div>
                                         <!-- project number -->
@@ -345,7 +348,10 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                     </div>
                                     <!-- card footer  -->
                                     <div  class=\"card-footer bg-white text-center\">
-                                        <a href=\"#\" class=\"link-primary\">Voir tous les matchs </a>
+                                        <a href=\"";
+        // line 202
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_matches");
+        echo "\" class=\"link-primary\">Voir tous les matchs </a>
 
                                     </div>
                                 </div>
@@ -376,7 +382,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
 
     public function getDebugInfo()
     {
-        return array (  343 => 197,  331 => 191,  327 => 189,  321 => 187,  317 => 185,  315 => 184,  311 => 182,  297 => 170,  295 => 169,  282 => 158,  280 => 157,  273 => 153,  265 => 148,  257 => 143,  252 => 140,  248 => 139,  217 => 111,  213 => 110,  186 => 86,  182 => 85,  156 => 62,  152 => 61,  126 => 38,  122 => 37,  91 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  353 => 202,  346 => 197,  334 => 191,  330 => 189,  324 => 187,  320 => 185,  318 => 184,  314 => 182,  300 => 170,  298 => 169,  285 => 158,  283 => 157,  276 => 153,  268 => 148,  260 => 143,  255 => 140,  251 => 139,  220 => 111,  216 => 110,  208 => 105,  186 => 86,  182 => 85,  156 => 62,  152 => 61,  126 => 38,  122 => 37,  91 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -485,7 +491,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                             </div>
                                             <div class=\"icon-shape icon-md bg-light-primary text-primary
                             rounded-2\">
-                                                <i class=\"bi bi bi-inboxes-fill\"></i>
+                                                <a href=\"{{ path('app_dashboard_matches') }}\"><i class=\"bi bi bi-inboxes-fill\"></i></a>
                                             </div>
                                         </div>
                                         <!-- project number -->
@@ -582,7 +588,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                     </div>
                                     <!-- card footer  -->
                                     <div  class=\"card-footer bg-white text-center\">
-                                        <a href=\"#\" class=\"link-primary\">Voir tous les matchs </a>
+                                        <a href=\"{{ path('app_dashboard_matches') }}\" class=\"link-primary\">Voir tous les matchs </a>
 
                                     </div>
                                 </div>

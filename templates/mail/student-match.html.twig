@@ -1,18 +1,18 @@
 <div>
-    Bonjour {{firstname}},
-
+    Bonjour {{firstname}},<br>
+    <br>
     Faisant suite à votre inscription sur la plateforme de parrainage Ôpe, nous avons le plaisir de
-    vous transmettre les coordonnées du parrain ou de la marraine que nous vous proposons :
-    {{ sponsor.civility.value == "Men" ? "Mr." : "Mme." }} {{ sponsor.person.lastname }} {{ sponsor.person.firstname}}
-    {{ sponsor.person.phonenumber }}
-    {{ sponsor.person.mail }}
-
-    Vous avez une semaine pour contacter votre parrain/marraine et nous en informer.
-    Contact établi : <a href="#"> OUI </a>
-
-    Espérant que vous partagerez de très bons moments grâce à notre plate-forme.
-
-    Cordialement,
-
+    vous transmettre les coordonnées du parrain ou de la marraine que nous vous proposons :<br>
+    {{ sponsor.civility.value == "MEN" ? "Mr." : "Mme." }} {{ sponsor.person.lastname }} {{ sponsor.person.firstname}}<br>
+    {{ sponsor.person.phonenumber }}<br>
+    {{ sponsor.person.email }}<br>
+    <br>
+    Vous avez une semaine pour contacter votre parrain/marraine et nous en informer.<br>
+    Contact établi : <a href="#"> OUI </a><br>
+    <br>
+    Espérant que vous partagerez de très bons moments grâce à notre plate-forme.<br>
+    <br>
+    Cordialement,<br>
+    <br>
     L'équipe Ôpe
 </div>

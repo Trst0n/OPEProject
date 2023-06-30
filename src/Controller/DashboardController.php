@@ -107,23 +107,7 @@ class DashboardController extends AbstractController
 
 
 
-    #[Route('/matches', name: 'app_dashboard_matches',  methods: ['GET'])]
-    public function matches(SponsorshipRepository $sponsorshipRepository): Response{
 
-        $matches = array_merge($sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_MATCH]),  $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_STUDENT_APPROVED]), $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSOR_APPROVED]), $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSORSHIP]));
-
-        return $this->render('dashboard/match/matches.html.twig', [
-            'matches' => $matches,
-        ]);
-    }
-
-    #[Route('/match/{id}', name: 'app_dashboard_match',  methods: ['GET'])]
-    public function match(Sponsorship $sponsorship): Response{
-
-        return $this->render('dashboard/match/match.html.twig', [
-            'match' => $sponsorship,
-        ]);
-    }
 
 
 
