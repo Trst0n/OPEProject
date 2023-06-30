@@ -25,7 +25,7 @@ class City
     private Collection $leads;
 
     #[ORM\Column]
-    private ?int $Lat = null;
+    private ?int $lat = null;
 
     #[ORM\Column]
     private ?int $lng = null;
@@ -95,12 +95,12 @@ class City
 
     public function getLat(): ?int
     {
-        return $this->Lat;
+        return $this->lat;
     }
 
     public function setLat(int $Lat): static
     {
-        $this->Lat = $Lat;
+        $this->lat = $Lat;
 
         return $this;
     }

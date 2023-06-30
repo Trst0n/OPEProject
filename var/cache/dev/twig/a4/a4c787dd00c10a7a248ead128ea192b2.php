@@ -277,7 +277,7 @@ class __TwigTemplate_7bb3268b532edd714c18e769d2339e34 extends Template
 
                                                         ";
             // line 157
-            if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "state", [], "any", false, false, false, 157), "value", [], "any", false, false, false, 157) == "available")) {
+            if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "state", [], "any", false, false, false, 157), "value", [], "any", false, false, false, 157) == "registered")) {
                 // line 158
                 echo "                                                            <td class=\"align-middle\">
                                                                 <div class=\"text-center\">
@@ -318,7 +318,9 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                                             ";
             } else {
                 // line 187
-                echo "                                                                <a href=\"#\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
+                echo "                                                                <a href=\"";
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sponsorship_new", ["id" => twig_get_attribute($this->env, $this->source, $context["request"], "id", [], "any", false, false, false, 187)]), "html", null, true);
+                echo "\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
                                                             ";
             }
             // line 189
@@ -374,7 +376,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
 
     public function getDebugInfo()
     {
-        return array (  341 => 197,  329 => 191,  325 => 189,  321 => 187,  317 => 185,  315 => 184,  311 => 182,  297 => 170,  295 => 169,  282 => 158,  280 => 157,  273 => 153,  265 => 148,  257 => 143,  252 => 140,  248 => 139,  217 => 111,  213 => 110,  186 => 86,  182 => 85,  156 => 62,  152 => 61,  126 => 38,  122 => 37,  91 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  343 => 197,  331 => 191,  327 => 189,  321 => 187,  317 => 185,  315 => 184,  311 => 182,  297 => 170,  295 => 169,  282 => 158,  280 => 157,  273 => 153,  265 => 148,  257 => 143,  252 => 140,  248 => 139,  217 => 111,  213 => 110,  186 => 86,  182 => 85,  156 => 62,  152 => 61,  126 => 38,  122 => 37,  91 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -535,7 +537,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                                         </div>
                                                     </td>
 
-                                                        {% if request.state.value == \"available\" %}
+                                                        {% if request.state.value == \"registered\" %}
                                                             <td class=\"align-middle\">
                                                                 <div class=\"text-center\">
                                                                     VALIDATION ADMIN
@@ -565,7 +567,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                                             {% if request.state.value == \"matched\" %}
                                                                 <a href=\"#\"><i style=\"font-size: 130%\" class=\"bi bi-arrow-up-square\"></i></a>
                                                             {% else %}
-                                                                <a href=\"#\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
+                                                                <a href=\"{{ path('app_sponsorship_new', {'id': request.id}) }}\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
                                                             {% endif %}
                                                             &nbsp;
                                                             &nbsp;

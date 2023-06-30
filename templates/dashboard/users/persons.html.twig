@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+
+        /** TODO Display block/none search */
+
+        function search(val){
+            let personlist = []
+            personlist = {{ jsvar | json_encode() | raw}};
+
+
+            let startwith = [];
+            let within = [];
+
+            for(var personl in personlist){
+                if((personlist[personl]["firstname"].toLowerCase()).startsWith(val.toLowerCase()) || (personlist[personl]["lastname"].toLowerCase()).startsWith(val.toLowerCase()) ){
+                    startwith.push(personlist[personl]);
+                }
+                else if(((personlist[personl]["firstname"].toLowerCase()).concat(personlist[personl]["lastname"].toLowerCase())).includes(val.toLowerCase())){
+                    within.push(personlist[personl]);
+                }
+            }
+
+            let personByName = startwith.concat(within)
+
+            document.getElementById('persons').innerHTML = "";
+            document.getElementById('noresult').innerHTML = "";
+
+            if(personByName.length === 0){
+                document.getElementById('noresult').innerHTML = "<div><div class=\"container-fluid text-center\" style=\"margin-top: 15%\"> <h3> Aucun résulat pour la recherche \"" + val +"\" </h3></div></div><p style=\"margin-bottom: 20%\"><p>";
+            }
+            for(var person in personByName){
+                document.getElementById('persons').innerHTML +=  "<tr> <td class=\"align-middle\"> <div class=\"text-center\">" + personByName[person]["firstname"] + "&nbsp;" + (personByName[person]["lastname"]).toUpperCase() +
+                    "</div> </td> <td class=\"align-middle\"> <div class=\"text-center\"> " + personByName[person]["createAt"] + " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\" style=\"color: cornflowerblue\">" +
+                    personByName[person]["email"] + " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\">" + personByName[person]["phonenumber"] +
+                    " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\" style=\"color: mediumpurple\">" + personByName[person]["status"] + " </div> </td> <td class=\"align-middle\"> <div class=\"text-center\"> <a href=\"./user/"+ personByName[person]["id"] +"\"><i style=\"font-size: 120%\" class=\"bi bi-info-circle\"></i></a> </div></td> </tr>";
+            }
+        }
+
+
+        function filter(val){
+            var value = val.toLowerCase();
+            $("#persons tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+
+            switch (val){
+                case "parrain":
+                    if(document.getElementById('sponsorFilter').className === "btn btn-dark-secondary btn-sm rounded-5" ){
+                        document.getElementById('sponsorFilter').className = "btn btn-dark-primary btn-sm rounded-5"
+
+                        //réaffichage des lignes display none
+                        $("#persons tr").filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+
+                    }
+                    else{
+                        document.getElementById('studentFilter').className = "btn btn-dark-primary btn-sm rounded-5"
+                        document.getElementById('sponsorFilter').className = "btn btn-dark-secondary btn-sm rounded-5"
+                    }
+
+                    break;
+                case "étudiant":
+                    if(document.getElementById('studentFilter').className === "btn btn-dark-secondary btn-sm rounded-5" ){
+                        document.getElementById('studentFilter').className = "btn btn-dark-primary btn-sm rounded-5"
+
+                        $("#persons tr").filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+
+                    }
+                    else {
+                        document.getElementById('sponsorFilter').className = "btn btn-dark-primary btn-sm rounded-5"
+                        document.getElementById('studentFilter').className = "btn btn-dark-secondary btn-sm rounded-5"
+                    }
+                    break;
+
+                case "parrainage":
+                    if(document.getElementById('sponsorshipFilter').className === "btn btn-dark-secondary btn-sm rounded-5" ){
+                        document.getElementById('sponsorshipFilter').className = "btn btn-dark-primary btn-sm rounded-5"
+
+                        $("#persons tr").filter(function() {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+                    }
+                    else {
+                        document.getElementById('sponsorshipFilter').className = "btn btn-dark-secondary btn-sm rounded-5"
+                    }
+                    break;
+
+
+            }
+
+    }
+
+    </script>
+
+{% endblock %}
+
+{% block body %}
+    <div class="bg-primary pt-2 pb-4">
+
+    <div class="ms-lg-3 d-none d-md-none d-lg-block" style="margin-top: 5%">
+
+        <!-- Form -->
+        <form class="d-flex align-items-center" autocomplete="off">
+            <input style="width: 70%; margin-left: 15%" type="search" class="form-control" placeholder="Rechercher un utilisateur" oninput="search(this.value)"/>
+        </form>
+        <br>
+        <div class="text-center" id="buttons">
+            <button id="sponsorFilter" type="button" class="btn btn-dark-primary btn-sm rounded-5" onclick="filter('parrain')">&nbsp; Parrain &nbsp;</button>
+            <button id="studentFilter" type="button" class="btn btn-dark-primary btn-sm rounded-5" onclick="filter('étudiant')">&nbsp; Etudiant &nbsp;</button>
+            <button id="sponsorshipFilter" type="button" class="btn btn-dark-primary btn-sm rounded-5"  onclick="filter('parrainage')" >&nbsp; Parrainé &nbsp;</button>
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Filtre.. &nbsp;</button>
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Filtre.. &nbsp;</button>
+            <button type="button" class="btn btn-dark-primary btn-sm rounded-5">&nbsp; Filtre.. &nbsp;</button>
+        </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-2 px-6">
+        <div class="card" style="margin-top: 3%">
+            <div class="card-header bg-white  py-4">
+            </div>
+    <div class="table-responsive text-center" style="font-size: 17px">
+        <table class="table text-nowrap mb-0">
+            <thead class="table-light" >
+            <tr>
+                <th>Identité</th>
+                <th><i class="bi bi-calendar"></i> Date d'inscription</th>
+                <th><i class="bi bi-envelope"></i> Email</th>
+                <th><i class="bi bi-telephone"></i> N° Téléphone </th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="persons">
+                {% for person in persons %}
+                    <tr>
+                        <td class="align-middle">
+                            <div class="text-center">
+                                {{ person.firstname }} &nbsp; {{ person.lastname | upper }}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="text-center">
+                                {{ person.createdAt | date("d-m-Y") }}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="text-center" style="color: cornflowerblue">
+                                {{ person.email }}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="text-center">
+                                {{ person.phonenumber }}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="text-center" style="color: mediumpurple">
+                                {% if person is instanceof(student) %}
+                                    Étudiant
+                                {% else %}
+                                    Parrain
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="text-center">
+                                <a href="{{ path('app_dashboard_user', {'id': person.id}) }}"><i style="font-size: 120%" class="bi bi-info-circle"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p id="noresult"></p>
+    </div>
+        </div>
+</div>
+    <p style="margin-bottom: 7%"></p>
+
+{% endblock %}

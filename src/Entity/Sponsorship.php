@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\Wish;
 use App\Repository\SponsorshipRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +21,7 @@ class Sponsorship
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::ARRAY, enumType: Wish::class)]
     private array $wishes = [];
 
     #[ORM\Column(length: 255)]

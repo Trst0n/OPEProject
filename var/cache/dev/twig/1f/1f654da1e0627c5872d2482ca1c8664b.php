@@ -84,11 +84,17 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                             <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"";
         // line 37
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_users");
-        echo "\" >Etudiants </a>
+        echo "\" >Tous les utilisateurs </a>
                         </li>
                         <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"";
         // line 40
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_users");
+        echo "\" >Etudiants </a>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"";
+        // line 43
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_users");
         echo "\" >Parrains </a>
                         </li>
@@ -106,13 +112,13 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                                 <ul class=\"nav flex-column\">
                                     <li class=\"nav-item\">
                                         <a class=\"nav-link @@if (context.page === 'signin') { active }\" href=\"";
-        // line 55
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_sponsorships");
+        // line 58
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sponsorship_sponsorships");
         echo "\"> Parrainages</a>
                                     </li>
                                     <li class=\"nav-item\">
                                         <a class=\"nav-link @@if (context.page === 'signup') { active } \" href=\"";
-        // line 58
+        // line 61
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_matches");
         echo "\"> Matchs</a>
                                     </li>
@@ -255,7 +261,7 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
 
     public function getDebugInfo()
     {
-        return array (  116 => 58,  110 => 55,  92 => 40,  86 => 37,  72 => 26,  55 => 12,  49 => 8,  43 => 1,);
+        return array (  122 => 61,  116 => 58,  98 => 43,  92 => 40,  86 => 37,  72 => 26,  55 => 12,  49 => 8,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -296,6 +302,9 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                 <div id=\"navPages\" class=\"collapse @@if (context.page_group === 'pages') { show }\" data-bs-parent=\"#sideNavbar\">
                     <ul class=\"nav flex-column\">
                         <li class=\"nav-item\">
+                            <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"{{ path('app_dashboard_users') }}\" >Tous les utilisateurs </a>
+                        </li>
+                        <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"{{ path('app_dashboard_users') }}\" >Etudiants </a>
                         </li>
                         <li class=\"nav-item\">
@@ -314,7 +323,7 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                             <div id=\"navAuthentication\" class=\"collapse @@if (context.page_group === 'authentication') { show }\" data-bs-parent=\"#sideNavbar\">
                                 <ul class=\"nav flex-column\">
                                     <li class=\"nav-item\">
-                                        <a class=\"nav-link @@if (context.page === 'signin') { active }\" href=\"{{ path('app_dashboard_sponsorships')}}\"> Parrainages</a>
+                                        <a class=\"nav-link @@if (context.page === 'signin') { active }\" href=\"{{ path('app_sponsorship_sponsorships')}}\"> Parrainages</a>
                                     </li>
                                     <li class=\"nav-item\">
                                         <a class=\"nav-link @@if (context.page === 'signup') { active } \" href=\"{{ path('app_dashboard_matches')}}\"> Matchs</a>

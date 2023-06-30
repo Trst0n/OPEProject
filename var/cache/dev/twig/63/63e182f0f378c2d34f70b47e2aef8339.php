@@ -85,7 +85,29 @@ class __TwigTemplate_92f165f9fc3341fdb0eab3c780ab6f74 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "    <div class=\"table-responsive text-center\" style=\"margin-top: 3%; font-size: 17px\">
+        echo "    <div class=\"bg-primary pt-2 pb-4\">
+        <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
+
+            <!-- Form -->
+            <form class=\"d-flex align-items-center\" autocomplete=\"off\">
+                <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value)\"/>
+            </form>
+            <br>
+            <div class=\"text-center\">
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+            </div>
+        </div>
+    </div>
+    <div class=\"container-fluid mt-2 px-6\">
+    <div class=\"card\" style=\"margin-top: 3%\">
+    <div class=\"card-header bg-white  py-4\">
+    </div>
+    <div class=\"table-responsive text-center\" style=\"font-size: 17px\">
         <table class=\"table text-nowrap mb-0\">
             <thead class=\"table-light\" >
             <tr>
@@ -98,65 +120,65 @@ class __TwigTemplate_92f165f9fc3341fdb0eab3c780ab6f74 extends Template
             </thead>
             <tbody>
             ";
-        // line 18
+        // line 40
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["matches"]) || array_key_exists("matches", $context) ? $context["matches"] : (function () { throw new RuntimeError('Variable "matches" does not exist.', 18, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["matches"]) || array_key_exists("matches", $context) ? $context["matches"] : (function () { throw new RuntimeError('Variable "matches" does not exist.', 40, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["match"]) {
-            // line 19
+            // line 41
             echo "                <tr>
                     <td class=\"align-middle\">
                         <div class=\"text-center\">
                             ";
-            // line 22
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorRequest", [], "any", false, false, false, 22), "person", [], "any", false, false, false, 22), "firstname", [], "any", false, false, false, 22), "html", null, true);
+            // line 44
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorRequest", [], "any", false, false, false, 44), "person", [], "any", false, false, false, 44), "firstname", [], "any", false, false, false, 44), "html", null, true);
             echo " ";
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorRequest", [], "any", false, false, false, 22), "person", [], "any", false, false, false, 22), "lastname", [], "any", false, false, false, 22)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorRequest", [], "any", false, false, false, 44), "person", [], "any", false, false, false, 44), "lastname", [], "any", false, false, false, 44)), "html", null, true);
             echo "
                         </div>
                     </td>
                     <td class=\"align-middle\">
                         <div class=\"text-center\">
                             ";
-            // line 27
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorProposal", [], "any", false, false, false, 27), "person", [], "any", false, false, false, 27), "firstname", [], "any", false, false, false, 27), "html", null, true);
+            // line 49
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorProposal", [], "any", false, false, false, 49), "person", [], "any", false, false, false, 49), "firstname", [], "any", false, false, false, 49), "html", null, true);
             echo " ";
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorProposal", [], "any", false, false, false, 27), "person", [], "any", false, false, false, 27), "lastname", [], "any", false, false, false, 27)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorProposal", [], "any", false, false, false, 49), "person", [], "any", false, false, false, 49), "lastname", [], "any", false, false, false, 49)), "html", null, true);
             echo "
                         </div>
                     </td>
                     <td class=\"align-middle\">
                         <div class=\"text-center\" style=\"color: cornflowerblue\">
                             ";
-            // line 32
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["match"], "createdAt", [], "any", false, false, false, 32), "d-m-Y"), "html", null, true);
+            // line 54
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["match"], "createdAt", [], "any", false, false, false, 54), "d-m-Y"), "html", null, true);
             echo "
                         </div>
                     </td>
                     <td class=\"align-middle\">
                         <div class=\"text-center\">
                             ";
-            // line 37
-            if ((twig_get_attribute($this->env, $this->source, $context["match"], "state", [], "any", false, false, false, 37) == "initialized")) {
-                // line 38
+            // line 59
+            if ((twig_get_attribute($this->env, $this->source, $context["match"], "state", [], "any", false, false, false, 59) == "initialized")) {
+                // line 60
                 echo "                                Attente réponse
                             ";
-            } elseif ((twig_get_attribute($this->env, $this->source,             // line 39
-$context["match"], "state", [], "any", false, false, false, 39) == "sponsor_approved")) {
-                // line 40
+            } elseif ((twig_get_attribute($this->env, $this->source,             // line 61
+$context["match"], "state", [], "any", false, false, false, 61) == "sponsor_approved")) {
+                // line 62
                 echo "                                Attente réponse (étudiant)
                             ";
-            } elseif ((twig_get_attribute($this->env, $this->source,             // line 41
-$context["match"], "state", [], "any", false, false, false, 41) == "student_approved")) {
-                // line 42
+            } elseif ((twig_get_attribute($this->env, $this->source,             // line 63
+$context["match"], "state", [], "any", false, false, false, 63) == "student_approved")) {
+                // line 64
                 echo "                                Attente réponse (parrain)
                             ";
-            } elseif ((twig_get_attribute($this->env, $this->source,             // line 43
-$context["match"], "state", [], "any", false, false, false, 43) == "approved")) {
-                // line 44
+            } elseif ((twig_get_attribute($this->env, $this->source,             // line 65
+$context["match"], "state", [], "any", false, false, false, 65) == "approved")) {
+                // line 66
                 echo "                                Attente prise de contact
                             ";
             }
-            // line 46
+            // line 68
             echo "                        </div>
                     </td>
                     <td class=\"align-middle\">
@@ -170,10 +192,12 @@ $context["match"], "state", [], "any", false, false, false, 43) == "approved")) 
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['match'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 55
+        // line 77
         echo "            </tbody>
         </table>
         <p id=\"noresult\"></p>
+    </div>
+    </div>
     </div>
     <p style=\"margin-bottom: 7%\"></p>
 
@@ -200,7 +224,7 @@ $context["match"], "state", [], "any", false, false, false, 43) == "approved")) 
 
     public function getDebugInfo()
     {
-        return array (  174 => 55,  160 => 46,  156 => 44,  154 => 43,  151 => 42,  149 => 41,  146 => 40,  144 => 39,  141 => 38,  139 => 37,  131 => 32,  121 => 27,  111 => 22,  106 => 19,  102 => 18,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  196 => 77,  182 => 68,  178 => 66,  176 => 65,  173 => 64,  171 => 63,  168 => 62,  166 => 61,  163 => 60,  161 => 59,  153 => 54,  143 => 49,  133 => 44,  128 => 41,  124 => 40,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -210,7 +234,29 @@ $context["match"], "state", [], "any", false, false, false, 43) == "approved")) 
 {% block title %}Matchs{% endblock %}
 
 {% block body %}
-    <div class=\"table-responsive text-center\" style=\"margin-top: 3%; font-size: 17px\">
+    <div class=\"bg-primary pt-2 pb-4\">
+        <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
+
+            <!-- Form -->
+            <form class=\"d-flex align-items-center\" autocomplete=\"off\">
+                <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value)\"/>
+            </form>
+            <br>
+            <div class=\"text-center\">
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+                <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+            </div>
+        </div>
+    </div>
+    <div class=\"container-fluid mt-2 px-6\">
+    <div class=\"card\" style=\"margin-top: 3%\">
+    <div class=\"card-header bg-white  py-4\">
+    </div>
+    <div class=\"table-responsive text-center\" style=\"font-size: 17px\">
         <table class=\"table text-nowrap mb-0\">
             <thead class=\"table-light\" >
             <tr>
@@ -262,6 +308,8 @@ $context["match"], "state", [], "any", false, false, false, 43) == "approved")) 
             </tbody>
         </table>
         <p id=\"noresult\"></p>
+    </div>
+    </div>
     </div>
     <p style=\"margin-bottom: 7%\"></p>
 

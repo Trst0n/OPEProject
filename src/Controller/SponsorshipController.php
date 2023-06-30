@@ -2,77 +2,75 @@
 
 namespace App\Controller;
 
+use App\Entity\Proposal;
+use App\Entity\Request;
 use App\Entity\Sponsorship;
-use App\Form\SponsorshipType;
+use App\Entity\SponsorshipState;
+use App\Entity\Student;
+use App\Enum\LeadState;
+use App\Repository\ProposalRepository;
 use App\Repository\SponsorshipRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Workflow\Registry;
+use Symfony\Component\Workflow\WorkflowInterface;
 
-#[Route('/sponsorship')]
 class SponsorshipController extends AbstractController
 {
-    #[Route('/', name: 'app_sponsorship_index', methods: ['GET'])]
-    public function index(SponsorshipRepository $sponsorshipRepository): Response
-    {
-        return $this->render('sponsorship/index.html.twig', [
-            'sponsorships' => $sponsorshipRepository->findAll(),
+    #[Route('/sponsorships', name: 'app_sponsorship_sponsorships',  methods: ['GET'])]
+    public function sponsorships(SponsorshipRepository $sponsorshipRepository): Response{
+
+        return $this->render('dashboard/match/sponsorships.html.twig', [
+            'sponsorships' => $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSORSHIP])
         ]);
     }
 
-    #[Route('/new', name: 'app_sponsorship_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SponsorshipRepository $sponsorshipRepository): Response
-    {
-        $sponsorship = new Sponsorship();
-        $form = $this->createForm(SponsorshipType::class, $sponsorship);
-        $form->handleRequest($request);
+    /**
+     * @throws ORMException
+     */
+    #[Route('/user/{id}/sponsorship', name: 'app_sponsorship_new',  methods: ['GET'])]
+    public function sponsorship(Request $student, ProposalRepository $proposalRepository, EntityManagerInterface $entityManager): Response{
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sponsorshipRepository->save($sponsorship, true);
+        //algo a la place de la contruction ici
+        $sponsors = $proposalRepository->findBy(['state' => LeadState::REGISTERED]);
+        $sponsorships = [];
 
-            return $this->redirectToRoute('app_sponsorship_index', [], Response::HTTP_SEE_OTHER);
+        foreach ($sponsors as $sponsor){
+            $sponsorship = new Sponsorship();
+            $sponsorship->setSponsorProposal($sponsor)->setSponsorRequest($student)->setWishes([]);
+
+            $entityManager->persist($sponsorship);
+            $sponsorships[] = $sponsorship;
+        }
+        $entityManager->flush();
+
+        return $this->render('dashboard/match/sponsorship.html.twig', [
+            'sponsorships' => $sponsorships,
+            'student' => $student
+        ]);
+    }
+
+    /**
+     * @throws ORMException
+     */
+    #[Route('/validate/{sponsorship}', name: 'app_sponsorship_validate',  methods: ['GET'])]
+    public function sponsorshipvalidation(Sponsorship $sponsorship, WorkflowInterface $sponsoringProcessStateMachine, EntityManagerInterface $entityManager ): Response{
+
+        $sponsoringProcessStateMachine->apply($sponsorship, 'to_match');
+        $request = $sponsorship->getSponsorRequest();
+        $entityManager -> flush();
+
+        foreach($request->getSponsorship() as $sponsorship){     /** on libere les parrains qui n'ont pas été choisis */
+            if($sponsorship->getState() === "initialized"){
+                $entityManager->remove($sponsorship);
+            }
         }
 
-        return $this->renderForm('sponsorship/new.html.twig', [
-            'sponsorship' => $sponsorship,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_sponsorship_show', methods: ['GET'])]
-    public function show(Sponsorship $sponsorship): Response
-    {
-        return $this->render('sponsorship/show.html.twig', [
-            'sponsorship' => $sponsorship,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_sponsorship_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Sponsorship $sponsorship, SponsorshipRepository $sponsorshipRepository): Response
-    {
-        $form = $this->createForm(SponsorshipType::class, $sponsorship);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sponsorshipRepository->save($sponsorship, true);
-
-            return $this->redirectToRoute('app_sponsorship_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('sponsorship/edit.html.twig', [
-            'sponsorship' => $sponsorship,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_sponsorship_delete', methods: ['POST'])]
-    public function delete(Request $request, Sponsorship $sponsorship, SponsorshipRepository $sponsorshipRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$sponsorship->getId(), $request->request->get('_token'))) {
-            $sponsorshipRepository->remove($sponsorship, true);
-        }
-
-        return $this->redirectToRoute('app_sponsorship_index', [], Response::HTTP_SEE_OTHER);
+        $this->addFlash('success', "Le parrainage a bien été pris en compte");
+        return $this->redirectToRoute('app_dashboard');
     }
 }

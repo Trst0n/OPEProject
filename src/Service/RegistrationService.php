@@ -2,13 +2,11 @@
 
 namespace App\Service;
 
-use App\Entity\Lead;
-use App\Entity\LeadState;
-use App\Entity\Person;
 use App\Entity\Proposal;
 use App\Entity\Request;
 use App\Entity\Sponsor;
 use App\Entity\Student;
+use App\Enum\LeadState;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;

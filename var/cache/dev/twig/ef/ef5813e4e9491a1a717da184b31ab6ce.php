@@ -65,27 +65,29 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
         echo "    <link rel=\"stylesheet\" href=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("css/app.css"), "html", null, true);
         echo "\">
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js\"></script>
+    <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js\"></script>
 
 </head>
 <body class=\"bg-light\">
 <div id=\"db-wrapper\">
     <!-- navbar vertical -->
     ";
-        // line 22
-        $this->loadTemplate("partials/navbar-vertical.html.twig", "base.html.twig", 22)->display($context);
-        // line 23
+        // line 24
+        $this->loadTemplate("partials/navbar-vertical.html.twig", "base.html.twig", 24)->display($context);
+        // line 25
         echo "    <!-- Page content -->
     <div id=\"page-content\">
         ";
-        // line 25
-        $this->loadTemplate("partials/header.html.twig", "base.html.twig", 25)->display($context);
-        // line 26
+        // line 27
+        $this->loadTemplate("partials/header.html.twig", "base.html.twig", 27)->display($context);
+        // line 28
         echo "        <!-- Container fluid -->
 ";
-        // line 28
+        // line 30
         echo "            ";
         $this->displayBlock('body', $context, $blocks);
-        // line 30
+        // line 32
         echo "    </div>
 </div>
 </body>
@@ -172,7 +174,7 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
 
     }
 
-    // line 28
+    // line 30
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -202,7 +204,7 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
 
     public function getDebugInfo()
     {
-        return array (  176 => 28,  164 => 14,  159 => 13,  149 => 12,  137 => 9,  132 => 8,  122 => 7,  103 => 5,  89 => 30,  86 => 28,  83 => 26,  81 => 25,  77 => 23,  75 => 22,  65 => 16,  63 => 12,  60 => 11,  58 => 7,  53 => 5,  47 => 1,);
+        return array (  178 => 30,  166 => 14,  161 => 13,  151 => 12,  139 => 9,  134 => 8,  124 => 7,  105 => 5,  91 => 32,  88 => 30,  85 => 28,  83 => 27,  79 => 25,  77 => 24,  65 => 16,  63 => 12,  60 => 11,  58 => 7,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -223,6 +225,8 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
     <link rel=\"stylesheet\" href=\"{{ asset('css/app.css') }}\">
+    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js\"></script>
+    <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js\"></script>
 
 </head>
 <body class=\"bg-light\">

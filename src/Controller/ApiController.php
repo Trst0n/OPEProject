@@ -50,6 +50,7 @@ class ApiController extends AbstractController
         }
 
         $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/registration.html.twig');
+        $this->mailing->sendEmail('noreply.ope@gmail.com',"Incription d'un nouvel utilisateur", 'mail/registration.html.twig');
 
         return new JsonResponse(
             ['status' => 'ok',], Response::HTTP_CREATED
@@ -85,7 +86,7 @@ class ApiController extends AbstractController
         }
 
         $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/registration.html.twig');
-
+        $this->mailing->sendEmail('noreply.ope@gmail.com',"Incription d'un nouvel utilisateur", 'mail/registration.html.twig');
 
         return new JsonResponse(
             ['status' => 'ok',], JsonResponse::HTTP_CREATED

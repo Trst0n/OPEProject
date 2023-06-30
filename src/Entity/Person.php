@@ -186,5 +186,4 @@ abstract class Person
         return $this;
     }
 
-
 }

@@ -154,7 +154,7 @@
                                                         </div>
                                                     </td>
 
-                                                        {% if request.state.value == "available" %}
+                                                        {% if request.state.value == "registered" %}
                                                             <td class="align-middle">
                                                                 <div class="text-center">
                                                                     VALIDATION ADMIN
@@ -184,7 +184,7 @@
                                                             {% if request.state.value == "matched" %}
                                                                 <a href="#"><i style="font-size: 130%" class="bi bi-arrow-up-square"></i></a>
                                                             {% else %}
-                                                                <a href="#"><i style="font-size: 130%" class="bi bi-plus-square"></i></a>
+                                                                <a href="{{ path('app_sponsorship_new', {'id': request.id}) }}"><i style="font-size: 130%" class="bi bi-plus-square"></i></a>
                                                             {% endif %}
                                                             &nbsp;
                                                             &nbsp;

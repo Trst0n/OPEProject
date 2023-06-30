@@ -89,7 +89,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         echo "
     <script>
 
-        /** TODO Display block/none filter boostrap */
+        /** TODO Display block/none search */
 
         function search(val){
             let personlist = []
@@ -117,7 +117,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
             document.getElementById('noresult').innerHTML = \"\";
 
             if(personByName.length === 0){
-                document.getElementById('noresult').innerHTML = \"<div><div class=\\\"container-fluid text-center\\\" style=\\\"margin-top: 10%\\\"> <h3> Aucun résulat pour la recherche \\\"\" + val +\"\\\" </h3></div></div>\";
+                document.getElementById('noresult').innerHTML = \"<div><div class=\\\"container-fluid text-center\\\" style=\\\"margin-top: 15%\\\"> <h3> Aucun résulat pour la recherche \\\"\" + val +\"\\\" </h3></div></div><p style=\\\"margin-bottom: 20%\\\"><p>\";
             }
             for(var person in personByName){
                 document.getElementById('persons').innerHTML +=  \"<tr> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\">\" + personByName[person][\"firstname\"] + \"&nbsp;\" + (personByName[person][\"lastname\"]).toUpperCase() +
@@ -126,6 +126,64 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
                     \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\" style=\\\"color: mediumpurple\\\">\" + personByName[person][\"status\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\"> <a href=\\\"./user/\"+ personByName[person][\"id\"] +\"\\\"><i style=\\\"font-size: 120%\\\" class=\\\"bi bi-info-circle\\\"></i></a> </div></td> </tr>\";
             }
         }
+
+
+        function filter(val){
+            var value = val.toLowerCase();
+            \$(\"#persons tr\").filter(function() {
+                \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+
+            switch (val){
+                case \"parrain\":
+                    if(document.getElementById('sponsorFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
+                        document.getElementById('sponsorFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+
+                        //réaffichage des lignes display none
+                        \$(\"#persons tr\").filter(function() {
+                            \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+
+                    }
+                    else{
+                        document.getElementById('studentFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+                        document.getElementById('sponsorFilter').className = \"btn btn-dark-secondary btn-sm rounded-5\"
+                    }
+
+                    break;
+                case \"étudiant\":
+                    if(document.getElementById('studentFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
+                        document.getElementById('studentFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+
+                        \$(\"#persons tr\").filter(function() {
+                            \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+
+                    }
+                    else {
+                        document.getElementById('sponsorFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+                        document.getElementById('studentFilter').className = \"btn btn-dark-secondary btn-sm rounded-5\"
+                    }
+                    break;
+
+                case \"parrainage\":
+                    if(document.getElementById('sponsorshipFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
+                        document.getElementById('sponsorshipFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+
+                        \$(\"#persons tr\").filter(function() {
+                            \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+                    }
+                    else {
+                        document.getElementById('sponsorshipFilter').className = \"btn btn-dark-secondary btn-sm rounded-5\"
+                    }
+                    break;
+
+
+            }
+
+    }
+
     </script>
 
 ";
@@ -137,7 +195,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
 
     }
 
-    // line 47
+    // line 105
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -147,7 +205,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 48
+        // line 106
         echo "    <div class=\"bg-primary pt-2 pb-4\">
 
     <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
@@ -157,13 +215,13 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
             <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value)\"/>
         </form>
         <br>
-        <div class=\"text-center\">
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Parrain &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Etudiant &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
+        <div class=\"text-center\" id=\"buttons\">
+            <button id=\"sponsorFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('parrain')\">&nbsp; Parrain &nbsp;</button>
+            <button id=\"studentFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('étudiant')\">&nbsp; Etudiant &nbsp;</button>
+            <button id=\"sponsorshipFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\"  onclick=\"filter('parrainage')\" >&nbsp; Parrainé &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
         </div>
         </div>
     </div>
@@ -185,67 +243,67 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
             </thead>
             <tbody id=\"persons\">
                 ";
-        // line 84
+        // line 142
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["persons"]) || array_key_exists("persons", $context) ? $context["persons"] : (function () { throw new RuntimeError('Variable "persons" does not exist.', 84, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["persons"]) || array_key_exists("persons", $context) ? $context["persons"] : (function () { throw new RuntimeError('Variable "persons" does not exist.', 142, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["person"]) {
-            // line 85
+            // line 143
             echo "                    <tr>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 88
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "firstname", [], "any", false, false, false, 88), "html", null, true);
+            // line 146
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "firstname", [], "any", false, false, false, 146), "html", null, true);
             echo " &nbsp; ";
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "lastname", [], "any", false, false, false, 88)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "lastname", [], "any", false, false, false, 146)), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 93
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "createdAt", [], "any", false, false, false, 93), "d-m-Y"), "html", null, true);
+            // line 151
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "createdAt", [], "any", false, false, false, 151), "d-m-Y"), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\" style=\"color: cornflowerblue\">
                                 ";
-            // line 98
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "email", [], "any", false, false, false, 98), "html", null, true);
+            // line 156
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "email", [], "any", false, false, false, 156), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 103
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "phonenumber", [], "any", false, false, false, 103), "html", null, true);
+            // line 161
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "phonenumber", [], "any", false, false, false, 161), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\" style=\"color: mediumpurple\">
                                 ";
-            // line 108
-            if ($this->extensions['App\Twig\AppExtension']->isInstanceof($context["person"], (isset($context["student"]) || array_key_exists("student", $context) ? $context["student"] : (function () { throw new RuntimeError('Variable "student" does not exist.', 108, $this->source); })()))) {
-                // line 109
+            // line 166
+            if ($this->extensions['App\Twig\AppExtension']->isInstanceof($context["person"], (isset($context["student"]) || array_key_exists("student", $context) ? $context["student"] : (function () { throw new RuntimeError('Variable "student" does not exist.', 166, $this->source); })()))) {
+                // line 167
                 echo "                                    Étudiant
                                 ";
             } else {
-                // line 111
+                // line 169
                 echo "                                    Parrain
                                 ";
             }
-            // line 113
+            // line 171
             echo "                            </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 <a href=\"";
-            // line 117
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_user", ["id" => twig_get_attribute($this->env, $this->source, $context["person"], "id", [], "any", false, false, false, 117)]), "html", null, true);
+            // line 175
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_user", ["id" => twig_get_attribute($this->env, $this->source, $context["person"], "id", [], "any", false, false, false, 175)]), "html", null, true);
             echo "\"><i style=\"font-size: 120%\" class=\"bi bi-info-circle\"></i></a>
                             </div>
                         </td>
@@ -255,7 +313,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['person'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 122
+        // line 180
         echo "            </tbody>
         </table>
         <p id=\"noresult\"></p>
@@ -285,7 +343,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
 
     public function getDebugInfo()
     {
-        return array (  259 => 122,  248 => 117,  242 => 113,  238 => 111,  234 => 109,  232 => 108,  224 => 103,  216 => 98,  208 => 93,  198 => 88,  193 => 85,  189 => 84,  151 => 48,  141 => 47,  98 => 13,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  317 => 180,  306 => 175,  300 => 171,  296 => 169,  292 => 167,  290 => 166,  282 => 161,  274 => 156,  266 => 151,  256 => 146,  251 => 143,  247 => 142,  209 => 106,  199 => 105,  98 => 13,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -298,7 +356,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
 
     <script>
 
-        /** TODO Display block/none filter boostrap */
+        /** TODO Display block/none search */
 
         function search(val){
             let personlist = []
@@ -323,7 +381,7 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
             document.getElementById('noresult').innerHTML = \"\";
 
             if(personByName.length === 0){
-                document.getElementById('noresult').innerHTML = \"<div><div class=\\\"container-fluid text-center\\\" style=\\\"margin-top: 10%\\\"> <h3> Aucun résulat pour la recherche \\\"\" + val +\"\\\" </h3></div></div>\";
+                document.getElementById('noresult').innerHTML = \"<div><div class=\\\"container-fluid text-center\\\" style=\\\"margin-top: 15%\\\"> <h3> Aucun résulat pour la recherche \\\"\" + val +\"\\\" </h3></div></div><p style=\\\"margin-bottom: 20%\\\"><p>\";
             }
             for(var person in personByName){
                 document.getElementById('persons').innerHTML +=  \"<tr> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\">\" + personByName[person][\"firstname\"] + \"&nbsp;\" + (personByName[person][\"lastname\"]).toUpperCase() +
@@ -332,6 +390,64 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
                     \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\" style=\\\"color: mediumpurple\\\">\" + personByName[person][\"status\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\"> <a href=\\\"./user/\"+ personByName[person][\"id\"] +\"\\\"><i style=\\\"font-size: 120%\\\" class=\\\"bi bi-info-circle\\\"></i></a> </div></td> </tr>\";
             }
         }
+
+
+        function filter(val){
+            var value = val.toLowerCase();
+            \$(\"#persons tr\").filter(function() {
+                \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+
+            switch (val){
+                case \"parrain\":
+                    if(document.getElementById('sponsorFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
+                        document.getElementById('sponsorFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+
+                        //réaffichage des lignes display none
+                        \$(\"#persons tr\").filter(function() {
+                            \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+
+                    }
+                    else{
+                        document.getElementById('studentFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+                        document.getElementById('sponsorFilter').className = \"btn btn-dark-secondary btn-sm rounded-5\"
+                    }
+
+                    break;
+                case \"étudiant\":
+                    if(document.getElementById('studentFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
+                        document.getElementById('studentFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+
+                        \$(\"#persons tr\").filter(function() {
+                            \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+
+                    }
+                    else {
+                        document.getElementById('sponsorFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+                        document.getElementById('studentFilter').className = \"btn btn-dark-secondary btn-sm rounded-5\"
+                    }
+                    break;
+
+                case \"parrainage\":
+                    if(document.getElementById('sponsorshipFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
+                        document.getElementById('sponsorshipFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
+
+                        \$(\"#persons tr\").filter(function() {
+                            \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
+                        });
+                    }
+                    else {
+                        document.getElementById('sponsorshipFilter').className = \"btn btn-dark-secondary btn-sm rounded-5\"
+                    }
+                    break;
+
+
+            }
+
+    }
+
     </script>
 
 {% endblock %}
@@ -346,13 +462,13 @@ class __TwigTemplate_c117ef0fc19b214a5784a17f0ad9e50b extends Template
             <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value)\"/>
         </form>
         <br>
-        <div class=\"text-center\">
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Parrain &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Etudiant &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Primary &nbsp;</button>
+        <div class=\"text-center\" id=\"buttons\">
+            <button id=\"sponsorFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('parrain')\">&nbsp; Parrain &nbsp;</button>
+            <button id=\"studentFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('étudiant')\">&nbsp; Etudiant &nbsp;</button>
+            <button id=\"sponsorshipFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\"  onclick=\"filter('parrainage')\" >&nbsp; Parrainé &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
+            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
         </div>
         </div>
     </div>

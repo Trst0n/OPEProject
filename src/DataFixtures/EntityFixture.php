@@ -3,20 +3,19 @@
 namespace App\DataFixtures;
 
 use App\Entity\City;
-use App\Entity\Civility;
 use App\Entity\Curriculum;
 use App\Entity\Establishment;
 use App\Entity\Field;
-use App\Entity\Language;
-use App\Entity\LeadState;
-use App\Entity\Person;
 use App\Entity\Proposal;
 use App\Entity\Request;
 use App\Entity\Sponsor;
 use App\Entity\Sponsorship;
 use App\Entity\SponsorshipState;
 use App\Entity\Student;
-use App\Entity\Wish;
+use App\Enum\Civility;
+use App\Enum\Language;
+use App\Enum\LeadState;
+use App\Enum\Wish;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
@@ -34,6 +33,10 @@ class EntityFixture extends Fixture
 
         $city2 = new City();
         $city2->setZipcode(45000)->setName("Orleans")->setLat($faker->randomNumber())->setLng($faker->randomNumber());
+        $manager->persist($city2);
+
+        $city2 = new City();
+        $city2->setZipcode(45800)->setName("Saint-Jean de Braye")->setLat($faker->randomNumber())->setLng($faker->randomNumber());
         $manager->persist($city2);
 
 
@@ -60,7 +63,7 @@ class EntityFixture extends Fixture
         $manager->persist($cursus);
 
         $field = new Field();
-        $field->setName($faker->domainName())->addCurriculum($cursus);
+        $field->setName("test")->addCurriculum($cursus);
         $manager->persist($field);
 
         for ($i=0; $i < 3; $i++) {
@@ -122,7 +125,7 @@ class EntityFixture extends Fixture
                 ->setWishes([Wish::Housing, Wish::Administrative])
                 ->setCurriculum($cursus)
                 ->setLanguages([Language::Chinese, Language::French])
-                ->setState($faker->randomNumber()%2 === 0 ?  LeadState::AVAILABLE : LeadState::MATCHED);
+                ->setState($faker->randomNumber()%2 === 0 ?  LeadState::REGISTERED : LeadState::MATCHED);
             $manager->persist($student);
 
             $person->addLead($student);
@@ -155,7 +158,7 @@ class EntityFixture extends Fixture
            $sponsorship->setState(random_int(1,2)%2 === 0 ? SponsorshipState::STATE_INITIALIZED : SponsorshipState::STATE_STUDENT_APPROVED);
         }
         else{
-            $sponsorship->setState(random_int(1,2)%2 === 0 ? SponsorshipState::STATE_SPONSOR_APPROVED : SponsorshipState::STATE_APPROVED);
+            $sponsorship->setState(random_int(1,2)%2 === 0 ? SponsorshipState::STATE_SPONSOR_APPROVED : SponsorshipState::STATE_SPONSORSHIP);
         }
             $manager->persist($sponsorship);
 

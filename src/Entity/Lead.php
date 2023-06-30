@@ -2,6 +2,10 @@
 
 namespace App\Entity;
 
+use App\Enum\Civility;
+use App\Enum\Language;
+use App\Enum\LeadState;
+use App\Enum\Wish;
 use App\Repository\LeadRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -41,7 +45,7 @@ class Lead
     private array $wishes = [];
 
     #[ORM\Column(length: 255, enumType: LeadState::class)]
-    private LeadState $state = LeadState::AVAILABLE;
+    private LeadState $state = LeadState::REGISTERED;
 
     public function getId(): ?int
     {

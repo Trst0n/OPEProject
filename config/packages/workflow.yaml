@@ -10,65 +10,35 @@ framework:
                 - App\Entity\Sponsorship
             initial_marking: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
             places:
-                - !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
-                - !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED        # parrainage approuvé par une personne
-                - !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED
-                - !php/const App\Entity\SponsorshipState::STATE_STUDENT_REJECTED        # parrainage rejeté par student
-                - !php/const App\Entity\SponsorshipState::STATE_SPONSOR_REJECTED        # parrainage rejeté par sponsor
-                - !php/const App\Entity\SponsorshipState::STATE_APPROVED
-                - !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP             # parrainage
-                #                - st_ended                                             # une des personnes y met fin
-                #                - sp_ended
-                - !php/const App\Entity\SponsorshipState::STATE_ENDED                         # parrainage fini par les deux parti
+                - !php/const App\Entity\SponsorshipState::STATE_INITIALIZED                 # Les différents parrainage possible sont créé
+                - !php/const App\Entity\SponsorshipState::STATE_MATCH                       # L'admin valide le parrainage
+                - !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED            # Le sponsor confirme la prise de contact
+                - !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED            # L'étudiant valide la prise de contact
+                - !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP                 # La deuxième personne valide la prise de contact
+                - !php/const App\Entity\SponsorshipState::STATE_ENDED                       # Le parrainage a pris fin
 
             transitions:
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_VALIDATE: # L'etudiant accepte la proposition de matching
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_TO_MATCH:
                     from: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
+                    to: !php/const App\Entity\SponsorshipState::STATE_MATCH
+
+
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_APPROVE:
+                    from: !php/const App\Entity\SponsorshipState::STATE_MATCH
                     to: !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_VALIDATE: # Le sponsor accepte la proposition de matching
-                    from: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_APPROVE:
+                    from: !php/const App\Entity\SponsorshipState::STATE_MATCH
                     to: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED
 
 
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_REFUSE: # L'un des parti refuse la proposition de matching
-                    from: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
-                    to: !php/const App\Entity\SponsorshipState::STATE_STUDENT_REJECTED
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_REFUSE:
-                    from: !php/const App\Entity\SponsorshipState::STATE_INITIALIZED
-                    to: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_REJECTED
-
-
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_APPROVE:          # La deuxième personne accepte la proposition de match
-                    from: !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED
-                    to: !php/const App\Entity\SponsorshipState::STATE_APPROVED
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_APPROVE:
-                    from: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED
-                    to: !php/const App\Entity\SponsorshipState::STATE_APPROVED
-
-
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_ST_REJECT:            # L'un des parti refuse la proposition de match durant le processus
-                    from: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED
-                    to: !php/const App\Entity\SponsorshipState::STATE_STUDENT_REJECTED
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_SP_REJECT:
-                    from: !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED
-                    to: !php/const App\Entity\SponsorshipState::STATE_SPONSOR_REJECTED
-
-
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_TO_CONCLUDE:          # Les deux partis ont pris contact
-                    from: !php/const App\Entity\SponsorshipState::STATE_APPROVED
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_TO_SPONSORSHIP:
+                    from: [!php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED, !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED]
                     to: !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP
 
 
-                !php/const App\Entity\SponsorshipTransition::TRANSITION_TO_END:               # L'un des parti souhaite arrêter le parrainnage
+                !php/const App\Entity\SponsorshipTransition::TRANSITION_TO_END:
                     from: !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP
                     to: !php/const App\Entity\SponsorshipState::STATE_ENDED
 
 
-
-#                st_end: # L'un des parti souhaite arrêter le parrainnage
-#                    from: sponsorship
-#                    to: st_ended
-#                sp_end: # L'un des parti souhaite arrêter le parrainnage
-#                    from: sponsorship
-#                    to: sp_ended
 

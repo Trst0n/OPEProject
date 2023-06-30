@@ -166,7 +166,7 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                         <!-- Bg -->
                         <div class=\"pt-20 rounded-top\" style=\"background: url(";
         // line 67
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/profile-cover.jpg"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("build/images/profile-cover.d8b85219.jpg"), "html", null, true);
         echo ") no-repeat; background-size: cover;\"></div>
                         <div class=\"bg-white rounded-bottom smooth-shadow-sm \">
                             <div class=\"d-flex align-items-center justify-content-between
@@ -180,13 +180,13 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
         if ((twig_get_attribute($this->env, $this->source, (isset($context["civility"]) || array_key_exists("civility", $context) ? $context["civility"] : (function () { throw new RuntimeError('Variable "civility" does not exist.', 75, $this->source); })()), "value", [], "any", false, false, false, 75) == "MEN")) {
             // line 76
             echo "                                            <img src=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/men_avatar.png"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("build/images/men_avatar.1086b426.png"), "html", null, true);
             echo "\" class=\"avatar-xxl rounded-circle border border-4 border-white-color-40\" alt=\"\">
                                         ";
         } else {
             // line 78
             echo "                                            <img src=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/women_avatar.png"), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("build/images/women_avatar.c9a1bebd.png"), "html", null, true);
             echo "\" class=\"avatar-xxl rounded-circle border border-4 border-white-color-40\" alt=\"\">
                                         ";
         }
@@ -235,7 +235,7 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                                 <!-- card body -->
                                 <div class=\"card-body\">
                                     <!-- card title -->
-                                    <h4 class=\"card-title\">Informations</h4>
+                                    <h4 class=\"card-title\">Informations  [TODO affichage !]</h4>
                                     <span class=\"text-uppercase fw-medium text-dark fs-5 ls-2\"></span>
                                     <div class=\"row\">
                                         <div class=\"col-6 mb-5\">
@@ -400,33 +400,31 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                             // line 191
                             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "createdAt", [], "any", false, false, false, 191), "d-m-Y"), "html", null, true);
                             echo "</p>
-                                                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                                        mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua
-                                                                        dignissim
-                                                                        per, habeo iusto primis ea eam.
+                                                                    <p>[Descritpion ici .... ]
+                                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
+                                                                        mnesarchum.
                                                                     </p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     ";
                         } else {
-                            // line 201
+                            // line 200
                             echo "                                                        <div class=\"timeline-4 right-4\">
                                                             <div class=\"card gradient-custom-4\">
                                                                 <div class=\"card-body p-4\">
                                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                                     <h4>";
-                            // line 205
-                            echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 205, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
+                            // line 204
+                            echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 204, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
                             echo "</h4>
                                                                     <p class=\"small text-white-50 mb-4\">";
-                            // line 206
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 206), "value", [], "any", false, false, false, 206), "html", null, true);
+                            // line 205
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 205), "value", [], "any", false, false, false, 205), "html", null, true);
                             echo "</p>
-                                                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                                        mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua
-                                                                        dignissim
-                                                                        per, habeo iusto primis ea eam.
+                                                                    <p>[Descritpion ici .... ]
+                                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
+                                                                        mnesarchum.
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -434,38 +432,38 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
 
                                                     ";
                         }
-                        // line 217
+                        // line 215
                         echo "
                                                     ";
-                        // line 218
-                        $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 218, $this->source); })()) + 1);
-                        // line 219
+                        // line 216
+                        $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 216, $this->source); })()) + 1);
+                        // line 217
                         echo "                                                ";
                     }
-                    // line 220
+                    // line 218
                     echo "                                            ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['sponsorship'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 221
+                // line 219
                 echo "                                        ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lead'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 222
+            // line 220
             echo "                                    </div>
                                 </div>
                             ";
         } else {
-            // line 225
+            // line 223
             echo "                                <div>
-                                    <h3> Aucun parrainage ou match </h3>
+                                    <h3> Aucun parrainage ou match [TODO aff !!]</h3>
                                 </div>
                             ";
         }
-        // line 229
+        // line 227
         echo "                        </div>
                     </div>
                 </div>
@@ -476,74 +474,72 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                                 <div class=\"main-timeline-4 text-white\">
 
                                     ";
-        // line 238
+        // line 236
         $context["altern"] = 0;
-        // line 239
+        // line 237
         echo "                                    ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 239, $this->source); })()), "leads", [], "any", false, false, false, 239)));
+        $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 237, $this->source); })()), "leads", [], "any", false, false, false, 237)));
         foreach ($context['_seq'] as $context["_key"] => $context["lead"]) {
-            // line 240
+            // line 238
             echo "
                                     ";
-            // line 241
-            if ((((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 241, $this->source); })()) % 2) == 0)) {
-                // line 242
+            // line 239
+            if ((((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 239, $this->source); })()) % 2) == 0)) {
+                // line 240
                 echo "                                        <div class=\"timeline-4 left-4\">
                                             <div class=\"card gradient-custom\">
                                                 <div class=\"card-body p-4\">
                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                     <h4>";
-                // line 246
-                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 246, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
+                // line 244
+                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 244, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
                 echo "</h4>
                                                     <p class=\"small text-white-50 mb-4\">";
-                // line 247
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 247), "value", [], "any", false, false, false, 247), "html", null, true);
+                // line 245
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 245), "value", [], "any", false, false, false, 245), "html", null, true);
                 echo "</p>
-                                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua
-                                                        dignissim
-                                                        per, habeo iusto primis ea eam.
+                                                    <p>[Descritpion ici .... ]
+                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
+                                                        mnesarchum.
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                     ";
             } else {
-                // line 257
+                // line 254
                 echo "                                     <div class=\"timeline-4 right-4\">
                                             <div class=\"card gradient-custom-4\">
                                                 <div class=\"card-body p-4\">
                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                     <h4>";
-                // line 261
-                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 261, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
+                // line 258
+                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 258, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
                 echo "</h4>
                                                     <p class=\"small text-white-50 mb-4\">";
-                // line 262
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 262), "value", [], "any", false, false, false, 262), "html", null, true);
+                // line 259
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 259), "value", [], "any", false, false, false, 259), "html", null, true);
                 echo "</p>
-                                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua
-                                                        dignissim
-                                                        per, habeo iusto primis ea eam.
+                                                    <p>[Descritpion ici .... ]
+                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
+                                                        mnesarchum.
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                     ";
             }
-            // line 272
+            // line 268
             echo "                                    ";
-            $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 272, $this->source); })()) + 1);
-            // line 273
+            $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 268, $this->source); })()) + 1);
+            // line 269
             echo "                                    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lead'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 274
+        // line 270
         echo "                                        </div>
                                     </div>
                                 </div>
@@ -581,22 +577,22 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
 
 
 ";
-        // line 385
+        // line 381
         echo "
 ";
-        // line 668
+        // line 664
         echo "
 ";
-        // line 680
+        // line 676
         echo "
 ";
-        // line 682
+        // line 678
         echo "
 ";
-        // line 790
+        // line 786
         echo "
 ";
-        // line 837
+        // line 833
         echo "            </div>
 
 
@@ -605,13 +601,13 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
 
 
 ";
-        // line 847
+        // line 843
         echo "
 ";
-        // line 859
+        // line 855
         echo "
 ";
-        // line 867
+        // line 863
         echo "
 
 
@@ -636,7 +632,7 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
 
     public function getDebugInfo()
     {
-        return array (  615 => 867,  612 => 859,  609 => 847,  600 => 837,  597 => 790,  594 => 682,  591 => 680,  588 => 668,  585 => 385,  547 => 274,  541 => 273,  538 => 272,  525 => 262,  521 => 261,  515 => 257,  502 => 247,  498 => 246,  492 => 242,  490 => 241,  487 => 240,  482 => 239,  480 => 238,  469 => 229,  463 => 225,  458 => 222,  452 => 221,  446 => 220,  443 => 219,  441 => 218,  438 => 217,  424 => 206,  420 => 205,  414 => 201,  401 => 191,  397 => 190,  391 => 186,  388 => 185,  385 => 184,  380 => 183,  375 => 182,  373 => 181,  368 => 178,  366 => 177,  355 => 168,  352 => 167,  343 => 165,  338 => 164,  335 => 163,  326 => 161,  321 => 160,  319 => 159,  312 => 154,  303 => 152,  299 => 151,  291 => 146,  279 => 137,  272 => 133,  265 => 129,  259 => 125,  250 => 123,  246 => 122,  205 => 84,  199 => 83,  194 => 80,  188 => 78,  182 => 76,  180 => 75,  169 => 67,  155 => 55,  145 => 54,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  611 => 863,  608 => 855,  605 => 843,  596 => 833,  593 => 786,  590 => 678,  587 => 676,  584 => 664,  581 => 381,  543 => 270,  537 => 269,  534 => 268,  522 => 259,  518 => 258,  512 => 254,  500 => 245,  496 => 244,  490 => 240,  488 => 239,  485 => 238,  480 => 237,  478 => 236,  467 => 227,  461 => 223,  456 => 220,  450 => 219,  444 => 218,  441 => 217,  439 => 216,  436 => 215,  423 => 205,  419 => 204,  413 => 200,  401 => 191,  397 => 190,  391 => 186,  388 => 185,  385 => 184,  380 => 183,  375 => 182,  373 => 181,  368 => 178,  366 => 177,  355 => 168,  352 => 167,  343 => 165,  338 => 164,  335 => 163,  326 => 161,  321 => 160,  319 => 159,  312 => 154,  303 => 152,  299 => 151,  291 => 146,  279 => 137,  272 => 133,  265 => 129,  259 => 125,  250 => 123,  246 => 122,  205 => 84,  199 => 83,  194 => 80,  188 => 78,  182 => 76,  180 => 75,  169 => 67,  155 => 55,  145 => 54,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -707,7 +703,7 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                 <div class=\"row align-items-center\">
                     <div class=\"col-xl-12 col-lg-12 col-md-12 col-12\">
                         <!-- Bg -->
-                        <div class=\"pt-20 rounded-top\" style=\"background: url({{ asset('images/profile-cover.jpg') }}) no-repeat; background-size: cover;\"></div>
+                        <div class=\"pt-20 rounded-top\" style=\"background: url({{ asset('build/images/profile-cover.d8b85219.jpg') }}) no-repeat; background-size: cover;\"></div>
                         <div class=\"bg-white rounded-bottom smooth-shadow-sm \">
                             <div class=\"d-flex align-items-center justify-content-between
                   pt-4 pb-6 px-4\">
@@ -716,9 +712,9 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
 
                                     <div class=\"avatar-xxl avatar-indicators avatar-online me-2 position-relative d-flex justify-content-end align-items-end mt-n10\">
                                         {% if civility.value == \"MEN\" %}
-                                            <img src=\"{{ asset('images/men_avatar.png') }}\" class=\"avatar-xxl rounded-circle border border-4 border-white-color-40\" alt=\"\">
+                                            <img src=\"{{ asset('build/images/men_avatar.1086b426.png') }}\" class=\"avatar-xxl rounded-circle border border-4 border-white-color-40\" alt=\"\">
                                         {% else %}
-                                            <img src=\"{{ asset('images/women_avatar.png') }}\" class=\"avatar-xxl rounded-circle border border-4 border-white-color-40\" alt=\"\">
+                                            <img src=\"{{ asset('build/images/women_avatar.c9a1bebd.png') }}\" class=\"avatar-xxl rounded-circle border border-4 border-white-color-40\" alt=\"\">
                                         {% endif %}
                                     </div>
                                     <!-- text -->
@@ -756,7 +752,7 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                                 <!-- card body -->
                                 <div class=\"card-body\">
                                     <!-- card title -->
-                                    <h4 class=\"card-title\">Informations</h4>
+                                    <h4 class=\"card-title\">Informations  [TODO affichage !]</h4>
                                     <span class=\"text-uppercase fw-medium text-dark fs-5 ls-2\"></span>
                                     <div class=\"row\">
                                         <div class=\"col-6 mb-5\">
@@ -832,10 +828,9 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                                     <h4>{{ sponsorship.state == \"sponsorship\"? \"Parrainage\" : \"Match\" }}</h4>
                                                                     <p class=\"small text-white-50 mb-4\">{{ sponsorship.createdAt | date(\"d-m-Y\") }}</p>
-                                                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                                        mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua
-                                                                        dignissim
-                                                                        per, habeo iusto primis ea eam.
+                                                                    <p>[Descritpion ici .... ]
+                                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
+                                                                        mnesarchum.
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -847,10 +842,9 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                                     <h4>{{ lead is instanceof(request) ? \"Profil étudiant\" : \"Profil parrain\" }}</h4>
                                                                     <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>
-                                                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                                        mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua
-                                                                        dignissim
-                                                                        per, habeo iusto primis ea eam.
+                                                                    <p>[Descritpion ici .... ]
+                                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
+                                                                        mnesarchum.
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -866,7 +860,7 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                                 </div>
                             {% else %}
                                 <div>
-                                    <h3> Aucun parrainage ou match </h3>
+                                    <h3> Aucun parrainage ou match [TODO aff !!]</h3>
                                 </div>
                             {% endif %}
                         </div>
@@ -888,10 +882,9 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                     <h4>{{ lead is instanceof(request) ? \"Profil étudiant\" : \"Profil parrain\" }}</h4>
                                                     <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>
-                                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua
-                                                        dignissim
-                                                        per, habeo iusto primis ea eam.
+                                                    <p>[Descritpion ici .... ]
+                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
+                                                        mnesarchum.
                                                     </p>
                                                 </div>
                                             </div>
@@ -903,10 +896,9 @@ class __TwigTemplate_1bc63db66a4ac41efa9bef6d059b3be5 extends Template
                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                     <h4>{{ lead is instanceof(request) ? \"Profil étudiant\" : \"Profil parrain\" }}</h4>
                                                     <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>
-                                                    <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua
-                                                        dignissim
-                                                        per, habeo iusto primis ea eam.
+                                                    <p>[Descritpion ici .... ]
+                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
+                                                        mnesarchum.
                                                     </p>
                                                 </div>
                                             </div>

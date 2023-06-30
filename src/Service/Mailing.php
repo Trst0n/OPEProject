@@ -17,13 +17,14 @@ class Mailing
     /**
      * @throws TransportExceptionInterface
      */
-    public function sendEmail(string $to, string $subject, string $twig): void
+    public function sendEmail(string $to, string $subject, string $twig, $var = []): void
     {
         $email = (new TemplatedEmail())
             ->from('noreply.ope@gmail.com')
             ->to($to)
             ->subject($subject)
-            ->htmlTemplate($twig);
+            ->htmlTemplate($twig)
+            ->context($var);
 
         $this->mailer->send($email);
 

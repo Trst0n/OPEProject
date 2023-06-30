@@ -41,8 +41,7 @@ class __TwigTemplate_1706b2711c41c853f8e6469dbf22fbf8 extends Template
 
         // line 1
         echo "<div>
-    <h2>Bienvenue dans le processus OPE</h2>
-    <p>Votre inscription a bien été prise en compte nous vous recontacterons sous peu</p>
+    <p>[template mail ici ...]</p>
 </div>";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -65,8 +64,7 @@ class __TwigTemplate_1706b2711c41c853f8e6469dbf22fbf8 extends Template
     public function getSourceContext()
     {
         return new Source("<div>
-    <h2>Bienvenue dans le processus OPE</h2>
-    <p>Votre inscription a bien été prise en compte nous vous recontacterons sous peu</p>
+    <p>[template mail ici ...]</p>
 </div>", "mail/registration.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/mail/registration.html.twig");
     }
 }

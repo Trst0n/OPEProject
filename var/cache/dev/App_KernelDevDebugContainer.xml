@@ -348,6 +348,13 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Command\ReminderCommand" class="App\Command\ReminderCommand" autowire="true" autoconfigure="true">
+      <tag name="console.command"/>
+      <tag name="container.no_preload"/>
+      <call method="setName">
+        <argument>app:send-reminder</argument>
+      </call>
+    </service>
     <service id="App\Controller\ApiController" class="App\Controller\ApiController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -362,6 +369,13 @@
       <tag name="container.service_subscriber"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\DashboardController"/>
+      </call>
+    </service>
+    <service id="App\Controller\PermaLinkController" class="App\Controller\PermaLinkController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\PermaLinkController"/>
       </call>
     </service>
     <service id="App\Controller\SponsorController" class="App\Controller\SponsorController" public="true" autowire="true" autoconfigure="true">
@@ -390,6 +404,10 @@
     </service>
     <service id="App\DataFixtures\EntityFixture" class="App\DataFixtures\EntityFixture" autowire="true" autoconfigure="true">
       <tag name="doctrine.fixture.orm"/>
+    </service>
+    <service id="App\Event\SponsoringProcessSubscriber" class="App\Event\SponsoringProcessSubscriber" autowire="true" autoconfigure="true">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="App\Service\Mailing"/>
     </service>
     <service id="App\Repository\AdministratorRepository" class="App\Repository\AdministratorRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -451,9 +469,6 @@
     <service id="App\Service\Mailing" class="App\Service\Mailing" autowire="true" autoconfigure="true">
       <argument type="service" id="mailer.mailer"/>
     </service>
-    <service id="App\Service\RegisterEvents" class="App\Service\RegisterEvents" autowire="true" autoconfigure="true">
-      <tag name="doctrine.event_subscriber"/>
-    </service>
     <service id="App\Service\RegistrationService" class="App\Service\RegistrationService" autowire="true" autoconfigure="true">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="App\Service\FindEntity"/>
@@ -489,7 +504,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.rkl2WGq"/>
+      <argument type="service" id=".service_locator.sbq0S6X"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -2559,51 +2574,31 @@
     </service>
     <service id="workflow.security.expression_language" class="Symfony\Component\Workflow\EventListener\ExpressionLanguage"/>
     <service id=".state_machine.sponsoring_process.transition.0" class="Symfony\Component\Workflow\Transition">
-      <argument>st_validate</argument>
+      <argument>to_match</argument>
       <argument>initialized</argument>
-      <argument>student_approved</argument>
+      <argument>match</argument>
     </service>
     <service id=".state_machine.sponsoring_process.transition.1" class="Symfony\Component\Workflow\Transition">
-      <argument>sp_validate</argument>
-      <argument>initialized</argument>
-      <argument>sponsor_approved</argument>
+      <argument>st_approve</argument>
+      <argument>match</argument>
+      <argument>student_approved</argument>
     </service>
     <service id=".state_machine.sponsoring_process.transition.2" class="Symfony\Component\Workflow\Transition">
-      <argument>st_refuse</argument>
-      <argument>initialized</argument>
-      <argument>student_rejected</argument>
+      <argument>sp_approve</argument>
+      <argument>match</argument>
+      <argument>sponsor_approved</argument>
     </service>
     <service id=".state_machine.sponsoring_process.transition.3" class="Symfony\Component\Workflow\Transition">
-      <argument>sp_refuse</argument>
-      <argument>initialized</argument>
-      <argument>sponsor_rejected</argument>
-    </service>
-    <service id=".state_machine.sponsoring_process.transition.4" class="Symfony\Component\Workflow\Transition">
-      <argument>sp_approve</argument>
-      <argument>student_approved</argument>
-      <argument>approved</argument>
-    </service>
-    <service id=".state_machine.sponsoring_process.transition.5" class="Symfony\Component\Workflow\Transition">
-      <argument>st_approve</argument>
-      <argument>sponsor_approved</argument>
-      <argument>approved</argument>
-    </service>
-    <service id=".state_machine.sponsoring_process.transition.6" class="Symfony\Component\Workflow\Transition">
-      <argument>st_reject</argument>
-      <argument>sponsor_approved</argument>
-      <argument>student_rejected</argument>
-    </service>
-    <service id=".state_machine.sponsoring_process.transition.7" class="Symfony\Component\Workflow\Transition">
-      <argument>sp_reject</argument>
-      <argument>student_approved</argument>
-      <argument>sponsor_rejected</argument>
-    </service>
-    <service id=".state_machine.sponsoring_process.transition.8" class="Symfony\Component\Workflow\Transition">
       <argument>to_conclude</argument>
-      <argument>approved</argument>
+      <argument>student_approved</argument>
       <argument>sponsorship</argument>
     </service>
-    <service id=".state_machine.sponsoring_process.transition.9" class="Symfony\Component\Workflow\Transition">
+    <service id=".state_machine.sponsoring_process.transition.4" class="Symfony\Component\Workflow\Transition">
+      <argument>to_conclude</argument>
+      <argument>sponsor_approved</argument>
+      <argument>sponsorship</argument>
+    </service>
+    <service id=".state_machine.sponsoring_process.transition.5" class="Symfony\Component\Workflow\Transition">
       <argument>to_end</argument>
       <argument>sponsorship</argument>
       <argument>ended</argument>
@@ -2632,11 +2627,9 @@
     <service id="state_machine.sponsoring_process.definition" class="Symfony\Component\Workflow\Definition">
       <argument type="collection">
         <argument>initialized</argument>
+        <argument>match</argument>
         <argument>sponsor_approved</argument>
         <argument>student_approved</argument>
-        <argument>student_rejected</argument>
-        <argument>sponsor_rejected</argument>
-        <argument>approved</argument>
         <argument>sponsorship</argument>
         <argument>ended</argument>
       </argument>
@@ -2647,10 +2640,6 @@
         <argument type="service" id=".state_machine.sponsoring_process.transition.3"/>
         <argument type="service" id=".state_machine.sponsoring_process.transition.4"/>
         <argument type="service" id=".state_machine.sponsoring_process.transition.5"/>
-        <argument type="service" id=".state_machine.sponsoring_process.transition.6"/>
-        <argument type="service" id=".state_machine.sponsoring_process.transition.7"/>
-        <argument type="service" id=".state_machine.sponsoring_process.transition.8"/>
-        <argument type="service" id=".state_machine.sponsoring_process.transition.9"/>
       </argument>
       <argument type="collection">
         <argument>initialized</argument>
@@ -2719,6 +2708,46 @@
         <argument type="collection">
           <argument type="service_closure" id="webpack_encore.exception_listener"/>
           <argument>onKernelException</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>workflow.sponsoring_process.transition.to_match</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="App\Event\SponsoringProcessSubscriber"/>
+          <argument>handleToMatch</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>workflow.sponsoring_process.transition.st_approve</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="App\Event\SponsoringProcessSubscriber"/>
+          <argument>handleStudentValidate</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>workflow.sponsoring_process.transition.sp_approve</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="App\Event\SponsoringProcessSubscriber"/>
+          <argument>handleSponsorValidate</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>workflow.sponsoring_process.transition.to_conclude</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="App\Event\SponsoringProcessSubscriber"/>
+          <argument>handleSponsorship</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>workflow.sponsoring_process.transition.to_end</argument>
+        <argument type="collection">
+          <argument type="service_closure" id="App\Event\SponsoringProcessSubscriber"/>
+          <argument>handleEnding</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -3248,7 +3277,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.rkl2WGq"/>
+      <argument type="service" id=".service_locator.sbq0S6X"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -4819,9 +4848,8 @@
       </call>
     </service>
     <service id="doctrine.dbal.default_connection.event_manager" class="Symfony\Bridge\Doctrine\ContainerAwareEventManager">
-      <argument type="service" id=".service_locator.MjW90MI"/>
+      <argument type="service" id=".service_locator.PBToVFE"/>
       <argument type="collection">
-        <argument>App\Service\RegisterEvents</argument>
         <argument type="collection">
           <argument type="collection">
             <argument>postGenerateSchema</argument>
@@ -6898,12 +6926,17 @@
         <argument key="_default" type="service_closure" id="webpack_encore.entrypoint_lookup[_default]"/>
       </argument>
     </service>
+    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Command\ReminderCommand" class="App\Command\ReminderCommand" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Command\ReminderCommand" class="App\Command\ReminderCommand" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ApiController" class="App\Controller\ApiController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ApiController" class="App\Controller\ApiController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ApiController" class="App\Controller\ApiController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\DashboardController" class="App\Controller\DashboardController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PermaLinkController" class="App\Controller\PermaLinkController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PermaLinkController" class="App\Controller\PermaLinkController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\PermaLinkController" class="App\Controller\PermaLinkController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SponsorController" class="App\Controller\SponsorController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6917,6 +6950,8 @@
     <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\EntityFixture" class="App\DataFixtures\EntityFixture" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\EntityFixture" class="App\DataFixtures\EntityFixture" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\EventDispatcher\EventSubscriberInterface.0.App\Event\SponsoringProcessSubscriber" class="App\Event\SponsoringProcessSubscriber" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Event\SponsoringProcessSubscriber" class="App\Event\SponsoringProcessSubscriber" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\AdministratorRepository" class="App\Repository\AdministratorRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\AdministratorRepository" class="App\Repository\AdministratorRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CityRepository" class="App\Repository\CityRepository" autowire="true" abstract="true"/>
@@ -6941,8 +6976,6 @@
     <service id=".abstract.instanceof.App\Repository\SponsorshipRepository" class="App\Repository\SponsorshipRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\StudentRepository" class="App\Repository\StudentRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\StudentRepository" class="App\Repository\StudentRepository" autowire="true" autoconfigure="true" abstract="true"/>
-    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface.0.App\Service\RegisterEvents" class="App\Service\RegisterEvents" autowire="true" abstract="true"/>
-    <service id=".abstract.instanceof.App\Service\RegisterEvents" class="App\Service\RegisterEvents" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Twig\Extension\ExtensionInterface.0.App\Twig\AppExtension" class="App\Twig\AppExtension" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Twig\AppExtension" class="App\Twig\AppExtension" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.7nzbL4K" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7363,11 +7396,20 @@
         <argument key="sponsor" type="service_closure" id=".errored..service_locator.IMMhoNM.App\Entity\Sponsor"/>
       </argument>
     </service>
-    <service id=".service_locator.aCYCZkE" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.64IM_Lz" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="sponsorship" type="service_closure" id=".errored..service_locator.aCYCZkE.App\Entity\Sponsorship"/>
-        <argument key="sponsorshipRepository" type="service_closure" id="App\Repository\SponsorshipRepository"/>
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="proposalRepository" type="service_closure" id="App\Repository\ProposalRepository"/>
+        <argument key="student" type="service_closure" id=".errored..service_locator.64IM_Lz.App\Entity\Request"/>
+      </argument>
+    </service>
+    <service id=".service_locator.lXwBZ8." class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="sponsoringProcessStateMachine" type="service_closure" id="state_machine.sponsoring_process"/>
+        <argument key="sponsorship" type="service_closure" id=".errored..service_locator.lXwBZ8..App\Entity\Sponsorship"/>
       </argument>
     </service>
     <service id=".service_locator.wmzwuy." class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7382,23 +7424,19 @@
         <argument key="student" type="service_closure" id=".errored..service_locator.aMfIQn5.App\Entity\Student"/>
       </argument>
     </service>
-    <service id=".service_locator.rkl2WGq" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.sbq0S6X" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\DashboardController::index" type="service_closure" id=".service_locator.PBTVzPc"/>
         <argument key="App\Controller\DashboardController::match" type="service_closure" id=".service_locator.A1WuIv."/>
         <argument key="App\Controller\DashboardController::matches" type="service_closure" id=".service_locator.gvThNC9"/>
-        <argument key="App\Controller\DashboardController::sponsorship" type="service_closure" id=".service_locator.A1WuIv."/>
-        <argument key="App\Controller\DashboardController::sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController::user" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\DashboardController::users" type="service_closure" id=".service_locator.nndhpqw"/>
         <argument key="App\Controller\SponsorController::index" type="service_closure" id=".service_locator.MPUuYf0"/>
         <argument key="App\Controller\SponsorController::show" type="service_closure" id=".service_locator.IMMhoNM"/>
-        <argument key="App\Controller\SponsorshipController::delete" type="service_closure" id=".service_locator.aCYCZkE"/>
-        <argument key="App\Controller\SponsorshipController::edit" type="service_closure" id=".service_locator.aCYCZkE"/>
-        <argument key="App\Controller\SponsorshipController::index" type="service_closure" id=".service_locator.gvThNC9"/>
-        <argument key="App\Controller\SponsorshipController::new" type="service_closure" id=".service_locator.gvThNC9"/>
-        <argument key="App\Controller\SponsorshipController::show" type="service_closure" id=".service_locator.A1WuIv."/>
+        <argument key="App\Controller\SponsorshipController::sponsorship" type="service_closure" id=".service_locator.64IM_Lz"/>
+        <argument key="App\Controller\SponsorshipController::sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
+        <argument key="App\Controller\SponsorshipController::sponsorshipvalidation" type="service_closure" id=".service_locator.lXwBZ8."/>
         <argument key="App\Controller\StudentController::index" type="service_closure" id=".service_locator.wmzwuy."/>
         <argument key="App\Controller\StudentController::show" type="service_closure" id=".service_locator.aMfIQn5"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -7408,17 +7446,13 @@
         <argument key="App\Controller\DashboardController:index" type="service_closure" id=".service_locator.PBTVzPc"/>
         <argument key="App\Controller\DashboardController:match" type="service_closure" id=".service_locator.A1WuIv."/>
         <argument key="App\Controller\DashboardController:matches" type="service_closure" id=".service_locator.gvThNC9"/>
-        <argument key="App\Controller\DashboardController:sponsorship" type="service_closure" id=".service_locator.A1WuIv."/>
-        <argument key="App\Controller\DashboardController:sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController:user" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\DashboardController:users" type="service_closure" id=".service_locator.nndhpqw"/>
         <argument key="App\Controller\SponsorController:index" type="service_closure" id=".service_locator.MPUuYf0"/>
         <argument key="App\Controller\SponsorController:show" type="service_closure" id=".service_locator.IMMhoNM"/>
-        <argument key="App\Controller\SponsorshipController:delete" type="service_closure" id=".service_locator.aCYCZkE"/>
-        <argument key="App\Controller\SponsorshipController:edit" type="service_closure" id=".service_locator.aCYCZkE"/>
-        <argument key="App\Controller\SponsorshipController:index" type="service_closure" id=".service_locator.gvThNC9"/>
-        <argument key="App\Controller\SponsorshipController:new" type="service_closure" id=".service_locator.gvThNC9"/>
-        <argument key="App\Controller\SponsorshipController:show" type="service_closure" id=".service_locator.A1WuIv."/>
+        <argument key="App\Controller\SponsorshipController:sponsorship" type="service_closure" id=".service_locator.64IM_Lz"/>
+        <argument key="App\Controller\SponsorshipController:sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
+        <argument key="App\Controller\SponsorshipController:sponsorshipvalidation" type="service_closure" id=".service_locator.lXwBZ8."/>
         <argument key="App\Controller\StudentController:index" type="service_closure" id=".service_locator.wmzwuy."/>
         <argument key="App\Controller\StudentController:show" type="service_closure" id=".service_locator.aMfIQn5"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -7673,10 +7707,9 @@
       <argument type="service" id="http_client.uri_template"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
     </service>
-    <service id=".service_locator.MjW90MI" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.PBToVFE" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Service\RegisterEvents" type="service_closure" id="App\Service\RegisterEvents"/>
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
         <argument key="doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_listener" type="service_closure" id="doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_listener"/>
         <argument key="doctrine.orm.listeners.doctrine_token_provider_schema_listener" type="service_closure" id="doctrine.orm.listeners.doctrine_token_provider_schema_listener"/>
@@ -8058,6 +8091,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\PermaLinkController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\PermaLinkController"/>
+      <argument>App\Controller\PermaLinkController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\SponsorController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\SponsorController"/>
       <argument>App\Controller\SponsorController</argument>
@@ -8432,8 +8471,11 @@
     <service id=".errored..service_locator.IMMhoNM.App\Entity\Sponsor" class="App\Entity\Sponsor">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.IMMhoNM&quot;: it needs an instance of &quot;App\Entity\Sponsor&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
-    <service id=".errored..service_locator.aCYCZkE.App\Entity\Sponsorship" class="App\Entity\Sponsorship">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.aCYCZkE&quot;: it needs an instance of &quot;App\Entity\Sponsorship&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    <service id=".errored..service_locator.64IM_Lz.App\Entity\Request" class="App\Entity\Request">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.64IM_Lz&quot;: it needs an instance of &quot;App\Entity\Request&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    </service>
+    <service id=".errored..service_locator.lXwBZ8..App\Entity\Sponsorship" class="App\Entity\Sponsorship">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.lXwBZ8.&quot;: it needs an instance of &quot;App\Entity\Sponsorship&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.aMfIQn5.App\Entity\Student" class="App\Entity\Student">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.aMfIQn5&quot;: it needs an instance of &quot;App\Entity\Student&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -8954,8 +8996,9 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.cLJ5Q8w"/>
+      <argument type="service" id=".service_locator.fyXOJvP"/>
       <argument type="collection">
+        <argument key="app:send-reminder">App\Command\ReminderCommand</argument>
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
         <argument key="cache:clear">console.command.cache_clear</argument>
@@ -9066,9 +9109,10 @@
         <argument key="make:security:form-login">maker.auto_command.make_security_form_login</argument>
       </argument>
     </service>
-    <service id=".service_locator.cLJ5Q8w" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.fyXOJvP" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Command\ReminderCommand" type="service_closure" id="App\Command\ReminderCommand"/>
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
         <argument key="console.command.assets_install" type="service_closure" id=".console.command.assets_install.lazy"/>
         <argument key="console.command.cache_clear" type="service_closure" id=".console.command.cache_clear.lazy"/>
@@ -9451,7 +9495,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.rkl2WGq"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.sbq0S6X"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9474,10 +9518,12 @@
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~SkvFOd9"/>
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
     <service id=".service_locator.8jLB1e9" alias=".service_locator.PBTVzPc"/>
-    <service id=".service_locator..pI6ADy" alias=".service_locator.rkl2WGq"/>
+    <service id=".service_locator.6nenO84" alias=".service_locator.64IM_Lz"/>
+    <service id=".service_locator.xbTBvZ5" alias=".service_locator.lXwBZ8."/>
+    <service id=".service_locator.dgJpjNz" alias=".service_locator.sbq0S6X"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
-    <service id=".service_locator._F5fqlN" alias=".service_locator.MjW90MI"/>
+    <service id=".service_locator.jij13qc" alias=".service_locator.PBToVFE"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
     <service id="validator" alias="debug.validator"/>
@@ -9504,7 +9550,8 @@
     <service id=".service_locator.V8vZvKO" alias=".service_locator.A1WuIv."/>
     <service id=".service_locator..KBaod7" alias=".service_locator.MPUuYf0"/>
     <service id=".service_locator.sHKlZZl" alias=".service_locator.IMMhoNM"/>
-    <service id=".service_locator.EbdBsV4" alias=".service_locator.aCYCZkE"/>
+    <service id=".service_locator.TewEm46" alias=".service_locator.64IM_Lz"/>
+    <service id=".service_locator.BF7wrlb" alias=".service_locator.lXwBZ8."/>
     <service id=".service_locator.ElkER0G" alias=".service_locator.wmzwuy."/>
     <service id=".service_locator.x1xfdir" alias=".service_locator.aMfIQn5"/>
     <service id=".service_locator.Q1z.f9O" alias=".service_locator.O2p6Lk7"/>

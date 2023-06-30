@@ -34,6 +34,9 @@
                 <div id="navPages" class="collapse @@if (context.page_group === 'pages') { show }" data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
+                            <a class="nav-link has-arrow  @@if (context.page === 'settings') { active } "  href="{{ path('app_dashboard_users') }}" >Tous les utilisateurs </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link has-arrow  @@if (context.page === 'settings') { active } "  href="{{ path('app_dashboard_users') }}" >Etudiants </a>
                         </li>
                         <li class="nav-item">
@@ -52,7 +55,7 @@
                             <div id="navAuthentication" class="collapse @@if (context.page_group === 'authentication') { show }" data-bs-parent="#sideNavbar">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link @@if (context.page === 'signin') { active }" href="{{ path('app_dashboard_sponsorships')}}"> Parrainages</a>
+                                        <a class="nav-link @@if (context.page === 'signin') { active }" href="{{ path('app_sponsorship_sponsorships')}}"> Parrainages</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link @@if (context.page === 'signup') { active } " href="{{ path('app_dashboard_matches')}}"> Matchs</a>

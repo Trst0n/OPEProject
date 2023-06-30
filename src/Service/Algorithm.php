@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Service;
-use App\Entity\Sponsor;
 use App\Entity\Student;
-use App\Entity\Wish;
 use App\Repository\SponsorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 

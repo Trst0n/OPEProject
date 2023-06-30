@@ -3,13 +3,12 @@
 namespace App\Service;
 
 use App\Entity\City;
-use App\Entity\Civility;
 use App\Entity\Curriculum;
-use App\Entity\Degree;
 use App\Entity\Establishment;
 use App\Entity\Field;
-use App\Entity\Language;
-use App\Entity\Wish;
+use App\Enum\Civility;
+use App\Enum\Language;
+use App\Enum\Wish;
 use Doctrine\ORM\EntityManagerInterface;
 
 class FindEntity
@@ -53,13 +52,6 @@ class FindEntity
         $curriculum = $curriculumRepository->findOneBy(['title' => $curriculumName]);
 
         return $curriculum;
-    }
-    public function getEstablishment(string $establishmentName):Establishment
-    {
-        $establishmentRepository = $this->entityManager->getRepository(Establishment::class);
-        $establishment = $establishmentRepository->findOneBy(['name' => $establishmentName]);
-
-        return $establishment;
     }
     public function getWishes(array $wishesString):array
     {
