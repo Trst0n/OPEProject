@@ -1,6 +1,11 @@
 <?php
 namespace App\Command;
 
+use App\Entity\Proposal;
+use App\Entity\SponsorshipState;
+use App\Enum\Civility;
+use App\Repository\SponsorshipRepository;
+use App\Service\Mailing;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,23 +15,64 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'app:send-reminder')]
 class ReminderCommand extends Command
 {
+    public function __construct(string $name = null, private SponsorshipRepository $sponsorshipRepository, private Mailing $mailing)
+    {
+        parent::__construct($name);
+    }
+
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-    // ... put here the code to create the user
 
-    // this method must return an integer number with the "exit status code"
-    // of the command. You can also use these constants to make code more readable
+        // ENVOI DE MAIL A TOUS LES UTILISATEURS QUI SONT EN PARRAINAGE TOUS LES 2 MOIS;
+        $sponsors = [];
+        $students = [];
 
-    // return this if there was no problem running the command
-    // (it's equivalent to returning int(0))
-    return Command::SUCCESS;
+        foreach ($this->sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSORSHIP]) as $sponsorship){
+            if(date_diff(new \DateTimeImmutable(), $sponsorship->getUpdatedAt())->format("%a")%61 == 0){
+                $sponsors[] = $sponsorship->getSponsorRequest();
+                $students[] = $sponsorship->getSponsorProposal();
+            }
+        }
 
-    // or return this if some error happened during the execution
-    // (it's equivalent to returning int(1))
-    // return Command::FAILURE;
+        foreach ($sponsors as $sponsor){
+            $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), "Rappel concernant votre parrainage", "mail/sponsor-reminder.html.twig",
+            ['civility' => ($sponsor->getCivility() == Civility::Men ? "Mr." : "Mme."), 'lastname' => $sponsor->getPerson()->getLastname()]);
+        }
 
-    // or return this to indicate incorrect command usage; e.g. invalid options
-    // or missing arguments (it's equivalent to returning int(2))
-    // return Command::INVALID
+        foreach ($students as $student){
+            $this->mailing->sendEmail($student->getPerson()->getEmail(), "Rappel concernant votre parrainage", "mail/student-reminder.html.twig",
+            ['lastname' => $student->getPerson()->getLastname()]);
+        }
+
+        // ENVOI DES RAPPELS POUR LES MATCHS TOUTES LES 2 SEMAINES
+
+        $students = [];
+        $sponsors = [];
+
+        foreach ($this->sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_STUDENT_APPROVED]) as $sponsorship){
+            if(date_diff(new \DateTimeImmutable(), $sponsorship->getUpdatedAt())->format("%a")%14 == 0){
+                $sponsors[] = $sponsorship->getSponsorProposal();
+            }
+        }
+
+        foreach ($this->sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSOR_APPROVED]) as $sponsorship){
+            if(date_diff(new \DateTimeImmutable(), $sponsorship->getUpdatedAt())->format("%a")%14 == 0){
+                $students[] = $sponsorship->getSponsorRequest();
+            }
+        }
+
+        foreach ($sponsors as $sponsor){
+            $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), "Rappel concernant votre parrainage", "mail/sponsor-match-reminder.html.twig",
+                ['civility' => ($sponsor->getCivility() == Civility::Men ? "Mr." : "Mme."), 'lastname' => $sponsor->getPerson()->getLastname()]);
+        }
+
+        foreach ($students as $student){
+            $this->mailing->sendEmail($student->getPerson()->getEmail(), "Rappel concernant votre parrainage", "mail/student-match-reminder.html.twig",
+                ['lastname' => $student->getPerson()->getLastname()]);
+        }
+
+        return Command::SUCCESS;
+
     }
 }

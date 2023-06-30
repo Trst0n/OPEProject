@@ -3,11 +3,9 @@
 namespace App\Service;
 
 use App\Enum\LeadState;
-use App\Entity\Sponsor;
 use App\Entity\Student;
 use App\Repository\SponsorRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Types\Integer;
 
 class Algorithm
 {

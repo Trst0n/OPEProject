@@ -110,14 +110,14 @@ class Sponsorship
         return $this;
     }
 
-    public function getUpdatesAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updates_at;
     }
 
     #[ORM\PostUpdate]
     #[ORM\PrePersist]
-    public function setUpdatesAt(): static
+    public function setUpdatedAt(): static
     {
         $this->updates_at = new \DateTimeImmutable();
 
