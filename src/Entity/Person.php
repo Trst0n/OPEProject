@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\LeadState;
 use App\Repository\PersonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -164,6 +165,7 @@ abstract class Person
         return $this->leads;
     }
 
+
     public function addLead(Lead $lead): static
     {
         if (!$this->leads->contains($lead)) {
@@ -185,5 +187,18 @@ abstract class Person
 
         return $this;
     }
+
+
+    public function getAvailableLeads(): ?Lead
+    {
+        foreach($this->leads as $lead){
+            if($lead->getState()==LeadState::REGISTERED){
+                return $lead;
+            }
+        }
+
+        return null;
+    }
+
 
 }
