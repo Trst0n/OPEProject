@@ -164,6 +164,7 @@ abstract class Person
         return $this->leads;
     }
 
+
     public function addLead(Lead $lead): static
     {
         if (!$this->leads->contains($lead)) {
@@ -184,6 +185,17 @@ abstract class Person
         }
 
         return $this;
+    }
+
+    public function getAvailableLeads(): ?Lead
+    {
+        foreach($this->leads as $lead){
+            if($lead->getState()==LeadState::AVAILABLE){
+                return $lead;
+            }
+        }
+
+        return null;
     }
 
 
