@@ -31,7 +31,10 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
 
         $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un match entre le parrain " . $sponsor->getPerson()->getFirstname() . " et l'étudiant " . $sponsor->getPerson()->getLastname() . "a été validé par ". $sponsorship->getAdministrator()->getUsername() .".");
         $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un email à été envoyé à l'utilisateur " . $sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname().".");
-        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . "Un email à été envoyé à l'utilisateur " . $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname().".");
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un email à été envoyé à l'utilisateur " . $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname().".");
+
+        $student->addActivity((new \DateTime())->format('Y-m-d H:i:s') . " : Nouveau match avec ".$sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname()." (parrain) validé par ".$sponsorship->getAdministrator()->getUsername().". Un email à été envoyé à l'utilisateur. ");
+        $sponsor->addActivity((new \DateTime())->format('Y-m-d H:i:s') . " : Nouveau match avec ".$student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname()." (étudiant)validé par ".$sponsorship->getAdministrator()->getUsername().". Un email à été envoyé à l'utilisateur. ");
     }
 
 
@@ -42,8 +45,8 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
         $student = $sponsorship->getSponsorRequest();
         $student->setState(LeadState::MATCH_APPROVED);
 
-        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " :" . $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname() . " a confirmé la prise de contact pour son parrainage ");
-
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : " . $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname() . " a confirmé la prise de contact pour son parrainage ");
+        $student->addActivity((new \DateTime())->format('Y-m-d H:i:s') . " : L'utilisateur a validé la prise de contact avec son parrain ". $sponsorship->getSponsorProposal()->getPerson()->getFirstname() . " " . $sponsorship->getSponsorProposal()->getPerson()->getLastname() . " .");
     }
 
     public function handleSponsorValidate(TransitionEvent $event): void     // PHASE 2.1: LE PARRAIN CONFIRME LA PRISE DE CONTACT
@@ -53,7 +56,8 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
         $sponsor = $sponsorship->getSponsorProposal();
         $sponsor->setState(LeadState::MATCH_APPROVED);
 
-        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " :" . $sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " a confirmé la prise de contact pour son parrainage ");
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : " . $sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " a confirmé la prise de contact pour son parrainage ");
+        $sponsor->addActivity((new \DateTime())->format('Y-m-d H:i:s') . " : L'utilisateur a validé la prise de contact avec son étudiant ". $sponsorship->getSponsorRequest()->getPerson()->getFirstname() . " " . $sponsorship->getSponsorRequest()->getPerson()->getLastname() . " .");
 
     }
 
@@ -68,6 +72,8 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
         $student->setState(LeadState::SPONSORSHIP);
 
         $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Le parrainage entre ".$sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " et ". $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname() . " vient de débuter.");
+        $student->addActivity((new \DateTime())->format('Y-m-d H:i:s') . " : Les deux utilisateurs viennent de confirmé la prise de contact, le parrainage vient de commencer !");
+        $sponsor->addActivity((new \DateTime())->format('Y-m-d H:i:s') . " : Les deux utilisateurs viennent de confirmé la prise de contact, le parrainage vient de commencer !");
 
 
     }
@@ -78,13 +84,16 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
 
         $sponsor = $sponsorship->getSponsorProposal();
         $sponsor->setState(LeadState::REGISTERED);
-        $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), "Votre parrainage a pris fin", 'mail/sponsor-ending.html.twig');
+        $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), " : Votre parrainage a pris fin", 'mail/sponsor-ending.html.twig');
 
         $student = $sponsorship->getSponsorRequest();
         $student->setState(LeadState::OUTDATED);
-        $this->mailing->sendEmail($student->getPerson()->getEmail(), "Votre parrainage a pris fin", 'mail/student-ending.html.twig');
+        $this->mailing->sendEmail($student->getPerson()->getEmail(), " : Votre parrainage a pris fin", 'mail/student-ending.html.twig');
 
         $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Le parrainage entre ".$sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " et ". $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname() . " vient de prendre fin.");
+
+        $student->addActivity((new \DateTime())->format('Y-m-d H:i:s') . " : Fin du parrainage entre ".$sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " et ". $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname().".");
+        $sponsor->addActivity((new \DateTime())->format('Y-m-d H:i:s') . " : Fin du parrainage entre ".$sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " et ". $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname().".");
 
     }
 

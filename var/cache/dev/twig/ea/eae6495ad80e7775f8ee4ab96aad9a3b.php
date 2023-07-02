@@ -93,36 +93,36 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                case \"overview\":
                    document.getElementById(val).innerHTML = \"<a class=\\\"nav-link active\\\" href=\\\"#\\\" onclick=\\\"views('overview')\\\">Informations</a>\"
                    document.getElementById(\"sponsorships\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('sponsorships')\\\">Parrainages</a>\"
-                   document.getElementById(\"activity\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('activity')\\\">Activité</a>\"
+                   document.getElementById(\"activities\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('activities')\\\">Activité</a>\"
 
                    // display des divs
                    document.getElementById(\"divOverview\").style.display = \"block\";
                    document.getElementById(\"divSponsorship\").style.display = \"none\";
-                   document.getElementById(\"divActivity\").style.display = \"none\";
+                   document.getElementById(\"divActivities\").style.display = \"none\";
 
                    break;
                case \"sponsorships\":
                    document.getElementById(val).innerHTML = \"<a class=\\\"nav-link active\\\" href=\\\"#\\\" onclick=\\\"views('sponsorships')\\\">Parrainages</a>\"
-                   document.getElementById(\"activity\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('activity')\\\">Activité</a>\"
+                   document.getElementById(\"activities\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('activities')\\\">Activité</a>\"
                    document.getElementById(\"overview\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('overview')\\\">Informations</a>\"
 
                    // display des divs
                    document.getElementById(\"divOverview\").style.display = \"none\";
                    document.getElementById(\"divSponsorship\").style.display = \"block\";
-                   document.getElementById(\"divActivity\").style.display = \"none\";
+                   document.getElementById(\"divActivities\").style.display = \"none\";
 
                    break;
-               case \"activity\":
+               case \"activities\":
 
                    // active link navbar
-                   document.getElementById(val).innerHTML = \"<a class=\\\"nav-link active\\\" href=\\\"#\\\" onclick=\\\"views('activity')\\\">Activité</a>\"
+                   document.getElementById(val).innerHTML = \"<a class=\\\"nav-link active\\\" href=\\\"#\\\" onclick=\\\"views('activities')\\\">Activité</a>\"
                    document.getElementById(\"overview\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('overview')\\\">Informations</a>\"
                    document.getElementById(\"sponsorships\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('sponsorships')\\\">Parrainages</a>\"
 
                    // display des divs
                    document.getElementById(\"divOverview\").style.display = \"none\";
                    document.getElementById(\"divSponsorship\").style.display = \"none\";
-                   document.getElementById(\"divActivity\").style.display = \"block\";
+                   document.getElementById(\"divActivities\").style.display = \"block\";
 
                    break;
 
@@ -206,9 +206,7 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
         echo "</p>
                                     </div>
                                 </div>
-                                <div>
-                                    <a href=\"#\" class=\"btn btn-outline-primary d-none d-md-block\">Edit Profile</a>
-                                </div>
+
                             </div>
                             <!-- nav -->
                             <ul class=\"nav nav-lt-tab px-4\" id=\"pills-tab\" role=\"tablist\">
@@ -219,8 +217,8 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                                     <a class=\"nav-link\" style=\"cursor: pointer\" onclick=\"views('sponsorships')\">Parrainages</a>
                                 </li>
 
-                                <li class=\"nav-item\" id=\"activity\">
-                                    <a class=\"nav-link\" style=\"cursor: pointer\" onclick=\"views('activity')\">Activité</a>
+                                <li class=\"nav-item\" id=\"activities\">
+                                    <a class=\"nav-link\" style=\"cursor: pointer\" onclick=\"views('activities')\">Activité</a>
                                 </li>
                             </ul>
                         </div>
@@ -242,41 +240,41 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                                             <h6 class=\"text-uppercase fs-5 ls-2\">Souhait(s):</h6>
                                             <p class=\"mb-0\">
                                                 ";
-        // line 122
+        // line 120
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 122, $this->source); })()), "leads", [], "any", false, false, false, 122), "last", [], "any", false, false, false, 122), "wishes", [], "any", false, false, false, 122));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 120, $this->source); })()), "leads", [], "any", false, false, false, 120), "last", [], "any", false, false, false, 120), "wishes", [], "any", false, false, false, 120));
         foreach ($context['_seq'] as $context["_key"] => $context["wish"]) {
-            // line 123
+            // line 121
             echo "                                                    ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["wish"], "value", [], "any", false, false, false, 123), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["wish"], "value", [], "any", false, false, false, 121), "html", null, true);
             echo "
                                                 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['wish'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 125
+        // line 123
         echo "                                            </p>
                                         </div>
                                         <div class=\"col-6 mb-5\">
                                             <h6 class=\"text-uppercase fs-5 ls-2\">Ville</h6>
                                             <p class=\"mb-0\">";
-        // line 129
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 129, $this->source); })()), "leads", [], "any", false, false, false, 129), "last", [], "any", false, false, false, 129), "city", [], "any", false, false, false, 129), "name", [], "any", false, false, false, 129), "html", null, true);
+        // line 127
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 127, $this->source); })()), "leads", [], "any", false, false, false, 127), "last", [], "any", false, false, false, 127), "city", [], "any", false, false, false, 127), "name", [], "any", false, false, false, 127), "html", null, true);
         echo "</p>
                                         </div>
                                         <div class=\"col-6 mb-5\">
                                             <h6 class=\"text-uppercase fs-5 ls-2\">N° Téléphone</h6>
                                             <p class=\"mb-0\">";
-        // line 133
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 133, $this->source); })()), "phonenumber", [], "any", false, false, false, 133), "html", null, true);
+        // line 131
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 131, $this->source); })()), "phonenumber", [], "any", false, false, false, 131), "html", null, true);
         echo "</p>
                                         </div>
                                         <div class=\"col-6  mb-5\">
                                             <h6 class=\"text-uppercase fs-5 ls-2\">Email </h6>
                                             <p class=\"mb-0\">";
-        // line 137
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 137, $this->source); })()), "email", [], "any", false, false, false, 137), "html", null, true);
+        // line 135
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 135, $this->source); })()), "email", [], "any", false, false, false, 135), "html", null, true);
         echo "</p>
                                         </div>
                                         <div class=\"col-6  mb-5\">
@@ -287,71 +285,71 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                                         <div class=\"col-6 mb-5\">
                                             <h6 class=\"text-uppercase fs-5 ls-2\">Inscrit le:</h6>
                                             <p class=\"mb-0\">";
-        // line 146
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 146, $this->source); })()), "createdAt", [], "any", false, false, false, 146), "d-m-Y"), "html", null, true);
+        // line 144
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 144, $this->source); })()), "createdAt", [], "any", false, false, false, 144), "d-m-Y"), "html", null, true);
         echo "</p>
                                         </div>
                                         <div class=\"col-6 mb-5\">
                                             <h6 class=\"text-uppercase fs-5 ls-2\">Langue(s) parlée(s)</h6>
                                             <p class=\"mb-0\">
                                                 ";
-        // line 151
+        // line 149
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 151, $this->source); })()), "leads", [], "any", false, false, false, 151), "last", [], "any", false, false, false, 151), "languages", [], "any", false, false, false, 151));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 149, $this->source); })()), "leads", [], "any", false, false, false, 149), "last", [], "any", false, false, false, 149), "languages", [], "any", false, false, false, 149));
         foreach ($context['_seq'] as $context["_key"] => $context["language"]) {
-            // line 152
+            // line 150
             echo "                                                    ";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["language"], "value", [], "any", false, false, false, 152), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["language"], "value", [], "any", false, false, false, 150), "html", null, true);
             echo "
                                                 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['language'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 154
+        // line 152
         echo "                                            </p>
                                         </div>
                                         <div class=\"col-6 mb-5\">
                                             <h6 class=\"text-uppercase fs-5 ls-2\">Domaines d'activités:</h6>
                                             <p class=\"mb-0\">
                                                 ";
-        // line 159
-        if ($this->extensions['App\Twig\AppExtension']->isInstanceof(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 159, $this->source); })()), "leads", [], "any", false, false, false, 159), "last", [], "any", false, false, false, 159), (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 159, $this->source); })()))) {
-            // line 160
+        // line 157
+        if ($this->extensions['App\Twig\AppExtension']->isInstanceof(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 157, $this->source); })()), "leads", [], "any", false, false, false, 157), "last", [], "any", false, false, false, 157), (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 157, $this->source); })()))) {
+            // line 158
             echo "                                                    ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 160, $this->source); })()), "leads", [], "any", false, false, false, 160), "last", [], "any", false, false, false, 160), "curriculum", [], "any", false, false, false, 160), "fields", [], "any", false, false, false, 160));
+            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 158, $this->source); })()), "leads", [], "any", false, false, false, 158), "last", [], "any", false, false, false, 158), "curriculum", [], "any", false, false, false, 158), "fields", [], "any", false, false, false, 158));
             foreach ($context['_seq'] as $context["_key"] => $context["field"]) {
-                // line 161
+                // line 159
                 echo "                                                        ";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["field"], "name", [], "any", false, false, false, 161), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["field"], "name", [], "any", false, false, false, 159), "html", null, true);
                 echo "
                                                     ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['field'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 163
+            // line 161
             echo "                                                ";
         } else {
-            // line 164
+            // line 162
             echo "                                                    ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 164, $this->source); })()), "leads", [], "any", false, false, false, 164), "last", [], "any", false, false, false, 164), "workfields", [], "any", false, false, false, 164));
+            $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 162, $this->source); })()), "leads", [], "any", false, false, false, 162), "last", [], "any", false, false, false, 162), "workfields", [], "any", false, false, false, 162));
             foreach ($context['_seq'] as $context["_key"] => $context["field"]) {
-                // line 165
+                // line 163
                 echo "                                                        ";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["field"], "name", [], "any", false, false, false, 165), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["field"], "name", [], "any", false, false, false, 163), "html", null, true);
                 echo "
                                                     ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['field'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 167
+            // line 165
             echo "                                                ";
         }
-        // line 168
+        // line 166
         echo "                                            </p>
                                         </div>
                                     </div>
@@ -360,125 +358,125 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                         </div>
                 <div class=\"py-6\" id=\"divSponsorship\" style=\"display: none\">
                     <div class=\"card\">
-                        <div class=\"card-body\">
+                        <div class=\"card-body\" >
                             ";
-        // line 177
-        if ((isset($context["hasSponsorship"]) || array_key_exists("hasSponsorship", $context) ? $context["hasSponsorship"] : (function () { throw new RuntimeError('Variable "hasSponsorship" does not exist.', 177, $this->source); })())) {
-            // line 178
+        // line 175
+        if ((isset($context["hasSponsorship"]) || array_key_exists("hasSponsorship", $context) ? $context["hasSponsorship"] : (function () { throw new RuntimeError('Variable "hasSponsorship" does not exist.', 175, $this->source); })())) {
+            // line 176
             echo "                                <div class=\"container py-5\">
                                     <div class=\"main-timeline-4 text-white\">
 
                                         ";
-            // line 181
+            // line 179
             $context["altern"] = 0;
-            // line 182
+            // line 180
             echo "                                        ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 182, $this->source); })()), "leads", [], "any", false, false, false, 182)));
+            $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 180, $this->source); })()), "leads", [], "any", false, false, false, 180)));
             foreach ($context['_seq'] as $context["_key"] => $context["lead"]) {
-                // line 183
+                // line 181
                 echo "                                            ";
                 $context['_parent'] = $context;
-                $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["lead"], "sponsorship", [], "any", false, false, false, 183));
+                $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["lead"], "sponsorship", [], "any", false, false, false, 181));
                 foreach ($context['_seq'] as $context["_key"] => $context["sponsorship"]) {
-                    // line 184
+                    // line 182
                     echo "                                                ";
                     if (($context["sponsorship"] != null)) {
-                        // line 185
+                        // line 183
                         echo "                                                    ";
-                        if ((((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 185, $this->source); })()) % 2) == 0)) {
-                            // line 186
+                        if ((((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 183, $this->source); })()) % 2) == 0)) {
+                            // line 184
                             echo "                                                        <div class=\"timeline-4 left-4\">
                                                             <div class=\"card gradient-custom\">
                                                                 <div class=\"card-body p-4\">
                                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                                     <h4>";
-                            // line 190
-                            echo (((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 190) == "sponsorship")) ? ("Parrainage") : ("Match"));
+                            // line 188
+                            echo (((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 188) == "sponsorship")) ? ("Parrainage") : ("Match"));
                             echo "</h4>
                                                                     <p class=\"small text-white-50 mb-4\">Créé le : ";
-                            // line 191
-                            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "createdAt", [], "any", false, false, false, 191), "d-m-Y"), "html", null, true);
+                            // line 189
+                            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "createdAt", [], "any", false, false, false, 189), "d-m-Y"), "html", null, true);
                             echo "</p>
                                                                     <p>Parrain : ";
-                            // line 192
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 192), "person", [], "any", false, false, false, 192), "firstname", [], "any", false, false, false, 192), "html", null, true);
+                            // line 190
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 190), "person", [], "any", false, false, false, 190), "firstname", [], "any", false, false, false, 190), "html", null, true);
                             echo " ";
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 192), "person", [], "any", false, false, false, 192), "lastname", [], "any", false, false, false, 192), "html", null, true);
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 190), "person", [], "any", false, false, false, 190), "lastname", [], "any", false, false, false, 190), "html", null, true);
                             echo "
                                                                         <br>
                                                                         Etudiant : ";
-                            // line 194
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 194), "person", [], "any", false, false, false, 194), "firstname", [], "any", false, false, false, 194), "html", null, true);
+                            // line 192
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 192), "person", [], "any", false, false, false, 192), "firstname", [], "any", false, false, false, 192), "html", null, true);
                             echo " ";
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 194), "person", [], "any", false, false, false, 194), "lastname", [], "any", false, false, false, 194), "html", null, true);
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 192), "person", [], "any", false, false, false, 192), "lastname", [], "any", false, false, false, 192), "html", null, true);
                             echo "
                                                                         <br>
                                                                         Statut :
                                                                         ";
-                            // line 197
-                            if ((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 197) == "sponsorship")) {
-                                // line 198
+                            // line 195
+                            if ((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 195) == "sponsorship")) {
+                                // line 196
                                 echo "                                                                            Parrainage en cours.
                                                                         ";
-                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 199
-$context["sponsorship"], "state", [], "any", false, false, false, 199) == "match")) {
-                                // line 200
+                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 197
+$context["sponsorship"], "state", [], "any", false, false, false, 197) == "match")) {
+                                // line 198
                                 echo "                                                                            Match validé par l'admin.
                                                                         ";
-                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 201
-$context["sponsorship"], "state", [], "any", false, false, false, 201) == "sponsor_approved")) {
-                                // line 202
+                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 199
+$context["sponsorship"], "state", [], "any", false, false, false, 199) == "sponsor_approved")) {
+                                // line 200
                                 echo "                                                                            En attente de la réponse du parrain
                                                                         ";
-                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 203
-$context["sponsorship"], "state", [], "any", false, false, false, 203) == "student_approved")) {
-                                // line 204
+                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 201
+$context["sponsorship"], "state", [], "any", false, false, false, 201) == "student_approved")) {
+                                // line 202
                                 echo "                                                                            En attente de la réponse de l'étudiant.
                                                                         ";
-                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 205
-$context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended")) {
-                                // line 206
+                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 203
+$context["sponsorship"], "state", [], "any", false, false, false, 203) == "ended")) {
+                                // line 204
                                 echo "                                                                            Parrainage terminé.
                                                                         ";
                             }
-                            // line 208
+                            // line 206
                             echo "                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     ";
                         } else {
-                            // line 213
+                            // line 211
                             echo "                                                        <div class=\"timeline-4 right-4\">
                                                             <div class=\"card gradient-custom-4\">
                                                                 <div class=\"card-body p-4\">
                                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                                     <h4>";
-                            // line 217
-                            echo (((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 217) == "sponsorship")) ? ("Parrainage") : ("Match"));
+                            // line 215
+                            echo (((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 215) == "sponsorship")) ? ("Parrainage") : ("Match"));
                             echo "</h4>
                                                                     <p class=\"small text-white-50 mb-4\">";
-                            // line 218
-                            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "createdAt", [], "any", false, false, false, 218), "d-m-Y"), "html", null, true);
+                            // line 216
+                            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "createdAt", [], "any", false, false, false, 216), "d-m-Y"), "html", null, true);
                             echo "</p>
                                                                     <p>Parrain : ";
-                            // line 219
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 219), "person", [], "any", false, false, false, 219), "firstname", [], "any", false, false, false, 219), "html", null, true);
+                            // line 217
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 217), "person", [], "any", false, false, false, 217), "firstname", [], "any", false, false, false, 217), "html", null, true);
                             echo " ";
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 219), "person", [], "any", false, false, false, 219), "lastname", [], "any", false, false, false, 219), "html", null, true);
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 217), "person", [], "any", false, false, false, 217), "lastname", [], "any", false, false, false, 217), "html", null, true);
                             echo "
                                                                         <br>
                                                                         Etudiant : ";
-                            // line 221
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 221), "person", [], "any", false, false, false, 221), "firstname", [], "any", false, false, false, 221), "html", null, true);
+                            // line 219
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 219), "person", [], "any", false, false, false, 219), "firstname", [], "any", false, false, false, 219), "html", null, true);
                             echo " ";
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 221), "person", [], "any", false, false, false, 221), "lastname", [], "any", false, false, false, 221), "html", null, true);
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 219), "person", [], "any", false, false, false, 219), "lastname", [], "any", false, false, false, 219), "html", null, true);
                             echo "
                                                                         <br>
                                                                         Statut : ";
-                            // line 223
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 223), "html", null, true);
+                            // line 221
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 221), "html", null, true);
                             echo "
                                                                     </p>
                                                                 </div>
@@ -487,107 +485,122 @@ $context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended
 
                                                     ";
                         }
-                        // line 230
+                        // line 228
                         echo "
                                                     ";
-                        // line 231
-                        $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 231, $this->source); })()) + 1);
-                        // line 232
+                        // line 229
+                        $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 229, $this->source); })()) + 1);
+                        // line 230
                         echo "                                                ";
                     }
-                    // line 233
+                    // line 231
                     echo "                                            ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['sponsorship'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 234
+                // line 232
                 echo "                                        ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lead'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 235
+            // line 233
             echo "                                    </div>
                                 </div>
                             ";
         } else {
-            // line 238
-            echo "                                <div>
-                                    <h3> Aucun parrainage ou match [TODO aff !!]</h3>
+            // line 236
+            echo "                                <div class=\"text-center \" style=\"margin-bottom: 15%; margin-top: 12%\">
+                                    <h3 class=\"text-muted\"> Aucun parrainage ou match.</h3>
                                 </div>
                             ";
         }
-        // line 242
+        // line 240
         echo "                        </div>
                     </div>
                 </div>
-                <div class=\"py-6\" id=\"divActivity\" style=\"display: none\">
+                <div class=\"py-6\" id=\"divActivities\" style=\"display: none\">
                     <div class=\"card\">
-                        <div class=\"card-body\">
+                        <div class=\"card-body\" style=\"margin-bottom: 8%; margin-top: 5%\">
                             <div class=\"container py-5\">
                                 <div class=\"main-timeline-4 text-white\">
 
                                     ";
-        // line 251
+        // line 249
         $context["altern"] = 0;
-        // line 252
+        // line 250
         echo "                                    ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 252, $this->source); })()), "leads", [], "any", false, false, false, 252)));
+        $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 250, $this->source); })()), "leads", [], "any", false, false, false, 250)));
         foreach ($context['_seq'] as $context["_key"] => $context["lead"]) {
-            // line 253
-            echo "
-                                    ";
-            // line 254
-            if ((((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 254, $this->source); })()) % 2) == 0)) {
-                // line 255
-                echo "                                        <div class=\"timeline-4 left-4\">
-                                            <div class=\"card gradient-custom\">
-                                                <div class=\"card-body p-4\">
-                                                    <i class=\"fas fa-brain fa-2x mb-3\"></i>
-                                                    <h4>";
-                // line 259
-                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 259, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
-                echo "</h4>
-                                                    <p class=\"small text-white-50 mb-4\">";
-                // line 260
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 260), "value", [], "any", false, false, false, 260), "html", null, true);
-                echo "</p>
-                                                    <p>[Descritpion ici .... ]
-                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum.
-                                                    </p>
+            // line 251
+            echo "                                        ";
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 251, $this->source); })()), "leads", [], "any", false, false, false, 251), "last", [], "any", false, false, false, 251), "activity", [], "any", false, false, false, 251)));
+            foreach ($context['_seq'] as $context["_key"] => $context["info"]) {
+                // line 252
+                echo "
+                                        ";
+                // line 253
+                if ((((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 253, $this->source); })()) % 2) == 0)) {
+                    // line 254
+                    echo "                                            <div class=\"timeline-4 left-4\">
+                                                <div class=\"card gradient-custom\">
+                                                    <div class=\"card-body p-4 text-center\">
+                                                        <i class=\"fas fa-brain fa-2x mb-3\"></i>
+                                                        <p>";
+                    // line 258
+                    echo twig_escape_filter($this->env, $context["info"], "html", null, true);
+                    echo "</p>
+    ";
+                    // line 260
+                    echo "    ";
+                    // line 261
+                    echo "    ";
+                    // line 262
+                    echo "    ";
+                    // line 263
+                    echo "    ";
+                    // line 264
+                    echo "                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ";
-            } else {
-                // line 269
-                echo "                                     <div class=\"timeline-4 right-4\">
-                                            <div class=\"card gradient-custom-4\">
-                                                <div class=\"card-body p-4\">
-                                                    <i class=\"fas fa-brain fa-2x mb-3\"></i>
-                                                    <h4>";
-                // line 273
-                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 273, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
-                echo "</h4>
-                                                    <p class=\"small text-white-50 mb-4\">";
-                // line 274
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 274), "value", [], "any", false, false, false, 274), "html", null, true);
-                echo "</p>
-                                                    <p>[Descritpion ici .... ]
-                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum.
-                                                    </p>
+                                        ";
+                } else {
+                    // line 268
+                    echo "                                         <div class=\"timeline-4 right-4\">
+                                                <div class=\"card gradient-custom-4\">
+                                                    <div class=\"card-body p-4\">
+                                                        <i class=\"fas fa-brain fa-2x mb-3\"></i>
+                                                        <p>";
+                    // line 272
+                    echo twig_escape_filter($this->env, $context["info"], "html", null, true);
+                    echo "</p>
+    ";
+                    // line 274
+                    echo "    ";
+                    // line 275
+                    echo "    ";
+                    // line 276
+                    echo "    ";
+                    // line 277
+                    echo "    ";
+                    // line 278
+                    echo "                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ";
+                                        ";
+                }
+                // line 282
+                echo "                                        ";
+                $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 282, $this->source); })()) + 1);
+                // line 283
+                echo "                                        ";
             }
-            // line 283
-            echo "                                    ";
-            $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 283, $this->source); })()) + 1);
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['info'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
             // line 284
             echo "                                    ";
         }
@@ -595,7 +608,18 @@ $context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lead'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 285
-        echo "                                        </div>
+        echo "                                    <div class=\"timeline-4 left-4\">
+                                        <div class=\"card gradient-custom\">
+                                                <div class=\"card-body p-4 text-center\">
+                                                    <i class=\"fas fa-brain fa-2x mb-3\"></i>
+                                                    <p>Création du compte le ";
+        // line 289
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 289, $this->source); })()), "createdAt", [], "any", false, false, false, 289), "d-m-Y"), "html", null, true);
+        echo "</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -623,7 +647,7 @@ $context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended
 
     public function getDebugInfo()
     {
-        return array (  598 => 285,  592 => 284,  589 => 283,  577 => 274,  573 => 273,  567 => 269,  555 => 260,  551 => 259,  545 => 255,  543 => 254,  540 => 253,  535 => 252,  533 => 251,  522 => 242,  516 => 238,  511 => 235,  505 => 234,  499 => 233,  496 => 232,  494 => 231,  491 => 230,  481 => 223,  474 => 221,  467 => 219,  463 => 218,  459 => 217,  453 => 213,  446 => 208,  442 => 206,  440 => 205,  437 => 204,  435 => 203,  432 => 202,  430 => 201,  427 => 200,  425 => 199,  422 => 198,  420 => 197,  412 => 194,  405 => 192,  401 => 191,  397 => 190,  391 => 186,  388 => 185,  385 => 184,  380 => 183,  375 => 182,  373 => 181,  368 => 178,  366 => 177,  355 => 168,  352 => 167,  343 => 165,  338 => 164,  335 => 163,  326 => 161,  321 => 160,  319 => 159,  312 => 154,  303 => 152,  299 => 151,  291 => 146,  279 => 137,  272 => 133,  265 => 129,  259 => 125,  250 => 123,  246 => 122,  205 => 84,  199 => 83,  194 => 80,  188 => 78,  182 => 76,  180 => 75,  169 => 67,  155 => 55,  145 => 54,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  617 => 289,  611 => 285,  605 => 284,  599 => 283,  596 => 282,  590 => 278,  588 => 277,  586 => 276,  584 => 275,  582 => 274,  578 => 272,  572 => 268,  566 => 264,  564 => 263,  562 => 262,  560 => 261,  558 => 260,  554 => 258,  548 => 254,  546 => 253,  543 => 252,  538 => 251,  533 => 250,  531 => 249,  520 => 240,  514 => 236,  509 => 233,  503 => 232,  497 => 231,  494 => 230,  492 => 229,  489 => 228,  479 => 221,  472 => 219,  465 => 217,  461 => 216,  457 => 215,  451 => 211,  444 => 206,  440 => 204,  438 => 203,  435 => 202,  433 => 201,  430 => 200,  428 => 199,  425 => 198,  423 => 197,  420 => 196,  418 => 195,  410 => 192,  403 => 190,  399 => 189,  395 => 188,  389 => 184,  386 => 183,  383 => 182,  378 => 181,  373 => 180,  371 => 179,  366 => 176,  364 => 175,  353 => 166,  350 => 165,  341 => 163,  336 => 162,  333 => 161,  324 => 159,  319 => 158,  317 => 157,  310 => 152,  301 => 150,  297 => 149,  289 => 144,  277 => 135,  270 => 131,  263 => 127,  257 => 123,  248 => 121,  244 => 120,  205 => 84,  199 => 83,  194 => 80,  188 => 78,  182 => 76,  180 => 75,  169 => 67,  155 => 55,  145 => 54,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -640,36 +664,36 @@ $context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended
                case \"overview\":
                    document.getElementById(val).innerHTML = \"<a class=\\\"nav-link active\\\" href=\\\"#\\\" onclick=\\\"views('overview')\\\">Informations</a>\"
                    document.getElementById(\"sponsorships\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('sponsorships')\\\">Parrainages</a>\"
-                   document.getElementById(\"activity\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('activity')\\\">Activité</a>\"
+                   document.getElementById(\"activities\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('activities')\\\">Activité</a>\"
 
                    // display des divs
                    document.getElementById(\"divOverview\").style.display = \"block\";
                    document.getElementById(\"divSponsorship\").style.display = \"none\";
-                   document.getElementById(\"divActivity\").style.display = \"none\";
+                   document.getElementById(\"divActivities\").style.display = \"none\";
 
                    break;
                case \"sponsorships\":
                    document.getElementById(val).innerHTML = \"<a class=\\\"nav-link active\\\" href=\\\"#\\\" onclick=\\\"views('sponsorships')\\\">Parrainages</a>\"
-                   document.getElementById(\"activity\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('activity')\\\">Activité</a>\"
+                   document.getElementById(\"activities\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('activities')\\\">Activité</a>\"
                    document.getElementById(\"overview\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('overview')\\\">Informations</a>\"
 
                    // display des divs
                    document.getElementById(\"divOverview\").style.display = \"none\";
                    document.getElementById(\"divSponsorship\").style.display = \"block\";
-                   document.getElementById(\"divActivity\").style.display = \"none\";
+                   document.getElementById(\"divActivities\").style.display = \"none\";
 
                    break;
-               case \"activity\":
+               case \"activities\":
 
                    // active link navbar
-                   document.getElementById(val).innerHTML = \"<a class=\\\"nav-link active\\\" href=\\\"#\\\" onclick=\\\"views('activity')\\\">Activité</a>\"
+                   document.getElementById(val).innerHTML = \"<a class=\\\"nav-link active\\\" href=\\\"#\\\" onclick=\\\"views('activities')\\\">Activité</a>\"
                    document.getElementById(\"overview\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('overview')\\\">Informations</a>\"
                    document.getElementById(\"sponsorships\").innerHTML = \"<a class=\\\"nav-link \\\" href=\\\"#\\\" onclick=\\\"views('sponsorships')\\\">Parrainages</a>\"
 
                    // display des divs
                    document.getElementById(\"divOverview\").style.display = \"none\";
                    document.getElementById(\"divSponsorship\").style.display = \"none\";
-                   document.getElementById(\"divActivity\").style.display = \"block\";
+                   document.getElementById(\"divActivities\").style.display = \"block\";
 
                    break;
 
@@ -714,9 +738,7 @@ $context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended
                                         <p class=\"mb-0 d-block\">{{ person.email }}</p>
                                     </div>
                                 </div>
-                                <div>
-                                    <a href=\"#\" class=\"btn btn-outline-primary d-none d-md-block\">Edit Profile</a>
-                                </div>
+
                             </div>
                             <!-- nav -->
                             <ul class=\"nav nav-lt-tab px-4\" id=\"pills-tab\" role=\"tablist\">
@@ -727,8 +749,8 @@ $context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended
                                     <a class=\"nav-link\" style=\"cursor: pointer\" onclick=\"views('sponsorships')\">Parrainages</a>
                                 </li>
 
-                                <li class=\"nav-item\" id=\"activity\">
-                                    <a class=\"nav-link\" style=\"cursor: pointer\" onclick=\"views('activity')\">Activité</a>
+                                <li class=\"nav-item\" id=\"activities\">
+                                    <a class=\"nav-link\" style=\"cursor: pointer\" onclick=\"views('activities')\">Activité</a>
                                 </li>
                             </ul>
                         </div>
@@ -803,7 +825,7 @@ $context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended
                         </div>
                 <div class=\"py-6\" id=\"divSponsorship\" style=\"display: none\">
                     <div class=\"card\">
-                        <div class=\"card-body\">
+                        <div class=\"card-body\" >
                             {% if hasSponsorship %}
                                 <div class=\"container py-5\">
                                     <div class=\"main-timeline-4 text-white\">
@@ -865,53 +887,63 @@ $context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended
                                     </div>
                                 </div>
                             {% else %}
-                                <div>
-                                    <h3> Aucun parrainage ou match [TODO aff !!]</h3>
+                                <div class=\"text-center \" style=\"margin-bottom: 15%; margin-top: 12%\">
+                                    <h3 class=\"text-muted\"> Aucun parrainage ou match.</h3>
                                 </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-                <div class=\"py-6\" id=\"divActivity\" style=\"display: none\">
+                <div class=\"py-6\" id=\"divActivities\" style=\"display: none\">
                     <div class=\"card\">
-                        <div class=\"card-body\">
+                        <div class=\"card-body\" style=\"margin-bottom: 8%; margin-top: 5%\">
                             <div class=\"container py-5\">
                                 <div class=\"main-timeline-4 text-white\">
 
                                     {% set altern = 0 %}
                                     {% for lead in person.leads | reverse %}
+                                        {% for info in person.leads.last.activity | reverse %}
 
-                                    {% if altern%2 == 0 %}
-                                        <div class=\"timeline-4 left-4\">
-                                            <div class=\"card gradient-custom\">
-                                                <div class=\"card-body p-4\">
-                                                    <i class=\"fas fa-brain fa-2x mb-3\"></i>
-                                                    <h4>{{ lead is instanceof(request) ? \"Profil étudiant\" : \"Profil parrain\" }}</h4>
-                                                    <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>
-                                                    <p>[Descritpion ici .... ]
-                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum.
-                                                    </p>
+                                        {% if altern%2 == 0 %}
+                                            <div class=\"timeline-4 left-4\">
+                                                <div class=\"card gradient-custom\">
+                                                    <div class=\"card-body p-4 text-center\">
+                                                        <i class=\"fas fa-brain fa-2x mb-3\"></i>
+                                                        <p>{{ info }}</p>
+    {#                                                    <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>#}
+    {#                                                    <p>[Descritpion ici .... ]#}
+    {#                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto#}
+    {#                                                        mnesarchum.#}
+    {#                                                    </p>#}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    {% else %}
-                                     <div class=\"timeline-4 right-4\">
-                                            <div class=\"card gradient-custom-4\">
-                                                <div class=\"card-body p-4\">
-                                                    <i class=\"fas fa-brain fa-2x mb-3\"></i>
-                                                    <h4>{{ lead is instanceof(request) ? \"Profil étudiant\" : \"Profil parrain\" }}</h4>
-                                                    <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>
-                                                    <p>[Descritpion ici .... ]
-                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum.
-                                                    </p>
+                                        {% else %}
+                                         <div class=\"timeline-4 right-4\">
+                                                <div class=\"card gradient-custom-4\">
+                                                    <div class=\"card-body p-4\">
+                                                        <i class=\"fas fa-brain fa-2x mb-3\"></i>
+                                                        <p>{{ info }}</p>
+    {#                                                    <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>#}
+    {#                                                    <p>[Descritpion ici .... ]#}
+    {#                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto#}
+    {#                                                        mnesarchum.#}
+    {#                                                    </p>#}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    {% endif %}
-                                    {% set altern = altern + 1 %}
+                                        {% endif %}
+                                        {% set altern = altern + 1 %}
+                                        {% endfor %}
                                     {% endfor %}
+                                    <div class=\"timeline-4 left-4\">
+                                        <div class=\"card gradient-custom\">
+                                                <div class=\"card-body p-4 text-center\">
+                                                    <i class=\"fas fa-brain fa-2x mb-3\"></i>
+                                                    <p>Création du compte le {{ person.createdAt | date(\"d-m-Y\") }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

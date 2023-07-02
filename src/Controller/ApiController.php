@@ -93,7 +93,6 @@ class ApiController extends AbstractController
 
         $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un nouveau étudiant/étudiante vient de s'inscrire ( " . $data['firstname'] . " " . $data['lastname'] . " ).");
 
-
         return new JsonResponse(
             ['status' => 'ok',], JsonResponse::HTTP_CREATED
         );

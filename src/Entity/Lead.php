@@ -47,6 +47,9 @@ class Lead
     #[ORM\Column(length: 255, enumType: LeadState::class)]
     private LeadState $state = LeadState::REGISTERED;
 
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $activity = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,6 +129,25 @@ class Lead
     public function setCivility(?Civility $civility): self
     {
         $this->civility = $civility;
+
+        return $this;
+    }
+
+    public function getActivity(): array
+    {
+        return $this->activity;
+    }
+
+    public function setActivity(array $activity): static
+    {
+        $this->activity = $activity;
+
+        return $this;
+    }
+
+    public function addActivity(string $activity): static
+    {
+        $this->activity[] = $activity;
 
         return $this;
     }

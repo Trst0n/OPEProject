@@ -52,7 +52,11 @@ class RegistrationService
                         return false;
                     }
                     $newProposals[]=$updatedProposal->getId();
+                    $updatedProposal->addActivity(  (new \DateTime())->format('Y-m-d H:i:s') . " : Création d'un nouveau profil de parrain.");
+
                     $this->entityManager->persist($updatedProposal);
+
+
                 }
 
                 foreach ($person->getLeads() as $lead){
@@ -92,6 +96,8 @@ class RegistrationService
                 if(!$this->validator->validate($updatedRequest)) {
                     return false;
                 }
+
+                $updatedRequest->addActivity(  (new \DateTime())->format('Y-m-d H:i:s') . " : Création d'un nouveau profil de étudiant.");
 
                 $this->entityManager->persist($updatedRequest); // flush de l'entité
 

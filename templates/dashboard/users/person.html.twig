@@ -10,36 +10,36 @@
                case "overview":
                    document.getElementById(val).innerHTML = "<a class=\"nav-link active\" href=\"#\" onclick=\"views('overview')\">Informations</a>"
                    document.getElementById("sponsorships").innerHTML = "<a class=\"nav-link \" href=\"#\" onclick=\"views('sponsorships')\">Parrainages</a>"
-                   document.getElementById("activity").innerHTML = "<a class=\"nav-link \" href=\"#\" onclick=\"views('activity')\">Activité</a>"
+                   document.getElementById("activities").innerHTML = "<a class=\"nav-link \" href=\"#\" onclick=\"views('activities')\">Activité</a>"
 
                    // display des divs
                    document.getElementById("divOverview").style.display = "block";
                    document.getElementById("divSponsorship").style.display = "none";
-                   document.getElementById("divActivity").style.display = "none";
+                   document.getElementById("divActivities").style.display = "none";
 
                    break;
                case "sponsorships":
                    document.getElementById(val).innerHTML = "<a class=\"nav-link active\" href=\"#\" onclick=\"views('sponsorships')\">Parrainages</a>"
-                   document.getElementById("activity").innerHTML = "<a class=\"nav-link \" href=\"#\" onclick=\"views('activity')\">Activité</a>"
+                   document.getElementById("activities").innerHTML = "<a class=\"nav-link \" href=\"#\" onclick=\"views('activities')\">Activité</a>"
                    document.getElementById("overview").innerHTML = "<a class=\"nav-link \" href=\"#\" onclick=\"views('overview')\">Informations</a>"
 
                    // display des divs
                    document.getElementById("divOverview").style.display = "none";
                    document.getElementById("divSponsorship").style.display = "block";
-                   document.getElementById("divActivity").style.display = "none";
+                   document.getElementById("divActivities").style.display = "none";
 
                    break;
-               case "activity":
+               case "activities":
 
                    // active link navbar
-                   document.getElementById(val).innerHTML = "<a class=\"nav-link active\" href=\"#\" onclick=\"views('activity')\">Activité</a>"
+                   document.getElementById(val).innerHTML = "<a class=\"nav-link active\" href=\"#\" onclick=\"views('activities')\">Activité</a>"
                    document.getElementById("overview").innerHTML = "<a class=\"nav-link \" href=\"#\" onclick=\"views('overview')\">Informations</a>"
                    document.getElementById("sponsorships").innerHTML = "<a class=\"nav-link \" href=\"#\" onclick=\"views('sponsorships')\">Parrainages</a>"
 
                    // display des divs
                    document.getElementById("divOverview").style.display = "none";
                    document.getElementById("divSponsorship").style.display = "none";
-                   document.getElementById("divActivity").style.display = "block";
+                   document.getElementById("divActivities").style.display = "block";
 
                    break;
 
@@ -84,9 +84,7 @@
                                         <p class="mb-0 d-block">{{ person.email }}</p>
                                     </div>
                                 </div>
-                                <div>
-                                    <a href="#" class="btn btn-outline-primary d-none d-md-block">Edit Profile</a>
-                                </div>
+
                             </div>
                             <!-- nav -->
                             <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
@@ -97,8 +95,8 @@
                                     <a class="nav-link" style="cursor: pointer" onclick="views('sponsorships')">Parrainages</a>
                                 </li>
 
-                                <li class="nav-item" id="activity">
-                                    <a class="nav-link" style="cursor: pointer" onclick="views('activity')">Activité</a>
+                                <li class="nav-item" id="activities">
+                                    <a class="nav-link" style="cursor: pointer" onclick="views('activities')">Activité</a>
                                 </li>
                             </ul>
                         </div>
@@ -173,7 +171,7 @@
                         </div>
                 <div class="py-6" id="divSponsorship" style="display: none">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" >
                             {% if hasSponsorship %}
                                 <div class="container py-5">
                                     <div class="main-timeline-4 text-white">
@@ -235,53 +233,63 @@
                                     </div>
                                 </div>
                             {% else %}
-                                <div>
-                                    <h3> Aucun parrainage ou match [TODO aff !!]</h3>
+                                <div class="text-center " style="margin-bottom: 15%; margin-top: 12%">
+                                    <h3 class="text-muted"> Aucun parrainage ou match.</h3>
                                 </div>
                             {% endif %}
                         </div>
                     </div>
                 </div>
-                <div class="py-6" id="divActivity" style="display: none">
+                <div class="py-6" id="divActivities" style="display: none">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body" style="margin-bottom: 8%; margin-top: 5%">
                             <div class="container py-5">
                                 <div class="main-timeline-4 text-white">
 
                                     {% set altern = 0 %}
                                     {% for lead in person.leads | reverse %}
+                                        {% for info in person.leads.last.activity | reverse %}
 
-                                    {% if altern%2 == 0 %}
-                                        <div class="timeline-4 left-4">
-                                            <div class="card gradient-custom">
-                                                <div class="card-body p-4">
-                                                    <i class="fas fa-brain fa-2x mb-3"></i>
-                                                    <h4>{{ lead is instanceof(request) ? "Profil étudiant" : "Profil parrain" }}</h4>
-                                                    <p class="small text-white-50 mb-4">{{ lead.state.value }}</p>
-                                                    <p>[Descritpion ici .... ]
-                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum.
-                                                    </p>
+                                        {% if altern%2 == 0 %}
+                                            <div class="timeline-4 left-4">
+                                                <div class="card gradient-custom">
+                                                    <div class="card-body p-4 text-center">
+                                                        <i class="fas fa-brain fa-2x mb-3"></i>
+                                                        <p>{{ info }}</p>
+    {#                                                    <p class="small text-white-50 mb-4">{{ lead.state.value }}</p>#}
+    {#                                                    <p>[Descritpion ici .... ]#}
+    {#                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto#}
+    {#                                                        mnesarchum.#}
+    {#                                                    </p>#}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    {% else %}
-                                     <div class="timeline-4 right-4">
-                                            <div class="card gradient-custom-4">
-                                                <div class="card-body p-4">
-                                                    <i class="fas fa-brain fa-2x mb-3"></i>
-                                                    <h4>{{ lead is instanceof(request) ? "Profil étudiant" : "Profil parrain" }}</h4>
-                                                    <p class="small text-white-50 mb-4">{{ lead.state.value }}</p>
-                                                    <p>[Descritpion ici .... ]
-                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                        mnesarchum.
-                                                    </p>
+                                        {% else %}
+                                         <div class="timeline-4 right-4">
+                                                <div class="card gradient-custom-4">
+                                                    <div class="card-body p-4">
+                                                        <i class="fas fa-brain fa-2x mb-3"></i>
+                                                        <p>{{ info }}</p>
+    {#                                                    <p class="small text-white-50 mb-4">{{ lead.state.value }}</p>#}
+    {#                                                    <p>[Descritpion ici .... ]#}
+    {#                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto#}
+    {#                                                        mnesarchum.#}
+    {#                                                    </p>#}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    {% endif %}
-                                    {% set altern = altern + 1 %}
+                                        {% endif %}
+                                        {% set altern = altern + 1 %}
+                                        {% endfor %}
                                     {% endfor %}
+                                    <div class="timeline-4 left-4">
+                                        <div class="card gradient-custom">
+                                                <div class="card-body p-4 text-center">
+                                                    <i class="fas fa-brain fa-2x mb-3"></i>
+                                                    <p>Création du compte le {{ person.createdAt | date("d-m-Y") }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>

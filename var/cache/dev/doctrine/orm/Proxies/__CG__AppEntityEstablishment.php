@@ -17,9 +17,11 @@ class Establishment extends \App\Entity\Establishment implements \Doctrine\Persi
     }
 
     private const LAZY_OBJECT_PROPERTY_SCOPES = [
+        "\0".parent::class."\0".'city' => [parent::class, 'city', null],
         "\0".parent::class."\0".'curricula' => [parent::class, 'curricula', null],
         "\0".parent::class."\0".'id' => [parent::class, 'id', null],
         "\0".parent::class."\0".'name' => [parent::class, 'name', null],
+        'city' => [parent::class, 'city', null],
         'curricula' => [parent::class, 'curricula', null],
         'id' => [parent::class, 'id', null],
         'name' => [parent::class, 'name', null],

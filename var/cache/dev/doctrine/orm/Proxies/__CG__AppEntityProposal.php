@@ -17,6 +17,7 @@ class Proposal extends \App\Entity\Proposal implements \Doctrine\Persistence\Pro
     }
 
     private const LAZY_OBJECT_PROPERTY_SCOPES = [
+        "\0".'App\\Entity\\Lead'."\0".'activity' => ['App\\Entity\\Lead', 'activity', null],
         "\0".'App\\Entity\\Lead'."\0".'city' => ['App\\Entity\\Lead', 'city', null],
         "\0".'App\\Entity\\Lead'."\0".'civility' => ['App\\Entity\\Lead', 'civility', null],
         "\0".'App\\Entity\\Lead'."\0".'id' => ['App\\Entity\\Lead', 'id', null],
@@ -26,6 +27,7 @@ class Proposal extends \App\Entity\Proposal implements \Doctrine\Persistence\Pro
         "\0".'App\\Entity\\Lead'."\0".'wishes' => ['App\\Entity\\Lead', 'wishes', null],
         "\0".parent::class."\0".'sponsorship' => [parent::class, 'sponsorship', null],
         "\0".parent::class."\0".'workfields' => [parent::class, 'workfields', null],
+        'activity' => ['App\\Entity\\Lead', 'activity', null],
         'city' => ['App\\Entity\\Lead', 'city', null],
         'civility' => ['App\\Entity\\Lead', 'civility', null],
         'id' => ['App\\Entity\\Lead', 'id', null],
