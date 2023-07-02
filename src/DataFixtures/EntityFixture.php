@@ -116,9 +116,9 @@ class EntityFixture extends Fixture
             $sponsorship->setSponsorRequest($student)->setSponsorProposal($sponsor)->setWishes([Wish::Housing]);
 
         if($faker->randomNumber()%2 === 0){
-           $sponsorship->setState(SponsorshipState::STATE_MATCH);
-            $sponsor->setState(LeadState::MATCHED);
-            $student->setState(LeadState::MATCHED);
+           $sponsorship->setState(SponsorshipState::STATE_INITIALIZED);
+            $sponsor->setState(LeadState::REGISTERED);
+            $student->setState(LeadState::REGISTERED);
         }
         else{
             $sponsorship->setState(SponsorshipState::STATE_SPONSORSHIP);

@@ -40,7 +40,7 @@ class ApiController extends AbstractController
         $person->setFirstname("itri")
             ->setLastname("obanni")
             ->setPhonenumber(0606060606)
-            ->setEmail("ad@211231212231212adfadf2gmail.com")
+            ->setEmail("ad1211211112111111221112211112211122adfadf2gmail.com")
             ->setBirthdate(new \DateTime());
 
         $student = new \App\Entity\Request();

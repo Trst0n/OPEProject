@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Enum\Civility;
 use App\Enum\LeadState;
 use App\Entity\Student;
 use App\Repository\SponsorRepository;
@@ -88,17 +89,23 @@ class Algorithm
         $studentSearch = [
             "language" => [],
             "gender" => [],
-            "objective" => $student->getAvailableLeads()->getWishes(),
+            "objective" => [],
             "domain" => [],
             "latitude" => $student->getAvailableLeads()->getCity()->getLat(),
             "longitude" => $student->getAvailableLeads()->getCity()->getLng(),
         ];
 
         foreach($student->getAvailableLeads()->getLanguages() as $language){
-            array_push($studentSearch["language"],$language->name);
+            array_push($studentSearch["language"],strtoupper($language->name));
         }
 
-        array_push($studentSearch["gender"], $student->getAvailableLeads()->getCivility());
+        foreach($student->getAvailableLeads()->getCivility() as $civility){
+            array_push($studentSearch["gender"],$civility);
+        }
+
+        foreach($student->getAvailableLeads()->getWishes()as $wish){
+            array_push($studentSearch["objective"],strtoupper($wish->name));
+        }
 
         foreach ($student->getAvailableLeads()->getCurriculum()->getFields() as $field) {
             array_push($studentSearch["domain"], $field->getName());
@@ -125,13 +132,21 @@ class Algorithm
                 if(in_array($wish,$sponsorTemp->getWishes()) && !in_array($sponsorTemp->getId(),$possibleHits)){
 
                     $possibleHits[$sponsor->getId()]["language"]=[];
-
                     foreach($sponsor->getAvailableLeads()->getLanguages() as $language){
-                        array_push($possibleHits[$sponsor->getId()]["language"],$language->name);
+                        array_push($possibleHits[$sponsor->getId()]["language"],strtoupper($language->name));
                     }
+
                     $possibleHits[$sponsor->getId()]["gender"]=[];
-                    array_push($possibleHits[$sponsor->getId()]["gender"],$sponsor->getAvailableLeads()->getCivility());
-                    $possibleHits[$sponsor->getId()]["objective"]=$sponsor->getAvailableLeads()->getWishes();
+                    foreach($sponsor->getAvailableLeads()->getCivility() as $civility){
+                        array_push($possibleHits[$sponsor->getId()]["gender"],$civility);
+                    }
+
+                    $possibleHits[$sponsor->getId()]["objective"]=[];
+
+                    foreach($sponsor->getAvailableLeads()->getWishes() as $wish1){
+                        array_push($possibleHits[$sponsor->getId()]["objective"],strtoupper($wish1->name));
+                    }
+
                     $possibleHits[$sponsor->getId()]["domain"]=[];
                     foreach( $sponsor->getAvailableLeads()->getWorkfields() as $workfield){
                         array_push($possibleHits[$sponsor->getId()]["domain"],$workfield->getName());
@@ -153,18 +168,36 @@ class Algorithm
             $score = 0;
             foreach($kpis as $kpi=>$boost) {
 
-                $array =  $this->enumToString($data["objective"]);
 
 
 
-                if(in_array($kpi,$this->enumToString($data["objective"])) && in_array($kpi,$this->enumToString($studentSearch["objective"]))){
+
+                if(in_array($kpi,$data["objective"]) && in_array($kpi,$data["objective"])){
+
 
                     //key is language, gender etc
+
+                    $scoreTemp = 0;
                     foreach ($boost as $key => $value) {
-                        $scoreTemp = 0;
-                        if($key=="language")
+
+                        if($key!="location"){
+
+
                             $intersect = array_intersect($data[$key],$studentSearch[$key]);
-                        $scoreTemp += count($intersect)*$value;
+
+                            // if the student is MEN and sponsor is WOMEN we divide the indicator by 2
+                            if($key == "gender"){
+                                if(in_array(Civility::Men,$studentSearch["gender"]) && in_array(Civility::Women,$data["gender"])){
+                                    $scoreTemp+=$value/2;
+                                    continue;
+                                }
+                            }
+                            $scoreTemp += count($intersect)*$value;
+
+
+                        }
+
+
                     }
 
 
@@ -174,16 +207,18 @@ class Algorithm
                         if($distance==0){
                             $scoreTemp+=$boost["location"];
                         }else{
-                            $scoreTemp+=($distance/$distanceMax)*$boost["location"];
+                            $scoreTemp+=($boost["location"]/$distance);
                         }
                     }else {
                         $distance=$this->Distance($data["latitude"],$data["longitude"],$student->getAvailableLeads()->getCurriculum()->getCity()->getLat(),$student->getAvailableLeads()->getCurriculum()->getCity()->getLat());
                         if($distance==0){
                             $scoreTemp+=$boost["location"];
                         }else{
-                            $scoreTemp+=($distance/$distanceMax)*$boost["location"];
+                            //($distance/$distanceMax)*$boost["location"] pas possible parce que lorsque on augmente la distance, le score augmente et c'est pas ce qu'on veut :(
+                            $scoreTemp+=($boost["location"]/$distance);
                         }
                     }
+
                     $score += $scoreTemp/count($boost);
                 }
 
