@@ -16,6 +16,7 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], [], []],
+    'app_algotest' => [[], ['_controller' => 'App\\Controller\\ApiController::algotest'], [], [['text', '/api/algoTest']], [], [], []],
     'app_api_sponsor' => [[], ['_controller' => 'App\\Controller\\ApiController::createSponsor'], [], [['text', '/api/sponsor']], [], [], []],
     'app_api_student' => [[], ['_controller' => 'App\\Controller\\ApiController::createStudent'], [], [['text', '/api/student']], [], [], []],
     'app_dashboard' => [[], ['_controller' => 'App\\Controller\\DashboardController::index'], [], [['text', '/']], [], [], []],

@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class Establishment extends \App\Entity\Establishment implements \Doctrine\Persistence\Proxy
 {
-    use \Symfony\Component\VarExporter\LazyGhostTrait {
+     use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as __load;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -25,7 +25,7 @@ class Establishment extends \App\Entity\Establishment implements \Doctrine\Persi
         'curricula' => [parent::class, 'curricula', null],
         'id' => [parent::class, 'id', null],
         'name' => [parent::class, 'name', null],
-    ];
+    ];
 
     /**
      * @internal

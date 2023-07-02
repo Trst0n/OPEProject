@@ -44,6 +44,12 @@ class Sponsorship
     #[ORM\ManyToOne(inversedBy: 'sponsorships')]
     private ?Administrator $administrator = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $score = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $scoreIndicators = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +141,30 @@ class Sponsorship
     public function setAdministrator(?Administrator $administrator): static
     {
         $this->administrator = $administrator;
+
+        return $this;
+    }
+
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    public function setScore(?int $score): static
+    {
+        $this->score = $score;
+
+        return $this;
+    }
+
+    public function getScoreIndicators(): array
+    {
+        return $this->scoreIndicators;
+    }
+
+    public function setScoreIndicators(?array $scoreIndicators): static
+    {
+        $this->scoreIndicators = $scoreIndicators;
 
         return $this;
     }

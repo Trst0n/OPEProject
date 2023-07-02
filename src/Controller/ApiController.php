@@ -2,8 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Student;
+use App\Enum\Civility;
+use App\Enum\Language;
+use App\Enum\Wish;
+use App\Repository\SponsorRepository;
+use App\Repository\StudentRepository;
+use App\Service\Algorithm;
+use App\Service\FindEntity;
 use App\Service\Mailing;
 use App\Service\RegistrationService;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,8 +26,43 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiController extends AbstractController
 {
 
-    public function __construct(private RegistrationService $registrationService, private Mailing $mailing, private LoggerInterface $historyLogger)
+    public function __construct(private Algorithm $algorithm,private RegistrationService $registrationService, private Mailing $mailing, private LoggerInterface $historyLogger)
     {
+    }
+
+    /**
+     * @throws TransportExceptionInterface
+     */
+    #[Route('/algoTest', name: 'app_algotest', methods: ['GET'])]
+    public function algotest(StudentRepository $studentRepository, SponsorRepository $sponsorRepository, FindEntity $findEntity, EntityManagerInterface $manager): Response
+    {
+        $person = new Student();
+        $person->setFirstname("itri")
+            ->setLastname("obanni")
+            ->setPhonenumber(0606060606)
+            ->setEmail("ad@211231212231212adfadf2gmail.com")
+            ->setBirthdate(new \DateTime());
+
+        $student = new \App\Entity\Request();
+        $student->setCivility( Civility::Men)
+            ->setCity($findEntity->getCity("Orleans"))
+            ->setWishes([Wish::Administrative])
+            ->setCurriculum($findEntity->getCurriculum("L3MIAGE"))
+            ->setLanguages([Language::Chinese, Language::French]);
+        $manager->persist($student);
+        $person->addLead($student);
+        $manager->persist($person);
+        $manager->flush();
+
+        $scores = $this->algorithm->Algo($person, $sponsorRepository, 50);
+
+
+        return new JsonResponse(
+            $scores, Response::HTTP_CREATED
+        );
+
+
+
     }
 
     /**
