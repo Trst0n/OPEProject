@@ -60,6 +60,7 @@ class SponsorshipController extends AbstractController
     #[Route('/validate/{sponsorship}', name: 'app_sponsorship_validate',  methods: ['GET'])]
     public function sponsorshipvalidation(Sponsorship $sponsorship, WorkflowInterface $sponsoringProcessStateMachine, EntityManagerInterface $entityManager ): Response{
 
+        $sponsorship->setAdministrator($this->getUser()); //Ajout de l'admin qui a validé le match
         $sponsoringProcessStateMachine->apply($sponsorship, 'to_match');
         $request = $sponsorship->getSponsorRequest();
         $entityManager -> flush();
@@ -77,7 +78,7 @@ class SponsorshipController extends AbstractController
     #[Route('/matches', name: 'app_dashboard_matches',  methods: ['GET'])]
     public function matches(SponsorshipRepository $sponsorshipRepository): Response{
 
-        $matches = array_merge($sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_MATCH]),  $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_STUDENT_APPROVED]), $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSOR_APPROVED]), $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSORSHIP]));
+        $matches = array_merge($sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_MATCH]),  $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_STUDENT_APPROVED]), $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSOR_APPROVED]));
 
         return $this->render('dashboard/match/matches.html.twig', [
             'matches' => $matches,

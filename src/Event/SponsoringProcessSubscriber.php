@@ -5,13 +5,14 @@ namespace App\Event;
 use App\Enum\Civility;
 use App\Enum\LeadState;
 use App\Service\Mailing;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\TransitionEvent;
 
 class SponsoringProcessSubscriber implements EventSubscriberInterface
 {
 
-    public function __construct(private Mailing $mailing)
+    public function __construct(private Mailing $mailing,  private LoggerInterface $historyLogger)
     {
     }
 
@@ -28,6 +29,9 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
         $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), "Nouveau match!", 'mail/sponsor-match.html.twig', [ 'civility' => ( $sponsor->getCivility() === Civility::Men ? "Mr." : "Mme." ), 'lastname' => $sponsor->getPerson()->getLastname(), 'student' => $student]);
         $this->mailing->sendEmail($student->getPerson()->getEmail(), "Nouveau match!", 'mail/student-match.html.twig', ['firstname' => $student->getPerson()->getFirstname(), 'sponsor' => $sponsor]);
 
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un match entre le parrain " . $sponsor->getPerson()->getFirstname() . " et l'étudiant " . $sponsor->getPerson()->getLastname() . "a été validé par ". $sponsorship->getAdministrator()->getUsername() .".");
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un email à été envoyé à l'utilisateur " . $sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname().".");
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . "Un email à été envoyé à l'utilisateur " . $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname().".");
     }
 
 
@@ -37,6 +41,9 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
 
         $student = $sponsorship->getSponsorRequest();
         $student->setState(LeadState::MATCH_APPROVED);
+
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " :" . $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname() . " a confirmé la prise de contact pour son parrainage ");
+
     }
 
     public function handleSponsorValidate(TransitionEvent $event): void     // PHASE 2.1: LE PARRAIN CONFIRME LA PRISE DE CONTACT
@@ -45,6 +52,9 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
 
         $sponsor = $sponsorship->getSponsorProposal();
         $sponsor->setState(LeadState::MATCH_APPROVED);
+
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " :" . $sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " a confirmé la prise de contact pour son parrainage ");
+
     }
 
     public function handleSponsorship(TransitionEvent $event): void     // PHASE 3: LA DEUXIEME PERSONNE VALIDE LA PRISE DE CONTACT
@@ -56,6 +66,9 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
 
         $student = $sponsorship->getSponsorRequest();
         $student->setState(LeadState::SPONSORSHIP);
+
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Le parrainage entre ".$sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " et ". $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname() . " vient de débuter.");
+
 
     }
 
@@ -70,6 +83,8 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
         $student = $sponsorship->getSponsorRequest();
         $student->setState(LeadState::OUTDATED);
         $this->mailing->sendEmail($student->getPerson()->getEmail(), "Votre parrainage a pris fin", 'mail/student-ending.html.twig');
+
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Le parrainage entre ".$sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " et ". $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname() . " vient de prendre fin.");
 
     }
 

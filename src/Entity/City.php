@@ -29,9 +29,13 @@ class City
     #[ORM\Column]
     private ?float $lng = null;
 
+    #[ORM\OneToMany(mappedBy: 'city', targetEntity: Establishment::class)]
+    private Collection $establishments;
+
     public function __construct()
     {
         $this->leads = new ArrayCollection();
+        $this->establishments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +117,36 @@ class City
     public function setLng(float $lng): static
     {
         $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Establishment>
+     */
+    public function getEstablishments(): Collection
+    {
+        return $this->establishments;
+    }
+
+    public function addEstablishment(Establishment $establishment): static
+    {
+        if (!$this->establishments->contains($establishment)) {
+            $this->establishments->add($establishment);
+            $establishment->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEstablishment(Establishment $establishment): static
+    {
+        if ($this->establishments->removeElement($establishment)) {
+            // set the owning side to null (unless already changed)
+            if ($establishment->getCity() === $this) {
+                $establishment->setCity(null);
+            }
+        }
 
         return $this;
     }

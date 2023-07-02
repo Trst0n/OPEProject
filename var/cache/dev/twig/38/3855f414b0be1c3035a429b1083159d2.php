@@ -85,12 +85,23 @@ class __TwigTemplate_09aff5448d2c3cb6cd9073da074fc881 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "    <div class=\"bg-primary pt-2 pb-4\">
+        echo "
+    <script>
+        function search(val){
+            var value = val.toLowerCase();
+            \$(\"#matches tr\").filter(function() {
+                \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        }
+    </script>
+
+
+    <div class=\"bg-primary pt-2 pb-4\">
         <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
 
             <!-- Form -->
             <form class=\"d-flex align-items-center\" autocomplete=\"off\">
-                <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value)\"/>
+                <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value, 'matches')\"/>
             </form>
             <br>
             <div class=\"text-center\">
@@ -118,62 +129,62 @@ class __TwigTemplate_09aff5448d2c3cb6cd9073da074fc881 extends Template
                 <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id=\"matches\">
             ";
-        // line 40
+        // line 51
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["matches"]) || array_key_exists("matches", $context) ? $context["matches"] : (function () { throw new RuntimeError('Variable "matches" does not exist.', 40, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["matches"]) || array_key_exists("matches", $context) ? $context["matches"] : (function () { throw new RuntimeError('Variable "matches" does not exist.', 51, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["match"]) {
-            // line 41
+            // line 52
             echo "                <tr>
                     <td class=\"align-middle\">
                         <div class=\"text-center\">
                             ";
-            // line 44
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorRequest", [], "any", false, false, false, 44), "person", [], "any", false, false, false, 44), "firstname", [], "any", false, false, false, 44), "html", null, true);
+            // line 55
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorRequest", [], "any", false, false, false, 55), "person", [], "any", false, false, false, 55), "firstname", [], "any", false, false, false, 55), "html", null, true);
             echo " ";
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorRequest", [], "any", false, false, false, 44), "person", [], "any", false, false, false, 44), "lastname", [], "any", false, false, false, 44)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorRequest", [], "any", false, false, false, 55), "person", [], "any", false, false, false, 55), "lastname", [], "any", false, false, false, 55)), "html", null, true);
             echo "
                         </div>
                     </td>
                     <td class=\"align-middle\">
                         <div class=\"text-center\">
                             ";
-            // line 49
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorProposal", [], "any", false, false, false, 49), "person", [], "any", false, false, false, 49), "firstname", [], "any", false, false, false, 49), "html", null, true);
+            // line 60
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorProposal", [], "any", false, false, false, 60), "person", [], "any", false, false, false, 60), "firstname", [], "any", false, false, false, 60), "html", null, true);
             echo " ";
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorProposal", [], "any", false, false, false, 49), "person", [], "any", false, false, false, 49), "lastname", [], "any", false, false, false, 49)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["match"], "sponsorProposal", [], "any", false, false, false, 60), "person", [], "any", false, false, false, 60), "lastname", [], "any", false, false, false, 60)), "html", null, true);
             echo "
                         </div>
                     </td>
                     <td class=\"align-middle\">
                         <div class=\"text-center\" style=\"color: cornflowerblue\">
                             ";
-            // line 54
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["match"], "createdAt", [], "any", false, false, false, 54), "d-m-Y"), "html", null, true);
+            // line 65
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["match"], "createdAt", [], "any", false, false, false, 65), "d-m-Y"), "html", null, true);
             echo "
                         </div>
                     </td>
                     <td class=\"align-middle\">
                         <div class=\"text-center\">
                             ";
-            // line 59
-            if ((twig_get_attribute($this->env, $this->source, $context["match"], "state", [], "any", false, false, false, 59) == "match")) {
-                // line 60
+            // line 70
+            if ((twig_get_attribute($this->env, $this->source, $context["match"], "state", [], "any", false, false, false, 70) == "match")) {
+                // line 71
                 echo "                                Attente réponse
                             ";
-            } elseif ((twig_get_attribute($this->env, $this->source,             // line 61
-$context["match"], "state", [], "any", false, false, false, 61) == "sponsor_approved")) {
-                // line 62
+            } elseif ((twig_get_attribute($this->env, $this->source,             // line 72
+$context["match"], "state", [], "any", false, false, false, 72) == "sponsor_approved")) {
+                // line 73
                 echo "                                Attente réponse (étudiant)
                             ";
-            } elseif ((twig_get_attribute($this->env, $this->source,             // line 63
-$context["match"], "state", [], "any", false, false, false, 63) == "student_approved")) {
-                // line 64
+            } elseif ((twig_get_attribute($this->env, $this->source,             // line 74
+$context["match"], "state", [], "any", false, false, false, 74) == "student_approved")) {
+                // line 75
                 echo "                                Attente réponse (parrain)
                             ";
             }
-            // line 66
+            // line 77
             echo "                        </div>
                     </td>
                     <td class=\"align-middle\">
@@ -187,7 +198,7 @@ $context["match"], "state", [], "any", false, false, false, 63) == "student_appr
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['match'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 75
+        // line 86
         echo "            </tbody>
         </table>
         <p id=\"noresult\"></p>
@@ -219,7 +230,7 @@ $context["match"], "state", [], "any", false, false, false, 63) == "student_appr
 
     public function getDebugInfo()
     {
-        return array (  191 => 75,  177 => 66,  173 => 64,  171 => 63,  168 => 62,  166 => 61,  163 => 60,  161 => 59,  153 => 54,  143 => 49,  133 => 44,  128 => 41,  124 => 40,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  202 => 86,  188 => 77,  184 => 75,  182 => 74,  179 => 73,  177 => 72,  174 => 71,  172 => 70,  164 => 65,  154 => 60,  144 => 55,  139 => 52,  135 => 51,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -229,12 +240,23 @@ $context["match"], "state", [], "any", false, false, false, 63) == "student_appr
 {% block title %}Matchs{% endblock %}
 
 {% block body %}
+
+    <script>
+        function search(val){
+            var value = val.toLowerCase();
+            \$(\"#matches tr\").filter(function() {
+                \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        }
+    </script>
+
+
     <div class=\"bg-primary pt-2 pb-4\">
         <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
 
             <!-- Form -->
             <form class=\"d-flex align-items-center\" autocomplete=\"off\">
-                <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value)\"/>
+                <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value, 'matches')\"/>
             </form>
             <br>
             <div class=\"text-center\">
@@ -262,7 +284,7 @@ $context["match"], "state", [], "any", false, false, false, 63) == "student_appr
                 <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id=\"matches\">
             {% for match in matches %}
                 <tr>
                     <td class=\"align-middle\">

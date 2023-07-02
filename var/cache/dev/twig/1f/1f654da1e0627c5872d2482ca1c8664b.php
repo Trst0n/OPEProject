@@ -89,13 +89,13 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                         <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"";
         // line 40
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_users");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_students");
         echo "\" >Etudiants </a>
                         </li>
                         <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"";
         // line 43
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_users");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_sponsors");
         echo "\" >Parrains </a>
                         </li>
                     </ul>
@@ -122,117 +122,53 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_matches");
         echo "\"> Matchs</a>
                                     </li>
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link @@if (context.page === 'forgetpassword') { active }\" href=\"@@webRoot/pages/forget-password.html\">
-                                             Forget Password
-                                </a>
-                                    </li>
-
                                 </ul>
                             </div>
-                        </li>
-                        <li class=\"nav-item\">
-                            <a class=\"nav-link @@if (context.page === 'layouts') { active }\" href=\"@@webRoot/pages/layout.html\">
-                                <i
-                                    data-feather=\"sidebar\"
-
-                                    class=\"nav-icon icon-xs me-2\"
-                                >
-                                </i
-                                      >
-                                Layouts
-                            </a>
                         </li>
 
                         <!-- Nav item -->
                         <li class=\"nav-item\">
-                            <div class=\"navbar-heading\">UI Components</div>
+                            <div class=\"navbar-heading\">Gestion données</div>
                         </li>
 
                         <!-- Nav item -->
                         <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/accordions.html\" >
-                                <i data-feather=\"package\" class=\"nav-icon icon-xs me-2\" >
-                            </i>  Components
+                                <i data-feather=\"package\" class=\"nav-icon icon-xs me-2\" ></i>  Cursus
                             </a>
                          </li>
-                  
-
                         <li class=\"nav-item\">
-                            <a class=\"nav-link has-arrow @@if (context.page_group !== 'menulevel') { collapsed }\" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navMenuLevel\" aria-expanded=\"false\" aria-controls=\"navMenuLevel\">
-                                <i
-                                data-feather=\"corner-left-down\"
-
-                                class=\"nav-icon icon-xs me-2\"
-                            >
-                            </i
-                                      > Menu Level
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/accordions.html\" >
+                                <i data-feather=\"package\" class=\"nav-icon icon-xs me-2\" ></i>  Etablissement
                             </a>
-                            <div id=\"navMenuLevel\" class=\"collapse @@if (context.page_group === 'menulevel') { show }\" data-bs-parent=\"#sideNavbar\">
-                                <ul class=\"nav flex-column\">
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link has-arrow @@if (context.page === 'twolevel') { active }\" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navMenuLevelSecond\" aria-expanded=\"false\" aria-controls=\"navMenuLevelSecond\">
-                                    Two Level
-                                </a>
-                                        <div id=\"navMenuLevelSecond\" class=\"collapse\" data-bs-parent=\"#navMenuLevel\">
-                                            <ul class=\"nav flex-column\">
-                                                <li class=\"nav-item\">
-                                                    <a class=\"nav-link @@if (context.page === 'navitem1') { active }\" href=\"#!\">  NavItem 1</a>
-                                                </li>
-                                                <li class=\"nav-item\">
-                                                    <a class=\"nav-link @@if (context.page === 'navitem2') { active }\" href=\"#!\">  NavItem 2</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link has-arrow @@if (context.page_group !== 'threelevel') { collapsed } \" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navMenuLevelThree\" aria-expanded=\"false\" aria-controls=\"navMenuLevelThree\">
-                                    Three Level
-                                </a>
-                                        <div id=\"navMenuLevelThree\" class=\"collapse @@if (context.page_group === 'threelevel') { show }\" data-bs-parent=\"#navMenuLevel\">
-                                            <ul class=\"nav flex-column\">
-                                                <li class=\"nav-item\">
-                                                    <a class=\"nav-link @@if (context.page_group !== 'navitemthree1') { collapsed }\" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navMenuLevelThreeOne\" aria-expanded=\"false\" aria-controls=\"navMenuLevelThreeOne\">
-                                                         NavItem 1
-                                            </a>
-                                                    <div id=\"navMenuLevelThreeOne\" class=\"collapse collapse @@if (context.page_group === 'navitemthree1') { show }\" data-bs-parent=\"#navMenuLevelThree\">
-                                                        <ul class=\"nav flex-column\">
-                                                            <li class=\"nav-item\">
-                                                                <a class=\"nav-link @@if (context.page === 'navchilitem') { active }\" href=\"#!\">
-                                                                     NavChild Item 1
-                                                        </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li class=\"nav-item\">
-                                                    <a class=\"nav-link @@if (context.page === 'navitem2') { active }\" href=\"#!\">  Nav Item 2</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/accordions.html\" >
+                                <i data-feather=\"package\" class=\"nav-icon icon-xs me-2\" ></i>  Langues
+                            </a>
                         </li>
 
-                                         <!-- Nav item -->
+                        <!-- Nav item -->
                         <li class=\"nav-item\">
-                            <div class=\"navbar-heading\">Documentation</div>
+                            <div class=\"navbar-heading\">Accessibilité</div>
                         </li>
 
                         <!-- Nav item -->
                         <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/index.html\" >
-                                <i data-feather=\"clipboard\" class=\"nav-icon icon-xs me-2\" >
-                            </i>  Docs
+                                <i data-feather=\"clipboard\" class=\"nav-icon icon-xs me-2\" ></i>  Administrateurs
                             </a>
                          </li>
                          <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/changelog.html\" >
-                                <i data-feather=\"git-pull-request\" class=\"nav-icon icon-xs me-2\" >
-                            </i>  Changelog
+                                <i data-feather=\"git-pull-request\" class=\"nav-icon icon-xs me-2\" ></i>  Docs
                             </a>
                          </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/changelog.html\" >
+                                <i data-feather=\"git-pull-request\" class=\"nav-icon icon-xs me-2\" ></i>  Historique
+                            </a>
+                        </li>
 
 
 
@@ -305,10 +241,10 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                             <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"{{ path('app_dashboard_users') }}\" >Tous les utilisateurs </a>
                         </li>
                         <li class=\"nav-item\">
-                            <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"{{ path('app_dashboard_users') }}\" >Etudiants </a>
+                            <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"{{ path('app_dashboard_students') }}\" >Etudiants </a>
                         </li>
                         <li class=\"nav-item\">
-                            <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"{{ path('app_dashboard_users')}}\" >Parrains </a>
+                            <a class=\"nav-link has-arrow  @@if (context.page === 'settings') { active } \"  href=\"{{ path('app_dashboard_sponsors')}}\" >Parrains </a>
                         </li>
                     </ul>
                 </div>
@@ -328,117 +264,53 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                                     <li class=\"nav-item\">
                                         <a class=\"nav-link @@if (context.page === 'signup') { active } \" href=\"{{ path('app_dashboard_matches')}}\"> Matchs</a>
                                     </li>
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link @@if (context.page === 'forgetpassword') { active }\" href=\"@@webRoot/pages/forget-password.html\">
-                                             Forget Password
-                                </a>
-                                    </li>
-
                                 </ul>
                             </div>
-                        </li>
-                        <li class=\"nav-item\">
-                            <a class=\"nav-link @@if (context.page === 'layouts') { active }\" href=\"@@webRoot/pages/layout.html\">
-                                <i
-                                    data-feather=\"sidebar\"
-
-                                    class=\"nav-icon icon-xs me-2\"
-                                >
-                                </i
-                                      >
-                                Layouts
-                            </a>
                         </li>
 
                         <!-- Nav item -->
                         <li class=\"nav-item\">
-                            <div class=\"navbar-heading\">UI Components</div>
+                            <div class=\"navbar-heading\">Gestion données</div>
                         </li>
 
                         <!-- Nav item -->
                         <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/accordions.html\" >
-                                <i data-feather=\"package\" class=\"nav-icon icon-xs me-2\" >
-                            </i>  Components
+                                <i data-feather=\"package\" class=\"nav-icon icon-xs me-2\" ></i>  Cursus
                             </a>
                          </li>
-                  
-
                         <li class=\"nav-item\">
-                            <a class=\"nav-link has-arrow @@if (context.page_group !== 'menulevel') { collapsed }\" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navMenuLevel\" aria-expanded=\"false\" aria-controls=\"navMenuLevel\">
-                                <i
-                                data-feather=\"corner-left-down\"
-
-                                class=\"nav-icon icon-xs me-2\"
-                            >
-                            </i
-                                      > Menu Level
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/accordions.html\" >
+                                <i data-feather=\"package\" class=\"nav-icon icon-xs me-2\" ></i>  Etablissement
                             </a>
-                            <div id=\"navMenuLevel\" class=\"collapse @@if (context.page_group === 'menulevel') { show }\" data-bs-parent=\"#sideNavbar\">
-                                <ul class=\"nav flex-column\">
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link has-arrow @@if (context.page === 'twolevel') { active }\" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navMenuLevelSecond\" aria-expanded=\"false\" aria-controls=\"navMenuLevelSecond\">
-                                    Two Level
-                                </a>
-                                        <div id=\"navMenuLevelSecond\" class=\"collapse\" data-bs-parent=\"#navMenuLevel\">
-                                            <ul class=\"nav flex-column\">
-                                                <li class=\"nav-item\">
-                                                    <a class=\"nav-link @@if (context.page === 'navitem1') { active }\" href=\"#!\">  NavItem 1</a>
-                                                </li>
-                                                <li class=\"nav-item\">
-                                                    <a class=\"nav-link @@if (context.page === 'navitem2') { active }\" href=\"#!\">  NavItem 2</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class=\"nav-item\">
-                                        <a class=\"nav-link has-arrow @@if (context.page_group !== 'threelevel') { collapsed } \" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navMenuLevelThree\" aria-expanded=\"false\" aria-controls=\"navMenuLevelThree\">
-                                    Three Level
-                                </a>
-                                        <div id=\"navMenuLevelThree\" class=\"collapse @@if (context.page_group === 'threelevel') { show }\" data-bs-parent=\"#navMenuLevel\">
-                                            <ul class=\"nav flex-column\">
-                                                <li class=\"nav-item\">
-                                                    <a class=\"nav-link @@if (context.page_group !== 'navitemthree1') { collapsed }\" href=\"#!\" data-bs-toggle=\"collapse\" data-bs-target=\"#navMenuLevelThreeOne\" aria-expanded=\"false\" aria-controls=\"navMenuLevelThreeOne\">
-                                                         NavItem 1
-                                            </a>
-                                                    <div id=\"navMenuLevelThreeOne\" class=\"collapse collapse @@if (context.page_group === 'navitemthree1') { show }\" data-bs-parent=\"#navMenuLevelThree\">
-                                                        <ul class=\"nav flex-column\">
-                                                            <li class=\"nav-item\">
-                                                                <a class=\"nav-link @@if (context.page === 'navchilitem') { active }\" href=\"#!\">
-                                                                     NavChild Item 1
-                                                        </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li class=\"nav-item\">
-                                                    <a class=\"nav-link @@if (context.page === 'navitem2') { active }\" href=\"#!\">  Nav Item 2</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                        </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/accordions.html\" >
+                                <i data-feather=\"package\" class=\"nav-icon icon-xs me-2\" ></i>  Langues
+                            </a>
                         </li>
 
-                                         <!-- Nav item -->
+                        <!-- Nav item -->
                         <li class=\"nav-item\">
-                            <div class=\"navbar-heading\">Documentation</div>
+                            <div class=\"navbar-heading\">Accessibilité</div>
                         </li>
 
                         <!-- Nav item -->
                         <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/index.html\" >
-                                <i data-feather=\"clipboard\" class=\"nav-icon icon-xs me-2\" >
-                            </i>  Docs
+                                <i data-feather=\"clipboard\" class=\"nav-icon icon-xs me-2\" ></i>  Administrateurs
                             </a>
                          </li>
                          <li class=\"nav-item\">
                             <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/changelog.html\" >
-                                <i data-feather=\"git-pull-request\" class=\"nav-icon icon-xs me-2\" >
-                            </i>  Changelog
+                                <i data-feather=\"git-pull-request\" class=\"nav-icon icon-xs me-2\" ></i>  Docs
                             </a>
                          </li>
+                        <li class=\"nav-item\">
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/changelog.html\" >
+                                <i data-feather=\"git-pull-request\" class=\"nav-icon icon-xs me-2\" ></i>  Historique
+                            </a>
+                        </li>
 
 
 

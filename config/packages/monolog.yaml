@@ -1,10 +1,17 @@
 monolog:
     channels:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+        - history
 
 when@dev:
     monolog:
         handlers:
+            history:
+                level: debug
+                type: stream
+                path: '%kernel.logs_dir%/history.log'
+                channels: [ history ]
+
             main:
                 type: stream
                 path: "%kernel.logs_dir%/%kernel.environment%.log"

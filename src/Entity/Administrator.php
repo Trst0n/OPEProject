@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AdministratorRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,6 +28,14 @@ class Administrator implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToMany(mappedBy: 'administrator', targetEntity: Sponsorship::class)]
+    private Collection $sponsorships;
+
+    public function __construct()
+    {
+        $this->sponsorships = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -95,5 +105,35 @@ class Administrator implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Sponsorship>
+     */
+    public function getSponsorships(): Collection
+    {
+        return $this->sponsorships;
+    }
+
+    public function addSponsorship(Sponsorship $sponsorship): static
+    {
+        if (!$this->sponsorships->contains($sponsorship)) {
+            $this->sponsorships->add($sponsorship);
+            $sponsorship->setAdministrator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSponsorship(Sponsorship $sponsorship): static
+    {
+        if ($this->sponsorships->removeElement($sponsorship)) {
+            // set the owning side to null (unless already changed)
+            if ($sponsorship->getAdministrator() === $this) {
+                $sponsorship->setAdministrator(null);
+            }
+        }
+
+        return $this;
     }
 }

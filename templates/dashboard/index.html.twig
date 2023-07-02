@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="icon-shape icon-md bg-light-primary text-primary
                             rounded-2">
-                                                <i class="bi bi-person"></i>
+                                                <a href="{{ path('app_dashboard_students') }}"><i class="bi bi-person"></i></a>
                                             </div>
                                         </div>
                                         <!-- project number -->
@@ -70,17 +70,14 @@
                                     <!-- card body -->
                                     <div class="card-body">
                                         <!-- heading -->
-                                        <div class="d-flex justify-content-between align-items-center
-                            mb-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
                                             <div>
                                                 <h4 class="mb-0">Etudiants</h4>
                                             </div>
-                                            <div class="icon-shape icon-md bg-light-primary text-primary
-                            rounded-2">
-                                                <i class="bi bi-person-fill"></i>
+                                            <div class="icon-shape icon-md bg-light-primary text-primary rounded-2">
+                                                <a href="{{ path('app_dashboard_students') }}"><i class="bi bi-person-fill"></i></a>
                                             </div>
                                         </div>
-                                        <!-- project number -->
                                         <div>
                                             <h1 class="fw-bold">{{ numValidRequests }}</h1>
                                             <p class="mb-0"><span class="text-success me-2">{{ numRequests }}</span>Inscrits</p>
@@ -95,17 +92,14 @@
                                     <!-- card body -->
                                     <div class="card-body">
                                         <!-- heading -->
-                                        <div class="d-flex justify-content-between align-items-center
-                            mb-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
                                             <div>
                                                 <h4 class="mb-0">Match en attente</h4>
                                             </div>
-                                            <div class="icon-shape icon-md bg-light-primary text-primary
-                            rounded-2">
+                                            <div class="icon-shape icon-md bg-light-primary text-primary rounded-2">
                                                 <a href="{{ path('app_dashboard_matches') }}"><i class="bi bi bi-inboxes-fill"></i></a>
                                             </div>
                                         </div>
-                                        <!-- project number -->
                                         <div>
                                             <h1 class="fw-bold">{{ onHoldMatches | length }}</h1>
                                             <p class="mb-0"><span class="text-success me-2">{{ numNoMatchSponsor }}</span>Parrain(s) disponible(s)</p>
@@ -186,8 +180,7 @@
                                                             {% else %}
                                                                 <a href="{{ path('app_sponsorship_new', {'id': request.id}) }}"><i style="font-size: 130%" class="bi bi-plus-square"></i></a>
                                                             {% endif %}
-                                                            &nbsp;
-                                                            &nbsp;
+                                                            &nbsp; &nbsp;
                                                             <a href="{{ path('app_dashboard_user', {'id': request.person.id}) }}"><i style="font-size: 130%" class="bi bi-info-circle"></i></a>
 
                                                         </div>
@@ -207,6 +200,5 @@
                             </div>
                         </div>
                     </div>
-
-                        <p style="margin-bottom: 7%"></p>
+                    <p style="margin-bottom: 7%"></p>
 {% endblock %}

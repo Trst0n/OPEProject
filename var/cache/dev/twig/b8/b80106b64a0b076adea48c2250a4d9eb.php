@@ -46,14 +46,15 @@ class __TwigTemplate_2147d6ce05ae693c1705c6b64e700877 extends Template
         echo twig_escape_filter($this->env, (isset($context["civility"]) || array_key_exists("civility", $context) ? $context["civility"] : (function () { throw new RuntimeError('Variable "civility" does not exist.', 2, $this->source); })()), "html", null, true);
         echo " ";
         echo twig_escape_filter($this->env, (isset($context["lastname"]) || array_key_exists("lastname", $context) ? $context["lastname"] : (function () { throw new RuntimeError('Variable "lastname" does not exist.', 2, $this->source); })()), "html", null, true);
-        echo ",
+        echo ",<br>
+    <br>
     Nous avons bien pris en compte votre inscription sur la plateforme de parrainage Ôpe, nous
     avons le plaisir de vous indiquer que nous recherchons un étudiant correspondant à vos
-    critères, nous ne manquerons pas de revenir vers vous très rapidement.
-    Belle journée.
-
-    Cordialement,
-
+    critères, nous ne manquerons pas de revenir vers vous très rapidement.<br>
+    Belle journée.<br>
+    <br>
+    Cordialement,<br>
+    <br>
     L'équipe Ôpe
 </div>
 
@@ -84,14 +85,15 @@ class __TwigTemplate_2147d6ce05ae693c1705c6b64e700877 extends Template
     public function getSourceContext()
     {
         return new Source("<div>
-    Bonjour {{ civility }} {{ lastname }},
+    Bonjour {{ civility }} {{ lastname }},<br>
+    <br>
     Nous avons bien pris en compte votre inscription sur la plateforme de parrainage Ôpe, nous
     avons le plaisir de vous indiquer que nous recherchons un étudiant correspondant à vos
-    critères, nous ne manquerons pas de revenir vers vous très rapidement.
-    Belle journée.
-
-    Cordialement,
-
+    critères, nous ne manquerons pas de revenir vers vous très rapidement.<br>
+    Belle journée.<br>
+    <br>
+    Cordialement,<br>
+    <br>
     L'équipe Ôpe
 </div>
 

@@ -21,6 +21,9 @@ class Establishment
     #[ORM\OneToMany(mappedBy: 'establishment', targetEntity: Curriculum::class)]
     private Collection $curricula;
 
+    #[ORM\ManyToOne(inversedBy: 'establishments')]
+    private ?City $city = null;
+
 
     public function __construct()
     {
@@ -70,6 +73,18 @@ class Establishment
                 $curriculum->setEstablishment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): static
+    {
+        $this->city = $city;
 
         return $this;
     }

@@ -396,35 +396,90 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                             // line 190
                             echo (((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 190) == "sponsorship")) ? ("Parrainage") : ("Match"));
                             echo "</h4>
-                                                                    <p class=\"small text-white-50 mb-4\">";
+                                                                    <p class=\"small text-white-50 mb-4\">Créé le : ";
                             // line 191
                             echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "createdAt", [], "any", false, false, false, 191), "d-m-Y"), "html", null, true);
                             echo "</p>
-                                                                    <p>[Descritpion ici .... ]
-                                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                                        mnesarchum.
-                                                                    </p>
+                                                                    <p>Parrain : ";
+                            // line 192
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 192), "person", [], "any", false, false, false, 192), "firstname", [], "any", false, false, false, 192), "html", null, true);
+                            echo " ";
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 192), "person", [], "any", false, false, false, 192), "lastname", [], "any", false, false, false, 192), "html", null, true);
+                            echo "
+                                                                        <br>
+                                                                        Etudiant : ";
+                            // line 194
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 194), "person", [], "any", false, false, false, 194), "firstname", [], "any", false, false, false, 194), "html", null, true);
+                            echo " ";
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 194), "person", [], "any", false, false, false, 194), "lastname", [], "any", false, false, false, 194), "html", null, true);
+                            echo "
+                                                                        <br>
+                                                                        Statut :
+                                                                        ";
+                            // line 197
+                            if ((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 197) == "sponsorship")) {
+                                // line 198
+                                echo "                                                                            Parrainage en cours.
+                                                                        ";
+                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 199
+$context["sponsorship"], "state", [], "any", false, false, false, 199) == "match")) {
+                                // line 200
+                                echo "                                                                            Match validé par l'admin.
+                                                                        ";
+                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 201
+$context["sponsorship"], "state", [], "any", false, false, false, 201) == "sponsor_approved")) {
+                                // line 202
+                                echo "                                                                            En attente de la réponse du parrain
+                                                                        ";
+                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 203
+$context["sponsorship"], "state", [], "any", false, false, false, 203) == "student_approved")) {
+                                // line 204
+                                echo "                                                                            En attente de la réponse de l'étudiant.
+                                                                        ";
+                            } elseif ((twig_get_attribute($this->env, $this->source,                             // line 205
+$context["sponsorship"], "state", [], "any", false, false, false, 205) == "ended")) {
+                                // line 206
+                                echo "                                                                            Parrainage terminé.
+                                                                        ";
+                            }
+                            // line 208
+                            echo "                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     ";
                         } else {
-                            // line 200
+                            // line 213
                             echo "                                                        <div class=\"timeline-4 right-4\">
                                                             <div class=\"card gradient-custom-4\">
                                                                 <div class=\"card-body p-4\">
                                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                                     <h4>";
-                            // line 204
-                            echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 204, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
+                            // line 217
+                            echo (((twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 217) == "sponsorship")) ? ("Parrainage") : ("Match"));
                             echo "</h4>
                                                                     <p class=\"small text-white-50 mb-4\">";
-                            // line 205
-                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 205), "value", [], "any", false, false, false, 205), "html", null, true);
+                            // line 218
+                            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "createdAt", [], "any", false, false, false, 218), "d-m-Y"), "html", null, true);
                             echo "</p>
-                                                                    <p>[Descritpion ici .... ]
-                                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                                        mnesarchum.
+                                                                    <p>Parrain : ";
+                            // line 219
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 219), "person", [], "any", false, false, false, 219), "firstname", [], "any", false, false, false, 219), "html", null, true);
+                            echo " ";
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorProposal", [], "any", false, false, false, 219), "person", [], "any", false, false, false, 219), "lastname", [], "any", false, false, false, 219), "html", null, true);
+                            echo "
+                                                                        <br>
+                                                                        Etudiant : ";
+                            // line 221
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 221), "person", [], "any", false, false, false, 221), "firstname", [], "any", false, false, false, 221), "html", null, true);
+                            echo " ";
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "sponsorRequest", [], "any", false, false, false, 221), "person", [], "any", false, false, false, 221), "lastname", [], "any", false, false, false, 221), "html", null, true);
+                            echo "
+                                                                        <br>
+                                                                        Statut : ";
+                            // line 223
+                            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "state", [], "any", false, false, false, 223), "html", null, true);
+                            echo "
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -432,38 +487,38 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
 
                                                     ";
                         }
-                        // line 215
+                        // line 230
                         echo "
                                                     ";
-                        // line 216
-                        $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 216, $this->source); })()) + 1);
-                        // line 217
+                        // line 231
+                        $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 231, $this->source); })()) + 1);
+                        // line 232
                         echo "                                                ";
                     }
-                    // line 218
+                    // line 233
                     echo "                                            ";
                 }
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['sponsorship'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 219
+                // line 234
                 echo "                                        ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lead'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 220
+            // line 235
             echo "                                    </div>
                                 </div>
                             ";
         } else {
-            // line 223
+            // line 238
             echo "                                <div>
                                     <h3> Aucun parrainage ou match [TODO aff !!]</h3>
                                 </div>
                             ";
         }
-        // line 227
+        // line 242
         echo "                        </div>
                     </div>
                 </div>
@@ -474,30 +529,30 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                                 <div class=\"main-timeline-4 text-white\">
 
                                     ";
-        // line 236
+        // line 251
         $context["altern"] = 0;
-        // line 237
+        // line 252
         echo "                                    ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 237, $this->source); })()), "leads", [], "any", false, false, false, 237)));
+        $context['_seq'] = twig_ensure_traversable(twig_reverse_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 252, $this->source); })()), "leads", [], "any", false, false, false, 252)));
         foreach ($context['_seq'] as $context["_key"] => $context["lead"]) {
-            // line 238
+            // line 253
             echo "
                                     ";
-            // line 239
-            if ((((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 239, $this->source); })()) % 2) == 0)) {
-                // line 240
+            // line 254
+            if ((((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 254, $this->source); })()) % 2) == 0)) {
+                // line 255
                 echo "                                        <div class=\"timeline-4 left-4\">
                                             <div class=\"card gradient-custom\">
                                                 <div class=\"card-body p-4\">
                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                     <h4>";
-                // line 244
-                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 244, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
+                // line 259
+                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 259, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
                 echo "</h4>
                                                     <p class=\"small text-white-50 mb-4\">";
-                // line 245
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 245), "value", [], "any", false, false, false, 245), "html", null, true);
+                // line 260
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 260), "value", [], "any", false, false, false, 260), "html", null, true);
                 echo "</p>
                                                     <p>[Descritpion ici .... ]
                                                         Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
@@ -508,18 +563,18 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                                         </div>
                                     ";
             } else {
-                // line 254
+                // line 269
                 echo "                                     <div class=\"timeline-4 right-4\">
                                             <div class=\"card gradient-custom-4\">
                                                 <div class=\"card-body p-4\">
                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                     <h4>";
-                // line 258
-                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 258, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
+                // line 273
+                echo (($this->extensions['App\Twig\AppExtension']->isInstanceof($context["lead"], (isset($context["request"]) || array_key_exists("request", $context) ? $context["request"] : (function () { throw new RuntimeError('Variable "request" does not exist.', 273, $this->source); })()))) ? ("Profil étudiant") : ("Profil parrain"));
                 echo "</h4>
                                                     <p class=\"small text-white-50 mb-4\">";
-                // line 259
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 259), "value", [], "any", false, false, false, 259), "html", null, true);
+                // line 274
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["lead"], "state", [], "any", false, false, false, 274), "value", [], "any", false, false, false, 274), "html", null, true);
                 echo "</p>
                                                     <p>[Descritpion ici .... ]
                                                         Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
@@ -530,16 +585,16 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                                         </div>
                                     ";
             }
-            // line 268
+            // line 283
             echo "                                    ";
-            $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 268, $this->source); })()) + 1);
-            // line 269
+            $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 283, $this->source); })()) + 1);
+            // line 284
             echo "                                    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lead'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 270
+        // line 285
         echo "                                        </div>
                                     </div>
                                 </div>
@@ -568,7 +623,7 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
 
     public function getDebugInfo()
     {
-        return array (  543 => 270,  537 => 269,  534 => 268,  522 => 259,  518 => 258,  512 => 254,  500 => 245,  496 => 244,  490 => 240,  488 => 239,  485 => 238,  480 => 237,  478 => 236,  467 => 227,  461 => 223,  456 => 220,  450 => 219,  444 => 218,  441 => 217,  439 => 216,  436 => 215,  423 => 205,  419 => 204,  413 => 200,  401 => 191,  397 => 190,  391 => 186,  388 => 185,  385 => 184,  380 => 183,  375 => 182,  373 => 181,  368 => 178,  366 => 177,  355 => 168,  352 => 167,  343 => 165,  338 => 164,  335 => 163,  326 => 161,  321 => 160,  319 => 159,  312 => 154,  303 => 152,  299 => 151,  291 => 146,  279 => 137,  272 => 133,  265 => 129,  259 => 125,  250 => 123,  246 => 122,  205 => 84,  199 => 83,  194 => 80,  188 => 78,  182 => 76,  180 => 75,  169 => 67,  155 => 55,  145 => 54,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  598 => 285,  592 => 284,  589 => 283,  577 => 274,  573 => 273,  567 => 269,  555 => 260,  551 => 259,  545 => 255,  543 => 254,  540 => 253,  535 => 252,  533 => 251,  522 => 242,  516 => 238,  511 => 235,  505 => 234,  499 => 233,  496 => 232,  494 => 231,  491 => 230,  481 => 223,  474 => 221,  467 => 219,  463 => 218,  459 => 217,  453 => 213,  446 => 208,  442 => 206,  440 => 205,  437 => 204,  435 => 203,  432 => 202,  430 => 201,  427 => 200,  425 => 199,  422 => 198,  420 => 197,  412 => 194,  405 => 192,  401 => 191,  397 => 190,  391 => 186,  388 => 185,  385 => 184,  380 => 183,  375 => 182,  373 => 181,  368 => 178,  366 => 177,  355 => 168,  352 => 167,  343 => 165,  338 => 164,  335 => 163,  326 => 161,  321 => 160,  319 => 159,  312 => 154,  303 => 152,  299 => 151,  291 => 146,  279 => 137,  272 => 133,  265 => 129,  259 => 125,  250 => 123,  246 => 122,  205 => 84,  199 => 83,  194 => 80,  188 => 78,  182 => 76,  180 => 75,  169 => 67,  155 => 55,  145 => 54,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -763,10 +818,23 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                                                                 <div class=\"card-body p-4\">
                                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                                     <h4>{{ sponsorship.state == \"sponsorship\"? \"Parrainage\" : \"Match\" }}</h4>
-                                                                    <p class=\"small text-white-50 mb-4\">{{ sponsorship.createdAt | date(\"d-m-Y\") }}</p>
-                                                                    <p>[Descritpion ici .... ]
-                                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                                        mnesarchum.
+                                                                    <p class=\"small text-white-50 mb-4\">Créé le : {{ sponsorship.createdAt | date(\"d-m-Y\") }}</p>
+                                                                    <p>Parrain : {{ sponsorship.sponsorProposal.person.firstname }} {{ sponsorship.sponsorProposal.person.lastname }}
+                                                                        <br>
+                                                                        Etudiant : {{ sponsorship.sponsorRequest.person.firstname }} {{ sponsorship.sponsorRequest.person.lastname }}
+                                                                        <br>
+                                                                        Statut :
+                                                                        {% if sponsorship.state == \"sponsorship\" %}
+                                                                            Parrainage en cours.
+                                                                        {% elseif sponsorship.state == \"match\" %}
+                                                                            Match validé par l'admin.
+                                                                        {% elseif sponsorship.state == \"sponsor_approved\" %}
+                                                                            En attente de la réponse du parrain
+                                                                        {% elseif sponsorship.state == \"student_approved\" %}
+                                                                            En attente de la réponse de l'étudiant.
+                                                                        {% elseif sponsorship.state == \"ended\" %}
+                                                                            Parrainage terminé.
+                                                                        {% endif %}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -776,11 +844,13 @@ class __TwigTemplate_5b92f7fa610c74a49b9d41e9ad16244b extends Template
                                                             <div class=\"card gradient-custom-4\">
                                                                 <div class=\"card-body p-4\">
                                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
-                                                                    <h4>{{ lead is instanceof(request) ? \"Profil étudiant\" : \"Profil parrain\" }}</h4>
-                                                                    <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>
-                                                                    <p>[Descritpion ici .... ]
-                                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto
-                                                                        mnesarchum.
+                                                                    <h4>{{ sponsorship.state == \"sponsorship\"? \"Parrainage\" : \"Match\" }}</h4>
+                                                                    <p class=\"small text-white-50 mb-4\">{{ sponsorship.createdAt | date(\"d-m-Y\") }}</p>
+                                                                    <p>Parrain : {{ sponsorship.sponsorProposal.person.firstname }} {{ sponsorship.sponsorProposal.person.lastname }}
+                                                                        <br>
+                                                                        Etudiant : {{ sponsorship.sponsorRequest.person.firstname }} {{ sponsorship.sponsorRequest.person.lastname }}
+                                                                        <br>
+                                                                        Statut : {{ sponsorship.state }}
                                                                     </p>
                                                                 </div>
                                                             </div>

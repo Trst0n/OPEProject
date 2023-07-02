@@ -91,46 +91,72 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
 
         /** TODO Display block/none search */
 
-        function search(val){
-            let personlist = []
-            personlist = ";
+        function search(val, table){
+            ";
         // line 13
-        echo json_encode((isset($context["jsvar"]) || array_key_exists("jsvar", $context) ? $context["jsvar"] : (function () { throw new RuntimeError('Variable "jsvar" does not exist.', 13, $this->source); })()));
-        echo ";
+        echo "            ";
+        // line 14
+        echo "
 
-
-            let startwith = [];
-            let within = [];
-
-            for(var personl in personlist){
-                if((personlist[personl][\"firstname\"].toLowerCase()).startsWith(val.toLowerCase()) || (personlist[personl][\"lastname\"].toLowerCase()).startsWith(val.toLowerCase()) ){
-                    startwith.push(personlist[personl]);
-                }
-                else if(((personlist[personl][\"firstname\"].toLowerCase()).concat(personlist[personl][\"lastname\"].toLowerCase())).includes(val.toLowerCase())){
-                    within.push(personlist[personl]);
-                }
-            }
-
-            let personByName = startwith.concat(within)
-
-            document.getElementById('persons').innerHTML = \"\";
-            document.getElementById('noresult').innerHTML = \"\";
-
-            if(personByName.length === 0){
-                document.getElementById('noresult').innerHTML = \"<div><div class=\\\"container-fluid text-center\\\" style=\\\"margin-top: 15%\\\"> <h3> Aucun résulat pour la recherche \\\"\" + val +\"\\\" </h3></div></div><p style=\\\"margin-bottom: 20%\\\"><p>\";
-            }
-            for(var person in personByName){
-                document.getElementById('persons').innerHTML +=  \"<tr> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\">\" + personByName[person][\"firstname\"] + \"&nbsp;\" + (personByName[person][\"lastname\"]).toUpperCase() +
-                    \"</div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\"> \" + personByName[person][\"createAt\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\" style=\\\"color: cornflowerblue\\\">\" +
-                    personByName[person][\"email\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\">\" + personByName[person][\"phonenumber\"] +
-                    \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\" style=\\\"color: mediumpurple\\\">\" + personByName[person][\"status\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\"> <a href=\\\"./user/\"+ personByName[person][\"id\"] +\"\\\"><i style=\\\"font-size: 120%\\\" class=\\\"bi bi-info-circle\\\"></i></a> </div></td> </tr>\";
-            }
+            ";
+        // line 17
+        echo "            ";
+        // line 18
+        echo "
+            ";
+        // line 20
+        echo "            ";
+        // line 21
+        echo "            ";
+        // line 22
+        echo "            ";
+        // line 23
+        echo "            ";
+        // line 24
+        echo "            ";
+        // line 25
+        echo "            ";
+        // line 26
+        echo "            ";
+        // line 27
+        echo "
+            ";
+        // line 29
+        echo "
+            ";
+        // line 31
+        echo "            ";
+        // line 32
+        echo "
+            ";
+        // line 34
+        echo "            ";
+        // line 35
+        echo "            ";
+        // line 36
+        echo "            ";
+        // line 37
+        echo "            ";
+        // line 38
+        echo "            ";
+        // line 39
+        echo "            ";
+        // line 40
+        echo "            ";
+        // line 41
+        echo "            ";
+        // line 42
+        echo "
+            var value = val.toLowerCase();
+            \$(\"#\"+ table +\" tr\").filter(function() {
+                \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1)
+            });
         }
 
 
-        function filter(val){
+        function filter(val, table){
             var value = val.toLowerCase();
-            \$(\"#persons tr\").filter(function() {
+            \$(\"#\"+ table+\" tr\").filter(function() {
                 \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1)
             });
 
@@ -140,7 +166,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
                         document.getElementById('sponsorFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
 
                         //réaffichage des lignes display none
-                        \$(\"#persons tr\").filter(function() {
+                        \$(\"#\"+ table+\" tr\").filter(function() {
                             \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
                         });
 
@@ -155,7 +181,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
                     if(document.getElementById('studentFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
                         document.getElementById('studentFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
 
-                        \$(\"#persons tr\").filter(function() {
+                        \$(\"#\"+ table+\" tr\").filter(function() {
                             \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
                         });
 
@@ -170,7 +196,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
                     if(document.getElementById('sponsorshipFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
                         document.getElementById('sponsorshipFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
 
-                        \$(\"#persons tr\").filter(function() {
+                        \$(\"#\"+ table+\" tr\").filter(function() {
                             \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
                         });
                     }
@@ -178,12 +204,8 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
                         document.getElementById('sponsorshipFilter').className = \"btn btn-dark-secondary btn-sm rounded-5\"
                     }
                     break;
-
-
             }
-
     }
-
     </script>
 
 ";
@@ -195,7 +217,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
 
     }
 
-    // line 105
+    // line 106
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -205,24 +227,19 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 106
+        // line 107
         echo "    <div class=\"bg-primary pt-2 pb-4\">
-
-    <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
+        <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
 
         <!-- Form -->
-        <form class=\"d-flex align-items-center\" autocomplete=\"off\">
-            <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value)\"/>
-        </form>
-        <br>
-        <div class=\"text-center\" id=\"buttons\">
-            <button id=\"sponsorFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('parrain')\">&nbsp; Parrain &nbsp;</button>
-            <button id=\"studentFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('étudiant')\">&nbsp; Etudiant &nbsp;</button>
-            <button id=\"sponsorshipFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\"  onclick=\"filter('parrainage')\" >&nbsp; Parrainé &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
-        </div>
+            <form class=\"d-flex align-items-center\" autocomplete=\"off\">
+                <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value, 'persons')\"/>
+            </form>
+            <br>
+            <div class=\"text-center\" id=\"buttons\">
+                <button id=\"sponsorFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('parrain', 'persons')\">&nbsp; Parrain &nbsp;</button>
+                <button id=\"studentFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('étudiant', 'persons')\">&nbsp; Etudiant &nbsp;</button>
+            </div>
         </div>
     </div>
     <div class=\"container-fluid mt-2 px-6\">
@@ -243,67 +260,67 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
             </thead>
             <tbody id=\"persons\">
                 ";
-        // line 142
+        // line 138
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["persons"]) || array_key_exists("persons", $context) ? $context["persons"] : (function () { throw new RuntimeError('Variable "persons" does not exist.', 142, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["persons"]) || array_key_exists("persons", $context) ? $context["persons"] : (function () { throw new RuntimeError('Variable "persons" does not exist.', 138, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["person"]) {
-            // line 143
+            // line 139
             echo "                    <tr>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 146
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "firstname", [], "any", false, false, false, 146), "html", null, true);
+            // line 142
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "firstname", [], "any", false, false, false, 142), "html", null, true);
             echo " &nbsp; ";
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "lastname", [], "any", false, false, false, 146)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "lastname", [], "any", false, false, false, 142)), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 151
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "createdAt", [], "any", false, false, false, 151), "d-m-Y"), "html", null, true);
+            // line 147
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "createdAt", [], "any", false, false, false, 147), "d-m-Y"), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\" style=\"color: cornflowerblue\">
                                 ";
-            // line 156
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "email", [], "any", false, false, false, 156), "html", null, true);
+            // line 152
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "email", [], "any", false, false, false, 152), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 ";
-            // line 161
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "phonenumber", [], "any", false, false, false, 161), "html", null, true);
+            // line 157
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["person"], "phonenumber", [], "any", false, false, false, 157), "html", null, true);
             echo "
                             </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\" style=\"color: mediumpurple\">
                                 ";
-            // line 166
-            if ($this->extensions['App\Twig\AppExtension']->isInstanceof($context["person"], (isset($context["student"]) || array_key_exists("student", $context) ? $context["student"] : (function () { throw new RuntimeError('Variable "student" does not exist.', 166, $this->source); })()))) {
-                // line 167
+            // line 162
+            if ($this->extensions['App\Twig\AppExtension']->isInstanceof($context["person"], (isset($context["student"]) || array_key_exists("student", $context) ? $context["student"] : (function () { throw new RuntimeError('Variable "student" does not exist.', 162, $this->source); })()))) {
+                // line 163
                 echo "                                    Étudiant
                                 ";
             } else {
-                // line 169
+                // line 165
                 echo "                                    Parrain
                                 ";
             }
-            // line 171
+            // line 167
             echo "                            </div>
                         </td>
                         <td class=\"align-middle\">
                             <div class=\"text-center\">
                                 <a href=\"";
-            // line 175
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_user", ["id" => twig_get_attribute($this->env, $this->source, $context["person"], "id", [], "any", false, false, false, 175)]), "html", null, true);
+            // line 171
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_user", ["id" => twig_get_attribute($this->env, $this->source, $context["person"], "id", [], "any", false, false, false, 171)]), "html", null, true);
             echo "\"><i style=\"font-size: 120%\" class=\"bi bi-info-circle\"></i></a>
                             </div>
                         </td>
@@ -313,7 +330,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['person'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 180
+        // line 176
         echo "            </tbody>
         </table>
         <p id=\"noresult\"></p>
@@ -343,7 +360,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
 
     public function getDebugInfo()
     {
-        return array (  317 => 180,  306 => 175,  300 => 171,  296 => 169,  292 => 167,  290 => 166,  282 => 161,  274 => 156,  266 => 151,  256 => 146,  251 => 143,  247 => 142,  209 => 106,  199 => 105,  98 => 13,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  334 => 176,  323 => 171,  317 => 167,  313 => 165,  309 => 163,  307 => 162,  299 => 157,  291 => 152,  283 => 147,  273 => 142,  268 => 139,  264 => 138,  231 => 107,  221 => 106,  149 => 42,  147 => 41,  145 => 40,  143 => 39,  141 => 38,  139 => 37,  137 => 36,  135 => 35,  133 => 34,  130 => 32,  128 => 31,  125 => 29,  122 => 27,  120 => 26,  118 => 25,  116 => 24,  114 => 23,  112 => 22,  110 => 21,  108 => 20,  105 => 18,  103 => 17,  99 => 14,  97 => 13,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -358,43 +375,48 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
 
         /** TODO Display block/none search */
 
-        function search(val){
-            let personlist = []
-            personlist = {{ jsvar | json_encode() | raw}};
+        function search(val, table){
+            {#let personlist = []#}
+            {#personlist = {{ jsvar | json_encode() | raw}};#}
 
 
-            let startwith = [];
-            let within = [];
+            {#let startwith = [];#}
+            {#let within = [];#}
 
-            for(var personl in personlist){
-                if((personlist[personl][\"firstname\"].toLowerCase()).startsWith(val.toLowerCase()) || (personlist[personl][\"lastname\"].toLowerCase()).startsWith(val.toLowerCase()) ){
-                    startwith.push(personlist[personl]);
-                }
-                else if(((personlist[personl][\"firstname\"].toLowerCase()).concat(personlist[personl][\"lastname\"].toLowerCase())).includes(val.toLowerCase())){
-                    within.push(personlist[personl]);
-                }
-            }
+            {#for(var personl in personlist){#}
+            {#    if((personlist[personl][\"firstname\"].toLowerCase()).startsWith(val.toLowerCase()) || (personlist[personl][\"lastname\"].toLowerCase()).startsWith(val.toLowerCase()) ){#}
+            {#        startwith.push(personlist[personl]);#}
+            {#    }#}
+            {#    else if(((personlist[personl][\"firstname\"].toLowerCase()).concat(personlist[personl][\"lastname\"].toLowerCase())).includes(val.toLowerCase())){#}
+            {#        within.push(personlist[personl]);#}
+            {#    }#}
+            {#}#}
 
-            let personByName = startwith.concat(within)
+            {#let personByName = startwith.concat(within)#}
 
-            document.getElementById('persons').innerHTML = \"\";
-            document.getElementById('noresult').innerHTML = \"\";
+            {#document.getElementById('persons').innerHTML = \"\";#}
+            {#document.getElementById('noresult').innerHTML = \"\";#}
 
-            if(personByName.length === 0){
-                document.getElementById('noresult').innerHTML = \"<div><div class=\\\"container-fluid text-center\\\" style=\\\"margin-top: 15%\\\"> <h3> Aucun résulat pour la recherche \\\"\" + val +\"\\\" </h3></div></div><p style=\\\"margin-bottom: 20%\\\"><p>\";
-            }
-            for(var person in personByName){
-                document.getElementById('persons').innerHTML +=  \"<tr> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\">\" + personByName[person][\"firstname\"] + \"&nbsp;\" + (personByName[person][\"lastname\"]).toUpperCase() +
-                    \"</div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\"> \" + personByName[person][\"createAt\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\" style=\\\"color: cornflowerblue\\\">\" +
-                    personByName[person][\"email\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\">\" + personByName[person][\"phonenumber\"] +
-                    \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\" style=\\\"color: mediumpurple\\\">\" + personByName[person][\"status\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\"> <a href=\\\"./user/\"+ personByName[person][\"id\"] +\"\\\"><i style=\\\"font-size: 120%\\\" class=\\\"bi bi-info-circle\\\"></i></a> </div></td> </tr>\";
-            }
+            {#if(personByName.length === 0){#}
+            {#    document.getElementById('noresult').innerHTML = \"<div><div class=\\\"container-fluid text-center\\\" style=\\\"margin-top: 15%\\\"> <h3> Aucun résulat pour la recherche \\\"\" + val +\"\\\" </h3></div></div><p style=\\\"margin-bottom: 20%\\\"><p>\";#}
+            {#}#}
+            {#for(var person in personByName){#}
+            {#    document.getElementById('persons').innerHTML +=  \"<tr> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\">\" + personByName[person][\"firstname\"] + \"&nbsp;\" + (personByName[person][\"lastname\"]).toUpperCase() +#}
+            {#        \"</div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\"> \" + personByName[person][\"createAt\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\" style=\\\"color: cornflowerblue\\\">\" +#}
+            {#        personByName[person][\"email\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\">\" + personByName[person][\"phonenumber\"] +#}
+            {#        \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\" style=\\\"color: mediumpurple\\\">\" + personByName[person][\"status\"] + \" </div> </td> <td class=\\\"align-middle\\\"> <div class=\\\"text-center\\\"> <a href=\\\"./user/\"+ personByName[person][\"id\"] +\"\\\"><i style=\\\"font-size: 120%\\\" class=\\\"bi bi-info-circle\\\"></i></a> </div></td> </tr>\";#}
+            {#}#}
+
+            var value = val.toLowerCase();
+            \$(\"#\"+ table +\" tr\").filter(function() {
+                \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1)
+            });
         }
 
 
-        function filter(val){
+        function filter(val, table){
             var value = val.toLowerCase();
-            \$(\"#persons tr\").filter(function() {
+            \$(\"#\"+ table+\" tr\").filter(function() {
                 \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -1)
             });
 
@@ -404,7 +426,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
                         document.getElementById('sponsorFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
 
                         //réaffichage des lignes display none
-                        \$(\"#persons tr\").filter(function() {
+                        \$(\"#\"+ table+\" tr\").filter(function() {
                             \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
                         });
 
@@ -419,7 +441,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
                     if(document.getElementById('studentFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
                         document.getElementById('studentFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
 
-                        \$(\"#persons tr\").filter(function() {
+                        \$(\"#\"+ table+\" tr\").filter(function() {
                             \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
                         });
 
@@ -434,7 +456,7 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
                     if(document.getElementById('sponsorshipFilter').className === \"btn btn-dark-secondary btn-sm rounded-5\" ){
                         document.getElementById('sponsorshipFilter').className = \"btn btn-dark-primary btn-sm rounded-5\"
 
-                        \$(\"#persons tr\").filter(function() {
+                        \$(\"#\"+ table+\" tr\").filter(function() {
                             \$(this).toggle(\$(this).text().toLowerCase().indexOf(value) > -2)
                         });
                     }
@@ -442,34 +464,25 @@ class __TwigTemplate_64dad5fb9f17b7e76062f8628ce0e74f extends Template
                         document.getElementById('sponsorshipFilter').className = \"btn btn-dark-secondary btn-sm rounded-5\"
                     }
                     break;
-
-
             }
-
     }
-
     </script>
 
 {% endblock %}
 
 {% block body %}
     <div class=\"bg-primary pt-2 pb-4\">
-
-    <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
+        <div class=\"ms-lg-3 d-none d-md-none d-lg-block\" style=\"margin-top: 5%\">
 
         <!-- Form -->
-        <form class=\"d-flex align-items-center\" autocomplete=\"off\">
-            <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value)\"/>
-        </form>
-        <br>
-        <div class=\"text-center\" id=\"buttons\">
-            <button id=\"sponsorFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('parrain')\">&nbsp; Parrain &nbsp;</button>
-            <button id=\"studentFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('étudiant')\">&nbsp; Etudiant &nbsp;</button>
-            <button id=\"sponsorshipFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\"  onclick=\"filter('parrainage')\" >&nbsp; Parrainé &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
-            <button type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\">&nbsp; Filtre.. &nbsp;</button>
-        </div>
+            <form class=\"d-flex align-items-center\" autocomplete=\"off\">
+                <input style=\"width: 70%; margin-left: 15%\" type=\"search\" class=\"form-control\" placeholder=\"Rechercher un utilisateur\" oninput=\"search(this.value, 'persons')\"/>
+            </form>
+            <br>
+            <div class=\"text-center\" id=\"buttons\">
+                <button id=\"sponsorFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('parrain', 'persons')\">&nbsp; Parrain &nbsp;</button>
+                <button id=\"studentFilter\" type=\"button\" class=\"btn btn-dark-primary btn-sm rounded-5\" onclick=\"filter('étudiant', 'persons')\">&nbsp; Etudiant &nbsp;</button>
+            </div>
         </div>
     </div>
     <div class=\"container-fluid mt-2 px-6\">

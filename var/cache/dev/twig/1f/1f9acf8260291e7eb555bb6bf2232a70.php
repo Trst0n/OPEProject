@@ -74,66 +74,41 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
               </a>
             </div>
             <!-- List group -->
-            <ul class=\"list-group list-group-flush notification-list-scroll\">
+            <ul class=\"list-group list-group-flush notification-list-scroll\"  style=\"cursor: pointer\">
               <!-- List group item -->
-              <li class=\"list-group-item bg-light\">
-
-
-                <a href=\"#\" class=\"text-muted\">
-                    <h5 class=\" mb-1\">Rishi Chopra</h5>
-                    <p class=\"mb-0\">
-                      Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
-                    </p>
-                </a>
-
-
-
-          </li>
+            <li class=\"list-group-item bg-light\">
+                <h5 class=\" mb-1\">Rishi Chopra</h5>
+                <p class=\"mb-0 text-muted\">
+                  Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
+                </p>
+             </li>
              <!-- List group item -->
-             <li class=\"list-group-item\">
-
-
-              <a href=\"#\" class=\"text-muted\">
-                  <h5 class=\" mb-1\">Neha Kannned</h5>
-                  <p class=\"mb-0\">
-                    Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
-                  </p>
-              </a>
-
-
-
-        </li>
+            <li class=\"list-group-item\">
+              <h5 class=\" mb-1\">Neha Kannned</h5>
+              <p class=\"mb-0 text-muted\">
+                Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
+              </p>
+            </li>
               <!-- List group item -->
-              <li class=\"list-group-item\">
-
-
-                <a href=\"#\" class=\"text-muted\">
-                    <h5 class=\" mb-1\">Nirmala Chauhan</h5>
-                    <p class=\"mb-0\">
-                      Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
-                    </p>
-                </a>
-
-
-
-          </li>
+            <li class=\"list-group-item\">
+                <h5 class=\" mb-1\">Nirmala Chauhan</h5>
+                <p class=\"mb-0 text-muted\">
+                  Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
+                </p>
+            </li>
               <!-- List group item -->
-              <li class=\"list-group-item\">
-
-
-                    <a href=\"#\" class=\"text-muted\">
-                        <h5 class=\" mb-1\">Sina Ray</h5>
-                        <p class=\"mb-0\">
-                          Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
-                        </p>
-                    </a>
-
-
-
-              </li>
+            <li class=\"list-group-item\" >
+              <h5 class=\" mb-1\">Sina Ray</h5>
+              <p class=\"mb-0 text-muted\">
+                Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
+              </p>
+            </li>
             </ul>
             <div class=\"border-top px-3 py-2 text-center\">
-              <a href=\"#\" class=\"text-inherit fw-semi-bold\">
+              <a href=\"";
+        // line 66
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_log");
+        echo "\" class=\"text-inherit fw-semi-bold\">
                 Voir toutes les notifications
               </a>
             </div>
@@ -153,7 +128,10 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
 
 
             <div class=\"lh-1 \">
-              <h5 class=\"mb-1\"> John E. Grainger</h5>
+              <h5 class=\"mb-1\"> ";
+        // line 86
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 86, $this->source); })()), "user", [], "any", false, false, false, 86), "userIdentifier", [], "any", false, false, false, 86), "html", null, true);
+        echo "</h5>
               <a href=\"#\" class=\"text-inherit fs-6\">Voir le profil</a>
             </div>
             <div class=\" dropdown-divider mt-3 mb-2\"></div>
@@ -162,9 +140,12 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
           <ul class=\"list-unstyled\">
             <li>
               <a class=\"dropdown-item\"
-                href=\"#\">
+                href=\"";
+        // line 95
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_log");
+        echo "\">
                 <i class=\"me-2 icon-xxs dropdown-item-icon\"
-                  data-feather=\"activity\"></i>Activité
+                  data-feather=\"activity\"></i>Historique
               </a>
             </li>
 
@@ -176,7 +157,10 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
               </a>
             </li>
             <li>
-              <a class=\"dropdown-item\" href=\"@@webRoot/index.html\">
+              <a class=\"dropdown-item\" href=\"";
+        // line 109
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
+        echo "\">
                 <i class=\"me-2 icon-xxs dropdown-item-icon\"
                   data-feather=\"power\"></i>Déconnexion
               </a>
@@ -201,9 +185,14 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
         return "partials/header.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  43 => 1,);
+        return array (  162 => 109,  145 => 95,  133 => 86,  110 => 66,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -242,66 +231,38 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
               </a>
             </div>
             <!-- List group -->
-            <ul class=\"list-group list-group-flush notification-list-scroll\">
+            <ul class=\"list-group list-group-flush notification-list-scroll\"  style=\"cursor: pointer\">
               <!-- List group item -->
-              <li class=\"list-group-item bg-light\">
-
-
-                <a href=\"#\" class=\"text-muted\">
-                    <h5 class=\" mb-1\">Rishi Chopra</h5>
-                    <p class=\"mb-0\">
-                      Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
-                    </p>
-                </a>
-
-
-
-          </li>
+            <li class=\"list-group-item bg-light\">
+                <h5 class=\" mb-1\">Rishi Chopra</h5>
+                <p class=\"mb-0 text-muted\">
+                  Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
+                </p>
+             </li>
              <!-- List group item -->
-             <li class=\"list-group-item\">
-
-
-              <a href=\"#\" class=\"text-muted\">
-                  <h5 class=\" mb-1\">Neha Kannned</h5>
-                  <p class=\"mb-0\">
-                    Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
-                  </p>
-              </a>
-
-
-
-        </li>
+            <li class=\"list-group-item\">
+              <h5 class=\" mb-1\">Neha Kannned</h5>
+              <p class=\"mb-0 text-muted\">
+                Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
+              </p>
+            </li>
               <!-- List group item -->
-              <li class=\"list-group-item\">
-
-
-                <a href=\"#\" class=\"text-muted\">
-                    <h5 class=\" mb-1\">Nirmala Chauhan</h5>
-                    <p class=\"mb-0\">
-                      Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
-                    </p>
-                </a>
-
-
-
-          </li>
+            <li class=\"list-group-item\">
+                <h5 class=\" mb-1\">Nirmala Chauhan</h5>
+                <p class=\"mb-0 text-muted\">
+                  Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
+                </p>
+            </li>
               <!-- List group item -->
-              <li class=\"list-group-item\">
-
-
-                    <a href=\"#\" class=\"text-muted\">
-                        <h5 class=\" mb-1\">Sina Ray</h5>
-                        <p class=\"mb-0\">
-                          Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
-                        </p>
-                    </a>
-
-
-
-              </li>
+            <li class=\"list-group-item\" >
+              <h5 class=\" mb-1\">Sina Ray</h5>
+              <p class=\"mb-0 text-muted\">
+                Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
+              </p>
+            </li>
             </ul>
             <div class=\"border-top px-3 py-2 text-center\">
-              <a href=\"#\" class=\"text-inherit fw-semi-bold\">
+              <a href=\"{{ path('app_dashboard_log') }}\" class=\"text-inherit fw-semi-bold\">
                 Voir toutes les notifications
               </a>
             </div>
@@ -321,7 +282,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
 
 
             <div class=\"lh-1 \">
-              <h5 class=\"mb-1\"> John E. Grainger</h5>
+              <h5 class=\"mb-1\"> {{ app.user.userIdentifier }}</h5>
               <a href=\"#\" class=\"text-inherit fs-6\">Voir le profil</a>
             </div>
             <div class=\" dropdown-divider mt-3 mb-2\"></div>
@@ -330,9 +291,9 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
           <ul class=\"list-unstyled\">
             <li>
               <a class=\"dropdown-item\"
-                href=\"#\">
+                href=\"{{ path('app_dashboard_log') }}\">
                 <i class=\"me-2 icon-xxs dropdown-item-icon\"
-                  data-feather=\"activity\"></i>Activité
+                  data-feather=\"activity\"></i>Historique
               </a>
             </li>
 
@@ -344,7 +305,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
               </a>
             </li>
             <li>
-              <a class=\"dropdown-item\" href=\"@@webRoot/index.html\">
+              <a class=\"dropdown-item\" href=\"{{ path('app_logout') }}\">
                 <i class=\"me-2 icon-xxs dropdown-item-icon\"
                   data-feather=\"power\"></i>Déconnexion
               </a>

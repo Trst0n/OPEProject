@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Parrains{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+
+        function search(val, table){
+            var value = val.toLowerCase();
+            $("#"+ table +" tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        }
+
+    </script>
+
+{% endblock %}
+
+{% block body %}
+    <div class="bg-primary pt-2 pb-5">
+
+        <div class="ms-lg-3 d-none d-md-none d-lg-block" style="margin-top: 5%">
+
+            <!-- Form -->
+            <form class="d-flex align-items-center" autocomplete="off">
+                <input style="width: 70%; margin-left: 15%" type="search" class="form-control" placeholder="Rechercher un utilisateur" oninput="search(this.value, 'sponsors')"/>
+            </form>
+            <br><br>
+        </div>
+    </div>
+    <div class="container-fluid mt-2 px-6">
+        <div class="card" style="margin-top: 3%">
+            <div class="card-header bg-white  py-4">
+            </div>
+            <div class="table-responsive text-center" style="font-size: 17px">
+                <table class="table text-nowrap mb-0">
+                    <thead class="table-light" >
+                    <tr>
+                        <th>Identité</th>
+                        <th><i class="bi bi-calendar"></i> Date d'inscription</th>
+                        <th><i class="bi bi-envelope"></i> Email</th>
+                        <th><i class="bi bi-telephone"></i> N° Téléphone </th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="sponsors">
+                    {% for sponsor in sponsors %}
+                        <tr>
+                            <td class="align-middle">
+                                <div class="text-center">
+                                    {{ sponsor.firstname }} &nbsp; {{ sponsor.lastname | upper }}
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="text-center">
+                                    {{ sponsor.createdAt | date("d-m-Y") }}
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="text-center" style="color: cornflowerblue">
+                                    {{ sponsor.email }}
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="text-center">
+                                    {{ sponsor.phonenumber }}
+                                </div>
+                            </td>
+                            <td class="align-middle">
+                                <div class="text-center">
+                                    <a href="{{ path('app_dashboard_user', {'id': sponsor.id}) }}"><i style="font-size: 120%" class="bi bi-info-circle"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <p style="margin-bottom: 7%"></p>
+
+{% endblock %}

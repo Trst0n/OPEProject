@@ -142,7 +142,10 @@ class __TwigTemplate_7bb3268b532edd714c18e769d2339e34 extends Template
                                             </div>
                                             <div class=\"icon-shape icon-md bg-light-primary text-primary
                             rounded-2\">
-                                                <i class=\"bi bi-person\"></i>
+                                                <a href=\"";
+        // line 56
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_students");
+        echo "\"><i class=\"bi bi-person\"></i></a>
                                             </div>
                                         </div>
                                         <!-- project number -->
@@ -165,25 +168,25 @@ class __TwigTemplate_7bb3268b532edd714c18e769d2339e34 extends Template
                                     <!-- card body -->
                                     <div class=\"card-body\">
                                         <!-- heading -->
-                                        <div class=\"d-flex justify-content-between align-items-center
-                            mb-3\">
+                                        <div class=\"d-flex justify-content-between align-items-center mb-3\">
                                             <div>
                                                 <h4 class=\"mb-0\">Etudiants</h4>
                                             </div>
-                                            <div class=\"icon-shape icon-md bg-light-primary text-primary
-                            rounded-2\">
-                                                <i class=\"bi bi-person-fill\"></i>
+                                            <div class=\"icon-shape icon-md bg-light-primary text-primary rounded-2\">
+                                                <a href=\"";
+        // line 78
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_students");
+        echo "\"><i class=\"bi bi-person-fill\"></i></a>
                                             </div>
                                         </div>
-                                        <!-- project number -->
                                         <div>
                                             <h1 class=\"fw-bold\">";
-        // line 85
-        echo twig_escape_filter($this->env, (isset($context["numValidRequests"]) || array_key_exists("numValidRequests", $context) ? $context["numValidRequests"] : (function () { throw new RuntimeError('Variable "numValidRequests" does not exist.', 85, $this->source); })()), "html", null, true);
+        // line 82
+        echo twig_escape_filter($this->env, (isset($context["numValidRequests"]) || array_key_exists("numValidRequests", $context) ? $context["numValidRequests"] : (function () { throw new RuntimeError('Variable "numValidRequests" does not exist.', 82, $this->source); })()), "html", null, true);
         echo "</h1>
                                             <p class=\"mb-0\"><span class=\"text-success me-2\">";
-        // line 86
-        echo twig_escape_filter($this->env, (isset($context["numRequests"]) || array_key_exists("numRequests", $context) ? $context["numRequests"] : (function () { throw new RuntimeError('Variable "numRequests" does not exist.', 86, $this->source); })()), "html", null, true);
+        // line 83
+        echo twig_escape_filter($this->env, (isset($context["numRequests"]) || array_key_exists("numRequests", $context) ? $context["numRequests"] : (function () { throw new RuntimeError('Variable "numRequests" does not exist.', 83, $this->source); })()), "html", null, true);
         echo "</span>Inscrits</p>
                                         </div>
                                     </div>
@@ -196,28 +199,25 @@ class __TwigTemplate_7bb3268b532edd714c18e769d2339e34 extends Template
                                     <!-- card body -->
                                     <div class=\"card-body\">
                                         <!-- heading -->
-                                        <div class=\"d-flex justify-content-between align-items-center
-                            mb-3\">
+                                        <div class=\"d-flex justify-content-between align-items-center mb-3\">
                                             <div>
                                                 <h4 class=\"mb-0\">Match en attente</h4>
                                             </div>
-                                            <div class=\"icon-shape icon-md bg-light-primary text-primary
-                            rounded-2\">
+                                            <div class=\"icon-shape icon-md bg-light-primary text-primary rounded-2\">
                                                 <a href=\"";
-        // line 105
+        // line 100
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_matches");
         echo "\"><i class=\"bi bi bi-inboxes-fill\"></i></a>
                                             </div>
                                         </div>
-                                        <!-- project number -->
                                         <div>
                                             <h1 class=\"fw-bold\">";
-        // line 110
-        echo twig_escape_filter($this->env, twig_length_filter($this->env, (isset($context["onHoldMatches"]) || array_key_exists("onHoldMatches", $context) ? $context["onHoldMatches"] : (function () { throw new RuntimeError('Variable "onHoldMatches" does not exist.', 110, $this->source); })())), "html", null, true);
+        // line 104
+        echo twig_escape_filter($this->env, twig_length_filter($this->env, (isset($context["onHoldMatches"]) || array_key_exists("onHoldMatches", $context) ? $context["onHoldMatches"] : (function () { throw new RuntimeError('Variable "onHoldMatches" does not exist.', 104, $this->source); })())), "html", null, true);
         echo "</h1>
                                             <p class=\"mb-0\"><span class=\"text-success me-2\">";
-        // line 111
-        echo twig_escape_filter($this->env, (isset($context["numNoMatchSponsor"]) || array_key_exists("numNoMatchSponsor", $context) ? $context["numNoMatchSponsor"] : (function () { throw new RuntimeError('Variable "numNoMatchSponsor" does not exist.', 111, $this->source); })()), "html", null, true);
+        // line 105
+        echo twig_escape_filter($this->env, (isset($context["numNoMatchSponsor"]) || array_key_exists("numNoMatchSponsor", $context) ? $context["numNoMatchSponsor"] : (function () { throw new RuntimeError('Variable "numNoMatchSponsor" does not exist.', 105, $this->source); })()), "html", null, true);
         echo "</span>Parrain(s) disponible(s)</p>
                                         </div>
                                     </div>
@@ -247,41 +247,41 @@ class __TwigTemplate_7bb3268b532edd714c18e769d2339e34 extends Template
                                             </thead>
                                             <tbody>
                                             ";
-        // line 139
+        // line 133
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["onHoldMatches"]) || array_key_exists("onHoldMatches", $context) ? $context["onHoldMatches"] : (function () { throw new RuntimeError('Variable "onHoldMatches" does not exist.', 139, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["onHoldMatches"]) || array_key_exists("onHoldMatches", $context) ? $context["onHoldMatches"] : (function () { throw new RuntimeError('Variable "onHoldMatches" does not exist.', 133, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["request"]) {
-            // line 140
+            // line 134
             echo "                                                <tr>
                                                     <td class=\"align-middle\">
                                                         <div class=\"text-center\">
                                                             ";
-            // line 143
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "person", [], "any", false, false, false, 143), "lastname", [], "any", false, false, false, 143), "html", null, true);
+            // line 137
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "person", [], "any", false, false, false, 137), "lastname", [], "any", false, false, false, 137), "html", null, true);
             echo "
                                                         </div>
                                                     </td>
                                                     <td class=\"align-middle\">
                                                         <div class=\"text-center\">
                                                             ";
-            // line 148
-            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "person", [], "any", false, false, false, 148), "firstname", [], "any", false, false, false, 148)), "html", null, true);
+            // line 142
+            echo twig_escape_filter($this->env, twig_upper_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "person", [], "any", false, false, false, 142), "firstname", [], "any", false, false, false, 142)), "html", null, true);
             echo "
                                                         </div>
                                                     </td>
                                                     <td class=\"align-middle\">
                                                         <div class=\"text-center\">
                                                             ";
-            // line 153
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "person", [], "any", false, false, false, 153), "updatedAt", [], "any", false, false, false, 153), "Y-m-d"), "html", null, true);
+            // line 147
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "person", [], "any", false, false, false, 147), "updatedAt", [], "any", false, false, false, 147), "Y-m-d"), "html", null, true);
             echo "
                                                         </div>
                                                     </td>
 
                                                         ";
-            // line 157
-            if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "state", [], "any", false, false, false, 157), "value", [], "any", false, false, false, 157) == "registered")) {
-                // line 158
+            // line 151
+            if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "state", [], "any", false, false, false, 151), "value", [], "any", false, false, false, 151) == "registered")) {
+                // line 152
                 echo "                                                            <td class=\"align-middle\">
                                                                 <div class=\"text-center\">
                                                                     VALIDATION ADMIN
@@ -294,9 +294,9 @@ class __TwigTemplate_7bb3268b532edd714c18e769d2339e34 extends Template
                                                             </td>
 
                                                         ";
-            } elseif ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 169
-$context["request"], "state", [], "any", false, false, false, 169), "value", [], "any", false, false, false, 169) == "matched")) {
-                // line 170
+            } elseif ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source,             // line 163
+$context["request"], "state", [], "any", false, false, false, 163), "value", [], "any", false, false, false, 163) == "matched")) {
+                // line 164
                 echo "                                                            <td class=\"align-middle\">
                                                                 <div class=\"text-center\">
                                                                     VALIDATION PERSONNES
@@ -310,28 +310,27 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
 
                                                         ";
             }
-            // line 182
+            // line 176
             echo "                                                    <td class=\"align-middle\">
                                                         <div class=\"text-center\">
                                                             ";
-            // line 184
-            if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "state", [], "any", false, false, false, 184), "value", [], "any", false, false, false, 184) == "matched")) {
-                // line 185
+            // line 178
+            if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "state", [], "any", false, false, false, 178), "value", [], "any", false, false, false, 178) == "matched")) {
+                // line 179
                 echo "                                                                <a href=\"#\"><i style=\"font-size: 130%\" class=\"bi bi-arrow-up-square\"></i></a>
                                                             ";
             } else {
-                // line 187
+                // line 181
                 echo "                                                                <a href=\"";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sponsorship_new", ["id" => twig_get_attribute($this->env, $this->source, $context["request"], "id", [], "any", false, false, false, 187)]), "html", null, true);
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sponsorship_new", ["id" => twig_get_attribute($this->env, $this->source, $context["request"], "id", [], "any", false, false, false, 181)]), "html", null, true);
                 echo "\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
                                                             ";
             }
-            // line 189
-            echo "                                                            &nbsp;
-                                                            &nbsp;
+            // line 183
+            echo "                                                            &nbsp; &nbsp;
                                                             <a href=\"";
-            // line 191
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_user", ["id" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "person", [], "any", false, false, false, 191), "id", [], "any", false, false, false, 191)]), "html", null, true);
+            // line 184
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_user", ["id" => twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["request"], "person", [], "any", false, false, false, 184), "id", [], "any", false, false, false, 184)]), "html", null, true);
             echo "\"><i style=\"font-size: 130%\" class=\"bi bi-info-circle\"></i></a>
 
                                                         </div>
@@ -342,14 +341,14 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['request'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 197
+        // line 190
         echo "                                            </tbody>
                                         </table>
                                     </div>
                                     <!-- card footer  -->
                                     <div  class=\"card-footer bg-white text-center\">
                                         <a href=\"";
-        // line 202
+        // line 195
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_matches");
         echo "\" class=\"link-primary\">Voir tous les matchs </a>
 
@@ -359,8 +358,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                             </div>
                         </div>
                     </div>
-
-                        <p style=\"margin-bottom: 7%\"></p>
+                    <p style=\"margin-bottom: 7%\"></p>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -382,7 +380,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
 
     public function getDebugInfo()
     {
-        return array (  353 => 202,  346 => 197,  334 => 191,  330 => 189,  324 => 187,  320 => 185,  318 => 184,  314 => 182,  300 => 170,  298 => 169,  285 => 158,  283 => 157,  276 => 153,  268 => 148,  260 => 143,  255 => 140,  251 => 139,  220 => 111,  216 => 110,  208 => 105,  186 => 86,  182 => 85,  156 => 62,  152 => 61,  126 => 38,  122 => 37,  91 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  352 => 195,  345 => 190,  333 => 184,  330 => 183,  324 => 181,  320 => 179,  318 => 178,  314 => 176,  300 => 164,  298 => 163,  285 => 152,  283 => 151,  276 => 147,  268 => 142,  260 => 137,  255 => 134,  251 => 133,  220 => 105,  216 => 104,  209 => 100,  189 => 83,  185 => 82,  178 => 78,  159 => 62,  155 => 61,  147 => 56,  126 => 38,  122 => 37,  91 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -442,7 +440,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                             </div>
                                             <div class=\"icon-shape icon-md bg-light-primary text-primary
                             rounded-2\">
-                                                <i class=\"bi bi-person\"></i>
+                                                <a href=\"{{ path('app_dashboard_students') }}\"><i class=\"bi bi-person\"></i></a>
                                             </div>
                                         </div>
                                         <!-- project number -->
@@ -459,17 +457,14 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                     <!-- card body -->
                                     <div class=\"card-body\">
                                         <!-- heading -->
-                                        <div class=\"d-flex justify-content-between align-items-center
-                            mb-3\">
+                                        <div class=\"d-flex justify-content-between align-items-center mb-3\">
                                             <div>
                                                 <h4 class=\"mb-0\">Etudiants</h4>
                                             </div>
-                                            <div class=\"icon-shape icon-md bg-light-primary text-primary
-                            rounded-2\">
-                                                <i class=\"bi bi-person-fill\"></i>
+                                            <div class=\"icon-shape icon-md bg-light-primary text-primary rounded-2\">
+                                                <a href=\"{{ path('app_dashboard_students') }}\"><i class=\"bi bi-person-fill\"></i></a>
                                             </div>
                                         </div>
-                                        <!-- project number -->
                                         <div>
                                             <h1 class=\"fw-bold\">{{ numValidRequests }}</h1>
                                             <p class=\"mb-0\"><span class=\"text-success me-2\">{{ numRequests }}</span>Inscrits</p>
@@ -484,17 +479,14 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                     <!-- card body -->
                                     <div class=\"card-body\">
                                         <!-- heading -->
-                                        <div class=\"d-flex justify-content-between align-items-center
-                            mb-3\">
+                                        <div class=\"d-flex justify-content-between align-items-center mb-3\">
                                             <div>
                                                 <h4 class=\"mb-0\">Match en attente</h4>
                                             </div>
-                                            <div class=\"icon-shape icon-md bg-light-primary text-primary
-                            rounded-2\">
+                                            <div class=\"icon-shape icon-md bg-light-primary text-primary rounded-2\">
                                                 <a href=\"{{ path('app_dashboard_matches') }}\"><i class=\"bi bi bi-inboxes-fill\"></i></a>
                                             </div>
                                         </div>
-                                        <!-- project number -->
                                         <div>
                                             <h1 class=\"fw-bold\">{{ onHoldMatches | length }}</h1>
                                             <p class=\"mb-0\"><span class=\"text-success me-2\">{{ numNoMatchSponsor }}</span>Parrain(s) disponible(s)</p>
@@ -575,8 +567,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                                                             {% else %}
                                                                 <a href=\"{{ path('app_sponsorship_new', {'id': request.id}) }}\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
                                                             {% endif %}
-                                                            &nbsp;
-                                                            &nbsp;
+                                                            &nbsp; &nbsp;
                                                             <a href=\"{{ path('app_dashboard_user', {'id': request.person.id}) }}\"><i style=\"font-size: 130%\" class=\"bi bi-info-circle\"></i></a>
 
                                                         </div>
@@ -596,8 +587,7 @@ $context["request"], "state", [], "any", false, false, false, 169), "value", [],
                             </div>
                         </div>
                     </div>
-
-                        <p style=\"margin-bottom: 7%\"></p>
+                    <p style=\"margin-bottom: 7%\"></p>
 {% endblock %}
 ", "dashboard/index.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/dashboard/index.html.twig");
     }

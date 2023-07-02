@@ -41,6 +41,9 @@ class Sponsorship
     #[ORM\Column]
     private ?\DateTimeImmutable $updates_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sponsorships')]
+    private ?Administrator $administrator = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Sponsorship
     public function setUpdatedAt(): static
     {
         $this->updates_at = new \DateTimeImmutable();
+
+        return $this;
+    }
+
+    public function getAdministrator(): ?Administrator
+    {
+        return $this->administrator;
+    }
+
+    public function setAdministrator(?Administrator $administrator): static
+    {
+        $this->administrator = $administrator;
 
         return $this;
     }

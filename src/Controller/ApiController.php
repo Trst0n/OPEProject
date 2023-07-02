@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\Mailing;
 use App\Service\RegistrationService;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiController extends AbstractController
 {
 
-    public function __construct(private RegistrationService $registrationService, private Mailing $mailing)
+    public function __construct(private RegistrationService $registrationService, private Mailing $mailing, private LoggerInterface $historyLogger)
     {
     }
 
@@ -51,6 +52,8 @@ class ApiController extends AbstractController
 
         $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/sponsor-registration.html.twig', ['lastname' => $data['lastname'], 'civility' => (strtolower($data['civility']) === "men" ? "Mr." : "Mme.")]);
         $this->mailing->sendEmail('noreply.ope@gmail.com',"Incription d'un nouvel utilisateur", 'mail/registration.html.twig');
+
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un nouveau parrain/marraine vient de s'inscrire ( " . $data['firstname'] . " " . $data['lastname'] . " ).");
 
         return new JsonResponse(
             ['status' => 'ok',], Response::HTTP_CREATED
@@ -87,6 +90,9 @@ class ApiController extends AbstractController
 
         $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/student-registration.html.twig', ['firstname' => $data['firstname']]);
         $this->mailing->sendEmail('noreply.ope@gmail.com',"Incription d'un nouvel utilisateur", 'mail/registration.html.twig');
+
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un nouveau étudiant/étudiante vient de s'inscrire ( " . $data['firstname'] . " " . $data['lastname'] . " ).");
+
 
         return new JsonResponse(
             ['status' => 'ok',], JsonResponse::HTTP_CREATED

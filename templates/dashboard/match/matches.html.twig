@@ -3,12 +3,23 @@
 {% block title %}Matchs{% endblock %}
 
 {% block body %}
+
+    <script>
+        function search(val){
+            var value = val.toLowerCase();
+            $("#matches tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        }
+    </script>
+
+
     <div class="bg-primary pt-2 pb-4">
         <div class="ms-lg-3 d-none d-md-none d-lg-block" style="margin-top: 5%">
 
             <!-- Form -->
             <form class="d-flex align-items-center" autocomplete="off">
-                <input style="width: 70%; margin-left: 15%" type="search" class="form-control" placeholder="Rechercher un utilisateur" oninput="search(this.value)"/>
+                <input style="width: 70%; margin-left: 15%" type="search" class="form-control" placeholder="Rechercher un utilisateur" oninput="search(this.value, 'matches')"/>
             </form>
             <br>
             <div class="text-center">
@@ -36,7 +47,7 @@
                 <th>Actions</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="matches">
             {% for match in matches %}
                 <tr>
                     <td class="align-middle">

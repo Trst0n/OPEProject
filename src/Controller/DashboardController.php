@@ -11,8 +11,13 @@ use App\Enum\LeadState;
 use App\Repository\PersonRepository;
 use App\Repository\ProposalRepository;
 use App\Repository\RequestRepository;
+use App\Repository\SponsorRepository;
 use App\Repository\SponsorshipRepository;
+use App\Repository\StudentRepository;
+use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -67,23 +72,24 @@ class DashboardController extends AbstractController
     #[Route('/users', name: 'app_dashboard_users',  methods: ['GET'])]
     public function users(PersonRepository $personRepository): Response{
 
-        $jsvar = [];
-
-        //Variables pour le code js => donnée tableau de personne
-        foreach($personRepository->findAll() as $person) {
-            $jsvar[]= ["id" => $person->getId(), "firstname"=>$person->getFirstname(),"lastname"=>$person->getLastname(), "createAt" => $person->getCreatedAt()->format("d-m-Y"), "email" => $person->getEmail()
-            , "phonenumber" => $person->getPhonenumber(), "status" => ($person instanceof Student ? "Étudiant" : "Parrain")];
-        }
-
-
-        $personsname = [];
-
-        foreach($personRepository->findAll() as $person){
-            $personsname[] = $person->getFirstname(). " " . $person->getLastname();
-        }
-
         return $this->render('dashboard/users/persons.html.twig', [
-            'persons' => $personRepository->findAll(), 'student' => Student::class, 'personsnames' => $personsname, 'jsvar' => $jsvar
+            'persons' => $personRepository->findAll(), 'student' => Student::class,
+        ]);
+    }
+
+    #[Route('/sponsors', name: 'app_dashboard_sponsors',  methods: ['GET'])]
+    public function sponsors(SponsorRepository $sponsorRepository): Response{
+
+        return $this->render('dashboard/users/sponsors.html.twig', [
+            'sponsors' => $sponsorRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/students', name: 'app_dashboard_students',  methods: ['GET'])]
+    public function students(StudentRepository $studentRepository): Response{
+
+        return $this->render('dashboard/users/students.html.twig', [
+            'students' => $studentRepository->findAll(),
         ]);
     }
 
@@ -103,6 +109,32 @@ class DashboardController extends AbstractController
             'person' => $person, 'status' => ($person instanceof Student ? "Etudiant" : "Parrain"), 'civility' => $civility, 'request' => Request::class,
             'hasSponsorship' => $hasSponsorship
         ]);
+    }
+
+    #[Route('/log', name: 'app_dashboard_log',  methods: ['GET'])]
+    public function log(): Response{
+
+        //calcule le nombre de ligne pour boucler
+        $contenu_fichier = file_get_contents('/home/tristan/Desktop/OPE/OPEProject/var/log/history.log');
+        $numLine = substr_count($contenu_fichier, "\n");
+
+        $log = [];
+        $file = fopen('/home/tristan/Desktop/OPE/OPEProject/var/log/history.log', 'rb');
+
+        for ($i = 0 ; $i<$numLine; $i++){
+            $log[] = substr(fgets($file), 48, -6);
+        }
+        fclose($file);
+
+        return $this->render('dashboard/accessibility/log.html.twig', [
+            'logs' => $log
+        ]);
+    }
+
+    #[Route('/error404', name: 'app_error', methods: ['GET'])]
+    public function show404(): Response
+    {
+        return $this->render('dashboard/error/error404.html.twig');
     }
 
 

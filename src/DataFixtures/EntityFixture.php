@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Administrator;
 use App\Entity\City;
 use App\Entity\Curriculum;
 use App\Entity\Establishment;
@@ -19,10 +20,15 @@ use App\Enum\Wish;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
 class EntityFixture extends Fixture
 {
+    public function __construct(private UserPasswordHasherInterface $passwordHasher)
+    {
+    }
+
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -66,50 +72,6 @@ class EntityFixture extends Fixture
         $field->setName("test")->addCurriculum($cursus);
         $manager->persist($field);
 
-        for ($i=0; $i < 3; $i++) {
-            $person = new Student();
-            $person->setFirstname($faker->firstName())
-                ->setLastname($faker->lastName())
-                ->setPhonenumber($faker->phoneNumber())
-                ->setEmail($faker->email())
-                ->setBirthdate($faker->dateTime());
-
-            $student = new Request();
-            $student->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
-                ->setCity($city)
-                ->setWishes([Wish::Housing, Wish::Administrative])
-                ->setCurriculum($cursus)
-                ->setLanguages([Language::Chinese, Language::French]);
-            $manager->persist($student);
-
-            $person->addLead($student);
-            $manager->persist($person);
-
-            $person2 = new Sponsor();
-            $person2->setFirstname($faker->firstName())
-                ->setLastname($faker->lastName())
-                ->setPhonenumber($faker->phoneNumber())
-                ->setEmail($faker->email())
-                ->setBirthdate($faker->dateTime());
-
-            $sponsor = new Proposal();
-            $sponsor
-                ->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
-                ->setCity($city)
-                ->setWishes([Wish::Housing, Wish::Administrative])
-                ->addWorkfield($field)
-                ->setLanguages([Language::Chinese, Language::French]);
-
-            $manager->persist($sponsor);
-
-            $person2->addLead($sponsor);
-            $manager->persist($person2);
-
-
-            $sponsorship = new Sponsorship();
-            $sponsorship->setSponsorRequest($student)->setSponsorProposal($sponsor)->setWishes([Wish::Housing]);
-            $manager->persist($sponsorship);
-        }
 
         for ($i=0; $i < 20; $i++) {
             $person = new Student();
@@ -124,8 +86,7 @@ class EntityFixture extends Fixture
                 ->setCity($city)
                 ->setWishes([Wish::Housing, Wish::Administrative])
                 ->setCurriculum($cursus)
-                ->setLanguages([Language::Chinese, Language::French])
-                ->setState($faker->randomNumber()%2 === 0 ?  LeadState::REGISTERED : LeadState::MATCHED);
+                ->setLanguages([Language::Chinese, Language::French]);
             $manager->persist($student);
 
             $person->addLead($student);
@@ -155,15 +116,25 @@ class EntityFixture extends Fixture
             $sponsorship->setSponsorRequest($student)->setSponsorProposal($sponsor)->setWishes([Wish::Housing]);
 
         if($faker->randomNumber()%2 === 0){
-           $sponsorship->setState(random_int(1,2)%2 === 0 ? SponsorshipState::STATE_INITIALIZED : SponsorshipState::STATE_STUDENT_APPROVED);
+           $sponsorship->setState(SponsorshipState::STATE_MATCH);
+            $sponsor->setState(LeadState::MATCHED);
+            $student->setState(LeadState::MATCHED);
         }
         else{
-            $sponsorship->setState(random_int(1,2)%2 === 0 ? SponsorshipState::STATE_SPONSOR_APPROVED : SponsorshipState::STATE_SPONSORSHIP);
+            $sponsorship->setState(SponsorshipState::STATE_SPONSORSHIP);
+            $sponsor->setState(LeadState::SPONSORSHIP);
+            $student->setState(LeadState::SPONSORSHIP);
         }
             $manager->persist($sponsorship);
 
 
         }
+
+        $admin = new Administrator();
+        $admin->setUsername("admin")
+            ->setPassword($this->passwordHasher->hashPassword($admin, "admin"));
+
+        $manager->persist($admin);
 
 //        for ($i=0; $i < 10; $i++) {
 //            $person2 = new Sponsor();
