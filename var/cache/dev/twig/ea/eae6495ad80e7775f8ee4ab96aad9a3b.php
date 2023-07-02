@@ -577,44 +577,34 @@ $context["sponsorship"], "state", [], "any", false, false, false, 203) == "ended
                     // line 272
                     echo twig_escape_filter($this->env, $context["info"], "html", null, true);
                     echo "</p>
-    ";
-                    // line 274
-                    echo "    ";
-                    // line 275
-                    echo "    ";
-                    // line 276
-                    echo "    ";
-                    // line 277
-                    echo "    ";
-                    // line 278
-                    echo "                                                    </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ";
                 }
-                // line 282
+                // line 277
                 echo "                                        ";
-                $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 282, $this->source); })()) + 1);
-                // line 283
+                $context["altern"] = ((isset($context["altern"]) || array_key_exists("altern", $context) ? $context["altern"] : (function () { throw new RuntimeError('Variable "altern" does not exist.', 277, $this->source); })()) + 1);
+                // line 278
                 echo "                                        ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['info'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 284
+            // line 279
             echo "                                    ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['lead'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 285
-        echo "                                    <div class=\"timeline-4 left-4\">
+        // line 280
+        echo "                                        <div class=\"timeline-4 left-4\">
                                         <div class=\"card gradient-custom\">
                                                 <div class=\"card-body p-4 text-center\">
                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                     <p>Création du compte le ";
-        // line 289
-        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 289, $this->source); })()), "createdAt", [], "any", false, false, false, 289), "d-m-Y"), "html", null, true);
+        // line 284
+        echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["person"]) || array_key_exists("person", $context) ? $context["person"] : (function () { throw new RuntimeError('Variable "person" does not exist.', 284, $this->source); })()), "createdAt", [], "any", false, false, false, 284), "d-m-Y"), "html", null, true);
         echo "</p>
                                                 </div>
                                             </div>
@@ -624,7 +614,7 @@ $context["sponsorship"], "state", [], "any", false, false, false, 203) == "ended
                                 </div>
                             </div>
                         </div>
-            </div>
+                    </div>
 
 ";
         
@@ -647,7 +637,7 @@ $context["sponsorship"], "state", [], "any", false, false, false, 203) == "ended
 
     public function getDebugInfo()
     {
-        return array (  617 => 289,  611 => 285,  605 => 284,  599 => 283,  596 => 282,  590 => 278,  588 => 277,  586 => 276,  584 => 275,  582 => 274,  578 => 272,  572 => 268,  566 => 264,  564 => 263,  562 => 262,  560 => 261,  558 => 260,  554 => 258,  548 => 254,  546 => 253,  543 => 252,  538 => 251,  533 => 250,  531 => 249,  520 => 240,  514 => 236,  509 => 233,  503 => 232,  497 => 231,  494 => 230,  492 => 229,  489 => 228,  479 => 221,  472 => 219,  465 => 217,  461 => 216,  457 => 215,  451 => 211,  444 => 206,  440 => 204,  438 => 203,  435 => 202,  433 => 201,  430 => 200,  428 => 199,  425 => 198,  423 => 197,  420 => 196,  418 => 195,  410 => 192,  403 => 190,  399 => 189,  395 => 188,  389 => 184,  386 => 183,  383 => 182,  378 => 181,  373 => 180,  371 => 179,  366 => 176,  364 => 175,  353 => 166,  350 => 165,  341 => 163,  336 => 162,  333 => 161,  324 => 159,  319 => 158,  317 => 157,  310 => 152,  301 => 150,  297 => 149,  289 => 144,  277 => 135,  270 => 131,  263 => 127,  257 => 123,  248 => 121,  244 => 120,  205 => 84,  199 => 83,  194 => 80,  188 => 78,  182 => 76,  180 => 75,  169 => 67,  155 => 55,  145 => 54,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
+        return array (  607 => 284,  601 => 280,  595 => 279,  589 => 278,  586 => 277,  578 => 272,  572 => 268,  566 => 264,  564 => 263,  562 => 262,  560 => 261,  558 => 260,  554 => 258,  548 => 254,  546 => 253,  543 => 252,  538 => 251,  533 => 250,  531 => 249,  520 => 240,  514 => 236,  509 => 233,  503 => 232,  497 => 231,  494 => 230,  492 => 229,  489 => 228,  479 => 221,  472 => 219,  465 => 217,  461 => 216,  457 => 215,  451 => 211,  444 => 206,  440 => 204,  438 => 203,  435 => 202,  433 => 201,  430 => 200,  428 => 199,  425 => 198,  423 => 197,  420 => 196,  418 => 195,  410 => 192,  403 => 190,  399 => 189,  395 => 188,  389 => 184,  386 => 183,  383 => 182,  378 => 181,  373 => 180,  371 => 179,  366 => 176,  364 => 175,  353 => 166,  350 => 165,  341 => 163,  336 => 162,  333 => 161,  324 => 159,  319 => 158,  317 => 157,  310 => 152,  301 => 150,  297 => 149,  289 => 144,  277 => 135,  270 => 131,  263 => 127,  257 => 123,  248 => 121,  244 => 120,  205 => 84,  199 => 83,  194 => 80,  188 => 78,  182 => 76,  180 => 75,  169 => 67,  155 => 55,  145 => 54,  89 => 6,  79 => 5,  60 => 3,  37 => 1,);
     }
 
     public function getSourceContext()
@@ -924,11 +914,6 @@ $context["sponsorship"], "state", [], "any", false, false, false, 203) == "ended
                                                     <div class=\"card-body p-4\">
                                                         <i class=\"fas fa-brain fa-2x mb-3\"></i>
                                                         <p>{{ info }}</p>
-    {#                                                    <p class=\"small text-white-50 mb-4\">{{ lead.state.value }}</p>#}
-    {#                                                    <p>[Descritpion ici .... ]#}
-    {#                                                        Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto#}
-    {#                                                        mnesarchum.#}
-    {#                                                    </p>#}
                                                     </div>
                                                 </div>
                                             </div>
@@ -936,7 +921,7 @@ $context["sponsorship"], "state", [], "any", false, false, false, 203) == "ended
                                         {% set altern = altern + 1 %}
                                         {% endfor %}
                                     {% endfor %}
-                                    <div class=\"timeline-4 left-4\">
+                                        <div class=\"timeline-4 left-4\">
                                         <div class=\"card gradient-custom\">
                                                 <div class=\"card-body p-4 text-center\">
                                                     <i class=\"fas fa-brain fa-2x mb-3\"></i>
@@ -949,7 +934,7 @@ $context["sponsorship"], "state", [], "any", false, false, false, 203) == "ended
                                 </div>
                             </div>
                         </div>
-            </div>
+                    </div>
 
 {% endblock %}", "dashboard/users/person.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/dashboard/users/person.html.twig");
     }

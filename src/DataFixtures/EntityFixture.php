@@ -73,62 +73,62 @@ class EntityFixture extends Fixture
         $manager->persist($field);
 
 
-        for ($i=0; $i < 20; $i++) {
-            $person = new Student();
-            $person->setFirstname($faker->firstName())
-                ->setLastname($faker->lastName())
-                ->setPhonenumber($faker->phoneNumber())
-                ->setEmail($faker->email())
-                ->setBirthdate($faker->dateTime());
-
-            $student = new Request();
-            $student->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
-                ->setCity($city)
-                ->setWishes([Wish::Housing, Wish::Administrative])
-                ->setCurriculum($cursus)
-                ->setLanguages([Language::Chinese, Language::French]);
-            $manager->persist($student);
-
-            $person->addLead($student);
-            $manager->persist($person);
-
-            $person2 = new Sponsor();
-            $person2->setFirstname($faker->firstName())
-                ->setLastname($faker->lastName())
-                ->setPhonenumber($faker->phoneNumber())
-                ->setEmail($faker->email())
-                ->setBirthdate($faker->dateTime());
-
-            $sponsor = new Proposal();
-            $sponsor
-                ->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
-                ->setCity($city)
-                ->setWishes([Wish::Housing, Wish::Administrative])
-                ->addWorkfield($field)
-                ->setLanguages([Language::Chinese, Language::French]);
-
-            $manager->persist($sponsor);
-
-            $person2->addLead($sponsor);
-            $manager->persist($person2);
-
-            $sponsorship = new Sponsorship();
-            $sponsorship->setSponsorRequest($student)->setSponsorProposal($sponsor)->setWishes([Wish::Housing]);
-
-        if($faker->randomNumber()%2 === 0){
-           $sponsorship->setState(SponsorshipState::STATE_MATCH);
-            $sponsor->setState(LeadState::MATCHED);
-            $student->setState(LeadState::MATCHED);
-        }
-        else{
-            $sponsorship->setState(SponsorshipState::STATE_SPONSORSHIP);
-            $sponsor->setState(LeadState::SPONSORSHIP);
-            $student->setState(LeadState::SPONSORSHIP);
-        }
-            $manager->persist($sponsorship);
-
-
-        }
+//        for ($i=0; $i < 20; $i++) {
+//            $person = new Student();
+//            $person->setFirstname($faker->firstName())
+//                ->setLastname($faker->lastName())
+//                ->setPhonenumber($faker->phoneNumber())
+//                ->setEmail($faker->email())
+//                ->setBirthdate($faker->dateTime());
+//
+//            $student = new Request();
+//            $student->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
+//                ->setCity($city)
+//                ->setWishes([Wish::Housing, Wish::Administrative])
+//                ->setCurriculum($cursus)
+//                ->setLanguages([Language::Chinese, Language::French]);
+//            $manager->persist($student);
+//
+//            $person->addLead($student);
+//            $manager->persist($person);
+//
+//            $person2 = new Sponsor();
+//            $person2->setFirstname($faker->firstName())
+//                ->setLastname($faker->lastName())
+//                ->setPhonenumber($faker->phoneNumber())
+//                ->setEmail($faker->email())
+//                ->setBirthdate($faker->dateTime());
+//
+//            $sponsor = new Proposal();
+//            $sponsor
+//                ->setCivility($faker->randomNumber()%2 === 0 ?  Civility::Women : Civility::Men)
+//                ->setCity($city)
+//                ->setWishes([Wish::Housing, Wish::Administrative])
+//                ->addWorkfield($field)
+//                ->setLanguages([Language::Chinese, Language::French]);
+//
+//            $manager->persist($sponsor);
+//
+//            $person2->addLead($sponsor);
+//            $manager->persist($person2);
+//
+//            $sponsorship = new Sponsorship();
+//            $sponsorship->setSponsorRequest($student)->setSponsorProposal($sponsor)->setWishes([Wish::Housing]);
+//
+//        if($faker->randomNumber()%2 === 0){
+//           $sponsorship->setState(SponsorshipState::STATE_MATCH);
+//            $sponsor->setState(LeadState::MATCHED);
+//            $student->setState(LeadState::MATCHED);
+//        }
+//        else{
+//            $sponsorship->setState(SponsorshipState::STATE_SPONSORSHIP);
+//            $sponsor->setState(LeadState::SPONSORSHIP);
+//            $student->setState(LeadState::SPONSORSHIP);
+//        }
+//            $manager->persist($sponsorship);
+//
+//
+//        }
 
         $admin = new Administrator();
         $admin->setUsername("admin")

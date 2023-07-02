@@ -54,7 +54,10 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
     <ul class=\"navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap\">
       <li class=\"dropdown stopevent\">
         <a  class=\"
-          indicator-primary text-muted\" href=\"#\" role=\"button\"
+          indicator-primary text-muted\" href=\"";
+        // line 15
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_log");
+        echo "\" role=\"button\"
           id=\"dropdownNotification\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\"
           aria-expanded=\"false\">
             <i style=\"font-size: 140%\" class=\"bi bi-bell-fill\">   &nbsp; </i>
@@ -76,37 +79,47 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
             <!-- List group -->
             <ul class=\"list-group list-group-flush notification-list-scroll\"  style=\"cursor: pointer\">
               <!-- List group item -->
-            <li class=\"list-group-item bg-light\">
-                <h5 class=\" mb-1\">Rishi Chopra</h5>
-                <p class=\"mb-0 text-muted\">
-                  Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
-                </p>
-             </li>
-             <!-- List group item -->
-            <li class=\"list-group-item\">
-              <h5 class=\" mb-1\">Neha Kannned</h5>
-              <p class=\"mb-0 text-muted\">
-                Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
-              </p>
-            </li>
-              <!-- List group item -->
-            <li class=\"list-group-item\">
-                <h5 class=\" mb-1\">Nirmala Chauhan</h5>
-                <p class=\"mb-0 text-muted\">
-                  Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
-                </p>
-            </li>
-              <!-- List group item -->
-            <li class=\"list-group-item\" >
-              <h5 class=\" mb-1\">Sina Ray</h5>
-              <p class=\"mb-0 text-muted\">
-                Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
-              </p>
-            </li>
-            </ul>
+
+              ";
+        // line 38
+        $context["logs"] = $this->extensions['App\Twig\AppExtension']->getFile("/home/tristan/Desktop/OPE/OPEProject/var/log/history.log");
+        // line 39
+        echo "              ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["logs"]) || array_key_exists("logs", $context) ? $context["logs"] : (function () { throw new RuntimeError('Variable "logs" does not exist.', 39, $this->source); })()));
+        $context['_iterated'] = false;
+        foreach ($context['_seq'] as $context["_key"] => $context["log"]) {
+            // line 40
+            echo "                <li class=\"list-group-item bg-light\">
+                    <h5 class=\" mb-1\">";
+            // line 41
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["log"], 0, [], "array", false, false, false, 41), "html", null, true);
+            echo "</h5>
+                    <p class=\"mb-0 text-muted\">
+                      ";
+            // line 43
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["log"], 1, [], "array", false, false, false, 43), "html", null, true);
+            echo "
+                    </p>
+                 </li>
+                ";
+            $context['_iterated'] = true;
+        }
+        if (!$context['_iterated']) {
+            // line 47
+            echo "                  <li class=\"list-group-item bg-light text-center pb-10 pt-10\" >
+                    <h4 class=\" mb-1\">Aucune notification</h4>
+                  </li>
+              ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['log'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 51
+        echo "            </ul>
             <div class=\"border-top px-3 py-2 text-center\">
               <a href=\"";
-        // line 66
+        // line 53
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_log");
         echo "\" class=\"text-inherit fw-semi-bold\">
                 Voir toutes les notifications
@@ -129,8 +142,8 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
 
             <div class=\"lh-1 \">
               <h5 class=\"mb-1\"> ";
-        // line 86
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 86, $this->source); })()), "user", [], "any", false, false, false, 86), "userIdentifier", [], "any", false, false, false, 86), "html", null, true);
+        // line 73
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 73, $this->source); })()), "user", [], "any", false, false, false, 73), "userIdentifier", [], "any", false, false, false, 73), "html", null, true);
         echo "</h5>
               <a href=\"#\" class=\"text-inherit fs-6\">Voir le profil</a>
             </div>
@@ -141,7 +154,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
             <li>
               <a class=\"dropdown-item\"
                 href=\"";
-        // line 95
+        // line 82
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_log");
         echo "\">
                 <i class=\"me-2 icon-xxs dropdown-item-icon\"
@@ -158,7 +171,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
             </li>
             <li>
               <a class=\"dropdown-item\" href=\"";
-        // line 109
+        // line 96
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_logout");
         echo "\">
                 <i class=\"me-2 icon-xxs dropdown-item-icon\"
@@ -192,7 +205,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
 
     public function getDebugInfo()
     {
-        return array (  162 => 109,  145 => 95,  133 => 86,  110 => 66,  43 => 1,);
+        return array (  175 => 96,  158 => 82,  146 => 73,  123 => 53,  119 => 51,  110 => 47,  101 => 43,  96 => 41,  93 => 40,  87 => 39,  85 => 38,  59 => 15,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -211,7 +224,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
     <ul class=\"navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap\">
       <li class=\"dropdown stopevent\">
         <a  class=\"
-          indicator-primary text-muted\" href=\"#\" role=\"button\"
+          indicator-primary text-muted\" href=\"{{ path('app_dashboard_log') }}\" role=\"button\"
           id=\"dropdownNotification\" data-bs-toggle=\"dropdown\" aria-haspopup=\"true\"
           aria-expanded=\"false\">
             <i style=\"font-size: 140%\" class=\"bi bi-bell-fill\">   &nbsp; </i>
@@ -233,33 +246,20 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
             <!-- List group -->
             <ul class=\"list-group list-group-flush notification-list-scroll\"  style=\"cursor: pointer\">
               <!-- List group item -->
-            <li class=\"list-group-item bg-light\">
-                <h5 class=\" mb-1\">Rishi Chopra</h5>
-                <p class=\"mb-0 text-muted\">
-                  Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
-                </p>
-             </li>
-             <!-- List group item -->
-            <li class=\"list-group-item\">
-              <h5 class=\" mb-1\">Neha Kannned</h5>
-              <p class=\"mb-0 text-muted\">
-                Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
-              </p>
-            </li>
-              <!-- List group item -->
-            <li class=\"list-group-item\">
-                <h5 class=\" mb-1\">Nirmala Chauhan</h5>
-                <p class=\"mb-0 text-muted\">
-                  Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
-                </p>
-            </li>
-              <!-- List group item -->
-            <li class=\"list-group-item\" >
-              <h5 class=\" mb-1\">Sina Ray</h5>
-              <p class=\"mb-0 text-muted\">
-                Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
-              </p>
-            </li>
+
+              {% set logs = getfile('/home/tristan/Desktop/OPE/OPEProject/var/log/history.log') %}
+              {% for log in logs %}
+                <li class=\"list-group-item bg-light\">
+                    <h5 class=\" mb-1\">{{ log[0] }}</h5>
+                    <p class=\"mb-0 text-muted\">
+                      {{ log[1] }}
+                    </p>
+                 </li>
+                {% else %}
+                  <li class=\"list-group-item bg-light text-center pb-10 pt-10\" >
+                    <h4 class=\" mb-1\">Aucune notification</h4>
+                  </li>
+              {% endfor %}
             </ul>
             <div class=\"border-top px-3 py-2 text-center\">
               <a href=\"{{ path('app_dashboard_log') }}\" class=\"text-inherit fw-semi-bold\">

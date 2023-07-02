@@ -66,7 +66,12 @@ class __TwigTemplate_89e7c8723835c65bb1711a08f9f7a6fb extends Template
         echo "<br>
     <br>
     Vous avez une semaine pour contacter votre parrain/marraine et nous en informer.<br>
-    Contact établi : <a href=\"#\"> OUI </a><br>
+    Contact établi : <a href=\"http://127.0.0.1:8100/yes/";
+        // line 11
+        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 11, $this->source); })()), "html", null, true);
+        echo "/";
+        echo twig_escape_filter($this->env, (isset($context["idsponsorship"]) || array_key_exists("idsponsorship", $context) ? $context["idsponsorship"] : (function () { throw new RuntimeError('Variable "idsponsorship" does not exist.', 11, $this->source); })()), "html", null, true);
+        echo "\"> OUI </a><br>
     <br>
     Espérant que vous partagerez de très bons moments grâce à notre plate-forme.<br>
     <br>
@@ -94,7 +99,7 @@ class __TwigTemplate_89e7c8723835c65bb1711a08f9f7a6fb extends Template
 
     public function getDebugInfo()
     {
-        return array (  65 => 8,  61 => 7,  53 => 6,  46 => 2,  43 => 1,);
+        return array (  71 => 11,  65 => 8,  61 => 7,  53 => 6,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -109,7 +114,7 @@ class __TwigTemplate_89e7c8723835c65bb1711a08f9f7a6fb extends Template
     {{ sponsor.person.email }}<br>
     <br>
     Vous avez une semaine pour contacter votre parrain/marraine et nous en informer.<br>
-    Contact établi : <a href=\"#\"> OUI </a><br>
+    Contact établi : <a href=\"http://127.0.0.1:8100/yes/{{id}}/{{ idsponsorship }}\"> OUI </a><br>
     <br>
     Espérant que vous partagerez de très bons moments grâce à notre plate-forme.<br>
     <br>

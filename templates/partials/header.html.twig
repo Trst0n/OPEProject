@@ -12,7 +12,7 @@
     <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
       <li class="dropdown stopevent">
         <a  class="
-          indicator-primary text-muted" href="#" role="button"
+          indicator-primary text-muted" href="{{ path('app_dashboard_log') }}" role="button"
           id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
             <i style="font-size: 140%" class="bi bi-bell-fill">   &nbsp; </i>
@@ -34,33 +34,20 @@
             <!-- List group -->
             <ul class="list-group list-group-flush notification-list-scroll"  style="cursor: pointer">
               <!-- List group item -->
-            <li class="list-group-item bg-light">
-                <h5 class=" mb-1">Rishi Chopra</h5>
-                <p class="mb-0 text-muted">
-                  Mauris blandit erat id nunc blandit, ac eleifend dolor pretium.
-                </p>
-             </li>
-             <!-- List group item -->
-            <li class="list-group-item">
-              <h5 class=" mb-1">Neha Kannned</h5>
-              <p class="mb-0 text-muted">
-                Proin at elit vel est condimentum elementum id in ante. Maecenas et sapien metus.
-              </p>
-            </li>
-              <!-- List group item -->
-            <li class="list-group-item">
-                <h5 class=" mb-1">Nirmala Chauhan</h5>
-                <p class="mb-0 text-muted">
-                  Morbi maximus urna lobortis elit sollicitudin sollicitudieget elit vel pretium.
-                </p>
-            </li>
-              <!-- List group item -->
-            <li class="list-group-item" >
-              <h5 class=" mb-1">Sina Ray</h5>
-              <p class="mb-0 text-muted">
-                Sed aliquam augue sit amet mauris volutpat hendrerit sed nunc eu diam.
-              </p>
-            </li>
+
+              {% set logs = getfile('/home/tristan/Desktop/OPE/OPEProject/var/log/history.log') %}
+              {% for log in logs %}
+                <li class="list-group-item bg-light">
+                    <h5 class=" mb-1">{{ log[0] }}</h5>
+                    <p class="mb-0 text-muted">
+                      {{ log[1] }}
+                    </p>
+                 </li>
+                {% else %}
+                  <li class="list-group-item bg-light text-center pb-10 pt-10" >
+                    <h4 class=" mb-1">Aucune notification</h4>
+                  </li>
+              {% endfor %}
             </ul>
             <div class="border-top px-3 py-2 text-center">
               <a href="{{ path('app_dashboard_log') }}" class="text-inherit fw-semi-bold">

@@ -145,7 +145,7 @@ class __TwigTemplate_7a1ab08a4f945da1f03762c6db873c69 extends Template
             echo "                        <tr>
                             <td class=\"align-middle\">
                                 <div class=\"text-center\">
-                                    ";
+                                        ";
             // line 43
             echo twig_escape_filter($this->env, $context["log"], "html", null, true);
             echo "
@@ -233,7 +233,7 @@ class __TwigTemplate_7a1ab08a4f945da1f03762c6db873c69 extends Template
                         <tr>
                             <td class=\"align-middle\">
                                 <div class=\"text-center\">
-                                    {{ log }}
+                                        {{ log }}
                                 </div>
                             </td>
                         </tr>

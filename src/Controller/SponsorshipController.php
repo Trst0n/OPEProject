@@ -19,77 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\WorkflowInterface;
 
+
 class SponsorshipController extends AbstractController
 {
-    #[Route('/sponsorships', name: 'app_sponsorship_sponsorships',  methods: ['GET'])]
-    public function sponsorships(SponsorshipRepository $sponsorshipRepository): Response{
 
-        return $this->render('dashboard/match/sponsorships.html.twig', [
-            'sponsorships' => $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSORSHIP])
-        ]);
-    }
-
-    /**
-     * @throws ORMException
-     */
-    #[Route('/user/{id}/sponsorship', name: 'app_sponsorship_new',  methods: ['GET'])]
-    public function sponsorship(Request $student, ProposalRepository $proposalRepository, EntityManagerInterface $entityManager): Response{
-
-        //algo a la place de la contruction ici
-        $sponsors = $proposalRepository->findBy(['state' => LeadState::REGISTERED]);
-        $sponsorships = [];
-
-        foreach ($sponsors as $sponsor){
-            $sponsorship = new Sponsorship();
-            $sponsorship->setSponsorProposal($sponsor)->setSponsorRequest($student)->setWishes([]);
-
-            $entityManager->persist($sponsorship);
-            $sponsorships[] = $sponsorship;
-        }
-        $entityManager->flush();
-
-        return $this->render('dashboard/match/sponsorship.html.twig', [
-            'sponsorships' => $sponsorships,
-            'student' => $student
-        ]);
-    }
-
-    /**
-     * @throws ORMException
-     */
-    #[Route('/validate/{sponsorship}', name: 'app_sponsorship_validate',  methods: ['GET'])]
-    public function sponsorshipvalidation(Sponsorship $sponsorship, WorkflowInterface $sponsoringProcessStateMachine, EntityManagerInterface $entityManager ): Response{
-
-        $sponsorship->setAdministrator($this->getUser()); //Ajout de l'admin qui a validé le match
-        $sponsoringProcessStateMachine->apply($sponsorship, 'to_match');
-        $request = $sponsorship->getSponsorRequest();
-        $entityManager -> flush();
-
-        foreach($request->getSponsorship() as $sponsorship){     /** on libere les parrains qui n'ont pas été choisis */
-            if($sponsorship->getState() === "initialized"){
-                $entityManager->remove($sponsorship);
-            }
-        }
-
-        $this->addFlash('success', "Le parrainage a bien été pris en compte");
-        return $this->redirectToRoute('app_dashboard');
-    }
-
-    #[Route('/matches', name: 'app_dashboard_matches',  methods: ['GET'])]
-    public function matches(SponsorshipRepository $sponsorshipRepository): Response{
-
-        $matches = array_merge($sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_MATCH]),  $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_STUDENT_APPROVED]), $sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_SPONSOR_APPROVED]));
-
-        return $this->render('dashboard/match/matches.html.twig', [
-            'matches' => $matches,
-        ]);
-    }
-
-    #[Route('/match/{id}', name: 'app_dashboard_match',  methods: ['GET'])]
-    public function match(Sponsorship $sponsorship): Response{
-
-        return $this->render('dashboard/match/match.html.twig', [
-            'match' => $sponsorship,
-        ]);
-    }
 }

@@ -165,7 +165,10 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                             </a>
                          </li>
                         <li class=\"nav-item\">
-                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/changelog.html\" >
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"";
+        // line 106
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_log");
+        echo "\" >
                                 <i data-feather=\"git-pull-request\" class=\"nav-icon icon-xs me-2\" ></i>  Historique
                             </a>
                         </li>
@@ -197,7 +200,7 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
 
     public function getDebugInfo()
     {
-        return array (  122 => 61,  116 => 58,  98 => 43,  92 => 40,  86 => 37,  72 => 26,  55 => 12,  49 => 8,  43 => 1,);
+        return array (  170 => 106,  122 => 61,  116 => 58,  98 => 43,  92 => 40,  86 => 37,  72 => 26,  55 => 12,  49 => 8,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -307,7 +310,7 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                             </a>
                          </li>
                         <li class=\"nav-item\">
-                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/changelog.html\" >
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"{{path('app_dashboard_log')}}\" >
                                 <i data-feather=\"git-pull-request\" class=\"nav-icon icon-xs me-2\" ></i>  Historique
                             </a>
                         </li>

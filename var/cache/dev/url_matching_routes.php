@@ -16,19 +16,18 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/api/sponsor' => [[['_route' => 'app_api_sponsor', '_controller' => 'App\\Controller\\ApiController::createSponsor'], null, ['POST' => 0], null, false, false, null]],
         '/api/student' => [[['_route' => 'app_api_student', '_controller' => 'App\\Controller\\ApiController::createStudent'], null, ['POST' => 0], null, false, false, null]],
-        '/' => [[['_route' => 'app_dashboard', '_controller' => 'App\\Controller\\DashboardController::index'], null, ['GET' => 0], null, false, false, null]],
-        '/users' => [[['_route' => 'app_dashboard_users', '_controller' => 'App\\Controller\\DashboardController::users'], null, ['GET' => 0], null, false, false, null]],
-        '/sponsors' => [[['_route' => 'app_dashboard_sponsors', '_controller' => 'App\\Controller\\DashboardController::sponsors'], null, ['GET' => 0], null, false, false, null]],
-        '/students' => [[['_route' => 'app_dashboard_students', '_controller' => 'App\\Controller\\DashboardController::students'], null, ['GET' => 0], null, false, false, null]],
-        '/log' => [[['_route' => 'app_dashboard_log', '_controller' => 'App\\Controller\\DashboardController::log'], null, ['GET' => 0], null, false, false, null]],
-        '/error404' => [[['_route' => 'app_error', '_controller' => 'App\\Controller\\DashboardController::show404'], null, ['GET' => 0], null, false, false, null]],
-        '/perma/link' => [[['_route' => 'app_perma_link', '_controller' => 'App\\Controller\\PermaLinkController::index'], null, null, null, false, false, null]],
+        '/dashboard' => [[['_route' => 'app_dashboard', '_controller' => 'App\\Controller\\DashboardController::index'], null, ['GET' => 0], null, true, false, null]],
+        '/dashboard/users' => [[['_route' => 'app_dashboard_users', '_controller' => 'App\\Controller\\DashboardController::users'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/sponsors' => [[['_route' => 'app_dashboard_sponsors', '_controller' => 'App\\Controller\\DashboardController::sponsors'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/students' => [[['_route' => 'app_dashboard_students', '_controller' => 'App\\Controller\\DashboardController::students'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/log' => [[['_route' => 'app_dashboard_log', '_controller' => 'App\\Controller\\DashboardController::log'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/sponsorships' => [[['_route' => 'app_sponsorship_sponsorships', '_controller' => 'App\\Controller\\DashboardController::sponsorships'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/matches' => [[['_route' => 'app_dashboard_matches', '_controller' => 'App\\Controller\\DashboardController::matches'], null, ['GET' => 0], null, false, false, null]],
+        '/error403' => [[['_route' => 'app_error', '_controller' => 'App\\Controller\\ErrorController::show403'], null, ['GET' => 0], null, false, false, null]],
+        '/generate' => [[['_route' => 'app_perma_link_generate', '_controller' => 'App\\Controller\\PermaLinkController::urlGenerate'], null, null, null, false, false, null]],
+        '/confirm' => [[['_route' => 'app_permalink_confirmation', '_controller' => 'App\\Controller\\PermaLinkController::confirmation'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
-        '/sponsor' => [[['_route' => 'app_sponsor_index', '_controller' => 'App\\Controller\\SponsorController::index'], null, ['GET' => 0], null, true, false, null]],
-        '/sponsorships' => [[['_route' => 'app_sponsorship_sponsorships', '_controller' => 'App\\Controller\\SponsorshipController::sponsorships'], null, ['GET' => 0], null, false, false, null]],
-        '/matches' => [[['_route' => 'app_dashboard_matches', '_controller' => 'App\\Controller\\SponsorshipController::matches'], null, ['GET' => 0], null, false, false, null]],
-        '/student' => [[['_route' => 'app_student_index', '_controller' => 'App\\Controller\\StudentController::index'], null, ['GET' => 0], null, true, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -47,16 +46,16 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/user/([^/]++)(?'
-                    .'|(*:186)'
-                    .'|/sponsorship(*:206)'
+                .'|/dashboard/(?'
+                    .'|user/([^/]++)(?'
+                        .'|(*:199)'
+                        .'|/sponsorship(*:219)'
+                    .')'
+                    .'|validate/([^/]++)(*:245)'
+                    .'|match/([^/]++)(*:267)'
                 .')'
-                .'|/s(?'
-                    .'|ponsor/([^/]++)(*:235)'
-                    .'|tudent/([^/]++)(*:258)'
-                .')'
-                .'|/validate/([^/]++)(*:285)'
-                .'|/match/([^/]++)(*:308)'
+                .'|/info/([^/]++)(*:290)'
+                .'|/yes/([^/]++)/([^/]++)(*:320)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -67,13 +66,13 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        186 => [[['_route' => 'app_dashboard_user', '_controller' => 'App\\Controller\\DashboardController::user'], ['id'], ['GET' => 0], null, false, true, null]],
-        206 => [[['_route' => 'app_sponsorship_new', '_controller' => 'App\\Controller\\SponsorshipController::sponsorship'], ['id'], ['GET' => 0], null, false, false, null]],
-        235 => [[['_route' => 'app_sponsor_show', '_controller' => 'App\\Controller\\SponsorController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        258 => [[['_route' => 'app_student_show', '_controller' => 'App\\Controller\\StudentController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        285 => [[['_route' => 'app_sponsorship_validate', '_controller' => 'App\\Controller\\SponsorshipController::sponsorshipvalidation'], ['sponsorship'], ['GET' => 0], null, false, true, null]],
-        308 => [
-            [['_route' => 'app_dashboard_match', '_controller' => 'App\\Controller\\SponsorshipController::match'], ['id'], ['GET' => 0], null, false, true, null],
+        199 => [[['_route' => 'app_dashboard_user', '_controller' => 'App\\Controller\\DashboardController::user'], ['id'], ['GET' => 0], null, false, true, null]],
+        219 => [[['_route' => 'app_sponsorship_new', '_controller' => 'App\\Controller\\DashboardController::sponsorship'], ['id'], ['GET' => 0], null, false, false, null]],
+        245 => [[['_route' => 'app_sponsorship_validate', '_controller' => 'App\\Controller\\DashboardController::sponsorshipvalidation'], ['sponsorship'], ['GET' => 0], null, false, true, null]],
+        267 => [[['_route' => 'app_dashboard_match', '_controller' => 'App\\Controller\\DashboardController::match'], ['id'], ['GET' => 0], null, false, true, null]],
+        290 => [[['_route' => 'app_perma_link', '_controller' => 'App\\Controller\\PermaLinkController::accountinfo'], ['tkn'], null, null, false, true, null]],
+        320 => [
+            [['_route' => 'app_permalink_emailredirect', '_controller' => 'App\\Controller\\PermaLinkController::emailRedirect'], ['id', 'sp_id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

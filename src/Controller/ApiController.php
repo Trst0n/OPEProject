@@ -91,7 +91,7 @@ class ApiController extends AbstractController
         $this->mailing->sendEmail($data['email'],"Validation d'incritpion", 'mail/student-registration.html.twig', ['firstname' => $data['firstname']]);
         $this->mailing->sendEmail('noreply.ope@gmail.com',"Incription d'un nouvel utilisateur", 'mail/registration.html.twig');
 
-        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un nouveau étudiant/étudiante vient de s'inscrire ( " . $data['firstname'] . " " . $data['lastname'] . " ).");
+        $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un(e) nouvel(le) étudiant(e) vient de s'inscrire ( " . $data['firstname'] . " " . $data['lastname'] . " ).");
 
         return new JsonResponse(
             ['status' => 'ok',], JsonResponse::HTTP_CREATED

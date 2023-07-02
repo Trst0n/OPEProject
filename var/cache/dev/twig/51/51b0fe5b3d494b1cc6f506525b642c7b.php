@@ -39,6 +39,8 @@ class __TwigTemplate_1a5204d5c4d99a4a2bbeca9d06c9e2f5 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "dashboard/error/error403.html.twig"));
 
+        // line 1
+        echo "<div> acces non autorisé</div>";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
 
@@ -54,11 +56,11 @@ class __TwigTemplate_1a5204d5c4d99a4a2bbeca9d06c9e2f5 extends Template
 
     public function getDebugInfo()
     {
-        return array ();
+        return array (  43 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "dashboard/error/error403.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/dashboard/error/error403.html.twig");
+        return new Source("<div> acces non autorisé</div>", "dashboard/error/error403.html.twig", "/home/tristan/Desktop/OPE/OPEProject/templates/dashboard/error/error403.html.twig");
     }
 }

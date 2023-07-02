@@ -1,8 +1,26 @@
-{% include('base.html.twig') %}
 
-{% block title %}Parrains{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-{% block body %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body class="bg-light">
+<div class="container">
     <!-- Error page -->
     <div class="container min-vh-100 d-flex justify-content-center
       align-items-center">
@@ -19,12 +37,12 @@
                     </div>
                     <!-- text -->
                     <h1 class="display-4 fw-bold">Oops! cette page n'existe pas.</h1>
-                    <p class="mb-4">Or simply leverage the expertise of our consultation
-                        team.</p>
+                    <br>
                     <!-- button -->
                     <a href="{{ path('app_dashboard') }}" class="btn btn-primary">Retour</a>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
+</div>
+</body>

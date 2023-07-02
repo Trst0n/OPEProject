@@ -26,8 +26,8 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
         $student = $sponsorship->getSponsorRequest();
         $student->setState(LeadState::MATCHED);
 
-        $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), "Nouveau match!", 'mail/sponsor-match.html.twig', [ 'civility' => ( $sponsor->getCivility() === Civility::Men ? "Mr." : "Mme." ), 'lastname' => $sponsor->getPerson()->getLastname(), 'student' => $student]);
-        $this->mailing->sendEmail($student->getPerson()->getEmail(), "Nouveau match!", 'mail/student-match.html.twig', ['firstname' => $student->getPerson()->getFirstname(), 'sponsor' => $sponsor]);
+        $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), "Nouveau match!", 'mail/sponsor-match.html.twig', [ 'civility' => ( $sponsor->getCivility() === Civility::Men ? "Mr." : "Mme." ), 'lastname' => $sponsor->getPerson()->getLastname(), 'student' => $student, 'id' => $sponsor->getId(),  'idsponsorship' => $sponsorship->getId()]);
+        $this->mailing->sendEmail($student->getPerson()->getEmail(), "Nouveau match!", 'mail/student-match.html.twig', ['firstname' => $student->getPerson()->getFirstname(), 'sponsor' => $sponsor, 'id' => $student->getId(), 'idsponsorship' => $sponsorship->getId()]);
 
         $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un match entre le parrain " . $sponsor->getPerson()->getFirstname() . " et l'étudiant " . $sponsor->getPerson()->getLastname() . "a été validé par ". $sponsorship->getAdministrator()->getUsername() .".");
         $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Un email à été envoyé à l'utilisateur " . $sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname().".");
