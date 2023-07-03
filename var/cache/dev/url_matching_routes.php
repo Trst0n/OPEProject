@@ -27,7 +27,6 @@ return [
         '/dashboard/admin' => [[['_route' => 'app_dashboard_admin', '_controller' => 'App\\Controller\\DashboardController::admin'], null, ['GET' => 0], null, false, false, null]],
         '/dashboard/admin/create' => [[['_route' => 'app_dashboard_admin_create', '_controller' => 'App\\Controller\\DashboardController::createAdmin'], null, ['POST' => 0], null, false, false, null]],
         '/dashboard/profil' => [[['_route' => 'app_dashboard_profile', '_controller' => 'App\\Controller\\DashboardController::profile'], null, ['GET' => 0], null, false, false, null]],
-        '/dashboard/test' => [[['_route' => 'app_dashboard_test', '_controller' => 'App\\Controller\\DashboardController::test'], null, ['GET' => 0], null, false, false, null]],
         '/error403' => [[['_route' => 'app_error', '_controller' => 'App\\Controller\\ErrorController::show403'], null, ['GET' => 0], null, false, false, null]],
         '/generate' => [[['_route' => 'app_perma_link_generate', '_controller' => 'App\\Controller\\PermaLinkController::urlGenerate'], null, null, null, false, false, null]],
         '/confirm' => [[['_route' => 'app_permalink_confirmation', '_controller' => 'App\\Controller\\PermaLinkController::confirmation'], null, null, null, false, false, null]],

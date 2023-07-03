@@ -25,7 +25,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="align-middle">{{ student.person.firstname }} {{ student.person.lastname }}</td>
+                                    <td class="align-middle">{{ student.person.firstname }} &nbsp; {{ student.person.lastname }}</td>
                                     <td class="align-middle">{{ student.civility.value }}</td>
                                     <td class="align-middle">
                                         {% for wish in student.wishes %}
@@ -67,14 +67,13 @@
                             <th>Score</th>
                             <th>Souhaits</th>
                             <th>Valeurs</th>
-                            <th>Ville</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for sponsorship in sponsorships %}
+                        {% for sponsorship in sponsorships | sort((a, b) => b.score <=> a.score ) %}
                             <tr>
-                                <td class="align-middle">{{ sponsorship.sponsorProposal.person.firstname }}{{ sponsorship.sponsorProposal.person.lastname }}
+                                <td class="align-middle">{{ sponsorship.sponsorProposal.person.firstname }} &nbsp;{{ sponsorship.sponsorProposal.person.lastname }}
                                 {% if student.civility.value != sponsorship.sponsorProposal.civility.value %}
                                     <i style="color: red; font-size: 120%" class="bi bi-exclamation-triangle"></i>
                                 {% endif %}
@@ -115,8 +114,6 @@
 
                                     {{ sponsorship.sponsorProposal.city.name }}
                                 </td>
-                                <td class="align-middle">{{ sponsorship.sponsorProposal.city.name }}</td>
-
                                 <td class="align-middle">
                                     <a href="{{ path('app_sponsorship_validate', {'sponsorship' : sponsorship.id}) }}" ><i style="font-size: 150%; color: limegreen" class="bi bi-check-circle"></i></a>
                                 </td>

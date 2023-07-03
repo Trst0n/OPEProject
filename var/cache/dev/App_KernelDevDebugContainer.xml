@@ -111,7 +111,7 @@
     <parameter key="kernel.trusted_hosts" type="collection"/>
     <parameter key="kernel.default_locale">en</parameter>
     <parameter key="kernel.enabled_locales" type="collection"/>
-    <parameter key="kernel.error_controller">error_controller</parameter>
+    <parameter key="kernel.error_controller">App\Controller\ErrorController::show404</parameter>
     <parameter key="debug.file_link_format">%env(default::SYMFONY_IDE)%</parameter>
     <parameter key="asset.request_context.base_path">null</parameter>
     <parameter key="asset.request_context.secure">null</parameter>
@@ -489,6 +489,7 @@
       <argument type="service" id="mailer.mailer"/>
     </service>
     <service id="App\Service\RegistrationService" class="App\Service\RegistrationService" autowire="true" autoconfigure="true">
+      <argument type="service" id="state_machine.sponsoring_process"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="App\Service\FindEntity"/>
       <argument type="service" id="debug.validator"/>
@@ -523,7 +524,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.ydI14S4"/>
+      <argument type="service" id=".service_locator.fgtf4dm"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -561,7 +562,7 @@
     </service>
     <service id="error_controller" class="Symfony\Component\HttpKernel\Controller\ErrorController" public="true">
       <argument type="service" id="http_kernel"/>
-      <argument>error_controller</argument>
+      <argument>App\Controller\ErrorController::show404</argument>
       <argument type="service" id="error_handler.error_renderer.serializer"/>
     </service>
     <service id="exception_listener" class="Symfony\Component\HttpKernel\EventListener\ErrorListener">
@@ -569,7 +570,7 @@
       <tag name="kernel.event_subscriber"/>
       <tag name="container.hot_path"/>
       <tag name="container.hot_path"/>
-      <argument>error_controller</argument>
+      <argument>App\Controller\ErrorController::show404</argument>
       <argument type="service" id="monolog.logger.request" on-invalid="null"/>
       <argument>true</argument>
       <argument type="collection"/>
@@ -2623,6 +2624,21 @@
     </service>
     <service id=".state_machine.sponsoring_process.transition.5" class="Symfony\Component\Workflow\Transition">
       <argument>to_end</argument>
+      <argument>match</argument>
+      <argument>ended</argument>
+    </service>
+    <service id=".state_machine.sponsoring_process.transition.6" class="Symfony\Component\Workflow\Transition">
+      <argument>to_end</argument>
+      <argument>student_approved</argument>
+      <argument>ended</argument>
+    </service>
+    <service id=".state_machine.sponsoring_process.transition.7" class="Symfony\Component\Workflow\Transition">
+      <argument>to_end</argument>
+      <argument>sponsor_approved</argument>
+      <argument>ended</argument>
+    </service>
+    <service id=".state_machine.sponsoring_process.transition.8" class="Symfony\Component\Workflow\Transition">
+      <argument>to_end</argument>
       <argument>sponsorship</argument>
       <argument>ended</argument>
     </service>
@@ -2663,6 +2679,9 @@
         <argument type="service" id=".state_machine.sponsoring_process.transition.3"/>
         <argument type="service" id=".state_machine.sponsoring_process.transition.4"/>
         <argument type="service" id=".state_machine.sponsoring_process.transition.5"/>
+        <argument type="service" id=".state_machine.sponsoring_process.transition.6"/>
+        <argument type="service" id=".state_machine.sponsoring_process.transition.7"/>
+        <argument type="service" id=".state_machine.sponsoring_process.transition.8"/>
       </argument>
       <argument type="collection">
         <argument>initialized</argument>
@@ -3300,7 +3319,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.ydI14S4"/>
+      <argument type="service" id=".service_locator.fgtf4dm"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -7537,12 +7556,6 @@
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
-    <service id=".service_locator.K6fmpDx" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="proposalRepository" type="service_closure" id="App\Repository\ProposalRepository"/>
-      </argument>
-    </service>
     <service id=".service_locator.zxQ8fho" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7565,7 +7578,7 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.ydI14S4" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.fgtf4dm" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\ApiController::algotest" type="service_closure" id=".service_locator.xp91Ge6"/>
@@ -7580,7 +7593,6 @@
         <argument key="App\Controller\DashboardController::sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController::sponsorshipvalidation" type="service_closure" id=".service_locator.lXwBZ8."/>
         <argument key="App\Controller\DashboardController::students" type="service_closure" id=".service_locator.wmzwuy."/>
-        <argument key="App\Controller\DashboardController::test" type="service_closure" id=".service_locator.K6fmpDx"/>
         <argument key="App\Controller\DashboardController::user" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\DashboardController::users" type="service_closure" id=".service_locator.nndhpqw"/>
         <argument key="App\Controller\PermaLinkController::accountinfo" type="service_closure" id=".service_locator.zxQ8fho"/>
@@ -7604,7 +7616,6 @@
         <argument key="App\Controller\DashboardController:sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController:sponsorshipvalidation" type="service_closure" id=".service_locator.lXwBZ8."/>
         <argument key="App\Controller\DashboardController:students" type="service_closure" id=".service_locator.wmzwuy."/>
-        <argument key="App\Controller\DashboardController:test" type="service_closure" id=".service_locator.K6fmpDx"/>
         <argument key="App\Controller\DashboardController:user" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\DashboardController:users" type="service_closure" id=".service_locator.nndhpqw"/>
         <argument key="App\Controller\PermaLinkController:accountinfo" type="service_closure" id=".service_locator.zxQ8fho"/>
@@ -9686,7 +9697,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.ydI14S4"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.fgtf4dm"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9714,7 +9725,7 @@
     <service id=".service_locator.xbTBvZ5" alias=".service_locator.lXwBZ8."/>
     <service id=".service_locator.jYwcnNW" alias=".service_locator..gjCOJy"/>
     <service id=".service_locator.ZBsC.Vs" alias=".service_locator.CkhOV7s"/>
-    <service id=".service_locator.noukR9." alias=".service_locator.ydI14S4"/>
+    <service id=".service_locator.Vm6WgIr" alias=".service_locator.fgtf4dm"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.jij13qc" alias=".service_locator.PBToVFE"/>
@@ -9750,7 +9761,6 @@
     <service id=".service_locator.uUTn3ET" alias=".service_locator.XC6.mbn"/>
     <service id=".service_locator.6so_8_k" alias=".service_locator..gjCOJy"/>
     <service id=".service_locator.zkepl0M" alias=".service_locator.33yFkNY"/>
-    <service id=".service_locator.jL..57i" alias=".service_locator.K6fmpDx"/>
     <service id=".service_locator.ANDaV3E" alias=".service_locator.zxQ8fho"/>
     <service id=".service_locator.Uojf2sf" alias=".service_locator.CkhOV7s"/>
     <service id=".service_locator.7NIAq8D" alias=".service_locator.rSTd.nA"/>

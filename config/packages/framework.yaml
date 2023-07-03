@@ -1,6 +1,6 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
-#    error_controller: App\Controller\ErrorController::show404
+    error_controller: App\Controller\ErrorController::show404
 
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true

@@ -82,7 +82,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
 
               ";
         // line 38
-        $context["logs"] = $this->extensions['App\Twig\AppExtension']->getFile("/home/tristan/Desktop/OPE/OPEProject/var/log/history.log");
+        $context["logs"] = $this->extensions['App\Twig\AppExtension']->getFile("../var/log/history.log");
         // line 39
         echo "              ";
         $context['_parent'] = $context;
@@ -250,7 +250,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
             <ul class=\"list-group list-group-flush notification-list-scroll\"  style=\"cursor: pointer\">
               <!-- List group item -->
 
-              {% set logs = getfile('/home/tristan/Desktop/OPE/OPEProject/var/log/history.log') %}
+              {% set logs = getfile('../var/log/history.log') %}
               {% for log in logs %}
                 <li class=\"list-group-item bg-light\">
                     <h5 class=\" mb-1\">{{ log[0] }}</h5>

@@ -84,11 +84,11 @@ class SponsoringProcessSubscriber implements EventSubscriberInterface
 
         $sponsor = $sponsorship->getSponsorProposal();
         $sponsor->setState(LeadState::REGISTERED);
-        $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), " : Votre parrainage a pris fin", 'mail/sponsor-ending.html.twig');
+        $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), "Votre parrainage a pris fin", 'mail/sponsor-ending.html.twig');
 
         $student = $sponsorship->getSponsorRequest();
         $student->setState(LeadState::OUTDATED);
-        $this->mailing->sendEmail($student->getPerson()->getEmail(), " : Votre parrainage a pris fin", 'mail/student-ending.html.twig');
+        $this->mailing->sendEmail($student->getPerson()->getEmail(), "Votre parrainage a pris fin", 'mail/student-ending.html.twig');
 
         $this->historyLogger->info((new \DateTime())->format('Y-m-d H:i:s') . " : Le parrainage entre ".$sponsor->getPerson()->getFirstname() . " " . $sponsor->getPerson()->getLastname() . " et ". $student->getPerson()->getFirstname() . " " . $student->getPerson()->getLastname() . " vient de prendre fin.");
 

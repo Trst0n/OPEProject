@@ -37,7 +37,7 @@ framework:
 
 
                 !php/const App\Entity\SponsorshipTransition::TRANSITION_TO_END:
-                    from: !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP
+                    from: [ !php/const App\Entity\SponsorshipState::STATE_MATCH, !php/const App\Entity\SponsorshipState::STATE_STUDENT_APPROVED, !php/const App\Entity\SponsorshipState::STATE_SPONSOR_APPROVED, !php/const App\Entity\SponsorshipState::STATE_SPONSORSHIP]
                     to: !php/const App\Entity\SponsorshipState::STATE_ENDED
 
 

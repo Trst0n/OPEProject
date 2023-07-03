@@ -5,16 +5,19 @@ namespace App\Service;
 use App\Entity\Proposal;
 use App\Entity\Request;
 use App\Entity\Sponsor;
+use App\Entity\SponsorshipState;
+use App\Entity\SponsorshipTransition;
 use App\Entity\Student;
 use App\Enum\LeadState;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Workflow\WorkflowInterface;
 
 class RegistrationService
 {
 
-    public function __construct(private EntityManagerInterface $entityManager, private FindEntity $service, private ValidatorInterface $validator)
+    public function __construct(private WorkflowInterface $sponsoringProcessStateMachine,private EntityManagerInterface $entityManager, private FindEntity $service, private ValidatorInterface $validator)
     {
     }
 
@@ -62,9 +65,16 @@ class RegistrationService
                 foreach ($person->getLeads() as $lead){
                     if(! in_array($lead->getId(), $newProposals)){
                         $lead->setState(LeadState::OUTDATED);
+                        foreach( $lead->getSponsorship() as $sponsorship){
+                            if($sponsorship->getState() == SponsorshipState::STATE_INITIALIZED){
+                                $this->entityManager->remove($sponsorship);
+                            }
+                            else{
+                                $this->sponsoringProcessStateMachine->apply($sponsorship, SponsorshipTransition::TRANSITION_TO_END);
+                            }
+                        }
                     }
                 }
-
                 $this->entityManager->flush();
 
                 return true;
@@ -104,6 +114,14 @@ class RegistrationService
                 foreach ($person->getLeads() as $lead){
                     if($lead->getId() != $updatedRequest->getId()){
                         $lead->setState(LeadState::OUTDATED);
+                        foreach( $lead->getSponsorship() as $sponsorship){
+                            if($sponsorship->getState() == SponsorshipState::STATE_INITIALIZED){
+                                $this->entityManager->remove($sponsorship);
+                            }
+                            else{
+                                $this->sponsoringProcessStateMachine->apply($sponsorship, SponsorshipTransition::TRANSITION_TO_END);
+                            }
+                        }
                     }
                 }
                 $this->entityManager->flush();

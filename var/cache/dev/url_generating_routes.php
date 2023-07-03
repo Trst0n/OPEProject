@@ -34,7 +34,6 @@ return [
     'app_dashboard_admin_create' => [[], ['_controller' => 'App\\Controller\\DashboardController::createAdmin'], [], [['text', '/dashboard/admin/create']], [], [], []],
     'app_dashboard_admin_delete' => [['id'], ['_controller' => 'App\\Controller\\DashboardController::deleteAdmin'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/dashboard/admin/delete']], [], [], []],
     'app_dashboard_profile' => [[], ['_controller' => 'App\\Controller\\DashboardController::profile'], [], [['text', '/dashboard/profil']], [], [], []],
-    'app_dashboard_test' => [[], ['_controller' => 'App\\Controller\\DashboardController::test'], [], [['text', '/dashboard/test']], [], [], []],
     'app_error' => [[], ['_controller' => 'App\\Controller\\ErrorController::show403'], [], [['text', '/error403']], [], [], []],
     'app_perma_link_generate' => [[], ['_controller' => 'App\\Controller\\PermaLinkController::urlGenerate'], [], [['text', '/generate']], [], [], []],
     'app_perma_link' => [['tkn'], ['_controller' => 'App\\Controller\\PermaLinkController::accountinfo'], [], [['variable', '/', '[^/]++', 'tkn', true], ['text', '/info']], [], [], []],

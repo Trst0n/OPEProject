@@ -246,12 +246,7 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    #[Route('/test', name: 'app_dashboard_test',  methods: ['GET'])]
-    public function test(ProposalRepository $proposalRepository): Response{
 
-        return new JsonResponse([ 'civility' => $proposalRepository->find(156)->getCivility()]);
-
-    }
 
 
 

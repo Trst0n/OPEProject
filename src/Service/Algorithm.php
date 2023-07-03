@@ -20,14 +20,13 @@ class Algorithm
     {
     }
 
-    public function checkSponsorInSponsorship($sponsorId,SponsorshipRepository $sponsorhipRepository, Request $request){
-        foreach ($sponsorhipRepository->findBy(['state' => SponsorshipState::STATE_INITIALIZED, 'sponsorRequest' => $request]) as $sponsorship) {
+    public function checkSponsorInSponsorship($sponsorId,SponsorshipRepository $sponsorshipRepository, Request $request){
+        foreach ($sponsorshipRepository->findBy(['state' => SponsorshipState::STATE_INITIALIZED, 'sponsorRequest' => $request]) as $sponsorship) {
             if ($sponsorship->getSponsorProposal()->getPerson()->getId() === $sponsorId) {
                 return true;
-            }else{
-                return false;
             }
         }
+        return false;
     }
 // the latitude and longitude needs to be a float
 
@@ -204,7 +203,7 @@ class Algorithm
 
                             // if the student is MEN and sponsor is WOMEN we divide the indicator by 2
 
-                            if(in_array(Civility::Men,$studentSearch["gender"]) && $kpi=="gender" && in_array(Civility::Women,$data["gender"])){
+                            if(in_array(Civility::Men->name,$studentSearch["gender"]) && $key=="gender" && in_array(Civility::Women->name,$data["gender"])){
                                 $scoreTemp+=$value/2;
                                 $indicatorScores[$key] += $value/2;
                                 continue;
