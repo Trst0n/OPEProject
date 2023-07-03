@@ -7,7 +7,7 @@ namespace Proxies\__CG__\App\Entity;
  */
 class City extends \App\Entity\City implements \Doctrine\Persistence\Proxy
 {
-     use \Symfony\Component\VarExporter\LazyGhostTrait {
+    use \Symfony\Component\VarExporter\LazyGhostTrait {
         initializeLazyObject as __load;
         setLazyObjectAsInitialized as public __setInitialized;
         isLazyObjectInitialized as private;
@@ -31,7 +31,7 @@ class City extends \App\Entity\City implements \Doctrine\Persistence\Proxy
         'lng' => [parent::class, 'lng', null],
         'name' => [parent::class, 'name', null],
         'zipcode' => [parent::class, 'zipcode', null],
-    ];
+    ];
 
     /**
      * @internal
