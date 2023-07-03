@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<<< HEAD:var/cache/dev/ContainerUbhf1M9/getForm_Type_ChoiceService.php
 namespace ContainerUbhf1M9;
+========
+namespace ContainerF0uzbxP;
+
+>>>>>>>> 6a6f802302f86a9a99b8b4be4a8dd434c3d3744f:var/cache/dev/ContainerF0uzbxP/getForm_Type_ChoiceService.php
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -17,9 +22,9 @@ class getForm_Type_ChoiceService extends App_KernelDevDebugContainer
      */
     public static function do($container, $lazyLoad = true)
     {
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/form/FormTypeInterface.php';
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/form/AbstractType.php';
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/form/Extension/Core/Type/ChoiceType.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'form'.\DIRECTORY_SEPARATOR.'FormTypeInterface.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'form'.\DIRECTORY_SEPARATOR.'AbstractType.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'form'.\DIRECTORY_SEPARATOR.'Extension'.\DIRECTORY_SEPARATOR.'Core'.\DIRECTORY_SEPARATOR.'Type'.\DIRECTORY_SEPARATOR.'ChoiceType.php';
 
         return $container->privates['form.type.choice'] = new \Symfony\Component\Form\Extension\Core\Type\ChoiceType(($container->privates['form.choice_list_factory.cached'] ?? $container->load('getForm_ChoiceListFactory_CachedService')), ($container->services['translator'] ?? self::getTranslatorService($container)));
     }

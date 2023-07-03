@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<<< HEAD:var/cache/dev/ContainerFmlgJxJ/getMaker_DoctrineHelperService.php
 namespace ContainerFmlgJxJ;
+========
+namespace ContainerF0uzbxP;
+
+>>>>>>>> 6a6f802302f86a9a99b8b4be4a8dd434c3d3744f:var/cache/dev/ContainerF0uzbxP/getMaker_DoctrineHelperService.php
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -17,8 +22,8 @@ class getMaker_DoctrineHelperService extends App_KernelDevDebugContainer
      */
     public static function do($container, $lazyLoad = true)
     {
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/maker-bundle/src/Doctrine/DoctrineHelper.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'maker-bundle'.\DIRECTORY_SEPARATOR.'src'.\DIRECTORY_SEPARATOR.'Doctrine'.\DIRECTORY_SEPARATOR.'DoctrineHelper.php';
 
-        return $container->privates['maker.doctrine_helper'] = new \Symfony\Bundle\MakerBundle\Doctrine\DoctrineHelper('App\\Entity', ($container->services['doctrine'] ?? self::getDoctrineService($container)), ['default' => [['App\\Entity', ($container->privates['doctrine.orm.default_attribute_metadata_driver'] ??= new \Doctrine\ORM\Mapping\Driver\AttributeDriver([(\dirname(__DIR__, 4).'/src/Entity')], true))]]]);
+        return $container->privates['maker.doctrine_helper'] = new \Symfony\Bundle\MakerBundle\Doctrine\DoctrineHelper('App\\Entity', ($container->services['doctrine'] ?? self::getDoctrineService($container)), ['default' => [['App\\Entity', ($container->privates['doctrine.orm.default_attribute_metadata_driver'] ??= new \Doctrine\ORM\Mapping\Driver\AttributeDriver([(\dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'src'.\DIRECTORY_SEPARATOR.'Entity')], true))]]]);
     }
 }

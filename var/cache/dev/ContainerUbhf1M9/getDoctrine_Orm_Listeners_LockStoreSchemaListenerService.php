@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<<< HEAD:var/cache/dev/ContainerUbhf1M9/getDoctrine_Orm_Listeners_LockStoreSchemaListenerService.php
 namespace ContainerUbhf1M9;
+========
+namespace ContainerF0uzbxP;
+
+>>>>>>>> 6a6f802302f86a9a99b8b4be4a8dd434c3d3744f:var/cache/dev/ContainerF0uzbxP/getDoctrine_Orm_Listeners_LockStoreSchemaListenerService.php
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -17,8 +22,8 @@ class getDoctrine_Orm_Listeners_LockStoreSchemaListenerService extends App_Kerne
      */
     public static function do($container, $lazyLoad = true)
     {
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/doctrine-bridge/SchemaListener/AbstractSchemaListener.php';
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/doctrine-bridge/SchemaListener/LockStoreSchemaListener.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'doctrine-bridge'.\DIRECTORY_SEPARATOR.'SchemaListener'.\DIRECTORY_SEPARATOR.'AbstractSchemaListener.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'doctrine-bridge'.\DIRECTORY_SEPARATOR.'SchemaListener'.\DIRECTORY_SEPARATOR.'LockStoreSchemaListener.php';
 
         return $container->privates['doctrine.orm.listeners.lock_store_schema_listener'] = new \Symfony\Bridge\Doctrine\SchemaListener\LockStoreSchemaListener(new RewindableGenerator(fn () => new \EmptyIterator(), 0));
     }

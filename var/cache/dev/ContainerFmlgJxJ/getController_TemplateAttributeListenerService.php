@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<<< HEAD:var/cache/dev/ContainerFmlgJxJ/getController_TemplateAttributeListenerService.php
 namespace ContainerFmlgJxJ;
+========
+namespace ContainerF0uzbxP;
+
+>>>>>>>> 6a6f802302f86a9a99b8b4be4a8dd434c3d3744f:var/cache/dev/ContainerF0uzbxP/getController_TemplateAttributeListenerService.php
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -17,7 +22,7 @@ class getController_TemplateAttributeListenerService extends App_KernelDevDebugC
      */
     public static function do($container, $lazyLoad = true)
     {
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/twig-bridge/EventListener/TemplateAttributeListener.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'twig-bridge'.\DIRECTORY_SEPARATOR.'EventListener'.\DIRECTORY_SEPARATOR.'TemplateAttributeListener.php';
 
         $a = ($container->privates['twig'] ?? self::getTwigService($container));
 

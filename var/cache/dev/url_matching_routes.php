@@ -14,6 +14,7 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/api/algoTest' => [[['_route' => 'app_algotest', '_controller' => 'App\\Controller\\ApiController::algotest'], null, ['GET' => 0], null, false, false, null]],
         '/api/sponsor' => [[['_route' => 'app_api_sponsor', '_controller' => 'App\\Controller\\ApiController::createSponsor'], null, ['POST' => 0], null, false, false, null]],
         '/api/student' => [[['_route' => 'app_api_student', '_controller' => 'App\\Controller\\ApiController::createStudent'], null, ['POST' => 0], null, false, false, null]],
         '/dashboard' => [[['_route' => 'app_dashboard', '_controller' => 'App\\Controller\\DashboardController::index'], null, ['GET' => 0], null, true, false, null]],

@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<<< HEAD:var/cache/dev/ContainerFmlgJxJ/getReminderCommandService.php
 namespace ContainerFmlgJxJ;
+========
+namespace ContainerF0uzbxP;
+
+>>>>>>>> 6a6f802302f86a9a99b8b4be4a8dd434c3d3744f:var/cache/dev/ContainerF0uzbxP/getReminderCommandService.php
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -17,8 +22,8 @@ class getReminderCommandService extends App_KernelDevDebugContainer
      */
     public static function do($container, $lazyLoad = true)
     {
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/console/Command/Command.php';
-        include_once \dirname(__DIR__, 4).'/src/Command/ReminderCommand.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'console'.\DIRECTORY_SEPARATOR.'Command'.\DIRECTORY_SEPARATOR.'Command.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'src'.\DIRECTORY_SEPARATOR.'Command'.\DIRECTORY_SEPARATOR.'ReminderCommand.php';
 
         $container->privates['App\\Command\\ReminderCommand'] = $instance = new \App\Command\ReminderCommand(($container->privates['App\\Repository\\SponsorshipRepository'] ?? $container->load('getSponsorshipRepositoryService')), ($container->privates['App\\Service\\Mailing'] ?? $container->load('getMailingService')));
 

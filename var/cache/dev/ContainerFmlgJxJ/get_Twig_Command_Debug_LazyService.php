@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<<< HEAD:var/cache/dev/ContainerFmlgJxJ/get_Twig_Command_Debug_LazyService.php
 namespace ContainerFmlgJxJ;
+========
+namespace ContainerPgpkAu2;
+
+>>>>>>>> 6a6f802302f86a9a99b8b4be4a8dd434c3d3744f:var/cache/dev/ContainerPgpkAu2/get_Twig_Command_Debug_LazyService.php
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -17,8 +22,8 @@ class get_Twig_Command_Debug_LazyService extends App_KernelDevDebugContainer
      */
     public static function do($container, $lazyLoad = true)
     {
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/console/Command/Command.php';
-        include_once \dirname(__DIR__, 4).'/vendor/symfony/console/Command/LazyCommand.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'console'.\DIRECTORY_SEPARATOR.'Command'.\DIRECTORY_SEPARATOR.'Command.php';
+        include_once \dirname(__DIR__, 4).''.\DIRECTORY_SEPARATOR.'vendor'.\DIRECTORY_SEPARATOR.'symfony'.\DIRECTORY_SEPARATOR.'console'.\DIRECTORY_SEPARATOR.'Command'.\DIRECTORY_SEPARATOR.'LazyCommand.php';
 
         return $container->privates['.twig.command.debug.lazy'] = new \Symfony\Component\Console\Command\LazyCommand('debug:twig', [], 'Show a list of twig functions, filters, globals and tests', false, #[\Closure(name: 'twig.command.debug', class: 'Symfony\\Bridge\\Twig\\Command\\DebugCommand')] fn (): \Symfony\Bridge\Twig\Command\DebugCommand => ($container->privates['twig.command.debug'] ?? $container->load('getTwig_Command_DebugService')));
     }

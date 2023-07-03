@@ -1,6 +1,11 @@
 <?php
 
+<<<<<<<< HEAD:var/cache/dev/ContainerUbhf1M9/getMonolog_Handler_HistoryService.php
 namespace ContainerUbhf1M9;
+========
+namespace ContainerF0uzbxP;
+
+>>>>>>>> 6a6f802302f86a9a99b8b4be4a8dd434c3d3744f:var/cache/dev/ContainerF0uzbxP/getMonolog_Handler_HistoryService.php
 
 use Symfony\Component\DependencyInjection\Argument\RewindableGenerator;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
@@ -17,7 +22,7 @@ class getMonolog_Handler_HistoryService extends App_KernelDevDebugContainer
      */
     public static function do($container, $lazyLoad = true)
     {
-        $container->privates['monolog.handler.history'] = $instance = new \Monolog\Handler\StreamHandler((\dirname(__DIR__, 3).'/log/history.log'), 100, true, NULL, false);
+        $container->privates['monolog.handler.history'] = $instance = new \Monolog\Handler\StreamHandler((\dirname(__DIR__, 3).''.\DIRECTORY_SEPARATOR.'log/history.log'), 100, true, NULL, false);
 
         $instance->pushProcessor(($container->privates['monolog.processor.psr_log_message'] ??= new \Monolog\Processor\PsrLogMessageProcessor()));
 
