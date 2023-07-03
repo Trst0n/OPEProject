@@ -29,7 +29,7 @@
                                                 <h4 class="mb-0">Parrainages</h4>
                                             </div>
                                             <div class="icon-shape icon-md bg-light-primary text-primary rounded-2">
-                                                <i class="bi bi-people-fill"></i>
+                                                <a href="{{ path('app_dashboard_sponsorships') }}"><i class="bi bi-people-fill"></i></a>
                                             </div>
                                         </div>
                                         <!-- project number -->
@@ -178,7 +178,7 @@
                                                             {% if request.state.value == "matched" %}
                                                                 <a href="#"><i style="font-size: 130%" class="bi bi-arrow-up-square"></i></a>
                                                             {% else %}
-                                                                <a href="{{ path('app_sponsorship_new', {'id': request.id}) }}"><i style="font-size: 130%" class="bi bi-plus-square"></i></a>
+                                                                <a href="{{ path('app_dashboard_sponsorship_validation', {'id': request.id}) }}"><i style="font-size: 130%" class="bi bi-plus-square"></i></a>
                                                             {% endif %}
                                                             &nbsp; &nbsp;
                                                             <a href="{{ path('app_dashboard_user', {'id': request.person.id}) }}"><i style="font-size: 130%" class="bi bi-info-circle"></i></a>

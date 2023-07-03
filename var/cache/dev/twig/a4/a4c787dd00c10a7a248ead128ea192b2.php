@@ -112,7 +112,10 @@ class __TwigTemplate_7bb3268b532edd714c18e769d2339e34 extends Template
                                                 <h4 class=\"mb-0\">Parrainages</h4>
                                             </div>
                                             <div class=\"icon-shape icon-md bg-light-primary text-primary rounded-2\">
-                                                <i class=\"bi bi-people-fill\"></i>
+                                                <a href=\"";
+        // line 32
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_sponsorships");
+        echo "\"><i class=\"bi bi-people-fill\"></i></a>
                                             </div>
                                         </div>
                                         <!-- project number -->
@@ -322,7 +325,7 @@ $context["request"], "state", [], "any", false, false, false, 163), "value", [],
             } else {
                 // line 181
                 echo "                                                                <a href=\"";
-                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sponsorship_new", ["id" => twig_get_attribute($this->env, $this->source, $context["request"], "id", [], "any", false, false, false, 181)]), "html", null, true);
+                echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_sponsorship_validation", ["id" => twig_get_attribute($this->env, $this->source, $context["request"], "id", [], "any", false, false, false, 181)]), "html", null, true);
                 echo "\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
                                                             ";
             }
@@ -380,7 +383,7 @@ $context["request"], "state", [], "any", false, false, false, 163), "value", [],
 
     public function getDebugInfo()
     {
-        return array (  352 => 195,  345 => 190,  333 => 184,  330 => 183,  324 => 181,  320 => 179,  318 => 178,  314 => 176,  300 => 164,  298 => 163,  285 => 152,  283 => 151,  276 => 147,  268 => 142,  260 => 137,  255 => 134,  251 => 133,  220 => 105,  216 => 104,  209 => 100,  189 => 83,  185 => 82,  178 => 78,  159 => 62,  155 => 61,  147 => 56,  126 => 38,  122 => 37,  91 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  355 => 195,  348 => 190,  336 => 184,  333 => 183,  327 => 181,  323 => 179,  321 => 178,  317 => 176,  303 => 164,  301 => 163,  288 => 152,  286 => 151,  279 => 147,  271 => 142,  263 => 137,  258 => 134,  254 => 133,  223 => 105,  219 => 104,  212 => 100,  192 => 83,  188 => 82,  181 => 78,  162 => 62,  158 => 61,  150 => 56,  129 => 38,  125 => 37,  117 => 32,  91 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -416,7 +419,7 @@ $context["request"], "state", [], "any", false, false, false, 163), "value", [],
                                                 <h4 class=\"mb-0\">Parrainages</h4>
                                             </div>
                                             <div class=\"icon-shape icon-md bg-light-primary text-primary rounded-2\">
-                                                <i class=\"bi bi-people-fill\"></i>
+                                                <a href=\"{{ path('app_dashboard_sponsorships') }}\"><i class=\"bi bi-people-fill\"></i></a>
                                             </div>
                                         </div>
                                         <!-- project number -->
@@ -565,7 +568,7 @@ $context["request"], "state", [], "any", false, false, false, 163), "value", [],
                                                             {% if request.state.value == \"matched\" %}
                                                                 <a href=\"#\"><i style=\"font-size: 130%\" class=\"bi bi-arrow-up-square\"></i></a>
                                                             {% else %}
-                                                                <a href=\"{{ path('app_sponsorship_new', {'id': request.id}) }}\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
+                                                                <a href=\"{{ path('app_dashboard_sponsorship_validation', {'id': request.id}) }}\"><i style=\"font-size: 130%\" class=\"bi bi-plus-square\"></i></a>
                                                             {% endif %}
                                                             &nbsp; &nbsp;
                                                             <a href=\"{{ path('app_dashboard_user', {'id': request.person.id}) }}\"><i style=\"font-size: 130%\" class=\"bi bi-info-circle\"></i></a>

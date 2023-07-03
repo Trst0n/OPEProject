@@ -21,8 +21,11 @@ return [
         '/dashboard/sponsors' => [[['_route' => 'app_dashboard_sponsors', '_controller' => 'App\\Controller\\DashboardController::sponsors'], null, ['GET' => 0], null, false, false, null]],
         '/dashboard/students' => [[['_route' => 'app_dashboard_students', '_controller' => 'App\\Controller\\DashboardController::students'], null, ['GET' => 0], null, false, false, null]],
         '/dashboard/log' => [[['_route' => 'app_dashboard_log', '_controller' => 'App\\Controller\\DashboardController::log'], null, ['GET' => 0], null, false, false, null]],
-        '/dashboard/sponsorships' => [[['_route' => 'app_sponsorship_sponsorships', '_controller' => 'App\\Controller\\DashboardController::sponsorships'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/sponsorships' => [[['_route' => 'app_dashboard_sponsorships', '_controller' => 'App\\Controller\\DashboardController::sponsorships'], null, ['GET' => 0], null, false, false, null]],
         '/dashboard/matches' => [[['_route' => 'app_dashboard_matches', '_controller' => 'App\\Controller\\DashboardController::matches'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/admin' => [[['_route' => 'app_dashboard_admin', '_controller' => 'App\\Controller\\DashboardController::admin'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/admin/create' => [[['_route' => 'app_dashboard_admin_create', '_controller' => 'App\\Controller\\DashboardController::createAdmin'], null, ['POST' => 0], null, false, false, null]],
+        '/dashboard/profil' => [[['_route' => 'app_dashboard_profile', '_controller' => 'App\\Controller\\DashboardController::profile'], null, ['GET' => 0], null, false, false, null]],
         '/error403' => [[['_route' => 'app_error', '_controller' => 'App\\Controller\\ErrorController::show403'], null, ['GET' => 0], null, false, false, null]],
         '/generate' => [[['_route' => 'app_perma_link_generate', '_controller' => 'App\\Controller\\PermaLinkController::urlGenerate'], null, null, null, false, false, null]],
         '/confirm' => [[['_route' => 'app_permalink_confirmation', '_controller' => 'App\\Controller\\PermaLinkController::confirmation'], null, null, null, false, false, null]],
@@ -53,9 +56,10 @@ return [
                     .')'
                     .'|validate/([^/]++)(*:245)'
                     .'|match/([^/]++)(*:267)'
+                    .'|admin/delete/([^/]++)(*:296)'
                 .')'
-                .'|/info/([^/]++)(*:290)'
-                .'|/yes/([^/]++)/([^/]++)(*:320)'
+                .'|/info/([^/]++)(*:319)'
+                .'|/yes/([^/]++)/([^/]++)(*:349)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -67,11 +71,12 @@ return [
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
         199 => [[['_route' => 'app_dashboard_user', '_controller' => 'App\\Controller\\DashboardController::user'], ['id'], ['GET' => 0], null, false, true, null]],
-        219 => [[['_route' => 'app_sponsorship_new', '_controller' => 'App\\Controller\\DashboardController::sponsorship'], ['id'], ['GET' => 0], null, false, false, null]],
+        219 => [[['_route' => 'app_dashboard_sponsorship_validation', '_controller' => 'App\\Controller\\DashboardController::sponsorship'], ['id'], ['GET' => 0], null, false, false, null]],
         245 => [[['_route' => 'app_sponsorship_validate', '_controller' => 'App\\Controller\\DashboardController::sponsorshipvalidation'], ['sponsorship'], ['GET' => 0], null, false, true, null]],
         267 => [[['_route' => 'app_dashboard_match', '_controller' => 'App\\Controller\\DashboardController::match'], ['id'], ['GET' => 0], null, false, true, null]],
-        290 => [[['_route' => 'app_perma_link', '_controller' => 'App\\Controller\\PermaLinkController::accountinfo'], ['tkn'], null, null, false, true, null]],
-        320 => [
+        296 => [[['_route' => 'app_dashboard_admin_delete', '_controller' => 'App\\Controller\\DashboardController::deleteAdmin'], ['id'], ['GET' => 0], null, false, true, null]],
+        319 => [[['_route' => 'app_perma_link', '_controller' => 'App\\Controller\\PermaLinkController::accountinfo'], ['tkn'], null, null, false, true, null]],
+        349 => [
             [['_route' => 'app_permalink_emailredirect', '_controller' => 'App\\Controller\\PermaLinkController::emailRedirect'], ['id', 'sp_id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

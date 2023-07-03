@@ -27,6 +27,17 @@
         {% include "partials/header.html.twig" %}
         <!-- Container fluid -->
 {#        <div class="container-fluid px-6">#}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
             {% block body %}{% endblock %}
 {#        </div>#}
     </div>

@@ -175,7 +175,10 @@ class __TwigTemplate_de3c1c2c6e3ca452d50632fa91d655f0 extends Template
                             </td>
                             <td class=\"align-middle\">
                                 <div class=\"text-center\">
-                                    nom admin
+                                    ";
+            // line 75
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["sponsorship"], "administrator", [], "any", false, false, false, 75), "username", [], "any", false, false, false, 75), "html", null, true);
+            echo "
                                 </div>
                             </td>
                             <td class=\"align-middle\">
@@ -219,7 +222,7 @@ class __TwigTemplate_de3c1c2c6e3ca452d50632fa91d655f0 extends Template
 
     public function getDebugInfo()
     {
-        return array (  193 => 85,  172 => 70,  164 => 65,  154 => 60,  144 => 55,  139 => 52,  135 => 51,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  196 => 85,  180 => 75,  172 => 70,  164 => 65,  154 => 60,  144 => 55,  139 => 52,  135 => 51,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -298,7 +301,7 @@ class __TwigTemplate_de3c1c2c6e3ca452d50632fa91d655f0 extends Template
                             </td>
                             <td class=\"align-middle\">
                                 <div class=\"text-center\">
-                                    nom admin
+                                    {{ sponsorship.administrator.username }}
                                 </div>
                             </td>
                             <td class=\"align-middle\">

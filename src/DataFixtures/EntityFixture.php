@@ -132,7 +132,7 @@ class EntityFixture extends Fixture
 
         $admin = new Administrator();
         $admin->setUsername("admin")
-            ->setPassword($this->passwordHasher->hashPassword($admin, "admin"));
+            ->setPassword($this->passwordHasher->hashPassword($admin, "admin"))->setRoles(["ROLE_SUPER_ADMIN"]);
 
         $manager->persist($admin);
 

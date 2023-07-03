@@ -113,7 +113,7 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                                     <li class=\"nav-item\">
                                         <a class=\"nav-link @@if (context.page === 'signin') { active }\" href=\"";
         // line 58
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_sponsorship_sponsorships");
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_sponsorships");
         echo "\"> Parrainages</a>
                                     </li>
                                     <li class=\"nav-item\">
@@ -155,7 +155,10 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
 
                         <!-- Nav item -->
                         <li class=\"nav-item\">
-                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/index.html\" >
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"";
+        // line 96
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_admin");
+        echo "\" >
                                 <i data-feather=\"clipboard\" class=\"nav-icon icon-xs me-2\" ></i>  Administrateurs
                             </a>
                          </li>
@@ -200,7 +203,7 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
 
     public function getDebugInfo()
     {
-        return array (  170 => 106,  122 => 61,  116 => 58,  98 => 43,  92 => 40,  86 => 37,  72 => 26,  55 => 12,  49 => 8,  43 => 1,);
+        return array (  173 => 106,  160 => 96,  122 => 61,  116 => 58,  98 => 43,  92 => 40,  86 => 37,  72 => 26,  55 => 12,  49 => 8,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -262,7 +265,7 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
                             <div id=\"navAuthentication\" class=\"collapse @@if (context.page_group === 'authentication') { show }\" data-bs-parent=\"#sideNavbar\">
                                 <ul class=\"nav flex-column\">
                                     <li class=\"nav-item\">
-                                        <a class=\"nav-link @@if (context.page === 'signin') { active }\" href=\"{{ path('app_sponsorship_sponsorships')}}\"> Parrainages</a>
+                                        <a class=\"nav-link @@if (context.page === 'signin') { active }\" href=\"{{ path('app_dashboard_sponsorships')}}\"> Parrainages</a>
                                     </li>
                                     <li class=\"nav-item\">
                                         <a class=\"nav-link @@if (context.page === 'signup') { active } \" href=\"{{ path('app_dashboard_matches')}}\"> Matchs</a>
@@ -300,7 +303,7 @@ class __TwigTemplate_0789c8eb5a8cdfa42b62049b2c57da9c extends Template
 
                         <!-- Nav item -->
                         <li class=\"nav-item\">
-                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"@@webRoot/docs/index.html\" >
+                            <a class=\"nav-link has-arrow @@if (context.page === 'docs') { active }\" href=\"{{path('app_dashboard_admin')}}\" >
                                 <i data-feather=\"clipboard\" class=\"nav-icon icon-xs me-2\" ></i>  Administrateurs
                             </a>
                          </li>

@@ -145,7 +145,10 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
         // line 73
         echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 73, $this->source); })()), "user", [], "any", false, false, false, 73), "userIdentifier", [], "any", false, false, false, 73), "html", null, true);
         echo "</h5>
-              <a href=\"#\" class=\"text-inherit fs-6\">Voir le profil</a>
+              <a href=\"";
+        // line 74
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_dashboard_profile");
+        echo "\" class=\"text-inherit fs-6\">Voir le profil</a>
             </div>
             <div class=\" dropdown-divider mt-3 mb-2\"></div>
           </div>
@@ -205,7 +208,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
 
     public function getDebugInfo()
     {
-        return array (  175 => 96,  158 => 82,  146 => 73,  123 => 53,  119 => 51,  110 => 47,  101 => 43,  96 => 41,  93 => 40,  87 => 39,  85 => 38,  59 => 15,  43 => 1,);
+        return array (  178 => 96,  161 => 82,  150 => 74,  146 => 73,  123 => 53,  119 => 51,  110 => 47,  101 => 43,  96 => 41,  93 => 40,  87 => 39,  85 => 38,  59 => 15,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -283,7 +286,7 @@ class __TwigTemplate_f8fd44ad9266c88a865f881ab2c04508 extends Template
 
             <div class=\"lh-1 \">
               <h5 class=\"mb-1\"> {{ app.user.userIdentifier }}</h5>
-              <a href=\"#\" class=\"text-inherit fs-6\">Voir le profil</a>
+              <a href=\"{{ path('app_dashboard_profile') }}\" class=\"text-inherit fs-6\">Voir le profil</a>
             </div>
             <div class=\" dropdown-divider mt-3 mb-2\"></div>
           </div>

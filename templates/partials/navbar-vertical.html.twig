@@ -55,7 +55,7 @@
                             <div id="navAuthentication" class="collapse @@if (context.page_group === 'authentication') { show }" data-bs-parent="#sideNavbar">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link @@if (context.page === 'signin') { active }" href="{{ path('app_sponsorship_sponsorships')}}"> Parrainages</a>
+                                        <a class="nav-link @@if (context.page === 'signin') { active }" href="{{ path('app_dashboard_sponsorships')}}"> Parrainages</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link @@if (context.page === 'signup') { active } " href="{{ path('app_dashboard_matches')}}"> Matchs</a>
@@ -93,7 +93,7 @@
 
                         <!-- Nav item -->
                         <li class="nav-item">
-                            <a class="nav-link has-arrow @@if (context.page === 'docs') { active }" href="@@webRoot/docs/index.html" >
+                            <a class="nav-link has-arrow @@if (context.page === 'docs') { active }" href="{{path('app_dashboard_admin')}}" >
                                 <i data-feather="clipboard" class="nav-icon icon-xs me-2" ></i>  Administrateurs
                             </a>
                          </li>

@@ -85,9 +85,45 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
         echo "        <!-- Container fluid -->
 ";
         // line 30
+        echo "        ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 30, $this->source); })()), "flashes", [0 => "success"], "method", false, false, false, 30));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 31
+            echo "            <div class=\"alert alert-success\">
+                ";
+            // line 32
+            echo twig_escape_filter($this->env, $context["message"], "html", null, true);
+            echo "
+            </div>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 35
+        echo "
+        ";
+        // line 36
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 36, $this->source); })()), "flashes", [0 => "danger"], "method", false, false, false, 36));
+        foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
+            // line 37
+            echo "            <div class=\"alert alert-danger\">
+                ";
+            // line 38
+            echo twig_escape_filter($this->env, $context["message"], "html", null, true);
+            echo "
+            </div>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 41
         echo "            ";
         $this->displayBlock('body', $context, $blocks);
-        // line 32
+        // line 43
         echo "    </div>
 </div>
 </body>
@@ -174,7 +210,7 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
 
     }
 
-    // line 30
+    // line 41
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -204,7 +240,7 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
 
     public function getDebugInfo()
     {
-        return array (  178 => 30,  166 => 14,  161 => 13,  151 => 12,  139 => 9,  134 => 8,  124 => 7,  105 => 5,  91 => 32,  88 => 30,  85 => 28,  83 => 27,  79 => 25,  77 => 24,  65 => 16,  63 => 12,  60 => 11,  58 => 7,  53 => 5,  47 => 1,);
+        return array (  214 => 41,  202 => 14,  197 => 13,  187 => 12,  175 => 9,  170 => 8,  160 => 7,  141 => 5,  127 => 43,  124 => 41,  115 => 38,  112 => 37,  108 => 36,  105 => 35,  96 => 32,  93 => 31,  88 => 30,  85 => 28,  83 => 27,  79 => 25,  77 => 24,  65 => 16,  63 => 12,  60 => 11,  58 => 7,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -238,6 +274,17 @@ class __TwigTemplate_8743dc50049ffc010269db8dde14d5f5 extends Template
         {% include \"partials/header.html.twig\" %}
         <!-- Container fluid -->
 {#        <div class=\"container-fluid px-6\">#}
+        {% for message in app.flashes('success') %}
+            <div class=\"alert alert-success\">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('danger') %}
+            <div class=\"alert alert-danger\">
+                {{ message }}
+            </div>
+        {% endfor %}
             {% block body %}{% endblock %}
 {#        </div>#}
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Administrator;
 use App\Entity\Person;
 use App\Entity\Request;
 
@@ -9,16 +10,19 @@ use App\Entity\Sponsorship;
 use App\Entity\SponsorshipState;
 use App\Entity\Student;
 use App\Enum\LeadState;
+use App\Repository\AdministratorRepository;
 use App\Repository\PersonRepository;
 use App\Repository\ProposalRepository;
 use App\Repository\RequestRepository;
 use App\Repository\SponsorRepository;
 use App\Repository\SponsorshipRepository;
 use App\Repository\StudentRepository;
+use App\Service\Mailing;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Workflow\WorkflowInterface;
 
@@ -133,7 +137,7 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    #[Route('/sponsorships', name: 'app_sponsorship_sponsorships',  methods: ['GET'])]
+    #[Route('/sponsorships', name: 'app_dashboard_sponsorships',  methods: ['GET'])]
     public function sponsorships(SponsorshipRepository $sponsorshipRepository): Response{
 
         return $this->render('dashboard/match/sponsorships.html.twig', [
@@ -144,7 +148,7 @@ class DashboardController extends AbstractController
     /**
      * @throws ORMException
      */
-    #[Route('/user/{id}/sponsorship', name: 'app_sponsorship_new',  methods: ['GET'])]
+    #[Route('/user/{id}/sponsorship', name: 'app_dashboard_sponsorship_validation',  methods: ['GET'])]
     public function sponsorship(Request $student, ProposalRepository $proposalRepository, EntityManagerInterface $entityManager): Response{
 
         //algo a la place de la contruction ici
@@ -206,11 +210,53 @@ class DashboardController extends AbstractController
         ]);
     }
 
+    #[Route('/admin', name: 'app_dashboard_admin',  methods: ['GET'])]
+    public function admin(AdministratorRepository $administratorRepository): Response{
 
+        return $this->render('dashboard/users/administrator.html.twig', [
+            'administrators' => $administratorRepository->findAll()
+        ]);
+    }
 
+    #[Route('/admin/create', name: 'app_dashboard_admin_create',  methods: ['POST'])]
+    public function createAdmin(AdministratorRepository $administratorRepository ,Mailing $mailing, UserPasswordHasherInterface $passwordHasher, \Symfony\Component\HttpFoundation\Request $request, EntityManagerInterface $manager): Response{
 
+        if($administratorRepository->findBy(['username' => $request->get('username')])){
+            $this->addFlash('danger', "L'identifiant ". $request->get('username') . " est déjà utilisé par un administrateur.");
+            return $this->redirectToRoute('app_dashboard_admin');
+        }
+       
 
+        $newAdmin = new Administrator();
+        $newAdmin->setUsername($request->get('username'))->setPassword($passwordHasher->hashPassword($newAdmin, $request->get('password')));
+        $manager->persist($newAdmin);
 
+        $this->addFlash('success', "Nouveau compte administrateur créé");
+        $mailing->sendEmail($request->get('email'), "Votre nouveau compte sur la plateforme OPE", 'mail/account.html.twig', ['pwd' => $request->get('password'), 'username' => $newAdmin->getUsername()]);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_dashboard_admin');
+}
+
+    #[Route('/admin/delete/{id}', name: 'app_dashboard_admin_delete',  methods: ['GET'])]
+    public function deleteAdmin(Administrator $administrator ,EntityManagerInterface $manager): Response{
+
+        if(in_array('ROLE_SUPER_ADMIN', $administrator->getRoles())){
+            $this->addFlash('danger', "Vous n'avez pas les droits pour supprimer cet administrateur.");
+            return $this->redirectToRoute('app_dashboard_admin');
+        }
+
+        $manager->remove($administrator);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_dashboard_admin');
+    }
+    #[Route('/profil', name: 'app_dashboard_profile',  methods: ['GET'])]
+    public function profile(): Response{
+
+        return $this->render('dashboard/users/profile.html.twig', [
+        ]);
+    }
 
 
 
