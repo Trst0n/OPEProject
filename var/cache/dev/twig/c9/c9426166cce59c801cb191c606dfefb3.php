@@ -48,7 +48,16 @@ class __TwigTemplate_dea5305fe349a5e421e45408397b623e extends Template
     <br>
     Faisant suite à votre inscription sur la plateforme de parrainage Ôpe, merci de nous indiquer si
     le contact avec votre parrain ou votre marraine est bien établi.<br>
-    [OUI] [NON]<br>
+    <a href=\"http://127.0.0.1:8100/yes/";
+        // line 6
+        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo "/";
+        echo twig_escape_filter($this->env, (isset($context["idsponsorship"]) || array_key_exists("idsponsorship", $context) ? $context["idsponsorship"] : (function () { throw new RuntimeError('Variable "idsponsorship" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo "\">OUI</a> <a href=\"http://127.0.0.1:8100/yes/";
+        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo "/";
+        echo twig_escape_filter($this->env, (isset($context["idsponsorship"]) || array_key_exists("idsponsorship", $context) ? $context["idsponsorship"] : (function () { throw new RuntimeError('Variable "idsponsorship" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo "\">NON</a><br>
     <br>
     Cordialement,<br>
     <br>
@@ -74,7 +83,7 @@ class __TwigTemplate_dea5305fe349a5e421e45408397b623e extends Template
 
     public function getDebugInfo()
     {
-        return array (  46 => 2,  43 => 1,);
+        return array (  53 => 6,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -84,7 +93,7 @@ class __TwigTemplate_dea5305fe349a5e421e45408397b623e extends Template
     <br>
     Faisant suite à votre inscription sur la plateforme de parrainage Ôpe, merci de nous indiquer si
     le contact avec votre parrain ou votre marraine est bien établi.<br>
-    [OUI] [NON]<br>
+    <a href=\"http://127.0.0.1:8100/yes/{{id}}/{{ idsponsorship }}\">OUI</a> <a href=\"http://127.0.0.1:8100/yes/{{id}}/{{ idsponsorship }}\">NON</a><br>
     <br>
     Cordialement,<br>
     <br>

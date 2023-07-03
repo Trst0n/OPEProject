@@ -27,6 +27,7 @@ return [
         '/dashboard/admin' => [[['_route' => 'app_dashboard_admin', '_controller' => 'App\\Controller\\DashboardController::admin'], null, ['GET' => 0], null, false, false, null]],
         '/dashboard/admin/create' => [[['_route' => 'app_dashboard_admin_create', '_controller' => 'App\\Controller\\DashboardController::createAdmin'], null, ['POST' => 0], null, false, false, null]],
         '/dashboard/profil' => [[['_route' => 'app_dashboard_profile', '_controller' => 'App\\Controller\\DashboardController::profile'], null, ['GET' => 0], null, false, false, null]],
+        '/dashboard/test' => [[['_route' => 'app_dashboard_test', '_controller' => 'App\\Controller\\DashboardController::test'], null, ['GET' => 0], null, false, false, null]],
         '/error403' => [[['_route' => 'app_error', '_controller' => 'App\\Controller\\ErrorController::show403'], null, ['GET' => 0], null, false, false, null]],
         '/generate' => [[['_route' => 'app_perma_link_generate', '_controller' => 'App\\Controller\\PermaLinkController::urlGenerate'], null, null, null, false, false, null]],
         '/confirm' => [[['_route' => 'app_permalink_confirmation', '_controller' => 'App\\Controller\\PermaLinkController::confirmation'], null, null, null, false, false, null]],
@@ -61,6 +62,7 @@ return [
                 .')'
                 .'|/info/([^/]++)(*:319)'
                 .'|/yes/([^/]++)/([^/]++)(*:349)'
+                .'|/end/([^/]++)/([^/]++)(*:379)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -77,8 +79,9 @@ return [
         267 => [[['_route' => 'app_dashboard_match', '_controller' => 'App\\Controller\\DashboardController::match'], ['id'], ['GET' => 0], null, false, true, null]],
         296 => [[['_route' => 'app_dashboard_admin_delete', '_controller' => 'App\\Controller\\DashboardController::deleteAdmin'], ['id'], ['GET' => 0], null, false, true, null]],
         319 => [[['_route' => 'app_perma_link', '_controller' => 'App\\Controller\\PermaLinkController::accountinfo'], ['tkn'], null, null, false, true, null]],
-        349 => [
-            [['_route' => 'app_permalink_emailredirect', '_controller' => 'App\\Controller\\PermaLinkController::emailRedirect'], ['id', 'sp_id'], null, null, false, true, null],
+        349 => [[['_route' => 'app_permalink_emailredirect', '_controller' => 'App\\Controller\\PermaLinkController::emailRedirect'], ['id', 'sp_id'], null, null, false, true, null]],
+        379 => [
+            [['_route' => 'app_permalink_emailredirect_end', '_controller' => 'App\\Controller\\PermaLinkController::emailRedirectEnd'], ['id', 'sp_id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

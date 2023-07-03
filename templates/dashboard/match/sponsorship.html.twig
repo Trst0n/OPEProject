@@ -1,8 +1,56 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Parrainage{% endblock %}
 
 {% block body %}
+
+    <div class="row mt-6">
+        <div class="col-md-12 col-12">
+            <div class="container-fluid mt-2 px-6">
+
+                <div class="card">
+                    <div class="card-header bg-white  py-3">Résumé de l'étudiant</div>
+                    <div class="table-responsive text-center" style="font-size: 17px">
+                        <table class="table text-nowrap mb-0">
+                            <thead class="table-light" >
+                            <tr>
+                                <th>Etudiant</th>
+                                <th>Genre</th>
+                                <th>Souhaits</th>
+                                <th>Langues</th>
+                                <th>Activités</th>
+                                <th>Ville</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle">{{ student.person.firstname }} {{ student.person.lastname }}</td>
+                                    <td class="align-middle">{{ student.civility.value }}</td>
+                                    <td class="align-middle">
+                                        {% for wish in student.wishes %}
+                                            {{ wish.value }}
+                                        {% endfor %}
+                                    </td>
+                                    <td class="align-middle">
+                                        {% for language in student.languages %}
+                                            {{ language.name }}
+                                        {% endfor %}
+                                    </td>
+                                    <td class="align-middle">
+                                        {% for field in student.curriculum.fields %}
+                                            {{ field.name }}
+                                        {% endfor %}
+                                    </td>
+                                    <td class="align-middle">{{ student.city.name }}</td>
+                                <tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row mt-6">
         <div class="col-md-12 col-12">
@@ -18,37 +66,42 @@
                             <th>Parrain</th>
                             <th>Score</th>
                             <th>Souhaits</th>
-                            <th>Secteur</th>
+                            <th>Valeurs</th>
                             <th>Ville</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% set score = 100 %}
                         {% for sponsorship in sponsorships %}
-                            {% set score = score - random(0,4) %}
                             <tr>
                                 <td class="align-middle">{{ sponsorship.sponsorProposal.person.firstname }}{{ sponsorship.sponsorProposal.person.lastname }}
                                 {% if student.civility.value != sponsorship.sponsorProposal.civility.value %}
                                     <i style="color: red; font-size: 120%" class="bi bi-exclamation-triangle"></i>
-
-
                                 {% endif %}
 
                                 </td>
-                                <td class="align-middle">{{ score }}%</td>
+                                <td class="align-middle">{{ sponsorship.score }}</td>
                                 <td class="align-middle">
-                                    {% set cpt = 0 %}
-
-                                    {% for wish in sponsorship.wishes %}
-                                        {% set cpt = cpt + 1 %}
-                                        {{ wish.value }}
-                                        {% if cpt < sponsorship.wishes | length %}
-                                            ,
-                                        {% endif %}
-                                    {% endfor %}
+                                    Langues : {{ sponsorship.scoreIndicators['language'] }} <br>
+                                    Genre : {{ sponsorship.scoreIndicators['gender'] }} <br>
+                                    Souhaits : {{ sponsorship.scoreIndicators['objective'] }} <br>
+                                    Domaine : {{ sponsorship.scoreIndicators['domain'] }} <br>
+                                    Localisation : {{ sponsorship.scoreIndicators['location'] }} <br>
                                 </td>
                                 <td class="align-middle">
+                                    {% for language in  sponsorship.sponsorProposal.languages %}
+                                        {{ language.value }}
+                                    {% endfor %}
+                                    <br>
+                                    {{ sponsorship.sponsorProposal.civility.value }}
+                                    <br>
+
+                                    {% for wish in  sponsorship.sponsorProposal.wishes %}
+                                        {{ wish.value }}
+                                    {% endfor %}
+                                    <br>
+
+
                                     {% set cpt = 0 %}
 
                                     {% for field in sponsorship.sponsorProposal.workfields %}
@@ -58,6 +111,9 @@
                                             ,
                                         {% endif %}
                                     {% endfor %}
+                                    <br>
+
+                                    {{ sponsorship.sponsorProposal.city.name }}
                                 </td>
                                 <td class="align-middle">{{ sponsorship.sponsorProposal.city.name }}</td>
 

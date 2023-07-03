@@ -24,8 +24,6 @@ class PermaLinkController extends AbstractController
     #[Route('/generate', name: 'app_perma_link_generate')]
     public function urlGenerate(Person $person): Response
     {
-
-
         return $this->render('perma_link/index.html.twig', [
             'controller_name' => 'PermaLinkController',
         ]);
@@ -34,11 +32,11 @@ class PermaLinkController extends AbstractController
     #[Route('/info/{tkn}', name: 'app_perma_link')]
     public function accountinfo(PersonRepository $personRepository, Request $request): Response
     {
-        $token = $request->request->get('tkn');
-
-        if ($this->isCsrfTokenValid('login', $token)) {
-            // redirect
-        }
+//        $token = $request->request->get('tkn');
+//
+//        if ($this->isCsrfTokenValid('login', $token)) {
+//            // redirect
+//        }
 
 
         return $this->render('perma_link/index.html.twig', [
@@ -63,6 +61,15 @@ class PermaLinkController extends AbstractController
                 $sponsoringProcessStateMachine->apply($sponsorship, SponsorshipTransition::TRANSITION_SP_APPROVE);
             }
         }
+
+        $manager->flush();
+        return $this->redirectToRoute('app_permalink_confirmation');
+    }
+
+    #[Route('/end/{id}/{sp_id}', name: 'app_permalink_emailredirect_end')]
+    public function emailRedirectEnd(Lead $lead, #[MapEntity(expr: 'repository.find(sp_id)')] Sponsorship $sponsorship, EntityManagerInterface $manager,WorkflowInterface $sponsoringProcessStateMachine): Response
+    {
+        $sponsoringProcessStateMachine->apply($sponsorship,SponsorshipTransition::TRANSITION_TO_END);
 
         $manager->flush();
         return $this->redirectToRoute('app_permalink_confirmation');

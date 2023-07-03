@@ -50,7 +50,7 @@ class __TwigTemplate_afcc1b28076a2aac0687f2241386ecaa extends Template
     <br>
     Faisant suite à votre inscription sur la plateforme de parrainage Ôpe, merci de nous indiquer si
     le contact avec votre étudiant est bien établi.<br>
-    [OUI] [NON]<br>
+    <a href=\"\">OUI</a> <a href=\"\">NON</a><br>
     <br>
     Cordialement,<br>
     <br>
@@ -86,7 +86,7 @@ class __TwigTemplate_afcc1b28076a2aac0687f2241386ecaa extends Template
     <br>
     Faisant suite à votre inscription sur la plateforme de parrainage Ôpe, merci de nous indiquer si
     le contact avec votre étudiant est bien établi.<br>
-    [OUI] [NON]<br>
+    <a href=\"\">OUI</a> <a href=\"\">NON</a><br>
     <br>
     Cordialement,<br>
     <br>

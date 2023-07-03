@@ -37,12 +37,12 @@ class ReminderCommand extends Command
 
         foreach ($sponsors as $sponsor){
             $this->mailing->sendEmail($sponsor->getPerson()->getEmail(), "Rappel concernant votre parrainage", "mail/sponsor-reminder.html.twig",
-            ['civility' => ($sponsor->getCivility() == Civility::Men ? "Mr." : "Mme."), 'lastname' => $sponsor->getPerson()->getLastname()]);
+            ['civility' => ($sponsor->getCivility() == Civility::Men ? "Mr." : "Mme."), 'lastname' => $sponsor->getPerson()->getLastname(), 'idsponsorship' => $sponsor->getSponsorship()->last()->getId(), 'id'=>$sponsor->getId()]);
         }
 
         foreach ($students as $student){
             $this->mailing->sendEmail($student->getPerson()->getEmail(), "Rappel concernant votre parrainage", "mail/student-reminder.html.twig",
-            ['lastname' => $student->getPerson()->getLastname()]);
+            ['firstname' => $student->getPerson()->getFirstname(), 'id' => $student->getId(), 'idsponsorship' => $student->getSponsorship()->last()->getId()]);
         }
 
         // ENVOI DES RAPPELS POUR LES MATCHS TOUTES LES 2 SEMAINES
@@ -69,7 +69,7 @@ class ReminderCommand extends Command
 
         foreach ($students as $student){
             $this->mailing->sendEmail($student->getPerson()->getEmail(), "Rappel concernant votre parrainage", "mail/student-match-reminder.html.twig",
-                ['lastname' => $student->getPerson()->getLastname()]);
+                ['firstname' => $student->getPerson()->getLastname()]);
         }
 
         return Command::SUCCESS;

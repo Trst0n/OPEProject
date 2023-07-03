@@ -21,6 +21,7 @@ use App\Service\Mailing;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -149,23 +150,10 @@ class DashboardController extends AbstractController
      * @throws ORMException
      */
     #[Route('/user/{id}/sponsorship', name: 'app_dashboard_sponsorship_validation',  methods: ['GET'])]
-    public function sponsorship(Request $student, ProposalRepository $proposalRepository, EntityManagerInterface $entityManager): Response{
-
-        //algo a la place de la contruction ici
-        $sponsors = $proposalRepository->findBy(['state' => LeadState::REGISTERED]);
-        $sponsorships = [];
-
-        foreach ($sponsors as $sponsor){
-            $sponsorship = new Sponsorship();
-            $sponsorship->setSponsorProposal($sponsor)->setSponsorRequest($student)->setWishes([]);
-
-            $entityManager->persist($sponsorship);
-            $sponsorships[] = $sponsorship;
-        }
-        $entityManager->flush();
+    public function sponsorship(Request $student): Response{
 
         return $this->render('dashboard/match/sponsorship.html.twig', [
-            'sponsorships' => $sponsorships,
+            'sponsorships' => $student->getSponsorship(),
             'student' => $student
         ]);
     }
@@ -225,7 +213,7 @@ class DashboardController extends AbstractController
             $this->addFlash('danger', "L'identifiant ". $request->get('username') . " est déjà utilisé par un administrateur.");
             return $this->redirectToRoute('app_dashboard_admin');
         }
-       
+
 
         $newAdmin = new Administrator();
         $newAdmin->setUsername($request->get('username'))->setPassword($passwordHasher->hashPassword($newAdmin, $request->get('password')));
@@ -256,6 +244,13 @@ class DashboardController extends AbstractController
 
         return $this->render('dashboard/users/profile.html.twig', [
         ]);
+    }
+
+    #[Route('/test', name: 'app_dashboard_test',  methods: ['GET'])]
+    public function test(ProposalRepository $proposalRepository): Response{
+
+        return new JsonResponse([ 'civility' => $proposalRepository->find(156)->getCivility()]);
+
     }
 
 

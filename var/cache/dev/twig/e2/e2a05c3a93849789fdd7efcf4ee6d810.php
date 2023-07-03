@@ -50,7 +50,16 @@ class __TwigTemplate_74932fa18e1e08abba0e1bbbf20a1e91 extends Template
     <br>
     Vous avez bénéficié d’une mise en relation avec un étudiant, merci de bien vouloir nous
     indiquer si les échanges se poursuivent.<br>
-    [OUI] [NON]<br>
+    <a href=\"http://127.0.0.1:8100/yes/";
+        // line 6
+        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo "/";
+        echo twig_escape_filter($this->env, (isset($context["idsponsorship"]) || array_key_exists("idsponsorship", $context) ? $context["idsponsorship"] : (function () { throw new RuntimeError('Variable "idsponsorship" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo "\">OUI</a> <a href=\"http://127.0.0.1:8100/end/";
+        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo "/";
+        echo twig_escape_filter($this->env, (isset($context["idsponsorship"]) || array_key_exists("idsponsorship", $context) ? $context["idsponsorship"] : (function () { throw new RuntimeError('Variable "idsponsorship" does not exist.', 6, $this->source); })()), "html", null, true);
+        echo "\">NON</a><br>
     <br>
     Cordialement,<br>
     <br>
@@ -76,7 +85,7 @@ class __TwigTemplate_74932fa18e1e08abba0e1bbbf20a1e91 extends Template
 
     public function getDebugInfo()
     {
-        return array (  46 => 2,  43 => 1,);
+        return array (  55 => 6,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -86,7 +95,7 @@ class __TwigTemplate_74932fa18e1e08abba0e1bbbf20a1e91 extends Template
     <br>
     Vous avez bénéficié d’une mise en relation avec un étudiant, merci de bien vouloir nous
     indiquer si les échanges se poursuivent.<br>
-    [OUI] [NON]<br>
+    <a href=\"http://127.0.0.1:8100/yes/{{id}}/{{ idsponsorship }}\">OUI</a> <a href=\"http://127.0.0.1:8100/end/{{id}}/{{ idsponsorship }}\">NON</a><br>
     <br>
     Cordialement,<br>
     <br>

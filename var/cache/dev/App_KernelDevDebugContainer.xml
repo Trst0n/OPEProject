@@ -354,6 +354,17 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Command\AlgorithmCommand" class="App\Command\AlgorithmCommand" autowire="true" autoconfigure="true">
+      <tag name="console.command"/>
+      <tag name="container.no_preload"/>
+      <argument type="service" id="App\Repository\SponsorRepository"/>
+      <argument type="service" id="App\Repository\SponsorshipRepository"/>
+      <argument type="service" id="App\Repository\RequestRepository"/>
+      <argument type="service" id="App\Service\Algorithm"/>
+      <call method="setName">
+        <argument>app:algorithm</argument>
+      </call>
+    </service>
     <service id="App\Command\ReminderCommand" class="App\Command\ReminderCommand" autowire="true" autoconfigure="true">
       <tag name="console.command"/>
       <tag name="container.no_preload"/>
@@ -366,6 +377,7 @@
     <service id="App\Controller\ApiController" class="App\Controller\ApiController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
+      <argument type="service" id="App\Service\Algorithm"/>
       <argument type="service" id="App\Service\RegistrationService"/>
       <argument type="service" id="App\Service\Mailing"/>
       <argument type="service" id="monolog.logger.history"/>
@@ -511,7 +523,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.81TGtIQ"/>
+      <argument type="service" id=".service_locator.ydI14S4"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3288,7 +3300,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.81TGtIQ"/>
+      <argument type="service" id=".service_locator.ydI14S4"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <argument type="service" id="request_stack"/>
@@ -7011,6 +7023,8 @@
         <argument key="_default" type="service_closure" id="webpack_encore.entrypoint_lookup[_default]"/>
       </argument>
     </service>
+    <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Command\AlgorithmCommand" class="App\Command\AlgorithmCommand" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Command\AlgorithmCommand" class="App\Command\AlgorithmCommand" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Console\Command\Command.0.App\Command\ReminderCommand" class="App\Command\ReminderCommand" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Command\ReminderCommand" class="App\Command\ReminderCommand" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ApiController" class="App\Controller\ApiController" autowire="true" abstract="true"/>
@@ -7434,6 +7448,15 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.xp91Ge6" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="findEntity" type="service_closure" id="App\Service\FindEntity"/>
+        <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="sponsorRepository" type="service_closure" id="App\Repository\SponsorRepository"/>
+        <argument key="studentRepository" type="service_closure" id="App\Repository\StudentRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.PBTVzPc" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7472,12 +7495,10 @@
         <argument key="sponsorshipRepository" type="service_closure" id="App\Repository\SponsorshipRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.64IM_Lz" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.C4.Baz6" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="entityManager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
-        <argument key="proposalRepository" type="service_closure" id="App\Repository\ProposalRepository"/>
-        <argument key="student" type="service_closure" id=".errored..service_locator.64IM_Lz.App\Entity\Request"/>
+        <argument key="student" type="service_closure" id=".errored..service_locator.C4.Baz6.App\Entity\Request"/>
       </argument>
     </service>
     <service id=".service_locator.lXwBZ8." class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -7516,6 +7537,12 @@
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
+    <service id=".service_locator.K6fmpDx" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="proposalRepository" type="service_closure" id="App\Repository\ProposalRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.zxQ8fho" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7538,9 +7565,10 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.81TGtIQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.ydI14S4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\ApiController::algotest" type="service_closure" id=".service_locator.xp91Ge6"/>
         <argument key="App\Controller\DashboardController::admin" type="service_closure" id=".service_locator.XC6.mbn"/>
         <argument key="App\Controller\DashboardController::createAdmin" type="service_closure" id=".service_locator..gjCOJy"/>
         <argument key="App\Controller\DashboardController::deleteAdmin" type="service_closure" id=".service_locator.33yFkNY"/>
@@ -7548,20 +7576,23 @@
         <argument key="App\Controller\DashboardController::match" type="service_closure" id=".service_locator.A1WuIv."/>
         <argument key="App\Controller\DashboardController::matches" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController::sponsors" type="service_closure" id=".service_locator.MPUuYf0"/>
-        <argument key="App\Controller\DashboardController::sponsorship" type="service_closure" id=".service_locator.64IM_Lz"/>
+        <argument key="App\Controller\DashboardController::sponsorship" type="service_closure" id=".service_locator.C4.Baz6"/>
         <argument key="App\Controller\DashboardController::sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController::sponsorshipvalidation" type="service_closure" id=".service_locator.lXwBZ8."/>
         <argument key="App\Controller\DashboardController::students" type="service_closure" id=".service_locator.wmzwuy."/>
+        <argument key="App\Controller\DashboardController::test" type="service_closure" id=".service_locator.K6fmpDx"/>
         <argument key="App\Controller\DashboardController::user" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\DashboardController::users" type="service_closure" id=".service_locator.nndhpqw"/>
         <argument key="App\Controller\PermaLinkController::accountinfo" type="service_closure" id=".service_locator.zxQ8fho"/>
         <argument key="App\Controller\PermaLinkController::emailRedirect" type="service_closure" id=".service_locator.CkhOV7s"/>
+        <argument key="App\Controller\PermaLinkController::emailRedirectEnd" type="service_closure" id=".service_locator.CkhOV7s"/>
         <argument key="App\Controller\PermaLinkController::urlGenerate" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.rSTd.nA"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
+        <argument key="App\Controller\ApiController:algotest" type="service_closure" id=".service_locator.xp91Ge6"/>
         <argument key="App\Controller\DashboardController:admin" type="service_closure" id=".service_locator.XC6.mbn"/>
         <argument key="App\Controller\DashboardController:createAdmin" type="service_closure" id=".service_locator..gjCOJy"/>
         <argument key="App\Controller\DashboardController:deleteAdmin" type="service_closure" id=".service_locator.33yFkNY"/>
@@ -7569,14 +7600,16 @@
         <argument key="App\Controller\DashboardController:match" type="service_closure" id=".service_locator.A1WuIv."/>
         <argument key="App\Controller\DashboardController:matches" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController:sponsors" type="service_closure" id=".service_locator.MPUuYf0"/>
-        <argument key="App\Controller\DashboardController:sponsorship" type="service_closure" id=".service_locator.64IM_Lz"/>
+        <argument key="App\Controller\DashboardController:sponsorship" type="service_closure" id=".service_locator.C4.Baz6"/>
         <argument key="App\Controller\DashboardController:sponsorships" type="service_closure" id=".service_locator.gvThNC9"/>
         <argument key="App\Controller\DashboardController:sponsorshipvalidation" type="service_closure" id=".service_locator.lXwBZ8."/>
         <argument key="App\Controller\DashboardController:students" type="service_closure" id=".service_locator.wmzwuy."/>
+        <argument key="App\Controller\DashboardController:test" type="service_closure" id=".service_locator.K6fmpDx"/>
         <argument key="App\Controller\DashboardController:user" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\DashboardController:users" type="service_closure" id=".service_locator.nndhpqw"/>
         <argument key="App\Controller\PermaLinkController:accountinfo" type="service_closure" id=".service_locator.zxQ8fho"/>
         <argument key="App\Controller\PermaLinkController:emailRedirect" type="service_closure" id=".service_locator.CkhOV7s"/>
+        <argument key="App\Controller\PermaLinkController:emailRedirectEnd" type="service_closure" id=".service_locator.CkhOV7s"/>
         <argument key="App\Controller\PermaLinkController:urlGenerate" type="service_closure" id=".service_locator.A7uOTdJ"/>
         <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.rSTd.nA"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -8615,8 +8648,8 @@
     <service id=".errored..service_locator.A7uOTdJ.App\Entity\Person" class="App\Entity\Person">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.A7uOTdJ&quot;: it needs an instance of &quot;App\Entity\Person&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
-    <service id=".errored..service_locator.64IM_Lz.App\Entity\Request" class="App\Entity\Request">
-      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.64IM_Lz&quot;: it needs an instance of &quot;App\Entity\Request&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
+    <service id=".errored..service_locator.C4.Baz6.App\Entity\Request" class="App\Entity\Request">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.C4.Baz6&quot;: it needs an instance of &quot;App\Entity\Request&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.lXwBZ8..App\Entity\Sponsorship" class="App\Entity\Sponsorship">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.lXwBZ8.&quot;: it needs an instance of &quot;App\Entity\Sponsorship&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -9152,8 +9185,9 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.fyXOJvP"/>
+      <argument type="service" id=".service_locator.Mnmq4QX"/>
       <argument type="collection">
+        <argument key="app:algorithm">App\Command\AlgorithmCommand</argument>
         <argument key="app:send-reminder">App\Command\ReminderCommand</argument>
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -9265,9 +9299,10 @@
         <argument key="make:security:form-login">maker.auto_command.make_security_form_login</argument>
       </argument>
     </service>
-    <service id=".service_locator.fyXOJvP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Mnmq4QX" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Command\AlgorithmCommand" type="service_closure" id="App\Command\AlgorithmCommand"/>
         <argument key="App\Command\ReminderCommand" type="service_closure" id="App\Command\ReminderCommand"/>
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
         <argument key="console.command.assets_install" type="service_closure" id=".console.command.assets_install.lazy"/>
@@ -9651,7 +9686,7 @@
     <service id="Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface" alias="webpack_encore.entrypoint_lookup[_default]"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.81TGtIQ"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.ydI14S4"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -9674,12 +9709,12 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~SkvFOd9"/>
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
+    <service id=".service_locator.W3vYVcX" alias=".service_locator.xp91Ge6"/>
     <service id=".service_locator.8jLB1e9" alias=".service_locator.PBTVzPc"/>
-    <service id=".service_locator.6nenO84" alias=".service_locator.64IM_Lz"/>
     <service id=".service_locator.xbTBvZ5" alias=".service_locator.lXwBZ8."/>
     <service id=".service_locator.jYwcnNW" alias=".service_locator..gjCOJy"/>
     <service id=".service_locator.ZBsC.Vs" alias=".service_locator.CkhOV7s"/>
-    <service id=".service_locator.a.rMWJE" alias=".service_locator.81TGtIQ"/>
+    <service id=".service_locator.noukR9." alias=".service_locator.ydI14S4"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.Za9MpXe" alias=".service_locator.y4dplYt"/>
     <service id=".service_locator.jij13qc" alias=".service_locator.PBToVFE"/>
@@ -9702,18 +9737,20 @@
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id="security.event_dispatcher.main" alias="debug.security.event_dispatcher.main"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
+    <service id=".service_locator.eB8rMjD" alias=".service_locator.xp91Ge6"/>
     <service id=".service_locator.4G4oGUx" alias=".service_locator.PBTVzPc"/>
     <service id=".service_locator.LWNhF2." alias=".service_locator.nndhpqw"/>
     <service id=".service_locator..KBaod7" alias=".service_locator.MPUuYf0"/>
     <service id=".service_locator.ElkER0G" alias=".service_locator.wmzwuy."/>
     <service id=".service_locator.dNoe8Y7" alias=".service_locator.A7uOTdJ"/>
     <service id=".service_locator.P9qU_e5" alias=".service_locator.gvThNC9"/>
-    <service id=".service_locator.TewEm46" alias=".service_locator.64IM_Lz"/>
+    <service id=".service_locator.gQeKLD2" alias=".service_locator.C4.Baz6"/>
     <service id=".service_locator.BF7wrlb" alias=".service_locator.lXwBZ8."/>
     <service id=".service_locator.V8vZvKO" alias=".service_locator.A1WuIv."/>
     <service id=".service_locator.uUTn3ET" alias=".service_locator.XC6.mbn"/>
     <service id=".service_locator.6so_8_k" alias=".service_locator..gjCOJy"/>
     <service id=".service_locator.zkepl0M" alias=".service_locator.33yFkNY"/>
+    <service id=".service_locator.jL..57i" alias=".service_locator.K6fmpDx"/>
     <service id=".service_locator.ANDaV3E" alias=".service_locator.zxQ8fho"/>
     <service id=".service_locator.Uojf2sf" alias=".service_locator.CkhOV7s"/>
     <service id=".service_locator.7NIAq8D" alias=".service_locator.rSTd.nA"/>

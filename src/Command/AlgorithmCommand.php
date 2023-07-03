@@ -6,6 +6,7 @@ use App\Entity\SponsorshipState;
 use App\Enum\Civility;
 use App\Enum\LeadState;
 use App\Repository\RequestRepository;
+use App\Repository\SponsorRepository;
 use App\Repository\SponsorshipRepository;
 use App\Service\Algorithm;
 use App\Service\Mailing;
@@ -18,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'app:algorithm')]
 class AlgorithmCommand extends Command
 {
-    public function __construct(private SponsorshipRepository $sponsorshipRepository, private RequestRepository $requestRepository, private Mailing $mailing, private Algorithm $algorithm)
+    public function __construct(private SponsorRepository $sponsorRepository,private SponsorshipRepository $sponsorshipRepository,private RequestRepository $requestRepository, private Algorithm $algorithm)
     {
         parent::__construct();
     }
@@ -27,7 +28,9 @@ class AlgorithmCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         foreach($this->requestRepository->findBy(['state' => LeadState::REGISTERED]) as $request){
-            $this->algorithm->Algo($request, )
+            $this->algorithm->Algo($request,$this->sponsorRepository, $this->sponsorshipRepository);
         }
+
+        return Command::SUCCESS;
     }
 }

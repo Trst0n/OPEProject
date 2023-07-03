@@ -2,10 +2,14 @@
 
 namespace App\Service;
 
+use App\Entity\Sponsorship;
+use App\Entity\SponsorshipState;
 use App\Enum\Civility;
 use App\Enum\LeadState;
 use App\Entity\Student;
+use App\Entity\Request;
 use App\Repository\SponsorRepository;
+use App\Repository\SponsorshipRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Enum\Wish;
 
@@ -14,6 +18,16 @@ class Algorithm
 
     public function __construct(private EntityManagerInterface $entityManager)
     {
+    }
+
+    public function checkSponsorInSponsorship($sponsorId,SponsorshipRepository $sponsorhipRepository, Request $request){
+        foreach ($sponsorhipRepository->findBy(['state' => SponsorshipState::STATE_INITIALIZED, 'sponsorRequest' => $request]) as $sponsorship) {
+            if ($sponsorship->getSponsorProposal()->getPerson()->getId() === $sponsorId) {
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 // the latitude and longitude needs to be a float
 
@@ -42,7 +56,7 @@ class Algorithm
     }
 
 //
-    public function Algo(Student $student, SponsorRepository $sponsorRepository, int $distanceMax)
+    public function Algo(Request $student, SponsorRepository $sponsorRepository, SponsorshipRepository $sponsorshipRepository)
     {
         $kpis = [
             "CONVIVIALITY" => [
@@ -91,33 +105,28 @@ class Algorithm
             "gender" => [],
             "objective" => [],
             "domain" => [],
-            "latitude" => $student->getAvailableLeads()->getCity()->getLat(),
-            "longitude" => $student->getAvailableLeads()->getCity()->getLng(),
+            "latitude" => $student->getCity()->getLat(),
+            "longitude" => $student->getCity()->getLng(),
         ];
 
-        foreach($student->getAvailableLeads()->getLanguages() as $language){
+        foreach($student->getLanguages() as $language){
             array_push($studentSearch["language"],strtoupper($language->name));
         }
 
-        foreach($student->getAvailableLeads()->getCivility() as $civility){
-            array_push($studentSearch["gender"],$civility);
-        }
 
-        foreach($student->getAvailableLeads()->getWishes()as $wish){
+        array_push($studentSearch["gender"],$student->getCivility()->name);
+
+
+        foreach($student->getWishes()as $wish){
             array_push($studentSearch["objective"],strtoupper($wish->name));
         }
 
-        foreach ($student->getAvailableLeads()->getCurriculum()->getFields() as $field) {
+        foreach ($student->getCurriculum()->getFields() as $field) {
             array_push($studentSearch["domain"], $field->getName());
         }
 
 
-        foreach ($student->getLeads() as $lead) {
-            if ($lead->getState() == LeadState::REGISTERED) {
-                $studentEntity = $lead;
-                break;
-            }
-        }
+
         //sponsors dataset
         foreach ($sponsorRepository->findAll() as $sponsor) {
             $sponsorTemp = null;
@@ -128,7 +137,7 @@ class Algorithm
                 }
             }
             if(!$sponsorTemp) continue;
-            foreach($studentEntity->getWishes() as $wish){
+            foreach($student->getWishes() as $wish){
                 if(in_array($wish,$sponsorTemp->getWishes()) && !in_array($sponsorTemp->getId(),$possibleHits)){
 
                     $possibleHits[$sponsor->getId()]["language"]=[];
@@ -137,9 +146,8 @@ class Algorithm
                     }
 
                     $possibleHits[$sponsor->getId()]["gender"]=[];
-                    foreach($sponsor->getAvailableLeads()->getCivility() as $civility){
-                        array_push($possibleHits[$sponsor->getId()]["gender"],$civility);
-                    }
+                    array_push($possibleHits[$sponsor->getId()]["gender"],$sponsor->getAvailableLeads()->getCivility()->name);
+
 
                     $possibleHits[$sponsor->getId()]["objective"]=[];
 
@@ -165,6 +173,13 @@ class Algorithm
 
         //you should stock the scores of the indicators ( intersect * boost )
         foreach($possibleHits as $sponsorId => $data){
+
+            $indicatorScores["language"] =0;
+            $indicatorScores["gender"] =0;
+            $indicatorScores["objective"] =0;
+            $indicatorScores["domain"] =0;
+            $indicatorScores["location"] =0;
+
             $score = 0;
             foreach($kpis as $kpi=>$boost) {
 
@@ -175,10 +190,12 @@ class Algorithm
                 if(in_array($kpi,$data["objective"]) && in_array($kpi,$data["objective"])){
 
 
+
                     //key is language, gender etc
 
                     $scoreTemp = 0;
                     foreach ($boost as $key => $value) {
+
 
                         if($key!="location"){
 
@@ -186,38 +203,48 @@ class Algorithm
                             $intersect = array_intersect($data[$key],$studentSearch[$key]);
 
                             // if the student is MEN and sponsor is WOMEN we divide the indicator by 2
-                            if($key == "gender"){
-                                if(in_array(Civility::Men,$studentSearch["gender"]) && in_array(Civility::Women,$data["gender"])){
-                                    $scoreTemp+=$value/2;
-                                    continue;
-                                }
+
+                            if(in_array(Civility::Men,$studentSearch["gender"]) && $kpi=="gender" && in_array(Civility::Women,$data["gender"])){
+                                $scoreTemp+=$value/2;
+                                $indicatorScores[$key] += $value/2;
+                                continue;
                             }
                             $scoreTemp += count($intersect)*$value;
+                            $indicatorScores[$key] += count($intersect)*$value;
 
 
+                        }else {
+                            if($kpi!=Wish::Housing->name){
+                                $distance=$this->Distance($data["latitude"],$data["longitude"],$student->getCity()->getLat(),$student->getCity()->getLng());
+                                if($distance==0){
+                                    $scoreTemp+=$boost["location"];
+                                    $indicatorScores[$key] += $boost["location"];
+                                }else{
+                                    $scoreTemp+=($boost["location"]/$distance);
+                                    $indicatorScores[$key] += $boost["location"]/$distance;
+                                }
+                            }else {
+                                $distance=$this->Distance($data["latitude"],$data["longitude"],$student->getCurriculum()->getEstablishment()->getCity()->getLat(),$student->getCurriculum()->getEstablishment()->getCity()->getLat());
+                                if($distance==0){
+                                    $scoreTemp+=$boost["location"];
+                                    $indicatorScores[$key] += $boost["location"];
+                                }else{
+                                    //($distance/$distanceMax)*$boost["location"] pas possible parce que lorsque on augmente la distance, le score augmente et c'est pas ce qu'on veut :(
+                                    $scoreTemp+=($boost["location"]/$distance);
+                                    $indicatorScores[$key] += $boost["location"]/$distance;
+                                }
+                            }
                         }
+
+
+
 
 
                     }
 
 
                     //if the objective is the housing we use the university's localization to calculate the localization score
-                    if($kpi!=Wish::Housing->name){
-                        $distance=$this->Distance($data["latitude"],$data["longitude"],$student->getAvailableLeads()->getCity()->getLat(),$student->getAvailableLeads()->getCity()->getLng());
-                        if($distance==0){
-                            $scoreTemp+=$boost["location"];
-                        }else{
-                            $scoreTemp+=($boost["location"]/$distance);
-                        }
-                    }else {
-                        $distance=$this->Distance($data["latitude"],$data["longitude"],$student->getAvailableLeads()->getCurriculum()->getCity()->getLat(),$student->getAvailableLeads()->getCurriculum()->getCity()->getLat());
-                        if($distance==0){
-                            $scoreTemp+=$boost["location"];
-                        }else{
-                            //($distance/$distanceMax)*$boost["location"] pas possible parce que lorsque on augmente la distance, le score augmente et c'est pas ce qu'on veut :(
-                            $scoreTemp+=($boost["location"]/$distance);
-                        }
-                    }
+
 
                     $score += $scoreTemp/count($boost);
                 }
@@ -225,13 +252,22 @@ class Algorithm
 
 
             }
-            $scores[$sponsorId]=ceil($score/count($kpis));
+//            foreach($indicatorScores as $key=>$value){
+//                $indicatorScores[$key]=ceil($value/count($kpis));
+//            }
+            $score=ceil($score/count($kpis));
+
+            if(!$this->checkSponsorInSponsorship($sponsorId,$sponsorshipRepository, $student)) {
+
+                $sponsorship = new Sponsorship();
+                $sponsorship->setWishes($student->getWishes())->setSponsorRequest($student)->setSponsorProposal($sponsorRepository->find($sponsorId)->getAvailableLeads())->setScore($score)->setScoreIndicators($indicatorScores);
+
+                $this->entityManager->persist($sponsorship);
+                $this->entityManager->flush();
+            }
+
 
         }
-
-
-
-        return $scores;
 
     }
 
